@@ -43,7 +43,7 @@ namespace Graphmatic
             exp.Power.Add(root);
             log.Base.Add(exp);
             var arctan = new FunctionToken(log.Operand, "tan`");
-            arctan.Operand.Add(new DigitToken(arctan.Operand, 3));
+            arctan.Operand.Add(new FractionToken(arctan.Operand));
             log.Operand.Add(arctan);
             sine.Operand.Add(log);
             prompt.Content.Add(sine);
@@ -73,7 +73,7 @@ namespace Graphmatic
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             expressionDisplay.Delete();
-            MessageBox.Show(Result.ToXmlElement().ToString());
+            // MessageBox.Show(Result.ToXmlElement().ToString());
         }
     }
 }

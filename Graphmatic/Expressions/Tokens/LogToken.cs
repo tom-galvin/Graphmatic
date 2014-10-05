@@ -33,7 +33,9 @@ namespace Graphmatic.Expressions.Tokens
         {
             get
             {
-                return Operand.BaselineOffset + Height - Operand.Height;
+                return Simplification == SimplificationType.None ?
+                    Operand.BaselineOffset + Math.Min(0, Height - Operand.Height) : 
+                    Operand.BaselineOffset + Height - Operand.Height;
             }
         }
 
@@ -86,16 +88,15 @@ namespace Graphmatic.Expressions.Tokens
 
         public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
-            SimplificationType simplification = GetSimplificationType(expressionCursor);
-            string text = simplification == SimplificationType.LogE ? "ln" : "log";
+            string text = Simplification == SimplificationType.LogE ? "ln" : "log";
             int xOffset = 6 * text.Length;
 
             g.DrawPixelString(text, Size == DisplaySize.Small, x, y + Operand.BaselineOffset);
-            if (simplification == SimplificationType.None)
+            if (Simplification == SimplificationType.None)
             {
-                Base.Paint(g, expressionCursor, x + xOffset, y + Base.Height - 6);
+                Base.Paint(g, expressionCursor, x + xOffset, y + (Size == DisplaySize.Large ? 5 : 4) + Operand.BaselineOffset);
             }
-            if (simplification == SimplificationType.None) xOffset += 1 + Base.Width;
+            if (Simplification == SimplificationType.None) xOffset += Base.Width;
 
             // draw bracket lines
             if (Size == DisplaySize.Large)
@@ -170,17 +171,19 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
+        SimplificationType Simplification;
         public void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
-            SimplificationType simplification = GetSimplificationType(expressionCursor);
-            string text = simplification == SimplificationType.LogE ? "ln" : "log";
+            Simplification = GetSimplificationType(expressionCursor);
+            string text = Simplification == SimplificationType.LogE ? "ln" : "log";
 
             Operand.Size = Size;
             Operand.RecalculateDimensions(expressionCursor);
             Base.Size = DisplaySize.Small;
             Base.RecalculateDimensions(expressionCursor);
-            Width = Operand.Width + 6 * text.Length + (Size == DisplaySize.Large ? 12 : 9) + (simplification == SimplificationType.None ? 1 + Base.Width : 0);
-            Height = Operand.Height;
+            Width = Operand.Width + 6 * text.Length + (Size == DisplaySize.Large ? 12 : 9) + (Simplification == SimplificationType.None ? 1 + Base.Width : 0);
+            int fnSize = (Size == DisplaySize.Large ? 3 : 2) + Base.Height + Operand.BaselineOffset;
+            Height = Simplification != SimplificationType.None ? Operand.Height : Math.Max(Operand.Height, fnSize);
         }
 
         private SimplificationType GetSimplificationType(ExpressionCursor expressionCursor)
