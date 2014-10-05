@@ -66,7 +66,8 @@ namespace Graphmatic.Expressions.Tokens
 
         public XElement ToXml()
         {
-            throw new NotImplementedException();
+            return new XElement("BinaryOperation",
+                new XAttribute("Operation", Operation.ToString()));
         }
 
         public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)

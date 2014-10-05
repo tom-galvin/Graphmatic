@@ -156,6 +156,12 @@ namespace Graphmatic.Expressions
             foreach (IToken token in this)
                 yield return token.ToXml();
         }
+
+        public XElement ToXmlElement()
+        {
+            return new XElement("Expression",
+                ToXml());
+        }
     }
 
     public enum DisplaySize

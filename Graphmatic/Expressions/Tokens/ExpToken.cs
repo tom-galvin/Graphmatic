@@ -73,8 +73,9 @@ namespace Graphmatic.Expressions.Tokens
 
         public XElement ToXml()
         {
-            throw new NotImplementedException();
-            // return new XE
+            return new XElement("Exp",
+                new XElement("Base", Base.ToXml()),
+                new XElement("Power", Power.ToXml()));
         }
 
         public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)

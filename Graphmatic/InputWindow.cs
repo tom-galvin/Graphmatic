@@ -70,6 +70,7 @@ namespace Graphmatic
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             expressionDisplay.Delete();
+            MessageBox.Show(Result.ToXmlElement().ToString());
         }
     }
 }

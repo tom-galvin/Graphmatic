@@ -81,8 +81,8 @@ namespace Graphmatic.Expressions.Tokens
 
         public XElement ToXml()
         {
-            throw new NotImplementedException();
-            // return new XE
+            return new XElement("Digit",
+                new XAttribute("Value", Value.ToString()));
         }
 
         public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)

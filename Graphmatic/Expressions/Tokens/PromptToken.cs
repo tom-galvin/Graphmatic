@@ -73,8 +73,7 @@ namespace Graphmatic.Expressions.Tokens
 
         public XElement ToXml()
         {
-            throw new NotImplementedException();
-            // return new XE
+            throw new NotImplementedException("Cannot convert prompt token to XML.");
         }
 
         public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
