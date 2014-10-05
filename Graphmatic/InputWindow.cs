@@ -26,25 +26,28 @@ namespace Graphmatic
         public InputWindow(string promptString)
         {
             InitializeComponent();
-            var prompt = new PromptToken(null, promptString, DisplaySize.Large);
+            var prompt = new PromptToken(null, promptString);
+            prompt.RecalculateDimensions(expressionDisplay.ExpressionCursor);
             expressionDisplay.Expression.Add(prompt);
             expressionDisplay.ExpressionCursor.Expression = prompt.Content;
             Result = prompt.Content;
 
             expressionDisplay.ExpressionCursor.Moved += ExpressionCursor_Moved;
-            prompt.Content.Add(new DigitToken(prompt.Content, 4, DisplaySize.Large));
-            var sine = new FunctionToken(prompt.Content, "Calc-é", DisplaySize.Large);
-            var frac = new FractionToken(sine.Operand, DisplaySize.Large);
-            var exp = new ExpToken(frac.Top, DisplaySize.Small);
-            exp.Base.Add(new DigitToken(exp.Base, 3, DisplaySize.Small));
-            exp.Power.Add(new RootToken(exp.Power, DisplaySize.Small));
+            prompt.Content.Add(new DigitToken(prompt.Content, 4));
+            var sine = new FunctionToken(prompt.Content, "Calc-é");
+            var frac = new FractionToken(sine.Operand);
+            var exp = new ExpToken(frac.Top);
+            exp.Base.Add(new DigitToken(exp.Base, 3));
+            var root = new RootToken(exp.Power);
+            root.Power.Add(new DigitToken(root.Power, 2));
+            exp.Power.Add(root);
             frac.Top.Add(exp);
-            var arctan = new FunctionToken(frac.Bottom, "tan`", DisplaySize.Small);
-            arctan.Operand.Add(new DigitToken(arctan.Operand, 3, DisplaySize.Small));
+            var arctan = new FunctionToken(frac.Bottom, "tan`");
+            arctan.Operand.Add(new DigitToken(arctan.Operand, 3));
             frac.Bottom.Add(arctan);
             sine.Operand.Add(frac);
             prompt.Content.Add(sine);
-            prompt.Content.Add(new ExpToken(prompt.Content, DisplaySize.Large));
+            prompt.Content.Add(new ExpToken(prompt.Content));
         }
 
         void ExpressionCursor_Moved(object sender, EventArgs e)

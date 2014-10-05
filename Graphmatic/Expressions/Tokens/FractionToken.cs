@@ -26,7 +26,7 @@ namespace Graphmatic.Expressions.Tokens
         public DisplaySize Size
         {
             get;
-            protected set;
+            set;
         }
 
         public int BaselineOffset
@@ -61,14 +61,12 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public FractionToken(Expression parent, DisplaySize size)
+        public FractionToken(Expression parent)
         {
             Parent = parent;
-            Size = size;
-            Top = new Expression(this, DisplaySize.Small);
-            Bottom = new Expression(this, DisplaySize.Small);
+            Top = new Expression(this);
+            Bottom = new Expression(this);
             Children = new Expression[] { Top, Bottom };
-            RecalculateDimensions();
         }
 
         public FractionToken(Expression parent, XElement xml)
@@ -97,10 +95,11 @@ namespace Graphmatic.Expressions.Tokens
                 y + Top.Height + 1);
         }
 
-        public void RecalculateDimensions()
+        public void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
-            Top.RecalculateDimensions();
-            Bottom.RecalculateDimensions();
+            Top.Size = Bottom.Size = DisplaySize.Small;
+            Top.RecalculateDimensions(expressionCursor);
+            Bottom.RecalculateDimensions(expressionCursor);
             Width = Math.Max(Top.Width, Bottom.Width);
             Height = Top.Height + Bottom.Height + 3;
         }

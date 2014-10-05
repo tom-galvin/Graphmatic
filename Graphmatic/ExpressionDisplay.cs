@@ -27,7 +27,6 @@ namespace Graphmatic
         }
 
         private int _DisplayScale;
-
         /// <summary>
         /// Gets the scale at which to display the expression.
         /// </summary>
@@ -53,6 +52,26 @@ namespace Graphmatic
             }
         }
 
+        private bool _SmallExpression;
+        /// <summary>
+        /// Gets or sets whether to force the expression to display in small mode.
+        /// </summary>
+        [DefaultValue(false)]
+        [Description("Determines whether to force the expression to display in small mode or not.")]
+        public bool SmallExpression
+        {
+            get
+            {
+                return _SmallExpression;
+            }
+            set
+            {
+                _SmallExpression = value;
+                Expression.RecalculateDimensions(ExpressionCursor);
+                Invalidate();
+            }
+        }
+
         /// <summary>
         /// Gets the cursor used to navigate and modify the entered expression.
         /// </summary>
@@ -73,7 +92,7 @@ namespace Graphmatic
         /// </summary>
         public ExpressionDisplay()
         {
-            Expression = new Expressions.Expression(null, DisplaySize.Large);
+            Expression = new Expressions.Expression(null);
             ExpressionCursor = new ExpressionCursor(Expression, 0);
             DisplayScale = 1;
             InitializeComponent();
@@ -86,7 +105,7 @@ namespace Graphmatic
         /// <param name="displayScale">The scale to display the expression at.</param>
         public ExpressionDisplay(int displayScale)
         {
-            Expression = new Expressions.Expression(null, DisplaySize.Large);
+            Expression = new Expressions.Expression(null);
             DisplayScale = displayScale;
             InitializeComponent();
         }
@@ -98,7 +117,8 @@ namespace Graphmatic
 
         private void ExpressionDisplay_Paint(object sender, PaintEventArgs e)
         {
-            Expression.RecalculateDimensions();
+            Expression.Size = SmallExpression ? DisplaySize.Small : DisplaySize.Large;
+            Expression.RecalculateDimensions(ExpressionCursor);
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
 
             Bitmap expressionBitmap = new Bitmap(Expression.Width + 3, Expression.Height + 3);

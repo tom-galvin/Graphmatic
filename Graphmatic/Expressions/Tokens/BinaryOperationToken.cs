@@ -34,7 +34,7 @@ namespace Graphmatic.Expressions.Tokens
         public DisplaySize Size
         {
             get;
-            protected set;
+            set;
         }
 
         public int BaselineOffset
@@ -57,13 +57,11 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public BinaryOperationToken(Expression parent, BinaryOperation operation, DisplaySize size)
+        public BinaryOperationToken(Expression parent, BinaryOperation operation)
         {
             Parent = parent;
             Children = new Expression[] { };
             Operation = operation;
-            Size = size;
-            RecalculateDimensions();
         }
 
         public BinaryOperationToken(Expression parent, XElement xml)
@@ -86,7 +84,7 @@ namespace Graphmatic.Expressions.Tokens
             g.DrawPixelString(Symbols[(int)Operation].ToString(), Size == DisplaySize.Small, x, y);
         }
 
-        public void RecalculateDimensions()
+        public void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Width = 5;
             Height = Size == DisplaySize.Large ? 9 : 6;

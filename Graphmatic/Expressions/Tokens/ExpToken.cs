@@ -26,7 +26,7 @@ namespace Graphmatic.Expressions.Tokens
         public DisplaySize Size
         {
             get;
-            protected set;
+            set;
         }
 
         public int BaselineOffset
@@ -61,14 +61,12 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public ExpToken(Expression parent, DisplaySize size)
+        public ExpToken(Expression parent)
         {
             Parent = parent;
-            Size = size;
-            Base = new Expression(this, size);
-            Power = new Expression(this, DisplaySize.Small);
+            Base = new Expression(this);
+            Power = new Expression(this);
             Children = new Expression[] { Base, Power };
-            RecalculateDimensions();
         }
 
         public ExpToken(Expression parent, XElement xml)
@@ -92,10 +90,12 @@ namespace Graphmatic.Expressions.Tokens
             Power.Paint(g, expressionCursor, x + Base.Width + 1, y);
         }
 
-        public void RecalculateDimensions()
+        public void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
-            Base.RecalculateDimensions();
-            Power.RecalculateDimensions();
+            Base.Size = Size;
+            Base.RecalculateDimensions(expressionCursor);
+            Power.Size = DisplaySize.Small;
+            Power.RecalculateDimensions(expressionCursor);
             Width = Base.Width + Power.Width + 1;
             Height = Base.Height + Power.Height - (Size == DisplaySize.Small ? 0 : 3);
         }

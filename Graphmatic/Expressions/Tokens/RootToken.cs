@@ -26,7 +26,7 @@ namespace Graphmatic.Expressions.Tokens
         public DisplaySize Size
         {
             get;
-            protected set;
+            set;
         }
 
         public int BaselineOffset
@@ -61,14 +61,12 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public RootToken(Expression parent, DisplaySize size)
+        public RootToken(Expression parent)
         {
             Parent = parent;
-            Size = size;
-            Base = new Expression(this, size);
-            Power = new Expression(this, DisplaySize.Small);
+            Base = new Expression(this);
+            Power = new Expression(this);
             Children = new Expression[] { Power, Base };
-            RecalculateDimensions();
         }
 
         public RootToken(Expression parent, XElement xml)
@@ -88,36 +86,58 @@ namespace Graphmatic.Expressions.Tokens
 
         public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
-            Power.Paint(g, expressionCursor, x, y);
+            bool skippingRoot = CanSimplifyDisplay(expressionCursor);
+            if(!skippingRoot)
+                Power.Paint(g, expressionCursor, x, y);
             if (Size == DisplaySize.Small) y += 1;
-            Base.Paint(g, expressionCursor, x + Power.Width + 3, y + Height - Base.Height);
+            int xOffset = skippingRoot ? 1 : Power.Width;
+            Base.Paint(g, expressionCursor, x + xOffset + 3, y + Height - Base.Height);
 
             // draw square-root symbol
             g.DrawLine(Expression.ExpressionPen,
-                x + Power.Width + 1,
+                x + xOffset + 1,
                 y + Height - Base.Height - 2,
-                x + Power.Width + 3 + Base.Width,
+                x + xOffset + 3 + Base.Width,
                 y + Height - Base.Height - 2);
 
             g.DrawLine(Expression.ExpressionPen,
-                x + Power.Width + 1,
+                x + xOffset + 1,
                 y + Height - Base.Height - 2,
-                x + Power.Width,
+                x + xOffset,
                 y + Height - 1);
 
             g.DrawLine(Expression.ExpressionPen,
-                x + Power.Width,
+                x + xOffset,
                 y + Height - 1,
-                x + Power.Width - 2,
+                x + xOffset - 2,
                 y + Height - 3);
         }
 
-        public void RecalculateDimensions()
+        public void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
-            Base.RecalculateDimensions();
-            Power.RecalculateDimensions();
-            Width = Base.Width + Power.Width + 5;
-            Height = Base.Height + Power.Height - 3 + (Size == DisplaySize.Small ? 1 : 0);
+            Base.Size = Size;
+            Base.RecalculateDimensions(expressionCursor);
+            Power.Size = DisplaySize.Small;
+            Power.RecalculateDimensions(expressionCursor);
+            if (!CanSimplifyDisplay(expressionCursor))
+            {
+                Width = Base.Width + Power.Width + 5;
+                Height = Base.Height + Power.Height - 3 + (Size == DisplaySize.Small ? 1 : 0);
+            }
+            else
+            {
+                Width = Base.Width + 5;
+                Height = Base.Height + 2;
+            }
+        }
+
+        private bool CanSimplifyDisplay(ExpressionCursor expressionCursor)
+        {
+            return
+                expressionCursor.Expression != Power &&
+                Power.Count == 1 &&
+                Power[0] is DigitToken &&
+                (Power[0] as DigitToken).Value == 2;
         }
     }
 }

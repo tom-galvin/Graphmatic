@@ -15,7 +15,10 @@ namespace Graphmatic.Expressions.Tokens
     /// <returns>The deserialized form of the token.</returns>
     public delegate IToken TokenDeserializerFactory(Expression parent, XElement xml);
 
-    public static class TokenDeserializer
+    /// <summary>
+    /// Provides methods to assist in (de)serialization of serialized Graphmatic expressions.
+    /// </summary>
+    public static class TokenSerialization
     {
         /// <summary>
         /// A list of deserializing constructors for tokens with differing XML element names.

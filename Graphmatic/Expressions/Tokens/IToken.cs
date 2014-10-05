@@ -18,6 +18,7 @@ namespace Graphmatic.Expressions.Tokens
         DisplaySize Size
         {
             get;
+            set;
         }
 
         /// <summary>

@@ -33,7 +33,7 @@ namespace Graphmatic.Expressions
         public DisplaySize Size
         {
             get;
-            protected set;
+            set;
         }
 
         public int BaselineOffset
@@ -61,24 +61,22 @@ namespace Graphmatic.Expressions
         {
             Parent = parent;
             AddRange(xml
-                .Select(x => TokenDeserializer.FromXml(this, x)));
+                .Select(x => TokenSerialization.FromXml(this, x)));
         }
 
-        public Expression(IToken parent, DisplaySize size)
+        public Expression(IToken parent)
             : base()
         {
             Parent = parent;
-            Size = size;
-            RecalculateDimensions();
         }
 
-        public Expression(IToken parent, DisplaySize size, params IToken[] children)
-            : this(parent, size)
+        public Expression(IToken parent, params IToken[] children)
+            : this(parent)
         {
             AddRange(children);
         }
 
-        public void RecalculateDimensions()
+        public void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             if (Count == 0)
             {
@@ -88,7 +86,10 @@ namespace Graphmatic.Expressions
             else
             {
                 foreach (IToken token in this)
-                    token.RecalculateDimensions();
+                {
+                    token.Size = Size;
+                    token.RecalculateDimensions(expressionCursor);
+                }
 
                 Width =
                     this.Select(token => token.Width).Aggregate((w1, w2) => w1 + w2) + TokenSpacing * (Count - 1);

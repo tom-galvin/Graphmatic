@@ -40,7 +40,7 @@ namespace Graphmatic.Expressions
         /// Paint the component to the screen.
         /// </summary>
         /// <param name="g">The <c>System.Drawing.Graphics</c> object to use to paint the component to the screen.</param>
-        /// <param name="expressionCursor">Cursor information to draw the green cursor line with.</param>
+        /// <param name="expressionCursor">Cursor information to draw the cursor I-beam with.</param>
         /// <param name="x">The X co-ordinate to paint at.</param>
         /// <param name="y">The Y co-ordinate to paint at.</param>
         void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y);
@@ -48,6 +48,7 @@ namespace Graphmatic.Expressions
         /// <summary>
         /// Recalculate the dimensions of the component in a recursive manner.
         /// </summary>
-        void RecalculateDimensions();
+        /// <param name="expressionCursor">Cursor information to draw the cursor I-beam with.</param>
+        void RecalculateDimensions(ExpressionCursor expressionCursor);
     }
 }
