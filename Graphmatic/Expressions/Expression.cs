@@ -103,7 +103,7 @@ namespace Graphmatic.Expressions
             if (Count == 0) // draw box if expression is empty
             {
                 if (expressionCursor.Expression == this)
-                    g.FillRectangle(Brushes.Blue, x, y, Width - 1, Height - 1);
+                    g.FillRectangle(Brushes.Blue, x, y, Width, Height);
                 else
                     g.DrawRectangle(Pens.Gray, x, y, Width - 1, Height - 1);
 
