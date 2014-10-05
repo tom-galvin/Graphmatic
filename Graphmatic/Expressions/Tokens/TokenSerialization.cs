@@ -30,7 +30,8 @@ namespace Graphmatic.Expressions.Tokens
             { "Exp", (parent, xml) => new ExpToken(parent, xml) },
             { "Fraction", (parent, xml) => new FractionToken(parent, xml) },
             { "Function", (parent, xml) => new FunctionToken(parent, xml) },
-            { "Root", (parent, xml) => new RootToken(parent, xml) }
+            { "Root", (parent, xml) => new RootToken(parent, xml) },
+            { "Log", (parent, xml) => new LogToken(parent, xml) }
         };
 
         /// <summary>

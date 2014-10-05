@@ -35,17 +35,17 @@ namespace Graphmatic
             expressionDisplay.ExpressionCursor.Moved += ExpressionCursor_Moved;
             prompt.Content.Add(new DigitToken(prompt.Content, 4));
             var sine = new FunctionToken(prompt.Content, "Calc-é");
-            var frac = new FractionToken(sine.Operand);
-            var exp = new ExpToken(frac.Top);
+            var log = new LogToken(sine.Operand);
+            var exp = new ExpToken(log.Base);
             exp.Base.Add(new DigitToken(exp.Base, 3));
             var root = new RootToken(exp.Power);
             root.Power.Add(new DigitToken(root.Power, 2));
             exp.Power.Add(root);
-            frac.Top.Add(exp);
-            var arctan = new FunctionToken(frac.Bottom, "tan`");
+            log.Base.Add(exp);
+            var arctan = new FunctionToken(log.Operand, "tan`");
             arctan.Operand.Add(new DigitToken(arctan.Operand, 3));
-            frac.Bottom.Add(arctan);
-            sine.Operand.Add(frac);
+            log.Operand.Add(arctan);
+            sine.Operand.Add(log);
             prompt.Content.Add(sine);
             prompt.Content.Add(new ExpToken(prompt.Content));
         }
