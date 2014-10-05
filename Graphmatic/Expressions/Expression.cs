@@ -111,7 +111,7 @@ namespace Graphmatic.Expressions
             {
                 if (expressionCursor.Expression == this) // draw yellow background if selected by cursor
                 {
-                    g.FillRectangle(Brushes.Yellow, x, y, Width, Height);
+                    g.FillRectangle(Brushes.Yellow, x, y, Width + 1, Height + 1);
                 }
                 int tokenX = x;
                 int tokenBaselineOffset = this.Select(token => token.BaselineOffset).Aggregate((b1, b2) => Math.Max(b1, b2));
