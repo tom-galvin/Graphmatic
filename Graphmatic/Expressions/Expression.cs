@@ -57,6 +57,13 @@ namespace Graphmatic.Expressions
             protected set;
         }
 
+        public Expression(IToken parent, IEnumerable<XElement> xml)
+        {
+            Parent = parent;
+            AddRange(xml
+                .Select(x => TokenDeserializer.FromXml(this, x)));
+        }
+
         public Expression(IToken parent, DisplaySize size)
             : base()
         {

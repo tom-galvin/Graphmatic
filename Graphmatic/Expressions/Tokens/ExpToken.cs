@@ -71,6 +71,14 @@ namespace Graphmatic.Expressions.Tokens
             RecalculateDimensions();
         }
 
+        public ExpToken(Expression parent, XElement xml)
+        {
+            Parent = parent;
+            Base = new Expression(this, xml.Element("Base").Elements());
+            Power = new Expression(this, xml.Element("Power").Elements());
+            Children = new Expression[] { Base, Power };
+        }
+
         public XElement ToXml()
         {
             return new XElement("Exp",

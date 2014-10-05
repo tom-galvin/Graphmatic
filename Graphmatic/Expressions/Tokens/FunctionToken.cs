@@ -71,6 +71,14 @@ namespace Graphmatic.Expressions.Tokens
             RecalculateDimensions();
         }
 
+        public FunctionToken(Expression parent, XElement xml)
+        {
+            Parent = parent;
+            Text = xml.Element("Name").Value;
+            Operand = new Expression(this, xml.Element("Operand").Elements());
+            Children = new Expression[] { Operand };
+        }
+
         public XElement ToXml()
         {
             return new XElement("Function",

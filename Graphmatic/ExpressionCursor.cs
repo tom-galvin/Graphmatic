@@ -9,7 +9,13 @@ using Graphmatic.Expressions.Tokens;
 
 namespace Graphmatic
 {
+    /// <summary>
+    /// Represents the method that handles the user clicking on a hotspot in an expression.
+    /// </summary>
+    /// <param name="pointInHotspotClicked">The point representing the location clicked relative to the top-left corner of the hotspot.</param>
+    /// <param name="clickedBy">The <c>ExpressionCursor</c> that was used to click on the hotspot.</param>
     public delegate void ExpressionCursorHotspotClickedCallback(Point pointInHotspotClicked, ExpressionCursor clickedBy);
+
     /// <summary>
     /// Provides a way of editing an equation visually.
     /// </summary>

@@ -71,6 +71,14 @@ namespace Graphmatic.Expressions.Tokens
             RecalculateDimensions();
         }
 
+        public FractionToken(Expression parent, XElement xml)
+        {
+            Parent = parent;
+            Top = new Expression(this, xml.Element("Top").Elements());
+            Bottom = new Expression(this, xml.Element("Bottom").Elements());
+            Children = new Expression[] { Top, Bottom };
+        }
+
         public XElement ToXml()
         {
             return new XElement("Fraction",

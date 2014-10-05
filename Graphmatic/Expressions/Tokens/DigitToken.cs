@@ -79,6 +79,13 @@ namespace Graphmatic.Expressions.Tokens
             RecalculateDimensions();
         }
 
+        public DigitToken(Expression parent, XElement xml)
+        {
+            Parent = parent;
+            Value = Int32.Parse(xml.Element("Value").Value);
+            Children = new Expression[] { };
+        }
+
         public XElement ToXml()
         {
             return new XElement("Digit",

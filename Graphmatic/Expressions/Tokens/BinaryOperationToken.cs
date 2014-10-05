@@ -12,11 +12,13 @@ namespace Graphmatic.Expressions.Tokens
     {
         private static char[] Symbols = { '+', '-', '*', '/' };
 
+        public BinaryOperation _Operation;
         public BinaryOperation Operation
         {
-            get;
-            set;
+            get { return _Operation; }
+            set { _Operation = value; }
         }
+
         public int Width
         {
             get;
@@ -62,6 +64,15 @@ namespace Graphmatic.Expressions.Tokens
             Operation = operation;
             Size = size;
             RecalculateDimensions();
+        }
+
+        public BinaryOperationToken(Expression parent, XElement xml)
+        {
+            Parent = parent;
+            string operationName = xml.Element("Operation").Value;
+            if(!Enum.TryParse<BinaryOperation>(operationName, out _Operation))
+                throw new NotImplementedException("The operation " + operationName + " is not implemented.");
+            Children = new Expression[] { };
         }
 
         public XElement ToXml()
