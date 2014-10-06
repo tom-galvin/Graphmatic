@@ -10,8 +10,8 @@ namespace Graphmatic.Expressions.Tokens
 {
     public class BinaryOperationToken : SimpleToken
     {
-        public BinaryOperation _Operation;
-        public BinaryOperation Operation
+        public BinaryOperationType _Operation;
+        public BinaryOperationType Operation
         {
             get { return _Operation; }
             set { _Operation = value; }
@@ -23,13 +23,13 @@ namespace Graphmatic.Expressions.Tokens
             {
                 switch (_Operation)
                 {
-                    case BinaryOperation.Add:
+                    case BinaryOperationType.Add:
                         return "+";
-                    case BinaryOperation.Subtract:
+                    case BinaryOperationType.Subtract:
                         return "-";
-                    case BinaryOperation.Multiply:
+                    case BinaryOperationType.Multiply:
                         return "*";
-                    case BinaryOperation.Divide:
+                    case BinaryOperationType.Divide:
                         return "/";
                     default:
                         return "<unknown operation>";
@@ -41,7 +41,7 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public BinaryOperationToken(Expression parent, BinaryOperation operation)
+        public BinaryOperationToken(Expression parent, BinaryOperationType operation)
             :base(parent)
         {
             Operation = operation;
@@ -51,7 +51,7 @@ namespace Graphmatic.Expressions.Tokens
             :base(parent)
         {
             string operationName = xml.Element("Operation").Value;
-            if(!Enum.TryParse<BinaryOperation>(operationName, out _Operation))
+            if(!Enum.TryParse<BinaryOperationType>(operationName, out _Operation))
                 throw new NotImplementedException("The operation " + operationName + " is not implemented.");
         }
 
@@ -60,13 +60,13 @@ namespace Graphmatic.Expressions.Tokens
             return new XElement("BinaryOperation",
                 new XAttribute("Operation", Operation.ToString()));
         }
-    }
 
-    public enum BinaryOperation
-    {
-        Add,
-        Subtract,
-        Multiply,
-        Divide
+        public enum BinaryOperationType
+        {
+            Add,
+            Subtract,
+            Multiply,
+            Divide
+        }
     }
 }

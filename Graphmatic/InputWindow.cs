@@ -38,6 +38,25 @@ namespace Graphmatic
 
         private void InitializeButtons()
         {
+            #region Digits
+            CreateExpressionButton(button0, expression => new DigitToken(expression, 0));
+            CreateExpressionButton(button1, expression => new DigitToken(expression, 1));
+            CreateExpressionButton(button2, expression => new DigitToken(expression, 2));
+            CreateExpressionButton(button3, expression => new DigitToken(expression, 3));
+            CreateExpressionButton(button4, expression => new DigitToken(expression, 4));
+            CreateExpressionButton(button5, expression => new DigitToken(expression, 5));
+            CreateExpressionButton(button6, expression => new DigitToken(expression, 6));
+            CreateExpressionButton(button7, expression => new DigitToken(expression, 7));
+            CreateExpressionButton(button8, expression => new DigitToken(expression, 8));
+            CreateExpressionButton(button9, expression => new DigitToken(expression, 9));
+            CreateExpressionButton(buttonDecimalPoint, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.DecimalPoint));
+            #endregion
+            #region Basic Operations
+            CreateExpressionButton(buttonAdd, expression => new BinaryOperationToken(expression, BinaryOperationToken.BinaryOperationType.Add));
+            CreateExpressionButton(buttonSubtract, expression => new BinaryOperationToken(expression, BinaryOperationToken.BinaryOperationType.Subtract));
+            CreateExpressionButton(buttonMultiply, expression => new BinaryOperationToken(expression, BinaryOperationToken.BinaryOperationType.Multiply));
+            CreateExpressionButton(buttonDivide, expression => new BinaryOperationToken(expression, BinaryOperationToken.BinaryOperationType.Divide));
+            #endregion
             #region Roots
             CreateExpressionButton(buttonRoot, expression => new RootToken(expression));
             CreateExpressionButton(buttonSqrt, expression =>
@@ -80,7 +99,7 @@ namespace Graphmatic
             CreateExpressionButton(buttonReciprocate, expression =>
             {
                 var token = new ExpToken(expression);
-                token.Power.Add(new BinaryOperationToken(token.Power, BinaryOperation.Subtract));
+                token.Power.Add(new BinaryOperationToken(token.Power, BinaryOperationToken.BinaryOperationType.Subtract));
                 token.Power.Add(new DigitToken(token.Power, 1));
                 return token;
             });
@@ -90,9 +109,11 @@ namespace Graphmatic
             CreateExpressionButton(buttonE, expression => new ConstantToken(expression, ConstantToken.ConstantType.E));
             #endregion
             #region Misc
+            CreateExpressionButton(buttonFraction, expression => new FractionToken(expression));
             CreateExpressionButton(buttonAbsolute, expression => new AbsoluteToken(expression));
             CreateExpressionButton(buttonBracket, expression => new FunctionToken(expression, ""));
             CreateExpressionButton(buttonComma, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Comma));
+            CreateExpressionButton(buttonPercent, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Percent));
             CreateExpressionButton(buttonSymbolicExp, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Exp10));
 #endregion
         }
