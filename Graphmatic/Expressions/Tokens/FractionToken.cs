@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    class FractionToken : IToken
+    public class FractionToken : IToken
     {
 
         public int Width

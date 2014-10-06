@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    class RootToken : IToken
+    public class RootToken : IToken
     {
 
         public int Width

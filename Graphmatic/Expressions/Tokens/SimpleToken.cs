@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class PromptToken : IToken
+    public abstract class SimpleToken : IToken
     {
 
         public int Width
@@ -33,17 +33,11 @@ namespace Graphmatic.Expressions.Tokens
         {
             get
             {
-                return Content.BaselineOffset;
+                return 0;
             }
         }
 
-        public string Text
-        {
-            get;
-            protected set;
-        }
-
-        public Expression Content
+        public abstract string Text
         {
             get;
             protected set;
@@ -65,44 +59,27 @@ namespace Graphmatic.Expressions.Tokens
         {
             get
             {
-                return Content;
+                return null;
             }
         }
 
-        public PromptToken(Expression parent, string text)
+        public SimpleToken(Expression parent)
         {
             Parent = parent;
-            Text = text;
-            Content = new Expression(this);
-            Children = new Expression[] { Content };
+            Children = new Expression[] { };
         }
 
-        public XElement ToXml()
-        {
-            throw new NotImplementedException("Cannot convert prompt token to XML.");
-        }
+        public abstract XElement ToXml();
 
         public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
-            g.DrawPixelString(Text, Size == DisplaySize.Small, x, y + Content.BaselineOffset);
-
-            // draw bracket lines
-            if (Size == DisplaySize.Large)
-            {
-                Content.Paint(g, expressionCursor, x + 6 * Text.Length + 1, y);
-            }
-            else
-            {
-                Content.Paint(g, expressionCursor, x + 6 * Text.Length + 1, y);
-            }
+            g.DrawPixelString(Text, Size == DisplaySize.Small, x, y);
         }
 
         public void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
-            Content.Size = Size;
-            Content.RecalculateDimensions(expressionCursor);
-            Width = Content.Width + 6 * Text.Length + 1;
-            Height = Content.Height;
+            Width = 5 * Text.Length + 1 * (Text.Length - 1);
+            Height = Size == DisplaySize.Large ? 9 : 6;
         }
     }
 }

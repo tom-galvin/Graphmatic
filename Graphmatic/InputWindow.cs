@@ -14,8 +14,6 @@ namespace Graphmatic
 {
     public partial class InputWindow : Form
     {
-        private Dictionary<Button, Func<Expression, IToken>> Buttons;
-
         /// <summary>
         /// Gets the result of this input window.
         /// </summary>
@@ -40,28 +38,69 @@ namespace Graphmatic
 
         private void InitializeButtons()
         {
-            Buttons = new Dictionary<Button, Func<Expression, IToken>>()
+            #region Roots
+            CreateExpressionButton(buttonRoot, expression => new RootToken(expression));
+            CreateExpressionButton(buttonSqrt, expression =>
             {
-                { buttonRoot, expression => new RootToken(expression) },
-                { buttonSqrt, expression => {
-                        var token = new RootToken(expression);
-                        token.Power.Add(new DigitToken(token.Power, 2));
-                        return token;
-                    }
-                },
-                { buttonLn, expression => {
-                    var token = new LogToken(expression);
-                    token.Base.Add(new ConstantToken(token.Base, ConstantToken.ConstantType.E));
-                    return token;
-                    }
-                }
-            };
+                var token = new RootToken(expression);
+                token.Power.Add(new DigitToken(token.Power, 2));
+                return token;
+            });
+            #endregion
+            #region Logs
+            CreateExpressionButton(buttonLogN, expression => new LogToken(expression));
+            CreateExpressionButton(buttonLogE, expression =>
+            {
+                var token = new LogToken(expression);
+                token.Base.Add(new ConstantToken(token.Base, ConstantToken.ConstantType.E));
+                return token;
+            });
+            CreateExpressionButton(buttonLog10, expression =>
+            {
+                var token = new LogToken(expression);
+                token.Base.Add(new DigitToken(token.Base, 1));
+                token.Base.Add(new DigitToken(token.Base, 0));
+                return token;
+            });
+            #endregion
+            #region Exponents
+            CreateExpressionButton(buttonExp, expression => new ExpToken(expression));
+            CreateExpressionButton(buttonSquare, expression =>
+            {
+                var token = new ExpToken(expression);
+                token.Power.Add(new DigitToken(token.Power, 2));
+                return token;
+            });
+            CreateExpressionButton(buttonCube, expression =>
+            {
+                var token = new ExpToken(expression);
+                token.Power.Add(new DigitToken(token.Power, 3));
+                return token;
+            });
+            CreateExpressionButton(buttonReciprocate, expression =>
+            {
+                var token = new ExpToken(expression);
+                token.Power.Add(new BinaryOperationToken(token.Power, BinaryOperation.Subtract));
+                token.Power.Add(new DigitToken(token.Power, 1));
+                return token;
+            });
+            #endregion
+            #region Constants
+            CreateExpressionButton(buttonPi, expression => new ConstantToken(expression, ConstantToken.ConstantType.Pi));
+            CreateExpressionButton(buttonE, expression => new ConstantToken(expression, ConstantToken.ConstantType.E));
+            #endregion
+            #region Misc
+            CreateExpressionButton(buttonAbsolute, expression => new AbsoluteToken(expression));
+            CreateExpressionButton(buttonBracket, expression => new FunctionToken(expression, ""));
+            CreateExpressionButton(buttonComma, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Comma));
+            CreateExpressionButton(buttonSymbolicExp, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Exp10));
+#endregion
+        }
 
-            foreach (var buttonToken in Buttons)
-            {
-                buttonToken.Key.Click += (sender, e) =>
-                    expressionDisplay.ExpressionCursor.Insert(buttonToken.Value(expressionDisplay.ExpressionCursor.Expression));
-            }
+        private void CreateExpressionButton(Button button, Func<Expression, IToken> token)
+        {
+            button.Click += (sender, e) =>
+                    expressionDisplay.ExpressionCursor.Insert(token(expressionDisplay.ExpressionCursor.Expression));
         }
 
         void ExpressionCursor_Moved(object sender, EventArgs e)

@@ -8,10 +8,8 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    class BinaryOperationToken : IToken
+    public class BinaryOperationToken : SimpleToken
     {
-        private static char[] Symbols = { '+', '-', '*', '/' };
-
         public BinaryOperation _Operation;
         public BinaryOperation Operation
         {
@@ -19,91 +17,56 @@ namespace Graphmatic.Expressions.Tokens
             set { _Operation = value; }
         }
 
-        public int Width
-        {
-            get;
-            protected set;
-        }
-
-        public int Height
-        {
-            get;
-            protected set;
-        }
-
-        public DisplaySize Size
-        {
-            get;
-            set;
-        }
-
-        public int BaselineOffset
+        public override string Text
         {
             get
             {
-                return 0;
+                switch (_Operation)
+                {
+                    case BinaryOperation.Add:
+                        return "+";
+                    case BinaryOperation.Subtract:
+                        return "-";
+                    case BinaryOperation.Multiply:
+                        return "*";
+                    case BinaryOperation.Divide:
+                        return "/";
+                    default:
+                        return "<unknown operation>";
+                }
             }
-        }
-
-        public Expression Parent
-        {
-            get;
-            protected set;
-        }
-
-        public Expression[] Children
-        {
-            get;
-            protected set;
-        }
-
-        public Expression DefaultChild
-        {
-            get
+            protected set
             {
-                return null;
+                throw new NotImplementedException();
             }
         }
 
         public BinaryOperationToken(Expression parent, BinaryOperation operation)
+            :base(parent)
         {
-            Parent = parent;
-            Children = new Expression[] { };
             Operation = operation;
         }
 
         public BinaryOperationToken(Expression parent, XElement xml)
+            :base(parent)
         {
-            Parent = parent;
             string operationName = xml.Element("Operation").Value;
             if(!Enum.TryParse<BinaryOperation>(operationName, out _Operation))
                 throw new NotImplementedException("The operation " + operationName + " is not implemented.");
-            Children = new Expression[] { };
         }
 
-        public XElement ToXml()
+        public override XElement ToXml()
         {
             return new XElement("BinaryOperation",
                 new XAttribute("Operation", Operation.ToString()));
-        }
-
-        public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
-        {
-            g.DrawPixelString(Symbols[(int)Operation].ToString(), Size == DisplaySize.Small, x, y);
-        }
-
-        public void RecalculateDimensions(ExpressionCursor expressionCursor)
-        {
-            Width = 5;
-            Height = Size == DisplaySize.Large ? 9 : 6;
         }
     }
 
     public enum BinaryOperation
     {
-        Add = 0,
-        Subtract = 1,
-        Multiply = 2,
-        Divide = 3
+        Add,
+        Subtract,
+        Multiply,
+        Divide
     }
 }

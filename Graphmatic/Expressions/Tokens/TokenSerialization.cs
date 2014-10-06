@@ -32,7 +32,9 @@ namespace Graphmatic.Expressions.Tokens
             { "Function", (parent, xml) => new FunctionToken(parent, xml) },
             { "Root", (parent, xml) => new RootToken(parent, xml) },
             { "Log", (parent, xml) => new LogToken(parent, xml) },
-            { "Constant", (parent, xml) => new ConstantToken(parent, xml) }
+            { "Constant", (parent, xml) => new ConstantToken(parent, xml) },
+            { "Symbolic", (parent, xml) => new SymbolicToken(parent, xml) },
+            { "Absolute", (parent, xml) => new AbsoluteToken(parent, xml) },
         };
 
         /// <summary>

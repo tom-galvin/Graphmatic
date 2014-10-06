@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    class FunctionToken : IToken
+    public class FunctionToken : IToken
     {
 
         public int Width
@@ -85,14 +85,14 @@ namespace Graphmatic.Expressions.Tokens
             Children = new Expression[] { Operand };
         }
 
-        public XElement ToXml()
+        public virtual XElement ToXml()
         {
             return new XElement("Function",
                 new XAttribute("Name", Text),
                 new XElement("Operand", Operand.ToXml()));
         }
 
-        public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
+        public virtual void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
             g.DrawPixelString(Text, Size == DisplaySize.Small, x, y + Operand.BaselineOffset);
 
@@ -169,7 +169,7 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public void RecalculateDimensions(ExpressionCursor expressionCursor)
+        public virtual void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Operand.Size = Size;
             Operand.RecalculateDimensions(expressionCursor);

@@ -56,6 +56,9 @@
     <Compile Include="Expressions\FontHelper.cs" />
     <Compile Include="Expressions\IPaintable.cs" />
     <Compile Include="Expressions\Tokens\BinaryOperationToken.cs" />
+    <Compile Include="Expressions\Tokens\AbsoluteToken.cs" />
+    <Compile Include="Expressions\Tokens\SimpleToken.cs" />
+    <Compile Include="Expressions\Tokens\SymbolicToken.cs" />
     <Compile Include="Expressions\Tokens\ConstantToken.cs" />
     <Compile Include="Expressions\Tokens\PromptToken.cs" />
     <Compile Include="Expressions\Tokens\FunctionToken.cs" />
@@ -119,6 +122,21 @@
     <None Include="Resources\SmallFont.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\CalcButtons\abs.png" />
+    <Content Include="Resources\CalcButtons\bracket.png" />
+    <Content Include="Resources\CalcButtons\comma.png" />
+    <Content Include="Resources\CalcButtons\cube.png" />
+    <Content Include="Resources\CalcButtons\e.png" />
+    <Content Include="Resources\CalcButtons\exp.png" />
+    <Content Include="Resources\CalcButtons\exp10.png" />
+    <Content Include="Resources\CalcButtons\ln.png" />
+    <Content Include="Resources\CalcButtons\log.png" />
+    <Content Include="Resources\CalcButtons\logN.png" />
+    <Content Include="Resources\CalcButtons\pi.png" />
+    <Content Include="Resources\CalcButtons\reciprocate.png" />
+    <Content Include="Resources\CalcButtons\root.png" />
+    <Content Include="Resources\CalcButtons\sqrt.png" />
+    <Content Include="Resources\CalcButtons\square.png" />
     <Content Include="Resources\LeftArrow.png" />
     <Content Include="Resources\RightArrow.png" />
     <Content Include="Resources\Equation.ico" />

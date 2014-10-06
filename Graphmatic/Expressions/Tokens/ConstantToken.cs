@@ -8,34 +8,8 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    class ConstantToken : IToken
+    public class ConstantToken : SimpleToken
     {
-
-        public int Width
-        {
-            get;
-            protected set;
-        }
-
-        public int Height
-        {
-            get;
-            protected set;
-        }
-
-        public DisplaySize Size
-        {
-            get;
-            set;
-        }
-
-        public int BaselineOffset
-        {
-            get
-            {
-                return 0;
-            }
-        }
 
         private ConstantType _Value;
         public ConstantType Value
@@ -44,7 +18,7 @@ namespace Graphmatic.Expressions.Tokens
             set { _Value = value; }
         }
 
-        public string Text
+        public override string Text
         {
             get
             {
@@ -55,32 +29,17 @@ namespace Graphmatic.Expressions.Tokens
                     case ConstantType.Pi:
                         return "^";
                     default:
-                        return "0";
+                        return "<unknown constant>";
                 }
             }
-        }
-
-        public Expression Parent
-        {
-            get;
-            protected set;
-        }
-
-        public Expression[] Children
-        {
-            get;
-            protected set;
-        }
-
-        public Expression DefaultChild
-        {
-            get
+            protected set
             {
-                return null;
+                throw new NotImplementedException();
             }
         }
 
         public ConstantToken(Expression parent, ConstantType value)
+            :base(parent)
         {
             Parent = parent;
             Children = new Expression[] { };
@@ -88,6 +47,7 @@ namespace Graphmatic.Expressions.Tokens
         }
 
         public ConstantToken(Expression parent, XElement xml)
+            :base(parent)
         {
             Parent = parent;
             string constantName = xml.Element("Value").Value;
@@ -96,21 +56,10 @@ namespace Graphmatic.Expressions.Tokens
             Children = new Expression[] { };
         }
 
-        public XElement ToXml()
+        public override XElement ToXml()
         {
             return new XElement("Constant",
                 new XAttribute("Value", Value.ToString()));
-        }
-
-        public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
-        {
-            g.DrawPixelString(Text, Size == DisplaySize.Small, x, y);
-        }
-
-        public void RecalculateDimensions(ExpressionCursor expressionCursor)
-        {
-            Width = 5 * Text.Length + 1 * (Text.Length - 1);
-            Height = Size == DisplaySize.Large ? 9 : 6;
         }
 
         public enum ConstantType

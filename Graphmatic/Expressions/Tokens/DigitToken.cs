@@ -8,35 +8,8 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    class DigitToken : IToken
+    public class DigitToken : SimpleToken
     {
-
-        public int Width
-        {
-            get;
-            protected set;
-        }
-
-        public int Height
-        {
-            get;
-            protected set;
-        }
-
-        public DisplaySize Size
-        {
-            get;
-            set;
-        }
-
-        public int BaselineOffset
-        {
-            get
-            {
-                return 0;
-            }
-        }
-
         private int _Value;
         public int Value
         {
@@ -57,55 +30,34 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public Expression Parent
-        {
-            get;
-            protected set;
-        }
-
-        public Expression[] Children
-        {
-            get;
-            protected set;
-        }
-
-        public Expression DefaultChild
+        public override string Text
         {
             get
             {
-                return null;
+                return _Value.ToString();
+            }
+            protected set
+            {
+                throw new NotImplementedException();
             }
         }
 
         public DigitToken(Expression parent, int value)
+            : base(parent)
         {
-            Parent = parent;
-            Children = new Expression[] { };
             Value = value;
         }
 
         public DigitToken(Expression parent, XElement xml)
+            : base(parent)
         {
-            Parent = parent;
             Value = Int32.Parse(xml.Element("Value").Value);
-            Children = new Expression[] { };
         }
 
-        public XElement ToXml()
+        public override XElement ToXml()
         {
             return new XElement("Digit",
                 new XAttribute("Value", Value.ToString()));
-        }
-
-        public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
-        {
-            g.DrawPixelString(Value.ToString(), Size == DisplaySize.Small, x, y);
-        }
-
-        public void RecalculateDimensions(ExpressionCursor expressionCursor)
-        {
-            Width = 5;
-            Height = Size == DisplaySize.Large ? 9 : 6;
         }
     }
 }
