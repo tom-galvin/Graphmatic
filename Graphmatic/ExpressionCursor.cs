@@ -270,5 +270,15 @@ namespace Graphmatic
                 }
             }
         }
+
+        /// <summary>
+        /// Inserts a token to the left of the cursor, and moves the cursor accordingly.
+        /// </summary>
+        /// <param name="token">The token to insert.</param>
+        public void Insert(IToken token)
+        {
+            Expression.Insert(Index, token);
+            Right();
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace Graphmatic
 {
     public partial class InputWindow : Form
     {
+        private Dictionary<Button, Func<Expression, IToken>> Buttons;
+
         /// <summary>
         /// Gets the result of this input window.
         /// </summary>
@@ -26,6 +28,7 @@ namespace Graphmatic
         public InputWindow(string promptString)
         {
             InitializeComponent();
+            InitializeButtons();
             var prompt = new PromptToken(null, promptString);
             prompt.RecalculateDimensions(expressionDisplay.ExpressionCursor);
             expressionDisplay.Expression.Add(prompt);
@@ -33,21 +36,32 @@ namespace Graphmatic
             Result = prompt.Content;
 
             expressionDisplay.ExpressionCursor.Moved += ExpressionCursor_Moved;
-            prompt.Content.Add(new DigitToken(prompt.Content, 4));
-            var sine = new FunctionToken(prompt.Content, "Calc-é");
-            var log = new LogToken(sine.Operand);
-            var exp = new ExpToken(log.Base);
-            exp.Base.Add(new DigitToken(exp.Base, 3));
-            var root = new RootToken(exp.Power);
-            root.Power.Add(new DigitToken(root.Power, 2));
-            exp.Power.Add(root);
-            log.Base.Add(exp);
-            var arctan = new FunctionToken(log.Operand, "tan`");
-            arctan.Operand.Add(new FractionToken(arctan.Operand));
-            log.Operand.Add(arctan);
-            sine.Operand.Add(log);
-            prompt.Content.Add(sine);
-            prompt.Content.Add(new ExpToken(prompt.Content));
+        }
+
+        private void InitializeButtons()
+        {
+            Buttons = new Dictionary<Button, Func<Expression, IToken>>()
+            {
+                { buttonRoot, expression => new RootToken(expression) },
+                { buttonSqrt, expression => {
+                        var token = new RootToken(expression);
+                        token.Power.Add(new DigitToken(token.Power, 2));
+                        return token;
+                    }
+                },
+                { buttonLn, expression => {
+                    var token = new LogToken(expression);
+                    token.Base.Add(new ConstantToken(token.Base, ConstantToken.ConstantType.E));
+                    return token;
+                    }
+                }
+            };
+
+            foreach (var buttonToken in Buttons)
+            {
+                buttonToken.Key.Click += (sender, e) =>
+                    expressionDisplay.ExpressionCursor.Insert(buttonToken.Value(expressionDisplay.ExpressionCursor.Expression));
+            }
         }
 
         void ExpressionCursor_Moved(object sender, EventArgs e)

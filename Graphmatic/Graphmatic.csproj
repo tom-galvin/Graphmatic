@@ -56,6 +56,7 @@
     <Compile Include="Expressions\FontHelper.cs" />
     <Compile Include="Expressions\IPaintable.cs" />
     <Compile Include="Expressions\Tokens\BinaryOperationToken.cs" />
+    <Compile Include="Expressions\Tokens\ConstantToken.cs" />
     <Compile Include="Expressions\Tokens\PromptToken.cs" />
     <Compile Include="Expressions\Tokens\FunctionToken.cs" />
     <Compile Include="Expressions\Tokens\FractionToken.cs" />

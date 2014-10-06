@@ -31,7 +31,8 @@ namespace Graphmatic.Expressions.Tokens
             { "Fraction", (parent, xml) => new FractionToken(parent, xml) },
             { "Function", (parent, xml) => new FunctionToken(parent, xml) },
             { "Root", (parent, xml) => new RootToken(parent, xml) },
-            { "Log", (parent, xml) => new LogToken(parent, xml) }
+            { "Log", (parent, xml) => new LogToken(parent, xml) },
+            { "Constant", (parent, xml) => new ConstantToken(parent, xml) }
         };
 
         /// <summary>
