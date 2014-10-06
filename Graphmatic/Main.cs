@@ -19,7 +19,7 @@ namespace Graphmatic
 
         private void dispToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new InputWindow("Plot y=").ShowDialog();
+            new InputWindow("y:x;").ShowDialog();
         }
     }
 }

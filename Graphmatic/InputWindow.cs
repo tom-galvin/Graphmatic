@@ -32,7 +32,7 @@ namespace Graphmatic
             expressionDisplay.Expression.Add(prompt);
             expressionDisplay.ExpressionCursor.Expression = prompt.Content;
             Result = prompt.Content;
-
+            DialogResult = System.Windows.Forms.DialogResult.Cancel;
             expressionDisplay.ExpressionCursor.Moved += ExpressionCursor_Moved;
         }
 
@@ -148,6 +148,12 @@ namespace Graphmatic
         {
             expressionDisplay.Delete();
             // MessageBox.Show(Result.ToXmlElement().ToString());
+        }
+
+        private void buttonDone_Click(object sender, EventArgs e)
+        {
+            DialogResult = System.Windows.Forms.DialogResult.OK;
+            Close();
         }
     }
 }
