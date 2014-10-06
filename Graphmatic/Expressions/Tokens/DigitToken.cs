@@ -69,6 +69,14 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
+        public Expression DefaultChild
+        {
+            get
+            {
+                return null;
+            }
+        }
+
         public DigitToken(Expression parent, int value)
         {
             Parent = parent;

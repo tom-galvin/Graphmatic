@@ -63,6 +63,14 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
+        public Expression DefaultChild
+        {
+            get
+            {
+                return Simplification == SimplificationType.None ? Base : Operand;
+            }
+        }
+
         public LogToken(Expression parent)
         {
             Parent = parent;
@@ -171,7 +179,7 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        SimplificationType Simplification;
+        private SimplificationType Simplification;
         public void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Simplification = GetSimplificationType(expressionCursor);
@@ -197,6 +205,16 @@ namespace Graphmatic.Expressions.Tokens
                         if ((Base[0] as DigitToken).Value == 1 && (Base[1] as DigitToken).Value == 0)
                         {
                             return SimplificationType.LogTen;
+                        }
+                    }
+                }
+                else if (Base.Count == 1)
+                {
+                    if (Base[0] is ConstantToken)
+                    {
+                        if ((Base[0] as ConstantToken).Value == ConstantToken.ConstantType.E)
+                        {
+                            return SimplificationType.LogE;
                         }
                     }
                 }

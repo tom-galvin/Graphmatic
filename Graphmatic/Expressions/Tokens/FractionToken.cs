@@ -61,6 +61,14 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
+        public Expression DefaultChild
+        {
+            get
+            {
+                return Top;
+            }
+        }
+
         public FractionToken(Expression parent)
         {
             Parent = parent;

@@ -72,6 +72,14 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
+        public Expression DefaultChild
+        {
+            get
+            {
+                return null;
+            }
+        }
+
         public ConstantToken(Expression parent, ConstantType value)
         {
             Parent = parent;

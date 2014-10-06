@@ -61,6 +61,14 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
+        public Expression DefaultChild
+        {
+            get
+            {
+                return Simplified ? Base : Power;
+            }
+        }
+
         public RootToken(Expression parent)
         {
             Parent = parent;
@@ -86,11 +94,10 @@ namespace Graphmatic.Expressions.Tokens
 
         public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
-            bool skippingRoot = CanSimplifyDisplay(expressionCursor);
-            if(!skippingRoot)
+            if(!Simplified)
                 Power.Paint(g, expressionCursor, x, y);
             if (Size == DisplaySize.Small) y += 1;
-            int xOffset = skippingRoot ? 1 : Power.Width;
+            int xOffset = Simplified ? 1 : Power.Width;
             Base.Paint(g, expressionCursor, x + xOffset + 3, y + Height - Base.Height);
 
             // draw square-root symbol
@@ -115,11 +122,12 @@ namespace Graphmatic.Expressions.Tokens
 
         public void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
+            Simplified = CanSimplifyDisplay(expressionCursor);
             Base.Size = Size;
             Base.RecalculateDimensions(expressionCursor);
             Power.Size = DisplaySize.Small;
             Power.RecalculateDimensions(expressionCursor);
-            if (!CanSimplifyDisplay(expressionCursor))
+            if (!Simplified)
             {
                 Width = Base.Width + Power.Width + 5;
                 Height = Base.Height + Power.Height - 3 + (Size == DisplaySize.Small ? 1 : 0);
@@ -131,6 +139,7 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
+        private bool Simplified;
         private bool CanSimplifyDisplay(ExpressionCursor expressionCursor)
         {
             return

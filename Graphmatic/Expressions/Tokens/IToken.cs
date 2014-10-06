@@ -38,6 +38,14 @@ namespace Graphmatic.Expressions.Tokens
         }
 
         /// <summary>
+        /// Gets the default child expression that the cursor is placed into when the token is inserted, or null to place the cursor after the expression.
+        /// </summary>
+        Expression DefaultChild
+        {
+            get;
+        }
+
+        /// <summary>
         /// Converts this token (and all its children) to XML.
         /// </summary>
         /// <returns>The XML representation of this token.</returns>

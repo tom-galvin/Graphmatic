@@ -277,8 +277,17 @@ namespace Graphmatic
         /// <param name="token">The token to insert.</param>
         public void Insert(IToken token)
         {
+            token.RecalculateDimensions(this);
             Expression.Insert(Index, token);
-            Right();
+            Expression defaultExpression = token.DefaultChild;
+            if (defaultExpression == null) // if the token has no default child expression...
+            {
+                Right(); // skip over the token
+            }
+            else // otherwise...
+            {
+                Expression = defaultExpression;
+            }
         }
     }
 }

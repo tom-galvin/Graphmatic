@@ -61,6 +61,14 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
+        public Expression DefaultChild
+        {
+            get
+            {
+                return Operand;
+            }
+        }
+
         public FunctionToken(Expression parent, string text)
         {
             Parent = parent;

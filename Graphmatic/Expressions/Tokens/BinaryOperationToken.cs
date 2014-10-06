@@ -57,6 +57,14 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
+        public Expression DefaultChild
+        {
+            get
+            {
+                return null;
+            }
+        }
+
         public BinaryOperationToken(Expression parent, BinaryOperation operation)
         {
             Parent = parent;

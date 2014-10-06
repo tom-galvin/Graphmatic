@@ -61,6 +61,14 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
+        public Expression DefaultChild
+        {
+            get
+            {
+                return Content;
+            }
+        }
+
         public PromptToken(Expression parent, string text)
         {
             Parent = parent;
