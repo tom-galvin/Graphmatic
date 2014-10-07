@@ -27,7 +27,7 @@ namespace Graphmatic.Expressions.Tokens
                 new XElement("Operand", Operand.ToXml()));
         }
 
-        public virtual void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
+        public override void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
             Operand.Paint(g, expressionCursor, x + 1, y);
             g.DrawLine(Expression.ExpressionPen,
@@ -43,7 +43,7 @@ namespace Graphmatic.Expressions.Tokens
                 y + Height);
         }
 
-        public virtual void RecalculateDimensions(ExpressionCursor expressionCursor)
+        public override void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Operand.Size = Size;
             Operand.RecalculateDimensions(expressionCursor);
