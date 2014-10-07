@@ -27,6 +27,7 @@ namespace Graphmatic.Expressions.Tokens
         Expression Parent
         {
             get;
+            set;
         }
 
         /// <summary>

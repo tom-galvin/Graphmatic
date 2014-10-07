@@ -8,8 +8,12 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class ExpToken : IToken
+    public class ExpToken : IToken, ITokenCollector
     {
+        public int Precedence
+        {
+            get { return 1000; }
+        }
 
         public int Width
         {
@@ -33,7 +37,9 @@ namespace Graphmatic.Expressions.Tokens
         {
             get
             {
-                return Height - Base.Height;
+                return (Height - Base.Height) + Base
+                    .Select(token => token.BaselineOffset)
+                    .Aggregate((b1, b2) => Math.Max(b1, b2));
             }
         }
 
@@ -52,7 +58,7 @@ namespace Graphmatic.Expressions.Tokens
         public Expression Parent
         {
             get;
-            protected set;
+            set;
         }
 
         public Expression[] Children

@@ -146,19 +146,11 @@ namespace Graphmatic
                         }
                         else // if this expression's parent has a containing token...
                         {
-                            int CurrentExpressionParentIndexInParentParent = -1;
-                            for (int i = 0; i < Expression.Parent.Parent.Count; i++) // find it's index in the parent's parent
-                            {
-                                if (Expression.Parent.Parent[i] == Expression.Parent)
-                                {
-                                    CurrentExpressionParentIndexInParentParent = i;
-                                    break;
-                                }
-                            }
+                            int currentExpressionParentIndexInParentParent = Expression.Parent.IndexInParent();
                             // move us outside of the current expression
                             Expression = Expression.Parent.Parent;
                             // put us to the left of the token we were just in
-                            Index = CurrentExpressionParentIndexInParentParent;
+                            Index = currentExpressionParentIndexInParentParent;
                         }
                     }
                 }
@@ -286,8 +278,46 @@ namespace Graphmatic
             }
             else // otherwise...
             {
-                Expression = defaultExpression;
+                if (token is ITokenCollector)
+                {
+                    ITokenCollector tokenCollector = token as ITokenCollector;
+                    int newIndex = Index + 1;
+                    for (int i = Index - 1; i >= 0; i--)
+                    {
+                        IToken collectedToken = Expression[i];
+                        if (collectedToken is ITokenCollector)
+                        {
+                            ITokenCollector collectedTokenCollector = collectedToken as ITokenCollector;
+                            if (collectedTokenCollector.Precedence < tokenCollector.Precedence) break;
+                        }
+                        collectedToken.Parent = defaultExpression;
+                        defaultExpression.Insert(0, collectedToken);
+                        Expression.RemoveAt(i);
+                        newIndex--;
+                    }
+                    if (defaultExpression.IndexInParent() != defaultExpression.Parent.Children.Length - 1)
+                    {
+                        Expression nextDefaultExpression = defaultExpression.Parent.Children[defaultExpression.IndexInParent() + 1];
+                        if (nextDefaultExpression.Count == 0)
+                        {
+                            Expression = nextDefaultExpression;
+                        }
+                        else
+                        {
+                            Index = newIndex;
+                        }
+                    }
+                    else
+                    {
+                        Index = newIndex;
+                    }
+                }
+                else
+                {
+                    Expression = defaultExpression;
+                }
             }
+            OnMoved();
         }
     }
 }

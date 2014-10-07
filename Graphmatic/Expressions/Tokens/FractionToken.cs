@@ -8,8 +8,12 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class FractionToken : IToken
+    public class FractionToken : IToken, ITokenCollector
     {
+        public int Precedence
+        {
+            get { return 10; }
+        }
 
         public int Width
         {
@@ -52,7 +56,7 @@ namespace Graphmatic.Expressions.Tokens
         public Expression Parent
         {
             get;
-            protected set;
+            set;
         }
 
         public Expression[] Children

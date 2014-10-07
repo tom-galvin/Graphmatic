@@ -54,7 +54,7 @@ namespace Graphmatic.Expressions.Tokens
         public Expression Parent
         {
             get;
-            protected set;
+            set;
         }
 
         public Expression[] Children

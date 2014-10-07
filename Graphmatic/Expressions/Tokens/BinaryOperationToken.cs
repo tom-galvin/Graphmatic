@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class BinaryOperationToken : SimpleToken
+    public class BinaryOperationToken : SimpleToken, IOperator
     {
         public BinaryOperationType _Operation;
         public BinaryOperationType Operation
@@ -38,6 +38,43 @@ namespace Graphmatic.Expressions.Tokens
             protected set
             {
                 throw new NotImplementedException();
+            }
+        }
+
+        public int Precedence
+        {
+            get
+            {
+                switch (_Operation)
+                {
+                    case BinaryOperationType.Divide:
+                        return 100;
+                    case BinaryOperationType.Multiply:
+                        return 99;
+                    case BinaryOperationType.Add:
+                        return 2;
+                    case BinaryOperationType.Subtract:
+                        return 1;
+                    default:
+                        throw new NotImplementedException("Unknown operation.");
+                }
+            }
+        }
+
+        public OperatorAssociativity Associativity
+        {
+            get
+            {
+                switch (_Operation)
+                {
+                    case BinaryOperationType.Add:
+                    case BinaryOperationType.Subtract:
+                    case BinaryOperationType.Multiply:
+                    case BinaryOperationType.Divide:
+                        return OperatorAssociativity.Left;
+                    default:
+                        throw new NotImplementedException("Unknown operation.");
+                }
             }
         }
 

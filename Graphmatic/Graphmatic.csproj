@@ -54,6 +54,8 @@
     <Compile Include="Expressions\Expression.cs" />
     <Compile Include="Expressions\ExpressionEngineExtensionMethods.cs" />
     <Compile Include="Expressions\FontHelper.cs" />
+    <Compile Include="Expressions\ITokenCollector.cs" />
+    <Compile Include="Expressions\IOperator.cs" />
     <Compile Include="Expressions\IPaintable.cs" />
     <Compile Include="Expressions\Tokens\BinaryOperationToken.cs" />
     <Compile Include="Expressions\Tokens\AbsoluteToken.cs" />
