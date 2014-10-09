@@ -103,7 +103,7 @@ namespace Graphmatic.Expressions.Tokens
             g.DrawLine(Expression.ExpressionPen,
                 x + xOffset + 1,
                 y + Height - Base.Height - 2,
-                x + xOffset + 3 + Base.Width,
+                x + xOffset + 2 + Base.Width,
                 y + Height - Base.Height - 2);
 
             g.DrawLine(Expression.ExpressionPen,
@@ -134,7 +134,7 @@ namespace Graphmatic.Expressions.Tokens
             else
             {
                 Width = Base.Width + 5;
-                Height = Base.Height + 3;
+                Height = Base.Height + 2;
             }
         }
 

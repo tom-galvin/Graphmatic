@@ -17,6 +17,16 @@ namespace Graphmatic
     public partial class ExpressionDisplay : UserControl
     {
         /// <summary>
+        /// Gets or sets if Moein mode is enabled or not.
+        /// </summary>
+        [Description("Changes whether Moein mode is enabled or not.")]
+        public bool MoeinMode
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets the mathematical expression to display.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -115,20 +125,27 @@ namespace Graphmatic
             Invalidate();
         }
 
-        private void ExpressionDisplay_Paint(object sender, PaintEventArgs e)
+        private void ExpressionDisplay_Paint(object sender, PaintEventArgs e) //follow me on reddit
         {
-            Expression.Size = SmallExpression ? DisplaySize.Small : DisplaySize.Large;
-            Expression.RecalculateDimensions(ExpressionCursor);
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            if (!MoeinMode)
+            {
+                Expression.Size = SmallExpression ? DisplaySize.Small : DisplaySize.Large;
+                Expression.RecalculateDimensions(ExpressionCursor);
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
 
-            Bitmap expressionBitmap = new Bitmap(Expression.Width + 3, Expression.Height + 3);
-            ExpressionSize = expressionBitmap.Size;
-            Graphics expressionGraphics = Graphics.FromImage(expressionBitmap);
-            ExpressionCursor.Hotspots.Clear();
-            Expression.Paint(expressionGraphics, ExpressionCursor, 1, 1);
+                Bitmap expressionBitmap = new Bitmap(Expression.Width + 3, Expression.Height + 3);
+                ExpressionSize = expressionBitmap.Size;
+                Graphics expressionGraphics = Graphics.FromImage(expressionBitmap);
+                ExpressionCursor.Hotspots.Clear();
+                Expression.Paint(expressionGraphics, ExpressionCursor, 1, 1);
 
-            e.Graphics.ScaleTransform(_DisplayScale, _DisplayScale);
-            e.Graphics.DrawImage(expressionBitmap, (Width / _DisplayScale - expressionBitmap.Width) / 2, (Height / _DisplayScale - expressionBitmap.Height) / 2);
+                e.Graphics.ScaleTransform(_DisplayScale, _DisplayScale);
+                e.Graphics.DrawImage(expressionBitmap, (Width / _DisplayScale - expressionBitmap.Width) / 2, (Height / _DisplayScale - expressionBitmap.Height) / 2);
+            }
+            else
+            {
+                e.Graphics.DrawImageUnscaled(Properties.Resources.Moein, 0, 0, Width, Height);
+            }
         }
 
         /// <summary>

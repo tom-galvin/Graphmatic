@@ -281,7 +281,7 @@ namespace Graphmatic
                 if (token is ITokenCollector)
                 {
                     ITokenCollector tokenCollector = token as ITokenCollector;
-                    int newIndex = Index + 1;
+                    int newIndex = Index + 1, addedTokens = 0;
                     for (int i = Index - 1; i >= 0; i--)
                     {
                         IToken collectedToken = Expression[i];
@@ -294,13 +294,21 @@ namespace Graphmatic
                         defaultExpression.Insert(0, collectedToken);
                         Expression.RemoveAt(i);
                         newIndex--;
+                        addedTokens++;
                     }
-                    if (defaultExpression.IndexInParent() != defaultExpression.Parent.Children.Length - 1)
+                    if (addedTokens > 0)
                     {
-                        Expression nextDefaultExpression = defaultExpression.Parent.Children[defaultExpression.IndexInParent() + 1];
-                        if (nextDefaultExpression.Count == 0)
+                        if (defaultExpression.IndexInParent() != defaultExpression.Parent.Children.Length - 1)
                         {
-                            Expression = nextDefaultExpression;
+                            Expression nextDefaultExpression = defaultExpression.Parent.Children[defaultExpression.IndexInParent() + 1];
+                            if (nextDefaultExpression.Count == 0)
+                            {
+                                Expression = nextDefaultExpression;
+                            }
+                            else
+                            {
+                                Index = newIndex;
+                            }
                         }
                         else
                         {
@@ -309,7 +317,7 @@ namespace Graphmatic
                     }
                     else
                     {
-                        Index = newIndex;
+                        Expression = defaultExpression;
                     }
                 }
                 else
