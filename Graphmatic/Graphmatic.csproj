@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Graphmatic.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -158,6 +161,8 @@
     <Content Include="Resources\CalcButtons\sqrt.png" />
     <Content Include="Resources\CalcButtons\square.png" />
     <Content Include="Resources\CalcButtons\subtract.png" />
+    <Content Include="Resources\Graphmatic.ico" />
+    <Content Include="Resources\GraphmaticDocument.ico" />
     <Content Include="Resources\LeftArrow.png" />
     <Content Include="Resources\RightArrow.png" />
     <Content Include="Resources\Equation.ico" />
