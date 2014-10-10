@@ -164,6 +164,7 @@
     <Content Include="Resources\Graphmatic.ico" />
     <Content Include="Resources\GraphmaticDocument.ico" />
     <Content Include="Resources\LeftArrow.png" />
+    <None Include="Resources\Moein.jpg" />
     <Content Include="Resources\RightArrow.png" />
     <Content Include="Resources\Equation.ico" />
     <Content Include="Resources\Delete.png" />
