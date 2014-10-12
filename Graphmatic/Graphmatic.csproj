@@ -164,11 +164,33 @@
     <Content Include="Resources\Graphmatic.ico" />
     <Content Include="Resources\GraphmaticDocument.ico" />
     <Content Include="Resources\LeftArrow.png" />
+    <Content Include="Resources\ToolbarIcons\AnnotateDraw16.png" />
+    <Content Include="Resources\ToolbarIcons\AnnotateEraseAll16.png" />
+    <Content Include="Resources\ToolbarIcons\AnnotateErase16.png" />
+    <Content Include="Resources\ToolbarIcons\AnnotationHighlight16.png" />
+    <Content Include="Resources\ToolbarIcons\Chart24.png" />
+    <Content Include="Resources\ToolbarIcons\CustomSelect24.png" />
+    <Content Include="Resources\ToolbarIcons\Redo16.png" />
+    <Content Include="Resources\ToolbarIcons\SquareSelect24.png" />
+    <Content Include="Resources\ToolbarIcons\Undo16.png" />
+    <Content Include="Resources\ToolbarIcons\ArrowLeft24.png" />
+    <Content Include="Resources\ToolbarIcons\ArrowRight24.png" />
+    <Content Include="Resources\ToolbarIcons\Color24.png" />
+    <Content Include="Resources\ToolbarIcons\AnnotateText24.png" />
+    <Content Include="Resources\ToolbarIcons\AnnotateErase24.png" />
+    <Content Include="Resources\ToolbarIcons\Data24.png" />
+    <Content Include="Resources\ToolbarIcons\Graph24.png" />
+    <Content Include="Resources\ToolbarIcons\IncreaseSize16.png" />
+    <Content Include="Resources\ToolbarIcons\DecreaseSize16.png" />
+    <Content Include="Resources\ToolbarIcons\AnnotateDraw24.png" />
+    <Content Include="Resources\ToolbarIcons\Add24.png" />
+    <Content Include="Resources\ToolbarIcons\Statistics24.png" />
     <None Include="Resources\Moein.jpg" />
     <Content Include="Resources\RightArrow.png" />
     <Content Include="Resources\Equation.ico" />
     <Content Include="Resources\Delete.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

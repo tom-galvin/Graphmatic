@@ -118,6 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Add24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\add24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotateDraw16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotatedraw16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotateDraw24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotatedraw24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotateErase16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotateerase16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotateErase24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotateerase24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotateEraseAll16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotateeraseall16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotateText24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotatetext24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotationHighlight16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotationhighlight16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ArrowLeft24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\arrowleft24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ArrowRight24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\arrowright24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Button0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\d0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -220,6 +250,21 @@
   <data name="ButtonSubtract" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\subtract.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Chart24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\chart24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Color24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\color24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CustomSelect24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\customselect24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Data24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\data24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DecreaseSize16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\decreasesize16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -229,11 +274,17 @@
   <data name="FontChars" xml:space="preserve">
     <value>0123456789.,:%)(!^£$@'"`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~*/+-=#&gt;&lt;¬|\; áéíóúÁÉÍÓÚ</value>
   </data>
+  <data name="Graph24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\graph24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Graphmatic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\graphmatic.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GraphmaticDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\graphmaticdocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IncreaseSize16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\increasesize16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LargeFont" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LargeFont.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -244,10 +295,22 @@
   <data name="Moein" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Moein.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Redo16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\redo16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RightArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\rightarrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SmallFont" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SmallFont.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SquareSelect24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\squareselect24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Statistics24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\statistics24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Undo16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\undo16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
