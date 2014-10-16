@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnterTextDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterTextDialog.Designer.cs">
+      <DependentUpon>EnterTextDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpressionCursor.cs" />
     <Compile Include="ExpressionDisplay.cs">
       <SubType>UserControl</SubType>
@@ -74,12 +80,14 @@
     <Compile Include="Expressions\Tokens\DigitToken.cs" />
     <Compile Include="Expressions\Tokens\IToken.cs" />
     <Compile Include="Expressions\Tokens\TokenSerialization.cs" />
+    <Compile Include="Files\Page.cs" />
     <Compile Include="InputWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InputWindow.Designer.cs">
       <DependentUpon>InputWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="IXmlConvertible.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +96,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EnterTextDialog.resx">
+      <DependentUpon>EnterTextDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExpressionDisplay.resx">
       <DependentUpon>ExpressionDisplay.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +181,7 @@
     <Content Include="Resources\ToolbarIcons\AnnotationHighlight16.png" />
     <Content Include="Resources\ToolbarIcons\Chart24.png" />
     <Content Include="Resources\ToolbarIcons\CustomSelect24.png" />
+    <Content Include="Resources\ToolbarIcons\Document16.png" />
     <Content Include="Resources\ToolbarIcons\Redo16.png" />
     <Content Include="Resources\ToolbarIcons\SquareSelect24.png" />
     <Content Include="Resources\ToolbarIcons\Undo16.png" />

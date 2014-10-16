@@ -28,10 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.dispToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.tabControlLeftPanel = new System.Windows.Forms.TabControl();
+            this.tabPagePages = new System.Windows.Forms.TabPage();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.imageListTabs = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonIncreasePenSize = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDecreasePenSize = new System.Windows.Forms.ToolStripButton();
@@ -60,20 +67,27 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
-            this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
+            this.display = new System.Windows.Forms.PictureBox();
+            this.lorgorgoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            this.toolStrip.SuspendLayout();
+            this.tabControlLeftPanel.SuspendLayout();
+            this.tabPagePages.SuspendLayout();
             this.toolStripContainer.BottomToolStripPanel.SuspendLayout();
+            this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
+            this.toolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dispToolStripMenuItem});
+            this.dispToolStripMenuItem,
+            this.lorgorgoToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1012, 24);
@@ -101,12 +115,77 @@
             this.splitContainer.Location = new System.Drawing.Point(0, 24);
             this.splitContainer.Name = "splitContainer";
             // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.Controls.Add(this.tabControlLeftPanel);
+            // 
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.toolStripContainer);
             this.splitContainer.Size = new System.Drawing.Size(1012, 490);
             this.splitContainer.SplitterDistance = 337;
             this.splitContainer.TabIndex = 2;
+            // 
+            // tabControlLeftPanel
+            // 
+            this.tabControlLeftPanel.Controls.Add(this.tabPagePages);
+            this.tabControlLeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlLeftPanel.ImageList = this.imageListTabs;
+            this.tabControlLeftPanel.Location = new System.Drawing.Point(0, 0);
+            this.tabControlLeftPanel.Name = "tabControlLeftPanel";
+            this.tabControlLeftPanel.SelectedIndex = 0;
+            this.tabControlLeftPanel.ShowToolTips = true;
+            this.tabControlLeftPanel.Size = new System.Drawing.Size(337, 490);
+            this.tabControlLeftPanel.TabIndex = 0;
+            // 
+            // tabPagePages
+            // 
+            this.tabPagePages.Controls.Add(this.listView1);
+            this.tabPagePages.ImageIndex = 0;
+            this.tabPagePages.Location = new System.Drawing.Point(4, 24);
+            this.tabPagePages.Name = "tabPagePages";
+            this.tabPagePages.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePages.Size = new System.Drawing.Size(329, 462);
+            this.tabPagePages.TabIndex = 0;
+            this.tabPagePages.Text = "Pages";
+            this.tabPagePages.ToolTipText = "See the pages in the Graphmatic document.";
+            this.tabPagePages.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(3, 3);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(323, 456);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
+            // 
+            // imageListTabs
+            // 
+            this.imageListTabs.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTabs.ImageStream")));
+            this.imageListTabs.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListTabs.Images.SetKeyName(0, "Document16");
+            // 
+            // toolStripContainer
+            // 
+            // 
+            // toolStripContainer.BottomToolStripPanel
+            // 
+            this.toolStripContainer.BottomToolStripPanel.Controls.Add(this.toolStrip);
+            // 
+            // toolStripContainer.ContentPanel
+            // 
+            this.toolStripContainer.ContentPanel.Controls.Add(this.display);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(671, 434);
+            this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStripContainer.LeftToolStripPanelVisible = false;
+            this.toolStripContainer.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer.Name = "toolStripContainer";
+            this.toolStripContainer.RightToolStripPanelVisible = false;
+            this.toolStripContainer.Size = new System.Drawing.Size(671, 490);
+            this.toolStripContainer.TabIndex = 3;
+            this.toolStripContainer.Text = "toolStripContainer1";
             // 
             // toolStrip
             // 
@@ -138,7 +217,7 @@
             this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip.Location = new System.Drawing.Point(3, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(521, 31);
+            this.toolStrip.Size = new System.Drawing.Size(490, 31);
             this.toolStrip.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -192,7 +271,7 @@
             this.drawAnnotationToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.AnnotateDraw16;
             this.drawAnnotationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.drawAnnotationToolStripMenuItem.Name = "drawAnnotationToolStripMenuItem";
-            this.drawAnnotationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.drawAnnotationToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.drawAnnotationToolStripMenuItem.Text = "Draw";
             this.drawAnnotationToolStripMenuItem.ToolTipText = "Draw annotation";
             // 
@@ -201,7 +280,7 @@
             this.highlightAnnotationToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.AnnotationHighlight16;
             this.highlightAnnotationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.highlightAnnotationToolStripMenuItem.Name = "highlightAnnotationToolStripMenuItem";
-            this.highlightAnnotationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.highlightAnnotationToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.highlightAnnotationToolStripMenuItem.Text = "Highlight";
             this.highlightAnnotationToolStripMenuItem.ToolTipText = "Highlight annotation";
             // 
@@ -277,7 +356,7 @@
             // 
             this.plotEquationToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Graph24;
             this.plotEquationToolStripMenuItem.Name = "plotEquationToolStripMenuItem";
-            this.plotEquationToolStripMenuItem.Size = new System.Drawing.Size(160, 30);
+            this.plotEquationToolStripMenuItem.Size = new System.Drawing.Size(153, 30);
             this.plotEquationToolStripMenuItem.Text = "Plot Equation";
             this.plotEquationToolStripMenuItem.ToolTipText = "Plot an equation on a graph";
             // 
@@ -285,7 +364,7 @@
             // 
             this.plotDataToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Data24;
             this.plotDataToolStripMenuItem.Name = "plotDataToolStripMenuItem";
-            this.plotDataToolStripMenuItem.Size = new System.Drawing.Size(160, 30);
+            this.plotDataToolStripMenuItem.Size = new System.Drawing.Size(153, 30);
             this.plotDataToolStripMenuItem.Text = "Plot Data";
             this.plotDataToolStripMenuItem.ToolTipText = "Plot a data set on a graph";
             // 
@@ -386,24 +465,23 @@
             this.toolStripButtonCustomSelect.Text = "toolStripButton1";
             this.toolStripButtonCustomSelect.ToolTipText = "Select objects with a free-form shape";
             // 
-            // toolStripContainer
+            // display
             // 
+            this.display.BackColor = System.Drawing.Color.White;
+            this.display.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.display.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.display.Location = new System.Drawing.Point(0, 0);
+            this.display.Name = "display";
+            this.display.Size = new System.Drawing.Size(671, 434);
+            this.display.TabIndex = 0;
+            this.display.TabStop = false;
             // 
-            // toolStripContainer.BottomToolStripPanel
+            // lorgorgoToolStripMenuItem
             // 
-            this.toolStripContainer.BottomToolStripPanel.Controls.Add(this.toolStrip);
-            // 
-            // toolStripContainer.ContentPanel
-            // 
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(671, 459);
-            this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainer.LeftToolStripPanelVisible = false;
-            this.toolStripContainer.Location = new System.Drawing.Point(0, 0);
-            this.toolStripContainer.Name = "toolStripContainer";
-            this.toolStripContainer.RightToolStripPanelVisible = false;
-            this.toolStripContainer.Size = new System.Drawing.Size(671, 490);
-            this.toolStripContainer.TabIndex = 3;
-            this.toolStripContainer.Text = "toolStripContainer1";
+            this.lorgorgoToolStripMenuItem.Name = "lorgorgoToolStripMenuItem";
+            this.lorgorgoToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.lorgorgoToolStripMenuItem.Text = "TestDlg";
+            this.lorgorgoToolStripMenuItem.Click += new System.EventHandler(this.lorgorgoToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -420,15 +498,20 @@
             this.Text = "Graphmatic";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
+            this.tabControlLeftPanel.ResumeLayout(false);
+            this.tabPagePages.ResumeLayout(false);
             this.toolStripContainer.BottomToolStripPanel.ResumeLayout(false);
             this.toolStripContainer.BottomToolStripPanel.PerformLayout();
+            this.toolStripContainer.ContentPanel.ResumeLayout(false);
             this.toolStripContainer.ResumeLayout(false);
             this.toolStripContainer.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -469,6 +552,12 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonSquareSelect;
         private System.Windows.Forms.ToolStripButton toolStripButtonCustomSelect;
         private System.Windows.Forms.ToolStripContainer toolStripContainer;
+        private System.Windows.Forms.PictureBox display;
+        private System.Windows.Forms.TabControl tabControlLeftPanel;
+        private System.Windows.Forms.TabPage tabPagePages;
+        private System.Windows.Forms.ImageList imageListTabs;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ToolStripMenuItem lorgorgoToolStripMenuItem;
     }
 }
 

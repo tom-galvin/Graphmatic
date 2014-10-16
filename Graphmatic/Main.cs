@@ -21,5 +21,10 @@ namespace Graphmatic
         {
             new InputWindow("y:x;").ShowDialog();
         }
+
+        private void lorgorgoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(EnterTextDialog.Display("Test", "ABC", "Lol", Properties.Resources.Graph24) ?? "hue");
+        }
     }
 }

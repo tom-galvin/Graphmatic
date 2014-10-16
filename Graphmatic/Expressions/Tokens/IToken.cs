@@ -10,7 +10,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Exposes methods and properties to manipulate a token (or component) in a mathematical expression.
     /// </summary>
-    public interface IToken : IPaintable
+    public interface IToken : IPaintable, IXmlConvertible
     {
         /// <summary>
         /// Gets whether the component is rendered in large or small mode.
@@ -45,11 +45,5 @@ namespace Graphmatic.Expressions.Tokens
         {
             get;
         }
-
-        /// <summary>
-        /// Converts this token (and all its children) to XML.
-        /// </summary>
-        /// <returns>The XML representation of this token.</returns>
-        XElement ToXml();
     }
 }
