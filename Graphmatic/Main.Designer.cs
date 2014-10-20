@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.dispToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lorgorgoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tabControlLeftPanel = new System.Windows.Forms.TabControl();
@@ -68,7 +71,6 @@
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.display = new System.Windows.Forms.PictureBox();
-            this.lorgorgoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -87,7 +89,8 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dispToolStripMenuItem,
-            this.lorgorgoToolStripMenuItem});
+            this.lorgorgoToolStripMenuItem,
+            this.toolsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1012, 24);
@@ -100,6 +103,29 @@
             this.dispToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.dispToolStripMenuItem.Text = "Disp";
             this.dispToolStripMenuItem.Click += new System.EventHandler(this.dispToolStripMenuItem_Click);
+            // 
+            // lorgorgoToolStripMenuItem
+            // 
+            this.lorgorgoToolStripMenuItem.Name = "lorgorgoToolStripMenuItem";
+            this.lorgorgoToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.lorgorgoToolStripMenuItem.Text = "TestDlg";
+            this.lorgorgoToolStripMenuItem.Click += new System.EventHandler(this.lorgorgoToolStripMenuItem_Click);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Text = "&Tools";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Settings16;
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Text = "&Options...";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -476,13 +502,6 @@
             this.display.TabIndex = 0;
             this.display.TabStop = false;
             // 
-            // lorgorgoToolStripMenuItem
-            // 
-            this.lorgorgoToolStripMenuItem.Name = "lorgorgoToolStripMenuItem";
-            this.lorgorgoToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.lorgorgoToolStripMenuItem.Text = "TestDlg";
-            this.lorgorgoToolStripMenuItem.Click += new System.EventHandler(this.lorgorgoToolStripMenuItem_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -496,6 +515,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Main";
             this.Text = "Graphmatic";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
@@ -558,6 +578,8 @@
         private System.Windows.Forms.ImageList imageListTabs;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ToolStripMenuItem lorgorgoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
     }
 }
 

@@ -26,5 +26,15 @@ namespace Graphmatic
         {
             MessageBox.Show(EnterTextDialog.Display("Test", "ABC", "Lol", Properties.Resources.Graph24) ?? "hue");
         }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.SaveSettings();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Options().ShowDialog(this);
+        }
     }
 }

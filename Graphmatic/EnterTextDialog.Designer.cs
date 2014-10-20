@@ -70,7 +70,7 @@
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 2;
-            this.buttonOK.Text = "OK";
+            this.buttonOK.Text = "O&K";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -82,11 +82,11 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 3;
-            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // CreationDialog
+            // EnterTextDialog
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -105,7 +105,7 @@
             this.MaximumSize = new System.Drawing.Size(600, 131);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(347, 131);
-            this.Name = "CreationDialog";
+            this.Name = "EnterTextDialog";
             this.ShowInTaskbar = false;
             this.Text = "Creation";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
