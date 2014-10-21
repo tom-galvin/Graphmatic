@@ -71,6 +71,7 @@
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.display = new System.Windows.Forms.PictureBox();
+            this.imageListPages = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -123,7 +124,7 @@
             // 
             this.optionsToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Settings16;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.optionsToolStripMenuItem.Text = "&Options...";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -183,9 +184,10 @@
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(323, 456);
+            this.listView1.SmallImageList = this.imageListPages;
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // imageListTabs
             // 
@@ -502,6 +504,12 @@
             this.display.TabIndex = 0;
             this.display.TabStop = false;
             // 
+            // imageListPages
+            // 
+            this.imageListPages.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageListPages.ImageSize = new System.Drawing.Size(32, 32);
+            this.imageListPages.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -580,6 +588,7 @@
         private System.Windows.Forms.ToolStripMenuItem lorgorgoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ImageList imageListPages;
     }
 }
 

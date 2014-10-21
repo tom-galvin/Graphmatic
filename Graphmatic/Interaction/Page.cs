@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Graphmatic.Files
+namespace Graphmatic.Interaction
 {
     public class Page : IXmlConvertible
     {
