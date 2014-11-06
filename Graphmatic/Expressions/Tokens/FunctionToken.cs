@@ -29,7 +29,7 @@ namespace Graphmatic.Expressions.Tokens
             set;
         }
 
-        public int BaselineOffset
+        public virtual int BaselineOffset
         {
             get
             {

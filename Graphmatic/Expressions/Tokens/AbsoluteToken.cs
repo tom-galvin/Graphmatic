@@ -29,25 +29,25 @@ namespace Graphmatic.Expressions.Tokens
 
         public override void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
-            Operand.Paint(g, expressionCursor, x + 1, y);
+            Operand.Paint(g, expressionCursor, x + 2, y);
             g.DrawLine(Expression.ExpressionPen,
                 x,
                 y,
                 x,
-                y + Height);
+                y + Height - 1);
 
             g.DrawLine(Expression.ExpressionPen,
-                x + Operand.Width + 2,
+                x + Operand.Width + 3,
                 y,
-                x + Operand.Width + 2,
-                y + Height);
+                x + Operand.Width + 3,
+                y + Height - 1);
         }
 
         public override void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Operand.Size = Size;
             Operand.RecalculateDimensions(expressionCursor);
-            Width = Operand.Width + 3;
+            Width = Operand.Width + 4;
             Height = Operand.Height;
         }
     }

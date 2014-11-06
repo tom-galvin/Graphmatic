@@ -8,11 +8,11 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class FractionToken : IToken, ITokenCollector
+    public class FractionToken : IToken, CollectibleToken
     {
         public int Precedence
         {
-            get { return 10; }
+            get { return 1000; }
         }
 
         public int Width

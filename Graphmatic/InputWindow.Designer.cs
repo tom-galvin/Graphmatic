@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
@@ -67,6 +68,7 @@
             this.buttonTabs = new System.Windows.Forms.TabControl();
             this.tabPageStandard = new System.Windows.Forms.TabPage();
             this.expressionDisplay = new Graphmatic.ExpressionDisplay();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.buttonTabs.SuspendLayout();
             this.tabPageStandard.SuspendLayout();
             this.SuspendLayout();
@@ -534,11 +536,13 @@
             this.Controls.Add(this.expressionDisplay);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Graphmatic.Properties.Resources.Equation;
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(673, 254);
             this.Name = "InputWindow";
             this.ShowInTaskbar = false;
             this.Text = "Enter Input";
             this.Load += new System.EventHandler(this.InputWindow_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputWindow_KeyDown);
             this.buttonTabs.ResumeLayout(false);
             this.tabPageStandard.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -586,5 +590,6 @@
         private System.Windows.Forms.Button buttonDone;
         private System.Windows.Forms.TabControl buttonTabs;
         private System.Windows.Forms.TabPage tabPageStandard;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

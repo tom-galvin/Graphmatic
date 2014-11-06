@@ -45,5 +45,11 @@ namespace Graphmatic.Expressions.Tokens
         {
             get;
         }
+
+        /* /// <summary>
+        /// Evaluates the expression with a given set of variables.
+        /// </summary>
+        /// <param name="variables">The value of the variables to evaluate with.</param>
+        double Evaluate(Dictionary<char, double> variables); */
     }
 }

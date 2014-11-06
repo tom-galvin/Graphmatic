@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graphmatic.Expressions
 {
-    public interface ITokenCollector
+    public interface CollectibleToken
     {
         int Precedence
         {

@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class ExpToken : IToken, ITokenCollector
+    public class ExpToken : IToken, CollectibleToken
     {
         public int Precedence
         {
@@ -37,9 +37,9 @@ namespace Graphmatic.Expressions.Tokens
         {
             get
             {
-                return (Height - Base.Height) + Base
+                return (Height - Base.Height) + (Base.Count == 0 ? 0 : Base
                     .Select(token => token.BaselineOffset)
-                    .Aggregate((b1, b2) => Math.Max(b1, b2));
+                    .Aggregate((b1, b2) => Math.Max(b1, b2)));
             }
         }
 

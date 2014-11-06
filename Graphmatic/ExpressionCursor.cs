@@ -278,16 +278,16 @@ namespace Graphmatic
             }
             else // otherwise...
             {
-                if (token is ITokenCollector)
+                if (token is CollectibleToken)
                 {
-                    ITokenCollector tokenCollector = token as ITokenCollector;
+                    CollectibleToken tokenCollector = token as CollectibleToken;
                     int newIndex = Index + 1, addedTokens = 0;
                     for (int i = Index - 1; i >= 0; i--)
                     {
                         IToken collectedToken = Expression[i];
-                        if (collectedToken is ITokenCollector)
+                        if (collectedToken is CollectibleToken)
                         {
-                            ITokenCollector collectedTokenCollector = collectedToken as ITokenCollector;
+                            CollectibleToken collectedTokenCollector = collectedToken as CollectibleToken;
                             if (collectedTokenCollector.Precedence < tokenCollector.Precedence) break;
                         }
                         collectedToken.Parent = defaultExpression;

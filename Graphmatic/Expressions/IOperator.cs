@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graphmatic.Expressions
 {
-    public interface IOperator : ITokenCollector
+    public interface IOperator : CollectibleToken
     {
         OperatorAssociativity Associativity
         {
