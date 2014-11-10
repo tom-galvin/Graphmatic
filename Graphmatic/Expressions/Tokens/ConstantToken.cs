@@ -41,19 +41,15 @@ namespace Graphmatic.Expressions.Tokens
         public ConstantToken(Expression parent, ConstantType value)
             :base(parent)
         {
-            Parent = parent;
-            Children = new Expression[] { };
             Value = value;
         }
 
         public ConstantToken(Expression parent, XElement xml)
             :base(parent)
         {
-            Parent = parent;
             string constantName = xml.Element("Value").Value;
             if(Enum.TryParse<ConstantType>(constantName, out _Value))
                 throw new NotImplementedException("The operation " + constantName + " is not implemented.");
-            Children = new Expression[] { };
         }
 
         public override XElement ToXml()

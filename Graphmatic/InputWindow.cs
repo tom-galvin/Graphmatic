@@ -120,7 +120,8 @@ namespace Graphmatic
             CreateExpressionButton(buttonComma, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Comma), ",", Keys.Oemcomma);
             CreateExpressionButton(buttonPercent, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Percent), "%", Keys.D5, Keys.Shift);
             CreateExpressionButton(buttonSymbolicExp, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Exp10),"Shift+E", Keys.E, Keys.Shift);
-#endregion
+            #endregion
+            CreateExpressionButton(buttonVariable, expression => new VariableToken(expression, 'x'), "X", Keys.X);
         }
 
         private void CreateExpressionButton(Button button, Func<Expression, IToken> token, string label = "", Keys shortcutKey = Keys.None, Keys modifierKey = Keys.None)
@@ -179,19 +180,29 @@ namespace Graphmatic
             Close();
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Left)
+            {
+                buttonLeft.PerformClick();
+                return true;
+            }
+            else if (keyData == Keys.Right)
+            {
+                buttonRight.PerformClick();
+                return true;
+            }
+            else
+            {
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
+        }
+
         private void InputWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Back)
             {
                 buttonDelete.PerformClick();
-            }
-            else if (e.KeyCode == Keys.Left)
-            {
-                buttonLeft.PerformClick();
-            }
-            else if(e.KeyCode == Keys.Right)
-            {
-                buttonRight.PerformClick();
             }
             else
             {

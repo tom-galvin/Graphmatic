@@ -86,6 +86,7 @@
     <Compile Include="Expressions\Tokens\DigitToken.cs" />
     <Compile Include="Expressions\Tokens\IToken.cs" />
     <Compile Include="Expressions\Tokens\TokenSerialization.cs" />
+    <Compile Include="Expressions\Tokens\VariableToken.cs" />
     <Compile Include="Interaction\Page.cs" />
     <Compile Include="InputWindow.cs">
       <SubType>Form</SubType>

@@ -69,6 +69,7 @@
             this.tabPageStandard = new System.Windows.Forms.TabPage();
             this.expressionDisplay = new Graphmatic.ExpressionDisplay();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonVariable = new System.Windows.Forms.Button();
             this.buttonTabs.SuspendLayout();
             this.tabPageStandard.SuspendLayout();
             this.SuspendLayout();
@@ -505,11 +506,23 @@
             this.expressionDisplay.Size = new System.Drawing.Size(633, 191);
             this.expressionDisplay.TabIndex = 0;
             // 
+            // buttonVariable
+            // 
+            this.buttonVariable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonVariable.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonVariable.Location = new System.Drawing.Point(516, 344);
+            this.buttonVariable.Name = "buttonVariable";
+            this.buttonVariable.Size = new System.Drawing.Size(39, 39);
+            this.buttonVariable.TabIndex = 38;
+            this.buttonVariable.Text = "x";
+            this.buttonVariable.UseVisualStyleBackColor = true;
+            // 
             // InputWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 395);
+            this.Controls.Add(this.buttonVariable);
             this.Controls.Add(this.buttonTabs);
             this.Controls.Add(this.buttonDone);
             this.Controls.Add(this.buttonAdd);
@@ -591,5 +604,6 @@
         private System.Windows.Forms.TabControl buttonTabs;
         private System.Windows.Forms.TabPage tabPageStandard;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Button buttonVariable;
     }
 }

@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace Graphmatic.Expressions.Tokens
+{
+    public class VariableToken : SimpleToken
+    {
+        private char _Symbol;
+        public char Symbol
+        {
+            get
+            {
+                return _Symbol;
+            }
+        }
+
+        public override string Text
+        {
+            get
+            {
+                return _Symbol.ToString();
+            }
+            protected set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public VariableToken(Expression parent, char symbol)
+            :base(parent)
+        {
+            _Symbol = symbol;
+        }
+
+        public VariableToken(Expression parent, XElement xml)
+            :base(parent)
+        {
+            string symbolString = xml.Element("Symbol").Value;
+            if (symbolString.Length == 1)
+                _Symbol = symbolString[0];
+            else
+                throw new NotImplementedException("Variable symbol name must be one letter long (invalid: " + symbolString + ")");
+        }
+
+        public override XElement ToXml()
+        {
+            return new XElement("Variable",
+                new XAttribute("Symbol", _Symbol.ToString()));
+        }
+    }
+}
