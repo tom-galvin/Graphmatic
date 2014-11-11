@@ -43,7 +43,6 @@
             this.buttonSquare = new System.Windows.Forms.Button();
             this.buttonAbsolute = new System.Windows.Forms.Button();
             this.buttonPi = new System.Windows.Forms.Button();
-            this.buttonComma = new System.Windows.Forms.Button();
             this.buttonBracket = new System.Windows.Forms.Button();
             this.buttonSymbolicExp = new System.Windows.Forms.Button();
             this.buttonE = new System.Windows.Forms.Button();
@@ -67,9 +66,9 @@
             this.buttonDone = new System.Windows.Forms.Button();
             this.buttonTabs = new System.Windows.Forms.TabControl();
             this.tabPageStandard = new System.Windows.Forms.TabPage();
-            this.expressionDisplay = new Graphmatic.ExpressionDisplay();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.buttonVariable = new System.Windows.Forms.Button();
+            this.expressionDisplay = new Graphmatic.ExpressionDisplay();
             this.buttonTabs.SuspendLayout();
             this.tabPageStandard.SuspendLayout();
             this.SuspendLayout();
@@ -217,17 +216,6 @@
             this.buttonPi.Size = new System.Drawing.Size(39, 39);
             this.buttonPi.TabIndex = 17;
             this.buttonPi.UseVisualStyleBackColor = true;
-            // 
-            // buttonComma
-            // 
-            this.buttonComma.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonComma.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonComma.Image = global::Graphmatic.Properties.Resources.ButtonComma;
-            this.buttonComma.Location = new System.Drawing.Point(389, 344);
-            this.buttonComma.Name = "buttonComma";
-            this.buttonComma.Size = new System.Drawing.Size(31, 39);
-            this.buttonComma.TabIndex = 16;
-            this.buttonComma.UseVisualStyleBackColor = true;
             // 
             // buttonBracket
             // 
@@ -491,6 +479,17 @@
             this.tabPageStandard.Text = "Standard";
             this.tabPageStandard.UseVisualStyleBackColor = true;
             // 
+            // buttonVariable
+            // 
+            this.buttonVariable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonVariable.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonVariable.Location = new System.Drawing.Point(389, 344);
+            this.buttonVariable.Name = "buttonVariable";
+            this.buttonVariable.Size = new System.Drawing.Size(31, 39);
+            this.buttonVariable.TabIndex = 38;
+            this.buttonVariable.Text = "X";
+            this.buttonVariable.UseVisualStyleBackColor = true;
+            // 
             // expressionDisplay
             // 
             this.expressionDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -505,17 +504,6 @@
             this.expressionDisplay.Name = "expressionDisplay";
             this.expressionDisplay.Size = new System.Drawing.Size(633, 191);
             this.expressionDisplay.TabIndex = 0;
-            // 
-            // buttonVariable
-            // 
-            this.buttonVariable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonVariable.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonVariable.Location = new System.Drawing.Point(516, 344);
-            this.buttonVariable.Name = "buttonVariable";
-            this.buttonVariable.Size = new System.Drawing.Size(39, 39);
-            this.buttonVariable.TabIndex = 38;
-            this.buttonVariable.Text = "x";
-            this.buttonVariable.UseVisualStyleBackColor = true;
             // 
             // InputWindow
             // 
@@ -541,7 +529,6 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonPi);
-            this.Controls.Add(this.buttonComma);
             this.Controls.Add(this.buttonE);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonLeft);
@@ -556,6 +543,7 @@
             this.Text = "Enter Input";
             this.Load += new System.EventHandler(this.InputWindow_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputWindow_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputWindow_KeyPress);
             this.buttonTabs.ResumeLayout(false);
             this.tabPageStandard.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -579,7 +567,6 @@
         private System.Windows.Forms.Button buttonSquare;
         private System.Windows.Forms.Button buttonAbsolute;
         private System.Windows.Forms.Button buttonPi;
-        private System.Windows.Forms.Button buttonComma;
         private System.Windows.Forms.Button buttonBracket;
         private System.Windows.Forms.Button buttonSymbolicExp;
         private System.Windows.Forms.Button buttonE;

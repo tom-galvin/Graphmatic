@@ -40,7 +40,7 @@ namespace Graphmatic.Expressions.Tokens
         public string Text
         {
             get;
-            protected set;
+            set;
         }
 
         public Expression Content

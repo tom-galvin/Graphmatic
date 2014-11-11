@@ -14,6 +14,38 @@ namespace Graphmatic
 {
     public partial class InputWindow : Form
     {
+        private PromptToken _Prompt;
+
+        private char _PlottedVariable;
+        public char PlottedVariable
+        {
+            get
+            {
+                return _PlottedVariable;
+            }
+            set
+            {
+                _PlottedVariable = value;
+                UpdatePromptString();
+            }
+        }
+
+        private char _VaryingVariable;
+        public char VaryingVariable
+        {
+            get
+            {
+                return _VaryingVariable;
+            }
+            set
+            {
+                _VaryingVariable = value;
+                UpdatePromptString();
+                buttonVariable.Text = _VaryingVariable.ToString();
+                toolTip.SetToolTip(buttonVariable, ConvertCharToTooltip(_VaryingVariable));
+            }
+        }
+
         /// <summary>
         /// Gets the result of this input window.
         /// </summary>
@@ -25,20 +57,39 @@ namespace Graphmatic
 
         public Dictionary<Tuple<Keys, Keys>, Control> Shortcuts;
 
-        public InputWindow(string promptString)
+        public InputWindow(char plottedVariable, char varyingVariable)
         {
             Shortcuts = new Dictionary<Tuple<Keys, Keys>, Control>();
 
             InitializeComponent();
             InitializeButtons();
 
-            var prompt = new PromptToken(null, promptString);
-            prompt.RecalculateDimensions(expressionDisplay.ExpressionCursor);
-            expressionDisplay.Expression.Add(prompt);
-            expressionDisplay.ExpressionCursor.Expression = prompt.Content;
-            Result = prompt.Content;
+            _Prompt = new PromptToken(null, "Loading... ");
+            _Prompt.RecalculateDimensions(expressionDisplay.ExpressionCursor);
+            expressionDisplay.Expression.Add(_Prompt);
+            expressionDisplay.ExpressionCursor.Expression = _Prompt.Content;
+            Result = _Prompt.Content;
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
             expressionDisplay.ExpressionCursor.Moved += ExpressionCursor_Moved;
+
+            PlottedVariable = plottedVariable;
+            VaryingVariable = varyingVariable;
+        }
+
+        public string ConvertCharToTooltip(char c)
+        {
+            char displayChar = Char.ToUpperInvariant(c);
+            return displayChar != c ? displayChar.ToString() : "Shift-" + displayChar.ToString();
+        }
+
+        private void UpdatePromptString()
+        {
+            _Prompt.Text = CreatePromptString(_PlottedVariable, _VaryingVariable);
+        }
+
+        private string CreatePromptString(char plottedVariable, char varyingVariable)
+        {
+            return String.Format("{0}=", plottedVariable, varyingVariable);
         }
 
         private void InitializeButtons()
@@ -63,22 +114,22 @@ namespace Graphmatic
             CreateExpressionButton(buttonDivide, expression => new BinaryOperationToken(expression, BinaryOperationToken.BinaryOperationType.Divide), "Backslash", Keys.Oem5);
             #endregion
             #region Roots
-            CreateExpressionButton(buttonRoot, expression => new RootToken(expression), "R", Keys.R);
+            CreateExpressionButton(buttonRoot, expression => new RootToken(expression), "Alt-Shift-R", Keys.R, Keys.Alt | Keys.Shift);
             CreateExpressionButton(buttonSqrt, expression =>
             {
                 var token = new RootToken(expression);
                 token.Power.Add(new DigitToken(token.Power, 2));
                 return token;
-            }, "Shift-R", Keys.R, Keys.Shift);
+            }, "Alt-R", Keys.R, Keys.Alt);
             #endregion
             #region Logs
-            CreateExpressionButton(buttonLogN, expression => new LogToken(expression), "L", Keys.L);
+            CreateExpressionButton(buttonLogN, expression => new LogToken(expression), "Alt-L", Keys.L, Keys.Alt);
             CreateExpressionButton(buttonLogE, expression =>
             {
                 var token = new LogToken(expression);
                 token.Base.Add(new ConstantToken(token.Base, ConstantToken.ConstantType.E));
                 return token;
-            }, "Shift+L", Keys.L, Keys.Shift);
+            }, "Alt-Shift-L", Keys.L, Keys.Shift | Keys.Alt);
             CreateExpressionButton(buttonLog10, expression =>
             {
                 var token = new LogToken(expression);
@@ -110,18 +161,19 @@ namespace Graphmatic
             }, "Alt-Minus", Keys.OemMinus, Keys.Alt);
             #endregion
             #region Constants
-            CreateExpressionButton(buttonPi, expression => new ConstantToken(expression, ConstantToken.ConstantType.Pi), "P", Keys.P);
-            CreateExpressionButton(buttonE, expression => new ConstantToken(expression, ConstantToken.ConstantType.E), "E", Keys.E);
+            CreateExpressionButton(buttonPi, expression => new ConstantToken(expression, ConstantToken.ConstantType.Pi), "Alt-P", Keys.P, Keys.Alt);
+            CreateExpressionButton(buttonE, expression => new ConstantToken(expression, ConstantToken.ConstantType.E), "Alt-E", Keys.E, Keys.Alt);
             #endregion
             #region Misc
-            CreateExpressionButton(buttonFraction, expression => new FractionToken(expression), "/", Keys.OemQuestion);
+            CreateExpressionButton(buttonFraction, expression => new FractionToken(expression), "Forward-slash", Keys.OemQuestion);
             CreateExpressionButton(buttonAbsolute, expression => new AbsoluteToken(expression), "|", Keys.Oem5, Keys.Shift);
             CreateExpressionButton(buttonBracket, expression => new FunctionToken(expression, ""), "(", Keys.D9, Keys.Shift);
-            CreateExpressionButton(buttonComma, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Comma), ",", Keys.Oemcomma);
+            // CreateExpressionButton(buttonComma, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Comma), ",", Keys.Oemcomma);
             CreateExpressionButton(buttonPercent, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Percent), "%", Keys.D5, Keys.Shift);
-            CreateExpressionButton(buttonSymbolicExp, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Exp10),"Shift+E", Keys.E, Keys.Shift);
+            CreateExpressionButton(buttonSymbolicExp, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Exp10), "Ctrl-E", Keys.E, Keys.Control);
+            
             #endregion
-            CreateExpressionButton(buttonVariable, expression => new VariableToken(expression, 'x'), "X", Keys.X);
+            CreateExpressionButton(buttonVariable, expression => new VariableToken(expression, VaryingVariable));
         }
 
         private void CreateExpressionButton(Button button, Func<Expression, IToken> token, string label = "", Keys shortcutKey = Keys.None, Keys modifierKey = Keys.None)
@@ -220,6 +272,13 @@ namespace Graphmatic
                 }
                 //MessageBox.Show(String.Format("Key: {0}\r\nModifier: {1}", e.KeyCode.ToString(), e.Modifiers.ToString()));
             }
+        }
+
+        // KeyPress needed to detect variable being pressed
+        private void InputWindow_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == _VaryingVariable)
+                buttonVariable.PerformClick();
         }
     }
 }

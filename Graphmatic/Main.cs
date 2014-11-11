@@ -19,7 +19,7 @@ namespace Graphmatic
 
         private void dispToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new InputWindow("y:x;").ShowDialog();
+            new InputWindow('y', 'x').ShowDialog();
         }
 
         private void lorgorgoToolStripMenuItem_Click(object sender, EventArgs e)
