@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Graphmatic.Expressions
 {
-    public static class FontHelper
+    public static class FontHelperExtensionMethods
     {
         private static Rectangle[] largeChars;
         private static Rectangle[] smallChars;
 
-        static FontHelper()
+        static FontHelperExtensionMethods()
         {
             largeChars = new Rectangle[100];
             smallChars = new Rectangle[100];

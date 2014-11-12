@@ -12,30 +12,53 @@ namespace Graphmatic.Expressions
     /// <summary>
     /// Represents a mathematical expression, which can be composed of individual mathematical tokens and other sub-expressions, and be evaluated to form a graph.
     /// </summary>
-    public class Expression : List<IToken>, IPaintable
+    public class Expression : List<Token>, IPaintable
     {
+        /// <summary>
+        /// Represents the pixel spacing between tokens in an expression.
+        /// </summary>
         private const int TokenSpacing = 1;
+
+        /// <summary>
+        /// The brush with which to fill expression components (including tokens).
+        /// </summary>
         public static readonly Brush ExpressionBrush = Brushes.Black;
+
+        /// <summary>
+        /// The pen with which to draw expression components (including tokens).
+        /// </summary>
         public static readonly Pen ExpressionPen = new Pen(ExpressionBrush, 1f);
 
+        /// <summary>
+        /// The width of the expression, in pixels.
+        /// </summary>
         public int Width
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// The height of the expression, in pixels.
+        /// </summary>
         public int Height
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the display size style (large or small) of the drawable element.
+        /// </summary>
         public DisplaySize Size
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets the vertical ascension of the expression from the top of the container.
+        /// </summary>
         public int BaselineOffset
         {
             get
@@ -51,31 +74,54 @@ namespace Graphmatic.Expressions
             }
         }
 
-        public IToken Parent
+        /// <summary>
+        /// Gets the parent token within which this expression is contained as a child expression.
+        /// </summary>
+        public Token Parent
         {
             get;
             protected set;
         }
 
-        public Expression(IToken parent, IEnumerable<XElement> xml)
+        /// <summary>
+        /// Initializes a new instance of the Graphmatic.Expressions.Expression class, with the given parent token and using the given XML elements as children.
+        /// </summary>
+        /// <param name="parent">The parent token of this expression.</param>
+        /// <param name="xml">XML elements to deserialise and use as children.</param>
+        public Expression(Token parent, IEnumerable<XElement> xml)
+            : this(parent)
         {
-            Parent = parent;
             AddRange(xml
-                .Select(x => TokenSerialization.FromXml(this, x)));
+                .Select(x => TokenSerializationExtensionMethods.FromXml(this, x)));
         }
 
-        public Expression(IToken parent)
+        /// <summary>
+        /// Initializes a new instance of the Graphmatic.Expressions.Expression class, with the given parent token.
+        /// </summary>
+        /// <param name="parent">The parent token of this expression.</param>
+        public Expression(Token parent)
             : base()
         {
             Parent = parent;
         }
 
-        public Expression(IToken parent, params IToken[] children)
+        /// <summary>
+        /// Initializes a new instance of the Graphmatic.Expressions.Expression class, with the given parent token and using the given child tokens.
+        /// </summary>
+        /// <param name="parent">The parent token of this expression.</param>
+        /// <param name="children">The child tokens contained within this expression.</param>
+        public Expression(Token parent, params Token[] children)
             : this(parent)
         {
             AddRange(children);
         }
 
+        /// <summary>
+        /// Recalculates the painted dimensions of this expression, using the dimensions of the child tokens contained within it and the expression cursor to use.
+        /// </summary>
+        /// <param name="expressionCursor">The expression cursor to use, for calculating sizes depending on the location of the cursor.
+        /// <para/>
+        /// For example, moving the cursor into the base of a <c>log</c> token with current base <c>e</c> will expand the token from <c>ln(...)</c> to <c>log_e(...)</c>.</param>
         public void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             if (Count == 0)
@@ -85,7 +131,7 @@ namespace Graphmatic.Expressions
             }
             else
             {
-                foreach (IToken token in this)
+                foreach (Token token in this)
                 {
                     token.Size = Size;
                     token.RecalculateDimensions(expressionCursor);
@@ -130,7 +176,7 @@ namespace Graphmatic.Expressions
 
                     if (i < Count) // as we're also iterating over the end of the array we need to do the check again
                     {
-                        IToken token = this[i];
+                        Token token = this[i];
                         int tokenY = y + tokenBaselineOffset - token.BaselineOffset;
                         token.Paint(g, expressionCursor, tokenX, tokenY);
 
@@ -138,7 +184,7 @@ namespace Graphmatic.Expressions
                         if (!(token is PromptToken)) // don't let the user select prompts
                         {
                             expressionCursor.CreateHotspot(new Rectangle(tokenX, tokenY, token.Width, token.Height),
-                                (point, cursor) =>
+                                (point, cursor) => // the closure responsible for the creation of the necessary temporary variable
                                 {
                                     cursor.Expression = this;
                                     cursor.Index = hotspotTokenIndex + (point.X >= hotspotTokenWidth / 2 ? 1 : 0);
@@ -161,7 +207,7 @@ namespace Graphmatic.Expressions
 
         public IEnumerable<XElement> ToXml()
         {
-            foreach (IToken token in this)
+            foreach (Token token in this)
                 yield return token.ToXml();
         }
 
@@ -170,11 +216,5 @@ namespace Graphmatic.Expressions
             return new XElement("Expression",
                 ToXml());
         }
-    }
-
-    public enum DisplaySize
-    {
-        Small,
-        Large
     }
 }

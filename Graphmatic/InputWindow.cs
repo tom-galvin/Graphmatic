@@ -176,7 +176,7 @@ namespace Graphmatic
             CreateExpressionButton(buttonVariable, expression => new VariableToken(expression, VaryingVariable));
         }
 
-        private void CreateExpressionButton(Button button, Func<Expression, IToken> token, string label = "", Keys shortcutKey = Keys.None, Keys modifierKey = Keys.None)
+        private void CreateExpressionButton(Button button, Func<Expression, Token> token, string label = "", Keys shortcutKey = Keys.None, Keys modifierKey = Keys.None)
         {
             button.Click += (sender, e) =>
                     expressionDisplay.ExpressionCursor.Insert(token(expressionDisplay.ExpressionCursor.Expression));

@@ -33,8 +33,8 @@ namespace Graphmatic
             }
             set
             {
-                _Expression = value;
-                _Index = 0;
+                this._Expression = value;
+                this._Index = 0;
                 OnMoved();
             }
         }
@@ -47,13 +47,13 @@ namespace Graphmatic
         {
             get
             {
-                return _Index;
+                return this._Index;
             }
             set
             {
                 if (value >= 0 && value <= Expression.Count)
                 {
-                    _Index = value;
+                    this._Index = value;
                     OnMoved();
                 }
                 else
@@ -224,7 +224,7 @@ namespace Graphmatic
             {
                 if (Expression.Parent != null && Expression.Parent.Parent != null) // if the parent expression, and the parent expression's parent token exist...
                 {
-                    IToken tokenToDelete = Expression.Parent;
+                    Token tokenToDelete = Expression.Parent;
                     if (tokenToDelete.Empty()) // if token to delete is empty...
                     {
                         int currentExpressionParentIndexInParentParent = Expression.Parent.IndexInParent();
@@ -248,7 +248,7 @@ namespace Graphmatic
             }
             else
             {
-                IToken tokenToDelete = Expression[_Index - 1];
+                Token tokenToDelete = Expression[_Index - 1];
                 if (tokenToDelete.Children.Length == 0) // token has no children - delete it
                 {
                     Left();
@@ -267,7 +267,7 @@ namespace Graphmatic
         /// Inserts a token to the left of the cursor, and moves the cursor accordingly.
         /// </summary>
         /// <param name="token">The token to insert.</param>
-        public void Insert(IToken token)
+        public void Insert(Token token)
         {
             token.RecalculateDimensions(this);
             Expression.Insert(Index, token);
@@ -278,17 +278,17 @@ namespace Graphmatic
             }
             else // otherwise...
             {
-                if (token is CollectibleToken)
+                if (token is ICollectorToken)
                 {
-                    CollectibleToken tokenCollector = token as CollectibleToken;
+                    ICollectorToken tokenCollector = token as ICollectorToken;
                     int newIndex = Index + 1, addedTokens = 0;
                     for (int i = Index - 1; i >= 0; i--)
                     {
-                        IToken collectedToken = Expression[i];
-                        if (collectedToken is CollectibleToken)
+                        Token collectedToken = Expression[i];
+                        if (collectedToken is ICollectorToken)
                         {
-                            CollectibleToken collectedTokenCollector = collectedToken as CollectibleToken;
-                            if (collectedTokenCollector.Precedence < tokenCollector.Precedence) break;
+                            ICollectorToken collectedTokenCollector = collectedToken as ICollectorToken;
+                            if (collectedTokenCollector.MaxPrecedence < tokenCollector.MaxPrecedence) break;
                         }
                         collectedToken.Parent = defaultExpression;
                         defaultExpression.Insert(0, collectedToken);

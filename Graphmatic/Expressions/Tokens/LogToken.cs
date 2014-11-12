@@ -8,33 +8,15 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class LogToken : IToken
+    public class LogToken : Token
     {
 
-        public int Width
-        {
-            get;
-            protected set;
-        }
-
-        public int Height
-        {
-            get;
-            protected set;
-        }
-
-        public DisplaySize Size
-        {
-            get;
-            set;
-        }
-
-        public int BaselineOffset
+        public override int BaselineOffset
         {
             get
             {
                 return Simplification == SimplificationType.None ?
-                    Operand.BaselineOffset + Math.Min(0, Height - Operand.Height) : 
+                    Operand.BaselineOffset + Math.Min(0, Height - Operand.Height) :
                     Operand.BaselineOffset + Height - Operand.Height;
             }
         }
@@ -51,19 +33,7 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public Expression Parent
-        {
-            get;
-            set;
-        }
-
-        public Expression[] Children
-        {
-            get;
-            protected set;
-        }
-
-        public Expression DefaultChild
+        public override Expression DefaultChild
         {
             get
             {
@@ -72,29 +42,29 @@ namespace Graphmatic.Expressions.Tokens
         }
 
         public LogToken(Expression parent)
+            : base(parent)
         {
-            Parent = parent;
             Operand = new Expression(this);
             Base = new Expression(this);
             Children = new Expression[] { Base, Operand };
         }
 
         public LogToken(Expression parent, XElement xml)
+            : base(parent)
         {
-            Parent = parent;
             Operand = new Expression(this, xml.Element("Operand").Elements());
             Base = new Expression(this, xml.Element("Base").Elements());
             Children = new Expression[] { Base, Operand };
         }
 
-        public XElement ToXml()
+        public override XElement ToXml()
         {
             return new XElement("Log",
                 new XElement("Base", Base.ToXml()),
                 new XElement("Operand", Operand.ToXml()));
         }
 
-        public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
+        public override void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
             string text = Simplification == SimplificationType.LogE ? "ln" : "log";
             int xOffset = 6 * text.Length;
@@ -180,7 +150,7 @@ namespace Graphmatic.Expressions.Tokens
         }
 
         private SimplificationType Simplification;
-        public void RecalculateDimensions(ExpressionCursor expressionCursor)
+        public override void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Simplification = GetSimplificationType(expressionCursor);
             string text = Simplification == SimplificationType.LogE ? "ln" : "log";
@@ -196,7 +166,7 @@ namespace Graphmatic.Expressions.Tokens
 
         private SimplificationType GetSimplificationType(ExpressionCursor expressionCursor)
         {
-            if(expressionCursor.Expression != Base)
+            if (expressionCursor.Expression != Base)
             {
                 if (Base.Count == 2)
                 {
@@ -222,7 +192,7 @@ namespace Graphmatic.Expressions.Tokens
             return SimplificationType.None;
         }
 
-        public enum SimplificationType
+        private enum SimplificationType
         {
             None,
             LogTen,

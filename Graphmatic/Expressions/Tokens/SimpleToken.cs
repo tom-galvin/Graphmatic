@@ -8,28 +8,10 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public abstract class SimpleToken : IToken
+    public abstract class SimpleToken : Token
     {
 
-        public int Width
-        {
-            get;
-            protected set;
-        }
-
-        public int Height
-        {
-            get;
-            protected set;
-        }
-
-        public DisplaySize Size
-        {
-            get;
-            set;
-        }
-
-        public int BaselineOffset
+        public override int BaselineOffset
         {
             get
             {
@@ -43,40 +25,17 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public Expression Parent
-        {
-            get;
-            set;
-        }
-
-        public Expression[] Children
-        {
-            get;
-            protected set;
-        }
-
-        public Expression DefaultChild
-        {
-            get
-            {
-                return null;
-            }
-        }
-
         public SimpleToken(Expression parent)
+            : base(parent)
         {
-            Parent = parent;
-            Children = new Expression[] { };
         }
 
-        public abstract XElement ToXml();
-
-        public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
+        public override void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
             g.DrawPixelString(Text, Size == DisplaySize.Small, x, y);
         }
 
-        public void RecalculateDimensions(ExpressionCursor expressionCursor)
+        public override void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Width = 5 * Text.Length + 1 * (Text.Length - 1);
             Height = Size == DisplaySize.Large ? 9 : 6;

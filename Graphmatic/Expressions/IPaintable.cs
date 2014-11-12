@@ -29,11 +29,20 @@ namespace Graphmatic.Expressions
         }
 
         /// <summary>
-        /// ets the vertical ascension of the expression from the top of the container.
+        /// Gets the vertical ascension of the element from the top of the container.
         /// </summary>
         int BaselineOffset
         {
             get;
+        }
+
+        /// <summary>
+        /// Gets or sets the display size style (large or small) of the drawable element.
+        /// </summary>
+        DisplaySize Size
+        {
+            get;
+            set;
         }
 
         /// <summary>

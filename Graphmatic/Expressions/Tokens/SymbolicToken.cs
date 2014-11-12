@@ -11,16 +11,18 @@ namespace Graphmatic.Expressions.Tokens
     public class SymbolicToken : SimpleToken
     {
         private SymbolicType _Type;
-        public SymbolicType Type{
+        public SymbolicType Type
+        {
             get { return _Type; }
             set { _Type = value; }
         }
 
         public override string Text
         {
-	        get 
-	        { 
-		        switch (Type){
+            get
+            {
+                switch (Type)
+                {
                     case SymbolicType.Comma:
                         return ",";
                     case SymbolicType.DecimalPoint:
@@ -32,21 +34,21 @@ namespace Graphmatic.Expressions.Tokens
                     default:
                         return "<unknown symbolic>";
                 }
-	        }
-	        protected set 
-	        { 
-		        throw new NotImplementedException(); 
-	        }
+            }
+            protected set
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public SymbolicToken(Expression parent, SymbolicType type)
-            :base(parent)
+            : base(parent)
         {
             Type = type;
         }
 
         public SymbolicToken(Expression parent, XElement xml)
-            :base(parent)
+            : base(parent)
         {
             string symbolicTypeName = xml.Element("Type").Value;
             if (!Enum.TryParse<SymbolicType>(symbolicTypeName, out _Type))

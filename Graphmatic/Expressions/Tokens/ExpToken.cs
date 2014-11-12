@@ -8,32 +8,14 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class ExpToken : IToken, CollectibleToken
+    public class ExpToken : Token, ICollectorToken
     {
-        public int Precedence
+        public int MaxPrecedence
         {
             get { return 1000; }
         }
 
-        public int Width
-        {
-            get;
-            protected set;
-        }
-
-        public int Height
-        {
-            get;
-            protected set;
-        }
-
-        public DisplaySize Size
-        {
-            get;
-            set;
-        }
-
-        public int BaselineOffset
+        public override int BaselineOffset
         {
             get
             {
@@ -55,19 +37,7 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public Expression Parent
-        {
-            get;
-            set;
-        }
-
-        public Expression[] Children
-        {
-            get;
-            protected set;
-        }
-
-        public Expression DefaultChild
+        public override Expression DefaultChild
         {
             get
             {
@@ -76,35 +46,35 @@ namespace Graphmatic.Expressions.Tokens
         }
 
         public ExpToken(Expression parent)
+            : base(parent)
         {
-            Parent = parent;
             Base = new Expression(this);
             Power = new Expression(this);
             Children = new Expression[] { Base, Power };
         }
 
         public ExpToken(Expression parent, XElement xml)
+            : base(parent)
         {
-            Parent = parent;
             Base = new Expression(this, xml.Element("Base").Elements());
             Power = new Expression(this, xml.Element("Power").Elements());
             Children = new Expression[] { Base, Power };
         }
 
-        public XElement ToXml()
+        public override XElement ToXml()
         {
             return new XElement("Exp",
                 new XElement("Base", Base.ToXml()),
                 new XElement("Power", Power.ToXml()));
         }
 
-        public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
+        public override void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
             Base.Paint(g, expressionCursor, x, y + Height - Base.Height);
             Power.Paint(g, expressionCursor, x + Base.Width + 1, y);
         }
 
-        public void RecalculateDimensions(ExpressionCursor expressionCursor)
+        public override void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Base.Size = Size;
             Base.RecalculateDimensions(expressionCursor);

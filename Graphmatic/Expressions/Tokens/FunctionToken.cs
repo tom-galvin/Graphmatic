@@ -8,28 +8,10 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class FunctionToken : IToken
+    public class FunctionToken : Token
     {
 
-        public int Width
-        {
-            get;
-            protected set;
-        }
-
-        public int Height
-        {
-            get;
-            protected set;
-        }
-
-        public DisplaySize Size
-        {
-            get;
-            set;
-        }
-
-        public virtual int BaselineOffset
+        public override int BaselineOffset
         {
             get
             {
@@ -49,19 +31,7 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public Expression Parent
-        {
-            get;
-            set;
-        }
-
-        public Expression[] Children
-        {
-            get;
-            protected set;
-        }
-
-        public Expression DefaultChild
+        public override Expression DefaultChild
         {
             get
             {
@@ -70,29 +40,29 @@ namespace Graphmatic.Expressions.Tokens
         }
 
         public FunctionToken(Expression parent, string text)
+            : base(parent)
         {
-            Parent = parent;
             Text = text;
             Operand = new Expression(this);
             Children = new Expression[] { Operand };
         }
 
         public FunctionToken(Expression parent, XElement xml)
+            : base(parent)
         {
-            Parent = parent;
             Text = xml.Element("Name").Value;
             Operand = new Expression(this, xml.Element("Operand").Elements());
             Children = new Expression[] { Operand };
         }
 
-        public virtual XElement ToXml()
+        public override XElement ToXml()
         {
             return new XElement("Function",
                 new XAttribute("Name", Text),
                 new XElement("Operand", Operand.ToXml()));
         }
 
-        public virtual void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
+        public override void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
             g.DrawPixelString(Text, Size == DisplaySize.Small, x, y + Operand.BaselineOffset);
 
@@ -169,7 +139,7 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public virtual void RecalculateDimensions(ExpressionCursor expressionCursor)
+        public override void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Operand.Size = Size;
             Operand.RecalculateDimensions(expressionCursor);

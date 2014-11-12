@@ -125,7 +125,7 @@ namespace Graphmatic
             Invalidate();
         }
 
-        private void ExpressionDisplay_Paint(object sender, PaintEventArgs e) //follow me on reddit
+        private void ExpressionDisplay_Paint(object sender, PaintEventArgs e)
         {
             try
             {
@@ -149,9 +149,9 @@ namespace Graphmatic
                     e.Graphics.DrawImageUnscaled(Properties.Resources.Moein, 0, 0, Width, Height);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw;
+                throw; // for debugging, so the debugger catches the exception without WinForms swallowing it
             }
         }
 

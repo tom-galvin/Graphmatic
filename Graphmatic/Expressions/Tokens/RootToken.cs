@@ -8,28 +8,10 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class RootToken : IToken
+    public class RootToken : Token
     {
 
-        public int Width
-        {
-            get;
-            protected set;
-        }
-
-        public int Height
-        {
-            get;
-            protected set;
-        }
-
-        public DisplaySize Size
-        {
-            get;
-            set;
-        }
-
-        public int BaselineOffset
+        public override int BaselineOffset
         {
             get
             {
@@ -49,19 +31,7 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public Expression Parent
-        {
-            get;
-            set;
-        }
-
-        public Expression[] Children
-        {
-            get;
-            protected set;
-        }
-
-        public Expression DefaultChild
+        public override Expression DefaultChild
         {
             get
             {
@@ -70,31 +40,31 @@ namespace Graphmatic.Expressions.Tokens
         }
 
         public RootToken(Expression parent)
+            : base(parent)
         {
-            Parent = parent;
             Base = new Expression(this);
             Power = new Expression(this);
             Children = new Expression[] { Power, Base };
         }
 
         public RootToken(Expression parent, XElement xml)
+            : base(parent)
         {
-            Parent = parent;
             Base = new Expression(this, xml.Element("Base").Elements());
             Power = new Expression(this, xml.Element("Power").Elements());
             Children = new Expression[] { Base, Power };
         }
 
-        public XElement ToXml()
+        public override XElement ToXml()
         {
             return new XElement("Root",
                 new XElement("Power", Power.ToXml()),
                 new XElement("Base", Base.ToXml()));
         }
 
-        public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
+        public override void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
-            if(!Simplified)
+            if (!Simplified)
                 Power.Paint(g, expressionCursor, x, y);
             int xOffset = Simplified ? 2 : Power.Width;
             Base.Paint(g, expressionCursor, x + xOffset + 3, y + Height - Base.Height);
@@ -119,7 +89,7 @@ namespace Graphmatic.Expressions.Tokens
                 y + Height - 3);
         }
 
-        public void RecalculateDimensions(ExpressionCursor expressionCursor)
+        public override void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Simplified = CanSimplifyDisplay(expressionCursor);
             Base.Size = Size;

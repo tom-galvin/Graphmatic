@@ -8,32 +8,14 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class FractionToken : IToken, CollectibleToken
+    public class FractionToken : Token, ICollectorToken
     {
-        public int Precedence
+        public int MaxPrecedence
         {
             get { return 1000; }
         }
 
-        public int Width
-        {
-            get;
-            protected set;
-        }
-
-        public int Height
-        {
-            get;
-            protected set;
-        }
-
-        public DisplaySize Size
-        {
-            get;
-            set;
-        }
-
-        public int BaselineOffset
+        public override int BaselineOffset
         {
             get
             {
@@ -53,19 +35,7 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public Expression Parent
-        {
-            get;
-            set;
-        }
-
-        public Expression[] Children
-        {
-            get;
-            protected set;
-        }
-
-        public Expression DefaultChild
+        public override Expression DefaultChild
         {
             get
             {
@@ -74,29 +44,29 @@ namespace Graphmatic.Expressions.Tokens
         }
 
         public FractionToken(Expression parent)
+            : base(parent)
         {
-            Parent = parent;
             Top = new Expression(this);
             Bottom = new Expression(this);
             Children = new Expression[] { Top, Bottom };
         }
 
         public FractionToken(Expression parent, XElement xml)
+            : base(parent)
         {
-            Parent = parent;
             Top = new Expression(this, xml.Element("Top").Elements());
             Bottom = new Expression(this, xml.Element("Bottom").Elements());
             Children = new Expression[] { Top, Bottom };
         }
 
-        public XElement ToXml()
+        public override XElement ToXml()
         {
             return new XElement("Fraction",
                 new XElement("Top", Top.ToXml()),
                 new XElement("Bottom", Bottom.ToXml()));
         }
 
-        public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
+        public override void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
         {
             Top.Paint(g, expressionCursor, x + (Width - Top.Width) / 2, y);
             Bottom.Paint(g, expressionCursor, x + (Width - Bottom.Width) / 2, y + Top.Height + 3);
@@ -107,7 +77,7 @@ namespace Graphmatic.Expressions.Tokens
                 y + Top.Height + 1);
         }
 
-        public void RecalculateDimensions(ExpressionCursor expressionCursor)
+        public override void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
             Top.Size = Bottom.Size = DisplaySize.Small;
             Top.RecalculateDimensions(expressionCursor);

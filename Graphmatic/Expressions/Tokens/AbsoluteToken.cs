@@ -16,7 +16,7 @@ namespace Graphmatic.Expressions.Tokens
         }
 
         public AbsoluteToken(Expression parent, XElement xml)
-            :base(parent, xml)
+            : base(parent, xml)
         {
 
         }

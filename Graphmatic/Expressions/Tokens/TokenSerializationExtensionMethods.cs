@@ -13,17 +13,17 @@ namespace Graphmatic.Expressions.Tokens
     /// <param name="parent">The parent expression of the token.</param>
     /// <param name="xml">THe XML representation of the token.</param>
     /// <returns>The deserialized form of the token.</returns>
-    public delegate IToken TokenDeserializerFactory(Expression parent, XElement xml);
+    public delegate Token TokenDeserializationFactory(Expression parent, XElement xml);
 
     /// <summary>
     /// Provides methods to assist in (de)serialization of serialized Graphmatic expressions.
     /// </summary>
-    public static class TokenSerialization
+    public static class TokenSerializationExtensionMethods
     {
         /// <summary>
         /// A list of deserializing constructors for tokens with differing XML element names.
         /// </summary>
-        private static Dictionary<string, TokenDeserializerFactory> TokenDeserializers = new Dictionary<string, TokenDeserializerFactory>
+        private static Dictionary<string, TokenDeserializationFactory> TokenDeserializers = new Dictionary<string, TokenDeserializationFactory>
         {
             { "BinaryOperation", (parent, xml) => new BinaryOperationToken(parent, xml) },
             { "Digit", (parent, xml) => new DigitToken(parent, xml) },
@@ -35,6 +35,7 @@ namespace Graphmatic.Expressions.Tokens
             { "Constant", (parent, xml) => new ConstantToken(parent, xml) },
             { "Symbolic", (parent, xml) => new SymbolicToken(parent, xml) },
             { "Absolute", (parent, xml) => new AbsoluteToken(parent, xml) },
+            { "Variable", (parent, xml) => new VariableToken(parent, xml) },
         };
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <param name="parent">The parent expression of the token.</param>
         /// <param name="xml">The XML representation of a token to deserialize.</param>
         /// <returns>The deserialized form of the given XML.</returns>
-        public static IToken FromXml(Expression parent, XElement xml)
+        public static Token FromXml(Expression parent, XElement xml)
         {
             return TokenDeserializers[xml.Name.LocalName](parent, xml);
         }

@@ -36,7 +36,7 @@ namespace Graphmatic.Expressions
         /// </summary>
         /// <param name="token">The token to check.</param>
         /// <returns>The index of <c>token</c> in its parent expression.</returns>
-        internal static int IndexInParent(this IToken token)
+        internal static int IndexInParent(this Token token)
         {
             if (token.Parent == null)
                 throw new InvalidOperationException("Token does not have a parent Expression.");
@@ -57,7 +57,7 @@ namespace Graphmatic.Expressions
         /// </summary>
         /// <param name="token">The token to check for emptiness.</param>
         /// <returns>Returns true if a token is empty; otherwise returns false.</returns>
-        internal static bool Empty(this IToken token)
+        internal static bool Empty(this Token token)
         {
             if (token.Children.Length == 0) return true;
             foreach (Expression childExpression in token.Children)

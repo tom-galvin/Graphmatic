@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class BinaryOperationToken : SimpleToken, IOperator
+    public class BinaryOperationToken : SimpleToken
     {
         public BinaryOperationType _Operation;
         public BinaryOperationType Operation
@@ -41,6 +41,7 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
+        /*
         public int Precedence
         {
             get
@@ -77,18 +78,19 @@ namespace Graphmatic.Expressions.Tokens
                 }
             }
         }
+         * */
 
         public BinaryOperationToken(Expression parent, BinaryOperationType operation)
-            :base(parent)
+            : base(parent)
         {
             Operation = operation;
         }
 
         public BinaryOperationToken(Expression parent, XElement xml)
-            :base(parent)
+            : base(parent)
         {
             string operationName = xml.Element("Operation").Value;
-            if(!Enum.TryParse<BinaryOperationType>(operationName, out _Operation))
+            if (!Enum.TryParse<BinaryOperationType>(operationName, out _Operation))
                 throw new NotImplementedException("The operation " + operationName + " is not implemented.");
         }
 

@@ -66,11 +66,11 @@
     <Compile Include="ExpressionDisplay.Designer.cs">
       <DependentUpon>ExpressionDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Expressions\DisplaySize.cs" />
     <Compile Include="Expressions\Expression.cs" />
     <Compile Include="Expressions\ExpressionEngineExtensionMethods.cs" />
-    <Compile Include="Expressions\FontHelper.cs" />
-    <Compile Include="Expressions\ITokenCollector.cs" />
-    <Compile Include="Expressions\IOperator.cs" />
+    <Compile Include="Expressions\FontHelperExtensionMethods.cs" />
+    <Compile Include="Expressions\Tokens\ICollectorToken.cs" />
     <Compile Include="Expressions\IPaintable.cs" />
     <Compile Include="Expressions\Tokens\BinaryOperationToken.cs" />
     <Compile Include="Expressions\Tokens\AbsoluteToken.cs" />
@@ -84,8 +84,8 @@
     <Compile Include="Expressions\Tokens\RootToken.cs" />
     <Compile Include="Expressions\Tokens\ExpToken.cs" />
     <Compile Include="Expressions\Tokens\DigitToken.cs" />
-    <Compile Include="Expressions\Tokens\IToken.cs" />
-    <Compile Include="Expressions\Tokens\TokenSerialization.cs" />
+    <Compile Include="Expressions\Tokens\Token.cs" />
+    <Compile Include="Expressions\Tokens\TokenSerializationExtensionMethods.cs" />
     <Compile Include="Expressions\Tokens\VariableToken.cs" />
     <Compile Include="Interaction\Page.cs" />
     <Compile Include="InputWindow.cs">
