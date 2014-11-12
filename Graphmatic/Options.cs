@@ -18,6 +18,17 @@ namespace Graphmatic
         public Options()
         {
             InitializeComponent();
+            InitializeSettings();
+        }
+
+        private void InitializeSettings()
+        {
+            CreateSetting(
+                "default-page-color",
+                colorChooserDefaultPageColor,
+                editor => editor.Color,
+                (editor, value) => editor.Color = value,
+                Color.White);
         }
 
         private void Options_Load(object sender, EventArgs e)
@@ -49,15 +60,15 @@ namespace Graphmatic
             Close();
         }
 
-        private void colorChooserDefaultPageColor_Load(object sender, EventArgs e)
+        private void CreateSetting<TSetting, TSettingEditor>(
+            string settingName,
+            TSettingEditor settingEditor,
+            Func<TSettingEditor, TSetting> getEditorValue,
+            Action<TSettingEditor, TSetting> setEditorValue,
+            TSetting defaultSettingValue = default(TSetting)) where TSettingEditor : Control
         {
-            colorChooserDefaultPageColor.Color =
-                Program.Settings.Root.GetOrDefault<Color>("default-page-color", Color.White);
-        }
-
-        private void colorChooserDefaultPageColor_ColorChanged(object sender, EventArgs e)
-        {
-            Program.Settings.Root.Set<Color>("default-page-color", colorChooserDefaultPageColor.Color);
+            setEditorValue(settingEditor, Program.Settings.Root.GetOrDefault<TSetting>(settingName, defaultSettingValue));
+            this.FormClosing += (sender, e) => Program.Settings.Root.Set<TSetting>(settingName, getEditorValue(settingEditor));
         }
     }
 }

@@ -124,8 +124,6 @@
             this.colorChooserDefaultPageColor.Name = "colorChooserDefaultPageColor";
             this.colorChooserDefaultPageColor.Size = new System.Drawing.Size(55, 15);
             this.colorChooserDefaultPageColor.TabIndex = 1;
-            this.colorChooserDefaultPageColor.ColorChanged += new System.EventHandler(this.colorChooserDefaultPageColor_ColorChanged);
-            this.colorChooserDefaultPageColor.Load += new System.EventHandler(this.colorChooserDefaultPageColor_Load);
             // 
             // Options
             // 
