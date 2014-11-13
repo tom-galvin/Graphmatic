@@ -80,5 +80,10 @@ namespace Graphmatic.Expressions.Tokens
             Width = Content.Width + 6 * Text.Length + 1;
             Height = Content.Height;
         }
+
+        public override double Evaluate(Dictionary<char, double> variables)
+        {
+            return Content.Evaluate(variables);
+        }
     }
 }

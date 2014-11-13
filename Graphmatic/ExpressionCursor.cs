@@ -280,21 +280,27 @@ namespace Graphmatic
             {
                 if (token is ICollectorToken)
                 {
-                    ICollectorToken tokenCollector = token as ICollectorToken;
+                    ICollectorToken collectorToken = token as ICollectorToken;
                     int newIndex = Index + 1, addedTokens = 0;
                     for (int i = Index - 1; i >= 0; i--)
                     {
                         Token collectedToken = Expression[i];
-                        if (collectedToken is ICollectorToken)
+                        if (collectedToken is BinaryOperationToken)
                         {
-                            ICollectorToken collectedTokenCollector = collectedToken as ICollectorToken;
-                            if (collectedTokenCollector.MaxPrecedence < tokenCollector.MaxPrecedence) break;
+                            BinaryOperationToken opCollectedToken = collectedToken as BinaryOperationToken;
+                            if(opCollectedToken.Operation == BinaryOperationToken.BinaryOperationType.Add ||
+                                opCollectedToken.Operation == BinaryOperationToken.BinaryOperationType.Subtract)
+                            {
+                                break;
+                            }
                         }
                         collectedToken.Parent = defaultExpression;
                         defaultExpression.Insert(0, collectedToken);
                         Expression.RemoveAt(i);
                         newIndex--;
                         addedTokens++;
+
+                        if (collectorToken.CollectorType == CollectorTokenType.Weak) break; // weak collection stops as soon as possible
                     }
                     if (addedTokens > 0)
                     {

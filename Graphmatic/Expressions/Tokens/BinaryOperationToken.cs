@@ -10,7 +10,7 @@ namespace Graphmatic.Expressions.Tokens
 {
     public class BinaryOperationToken : SimpleToken
     {
-        public BinaryOperationType _Operation;
+        private BinaryOperationType _Operation;
         public BinaryOperationType Operation
         {
             get { return _Operation; }
@@ -41,44 +41,10 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        /*
-        public int Precedence
+        public override double Evaluate(Dictionary<char, double> variables)
         {
-            get
-            {
-                switch (_Operation)
-                {
-                    case BinaryOperationType.Divide:
-                        return 100;
-                    case BinaryOperationType.Multiply:
-                        return 99;
-                    case BinaryOperationType.Add:
-                        return 2;
-                    case BinaryOperationType.Subtract:
-                        return 1;
-                    default:
-                        throw new NotImplementedException("Unknown operation.");
-                }
-            }
+            throw new NotImplementedException();
         }
-
-        public OperatorAssociativity Associativity
-        {
-            get
-            {
-                switch (_Operation)
-                {
-                    case BinaryOperationType.Add:
-                    case BinaryOperationType.Subtract:
-                    case BinaryOperationType.Multiply:
-                    case BinaryOperationType.Divide:
-                        return OperatorAssociativity.Left;
-                    default:
-                        throw new NotImplementedException("Unknown operation.");
-                }
-            }
-        }
-         * */
 
         public BinaryOperationToken(Expression parent, BinaryOperationType operation)
             : base(parent)

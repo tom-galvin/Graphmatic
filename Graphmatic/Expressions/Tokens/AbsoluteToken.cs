@@ -50,5 +50,10 @@ namespace Graphmatic.Expressions.Tokens
             Width = Operand.Width + 4;
             Height = Operand.Height;
         }
+
+        public override double Evaluate(Dictionary<char, double> variables)
+        {
+            return Math.Abs(Operand.Evaluate(variables));
+        }
     }
 }

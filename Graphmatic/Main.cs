@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Graphmatic.Interaction;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,8 @@ namespace Graphmatic
 {
     public partial class Main : Form
     {
+        Equation equation = new Equation('y', 'x');
+
         public Main()
         {
             InitializeComponent();
@@ -21,10 +24,10 @@ namespace Graphmatic
 
         private void dispToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            InputWindow inputWindow = new InputWindow('y', 'x');
+            InputWindow inputWindow = new InputWindow(equation);
             if (inputWindow.ShowDialog() == DialogResult.OK)
             {
-                File.WriteAllText("test.xml", inputWindow.Result.ToXmlElement().ToString());
+                File.WriteAllText("test.xml", equation.ToXml().ToString());
                 Process.Start("test.xml");
             }
         }

@@ -117,5 +117,10 @@ namespace Graphmatic.Expressions.Tokens
                 Power[0] is DigitToken &&
                 (Power[0] as DigitToken).Value == 2;
         }
+
+        public override double Evaluate(Dictionary<char, double> variables)
+        {
+            return Math.Pow(Base.Evaluate(variables), 1.0 / Power.Evaluate(variables));
+        }
     }
 }

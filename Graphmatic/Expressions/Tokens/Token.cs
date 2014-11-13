@@ -11,7 +11,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Exposes methods and properties to manipulate a token (or component) in a mathematical expression.
     /// </summary>
-    public abstract class Token : IPaintable, IXmlConvertible
+    public abstract class Token : IPaintable, IXmlConvertible, IEvaluable
     {
         /// <summary>
         /// Gets the expression containing this token.
@@ -41,12 +41,6 @@ namespace Graphmatic.Expressions.Tokens
                 return null;
             }
         }
-
-        /* /// <summary>
-        /// Evaluates the expression with a given set of variables.
-        /// </summary>
-        /// <param name="variables">The value of the variables to evaluate with.</param>
-        double Evaluate(Dictionary<char, double> variables); */
 
         /// <summary>
         /// The width of the token, in pixels.
@@ -97,5 +91,11 @@ namespace Graphmatic.Expressions.Tokens
         public abstract void RecalculateDimensions(ExpressionCursor expressionCursor);
 
         public abstract XElement ToXml();
+
+        /// <summary>
+        /// Evaluates the expression with a given set of variables.
+        /// </summary>
+        /// <param name="variables">The value of the variables to evaluate with.</param>
+        public abstract double Evaluate(Dictionary<char, double> variables);
     }
 }

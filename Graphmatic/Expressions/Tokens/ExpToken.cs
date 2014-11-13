@@ -10,9 +10,15 @@ namespace Graphmatic.Expressions.Tokens
 {
     public class ExpToken : Token, ICollectorToken
     {
-        public int MaxPrecedence
+        /// <summary>
+        /// Gets the token collection type for this token collector.
+        /// </summary>
+        public CollectorTokenType CollectorType
         {
-            get { return 1000; }
+            get
+            {
+                return CollectorTokenType.Weak;
+            }
         }
 
         public override int BaselineOffset
@@ -82,6 +88,11 @@ namespace Graphmatic.Expressions.Tokens
             Power.RecalculateDimensions(expressionCursor);
             Width = Base.Width + Power.Width + 1;
             Height = Base.Height + Power.Height - (Size == DisplaySize.Small ? 0 : 3);
+        }
+
+        public override double Evaluate(Dictionary<char, double> variables)
+        {
+            return Math.Pow(Base.Evaluate(variables), Power.Evaluate(variables));
         }
     }
 }

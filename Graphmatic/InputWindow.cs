@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Graphmatic.Expressions;
 using Graphmatic.Expressions.Tokens;
+using Graphmatic.Interaction;
 
 namespace Graphmatic
 {
@@ -56,6 +57,12 @@ namespace Graphmatic
         }
 
         public Dictionary<Tuple<Keys, Keys>, Control> Shortcuts;
+
+        public InputWindow(Equation equation)
+            : this(equation.PlottedVariable, equation.VaryingVariable, equation.Expression)
+        {
+
+        }
 
         public InputWindow(char plottedVariable, char varyingVariable, Expression expression)
         {
@@ -135,13 +142,13 @@ namespace Graphmatic
             CreateExpressionButton(buttonDivide, expression => new BinaryOperationToken(expression, BinaryOperationToken.BinaryOperationType.Divide), "Backslash", Keys.Oem5);
             #endregion
             #region Roots
-            CreateExpressionButton(buttonRoot, expression => new RootToken(expression), "Alt-Shift-R", Keys.R, Keys.Alt | Keys.Shift);
+            CreateExpressionButton(buttonRoot, expression => new RootToken(expression), "Ctrl-Shift-R", Keys.R, Keys.Control | Keys.Shift);
             CreateExpressionButton(buttonSqrt, expression =>
             {
                 var token = new RootToken(expression);
                 token.Power.Add(new DigitToken(token.Power, 2));
                 return token;
-            }, "Alt-R", Keys.R, Keys.Alt);
+            }, "Ctrl-R", Keys.R, Keys.Control);
             #endregion
             #region Logs
             CreateExpressionButton(buttonLogN, expression => new LogToken(expression), "Alt-L", Keys.L, Keys.Alt);

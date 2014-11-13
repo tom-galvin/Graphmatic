@@ -46,6 +46,11 @@ namespace Graphmatic.Expressions.Tokens
                 throw new NotImplementedException("Variable symbol name must be one letter long (invalid: " + symbolString + ")");
         }
 
+        public override double Evaluate(Dictionary<char, double> variables)
+        {
+            return variables[Symbol];
+        }
+
         public override XElement ToXml()
         {
             return new XElement("Variable",

@@ -12,9 +12,28 @@ namespace Graphmatic.Expressions.Tokens
     /// </summary>
     public interface ICollectorToken
     {
-        int MaxPrecedence
+        /// <summary>
+        /// Gets the token collection type for this token collector.
+        /// </summary>
+        CollectorTokenType CollectorType
         {
             get;
         }
+    }
+
+    /// <summary>
+    /// Specifies the token collection type.
+    /// </summary>
+    public enum CollectorTokenType
+    {
+        /// <summary>
+        /// Defines strong token collection - that is, collects as many items as possible.
+        /// </summary>
+        Strong,
+
+        /// <summary>
+        /// Defines weak token collection - that is, collects as few items as possible (in most cases, one.)
+        /// </summary>
+        Weak
     }
 }

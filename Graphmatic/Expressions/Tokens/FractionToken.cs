@@ -10,9 +10,15 @@ namespace Graphmatic.Expressions.Tokens
 {
     public class FractionToken : Token, ICollectorToken
     {
-        public int MaxPrecedence
+        /// <summary>
+        /// Gets the token collection type for this token collector.
+        /// </summary>
+        public CollectorTokenType CollectorType
         {
-            get { return 1000; }
+            get
+            {
+                return CollectorTokenType.Strong;
+            }
         }
 
         public override int BaselineOffset
@@ -84,6 +90,11 @@ namespace Graphmatic.Expressions.Tokens
             Bottom.RecalculateDimensions(expressionCursor);
             Width = Math.Max(Top.Width, Bottom.Width);
             Height = Top.Height + Bottom.Height + 3;
+        }
+
+        public override double Evaluate(Dictionary<char, double> variables)
+        {
+            return Top.Evaluate(variables) / Bottom.Evaluate(variables);
         }
     }
 }

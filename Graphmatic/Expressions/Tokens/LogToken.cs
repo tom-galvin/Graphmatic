@@ -192,6 +192,11 @@ namespace Graphmatic.Expressions.Tokens
             return SimplificationType.None;
         }
 
+        public override double Evaluate(Dictionary<char, double> variables)
+        {
+            return Math.Log(Operand.Evaluate(variables), Base.Evaluate(variables));
+        }
+
         private enum SimplificationType
         {
             None,

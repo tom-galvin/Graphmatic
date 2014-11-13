@@ -68,8 +68,10 @@
     </Compile>
     <Compile Include="Expressions\DisplaySize.cs" />
     <Compile Include="Expressions\Expression.cs" />
+    <Compile Include="Expressions\Expression.Parsing.cs" />
     <Compile Include="Expressions\ExpressionEngineExtensionMethods.cs" />
     <Compile Include="Expressions\FontHelperExtensionMethods.cs" />
+    <Compile Include="Expressions\IEvaluable.cs" />
     <Compile Include="Expressions\Tokens\ICollectorToken.cs" />
     <Compile Include="Expressions\IPaintable.cs" />
     <Compile Include="Expressions\Tokens\BinaryOperationToken.cs" />

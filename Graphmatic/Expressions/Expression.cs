@@ -12,7 +12,7 @@ namespace Graphmatic.Expressions
     /// <summary>
     /// Represents a mathematical expression, which can be composed of individual mathematical tokens and other sub-expressions, and be evaluated to form a graph.
     /// </summary>
-    public class Expression : List<Token>, IPaintable
+    public partial class Expression : List<Token>, IPaintable, IEvaluable
     {
         /// <summary>
         /// Represents the pixel spacing between tokens in an expression.

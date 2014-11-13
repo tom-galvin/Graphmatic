@@ -8,8 +8,17 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
+    public delegate double FunctionTransformation(double x);
+
     public class FunctionToken : Token
     {
+        public static Dictionary<string, FunctionTransformation> Functions = new Dictionary<string, FunctionTransformation>()
+        {
+            { "", x => x },
+            { "sin", x => Math.Sin(x) },
+            { "cos", x => Math.Cos(x) },
+            { "tan", x => Math.Tan(x) }
+        };
 
         public override int BaselineOffset
         {
@@ -19,10 +28,20 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
+        private FunctionTransformation _Transformation = null;
+
+        public string _Text;
         public string Text
         {
-            get;
-            protected set;
+            get
+            {
+                return _Text;
+            }
+            protected set
+            {
+                _Text = value;
+                _Transformation = Functions[_Text];
+            }
         }
 
         public Expression Operand
@@ -145,6 +164,11 @@ namespace Graphmatic.Expressions.Tokens
             Operand.RecalculateDimensions(expressionCursor);
             Width = Operand.Width + 6 * Text.Length + (Size == DisplaySize.Large ? 12 : 9);
             Height = Operand.Height;
+        }
+
+        public override double Evaluate(Dictionary<char, double> variables)
+        { 
+            return _Transformation(Operand.Evaluate(variables));
         }
     }
 }

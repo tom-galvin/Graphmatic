@@ -49,7 +49,7 @@ namespace Graphmatic.Expressions.Tokens
         {
             string constantName = xml.Element("Value").Value;
             if (Enum.TryParse<ConstantType>(constantName, out _Value))
-                throw new NotImplementedException("The operation " + constantName + " is not implemented.");
+                throw new NotImplementedException("The constant value " + constantName + " is not implemented.");
         }
 
         public override XElement ToXml()
@@ -62,6 +62,19 @@ namespace Graphmatic.Expressions.Tokens
         {
             E,
             Pi
+        }
+
+        public override double Evaluate(Dictionary<char, double> variables)
+        {
+            switch (Value)
+            {
+                case ConstantType.E:
+                    return Math.E;
+                case ConstantType.Pi:
+                    return Math.PI;
+                default:
+                    throw new NotImplementedException("The constant value " + Value.ToString() + " is not implemented, and thus has no value.");
+            }
         }
     }
 }
