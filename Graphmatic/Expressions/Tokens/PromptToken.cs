@@ -24,10 +24,18 @@ namespace Graphmatic.Expressions.Tokens
             set;
         }
 
+        private Expression _Content;
         public Expression Content
         {
-            get;
-            protected set;
+            get
+            {
+                return _Content;
+            }
+            set
+            {
+                _Content = value;
+                Children = new Expression[] { _Content };
+            }
         }
 
         public override Expression DefaultChild
@@ -43,7 +51,6 @@ namespace Graphmatic.Expressions.Tokens
         {
             Text = text;
             Content = new Expression(this);
-            Children = new Expression[] { Content };
         }
 
         public override XElement ToXml()

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +21,12 @@ namespace Graphmatic
 
         private void dispToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new InputWindow('y', 'x').ShowDialog();
+            InputWindow inputWindow = new InputWindow('y', 'x');
+            if (inputWindow.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText("test.xml", inputWindow.Result.ToXmlElement().ToString());
+                Process.Start("test.xml");
+            }
         }
 
         private void lorgorgoToolStripMenuItem_Click(object sender, EventArgs e)

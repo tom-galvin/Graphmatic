@@ -57,6 +57,27 @@ namespace Graphmatic
 
         public Dictionary<Tuple<Keys, Keys>, Control> Shortcuts;
 
+        public InputWindow(char plottedVariable, char varyingVariable, Expression expression)
+        {
+            Shortcuts = new Dictionary<Tuple<Keys, Keys>, Control>();
+
+            InitializeComponent();
+            InitializeButtons();
+
+            _Prompt = new PromptToken(null, "Loading... ");
+            _Prompt.RecalculateDimensions(expressionDisplay.ExpressionCursor);
+            expressionDisplay.Expression.Add(_Prompt);
+            expression.Parent = _Prompt;
+            _Prompt.Content = expression;
+            expressionDisplay.ExpressionCursor.Expression = _Prompt.Content;
+            Result = _Prompt.Content;
+            DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            expressionDisplay.ExpressionCursor.Moved += ExpressionCursor_Moved;
+
+            PlottedVariable = plottedVariable;
+            VaryingVariable = varyingVariable;
+        }
+
         public InputWindow(char plottedVariable, char varyingVariable)
         {
             Shortcuts = new Dictionary<Tuple<Keys, Keys>, Control>();
@@ -279,6 +300,11 @@ namespace Graphmatic
         {
             if (e.KeyChar == _VaryingVariable)
                 buttonVariable.PerformClick();
+        }
+
+        private void InputWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Result.Parent = null;
         }
     }
 }

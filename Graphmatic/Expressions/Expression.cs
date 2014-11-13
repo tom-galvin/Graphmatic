@@ -80,7 +80,7 @@ namespace Graphmatic.Expressions
         public Token Parent
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>

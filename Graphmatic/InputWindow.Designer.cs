@@ -541,6 +541,7 @@
             this.Name = "InputWindow";
             this.ShowInTaskbar = false;
             this.Text = "Enter Input";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InputWindow_FormClosing);
             this.Load += new System.EventHandler(this.InputWindow_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputWindow_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputWindow_KeyPress);
