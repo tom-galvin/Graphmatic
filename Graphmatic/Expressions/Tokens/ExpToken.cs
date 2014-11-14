@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class ExpToken : Token, ICollectorToken
+    public class ExpToken : Token, ICollectorToken, IParsable
     {
         /// <summary>
         /// Gets the token collection type for this token collector.
@@ -90,9 +91,10 @@ namespace Graphmatic.Expressions.Tokens
             Height = Base.Height + Power.Height - (Size == DisplaySize.Small ? 0 : 3);
         }
 
-        public override double Evaluate(Dictionary<char, double> variables)
+        public const BinaryEvaluator Evaluator = (powBase, powPower) => Math.Pow(powBase, powPower);
+        public ParseTreeNode Parse()
         {
-            return Math.Pow(Base.Evaluate(variables), Power.Evaluate(variables));
+            return new BinaryParseTreeNode(Evaluator, Base.Parse(), Power.Parse());
         }
     }
 }

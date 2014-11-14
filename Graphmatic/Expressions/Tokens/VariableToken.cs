@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class VariableToken : SimpleToken
+    public class VariableToken : SimpleToken, IParsable
     {
         private char _Symbol;
         public char Symbol
@@ -46,9 +47,9 @@ namespace Graphmatic.Expressions.Tokens
                 throw new NotImplementedException("Variable symbol name must be one letter long (invalid: " + symbolString + ")");
         }
 
-        public override double Evaluate(Dictionary<char, double> variables)
+        public ParseTreeNode Parse()
         {
-            return variables[Symbol];
+            return new VariableParseTreeNode(Symbol);
         }
 
         public override XElement ToXml()

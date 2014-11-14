@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class LogToken : Token
+    public class LogToken : Token, IParsable
     {
 
         public override int BaselineOffset
@@ -192,9 +193,10 @@ namespace Graphmatic.Expressions.Tokens
             return SimplificationType.None;
         }
 
-        public override double Evaluate(Dictionary<char, double> variables)
+        public const BinaryEvaluator Evaluator = (logBase, logOperand) => Math.Log(logOperand, logBase);
+        public ParseTreeNode Parse()
         {
-            return Math.Log(Operand.Evaluate(variables), Base.Evaluate(variables));
+            return new BinaryParseTreeNode(Evaluator, Base.Parse(), Operand.Parse());
         }
 
         private enum SimplificationType

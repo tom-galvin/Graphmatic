@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class ConstantToken : SimpleToken
+    public class ConstantToken : SimpleToken, IParsable
     {
 
         private ConstantType _Value;
@@ -64,14 +65,14 @@ namespace Graphmatic.Expressions.Tokens
             Pi
         }
 
-        public override double Evaluate(Dictionary<char, double> variables)
+        public ParseTreeNode Parse()
         {
             switch (Value)
             {
                 case ConstantType.E:
-                    return Math.E;
+                    return new ConstantParseTreeNode(Math.E);
                 case ConstantType.Pi:
-                    return Math.PI;
+                    return new ConstantParseTreeNode(Math.PI);
                 default:
                     throw new NotImplementedException("The constant value " + Value.ToString() + " is not implemented, and thus has no value.");
             }

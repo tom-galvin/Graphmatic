@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class RootToken : Token
+    public class RootToken : Token, IParsable
     {
 
         public override int BaselineOffset
@@ -118,9 +119,11 @@ namespace Graphmatic.Expressions.Tokens
                 (Power[0] as DigitToken).Value == 2;
         }
 
-        public override double Evaluate(Dictionary<char, double> variables)
+        public const BinaryEvaluator Evaluator = (rootBase, rootPower) => Math.Pow(rootBase, 1 / rootPower);
+
+        public ParseTreeNode Parse()
         {
-            return Math.Pow(Base.Evaluate(variables), 1.0 / Power.Evaluate(variables));
+            return new BinaryParseTreeNode(Evaluator, Base.Parse(), Power.Parse());
         }
     }
 }

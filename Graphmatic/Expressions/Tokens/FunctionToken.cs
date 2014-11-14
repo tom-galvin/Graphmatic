@@ -5,19 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public delegate double FunctionTransformation(double x);
-
-    public class FunctionToken : Token
+    public class FunctionToken : Token, IParsable
     {
-        public static Dictionary<string, FunctionTransformation> Functions = new Dictionary<string, FunctionTransformation>()
+        public static readonly Dictionary<string, UnaryEvaluator> Evaluators = new Dictionary<string, UnaryEvaluator>()
         {
-            { "", x => x },
             { "sin", x => Math.Sin(x) },
             { "cos", x => Math.Cos(x) },
-            { "tan", x => Math.Tan(x) }
+            { "tan", x => Math.Tan(x) },
+            { "", x => x },
         };
 
         public override int BaselineOffset
@@ -28,20 +27,10 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        private FunctionTransformation _Transformation = null;
-
-        public string _Text;
         public string Text
         {
-            get
-            {
-                return _Text;
-            }
-            protected set
-            {
-                _Text = value;
-                _Transformation = Functions[_Text];
-            }
+            get;
+            set;
         }
 
         public Expression Operand
@@ -166,9 +155,9 @@ namespace Graphmatic.Expressions.Tokens
             Height = Operand.Height;
         }
 
-        public override double Evaluate(Dictionary<char, double> variables)
-        { 
-            return _Transformation(Operand.Evaluate(variables));
+        public ParseTreeNode Parse()
+        {
+            return new UnaryParseTreeNode(Evaluators[Text], Operand.Parse());
         }
     }
 }

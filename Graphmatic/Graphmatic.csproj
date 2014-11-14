@@ -71,7 +71,13 @@
     <Compile Include="Expressions\Expression.Parsing.cs" />
     <Compile Include="Expressions\ExpressionEngineExtensionMethods.cs" />
     <Compile Include="Expressions\FontHelperExtensionMethods.cs" />
-    <Compile Include="Expressions\IEvaluable.cs" />
+    <Compile Include="Expressions\IParsable.cs" />
+    <Compile Include="Expressions\Parsing\BinaryParseTreeNode.cs" />
+    <Compile Include="Expressions\Parsing\ConstantParseTreeNode.cs" />
+    <Compile Include="Expressions\Parsing\Evaluator.cs" />
+    <Compile Include="Expressions\Parsing\ParseTreeNode.cs" />
+    <Compile Include="Expressions\Parsing\UnaryParseTreeNode.cs" />
+    <Compile Include="Expressions\Parsing\VariableParseTreeNode.cs" />
     <Compile Include="Expressions\Tokens\ICollectorToken.cs" />
     <Compile Include="Expressions\IPaintable.cs" />
     <Compile Include="Expressions\Tokens\BinaryOperationToken.cs" />
@@ -141,6 +147,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

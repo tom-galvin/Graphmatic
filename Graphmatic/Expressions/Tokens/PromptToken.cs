@@ -83,7 +83,7 @@ namespace Graphmatic.Expressions.Tokens
 
         public override double Evaluate(Dictionary<char, double> variables)
         {
-            return Content.Evaluate(variables);
+            return Content.Parse(variables);
         }
     }
 }

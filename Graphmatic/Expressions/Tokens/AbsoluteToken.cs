@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class AbsoluteToken : FunctionToken
+    public class AbsoluteToken : FunctionToken, IParsable
     {
         public AbsoluteToken(Expression parent)
             : base(parent, "Abs")
@@ -51,9 +52,10 @@ namespace Graphmatic.Expressions.Tokens
             Height = Operand.Height;
         }
 
-        public override double Evaluate(Dictionary<char, double> variables)
+        public const UnaryEvaluator Evaluator = x => Math.Abs(x);
+        public ParseTreeNode Parse()
         {
-            return Math.Abs(Operand.Evaluate(variables));
+            return new UnaryParseTreeNode(Evaluator, Operand.Parse());
         }
     }
 }
