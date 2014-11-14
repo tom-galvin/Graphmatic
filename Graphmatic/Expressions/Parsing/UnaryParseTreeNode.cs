@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Graphmatic.Expressions.Parsing
+{
+    public class UnaryParseTreeNode : ParseTreeNode
+    {
+        public readonly UnaryEvaluator Evaluator
+        {
+            get;
+            protected set;
+        }
+
+        public readonly ParseTreeNode Operand
+        {
+            get;
+            protected set;
+        }
+
+        public UnaryParseTreeNode(UnaryEvaluator evaluator, ParseTreeNode operand)
+        {
+            Evaluator = evaluator;
+            Operand = operand;
+        }
+
+        public override double Evaluate(Dictionary<char, double> variables)
+        {
+            double operandResult = Operand.Evaluate(variables);
+            return Evaluator(operandResult);
+        }
+    }
+}
