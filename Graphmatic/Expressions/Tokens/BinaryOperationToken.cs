@@ -41,11 +41,6 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public override double Evaluate(Dictionary<char, double> variables)
-        {
-            throw new NotImplementedException();
-        }
-
         public BinaryOperationToken(Expression parent, BinaryOperationType operation)
             : base(parent)
         {

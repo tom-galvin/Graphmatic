@@ -61,11 +61,6 @@ namespace Graphmatic.Expressions.Tokens
                 new XAttribute("Type", _Type.ToString()));
         }
 
-        public override double Evaluate(Dictionary<char, double> variables)
-        {
-            throw new NotImplementedException();
-        }
-
         public enum SymbolicType
         {
             Comma,

@@ -8,13 +8,13 @@ namespace Graphmatic.Expressions.Parsing
 {
     public class UnaryParseTreeNode : ParseTreeNode
     {
-        public readonly UnaryEvaluator Evaluator
+        public UnaryEvaluator Evaluator
         {
             get;
             protected set;
         }
 
-        public readonly ParseTreeNode Operand
+        public ParseTreeNode Operand
         {
             get;
             protected set;

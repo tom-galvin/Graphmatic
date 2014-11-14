@@ -193,7 +193,7 @@ namespace Graphmatic.Expressions.Tokens
             return SimplificationType.None;
         }
 
-        public const BinaryEvaluator Evaluator = (logBase, logOperand) => Math.Log(logOperand, logBase);
+        public static readonly BinaryEvaluator Evaluator = (logBase, logOperand) => Math.Log(logOperand, logBase);
         public ParseTreeNode Parse()
         {
             return new BinaryParseTreeNode(Evaluator, Base.Parse(), Operand.Parse());

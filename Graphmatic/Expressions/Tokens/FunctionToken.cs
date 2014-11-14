@@ -155,7 +155,7 @@ namespace Graphmatic.Expressions.Tokens
             Height = Operand.Height;
         }
 
-        public ParseTreeNode Parse()
+        public virtual ParseTreeNode Parse()
         {
             return new UnaryParseTreeNode(Evaluators[Text], Operand.Parse());
         }

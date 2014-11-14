@@ -91,7 +91,7 @@ namespace Graphmatic.Expressions.Tokens
             Height = Base.Height + Power.Height - (Size == DisplaySize.Small ? 0 : 3);
         }
 
-        public const BinaryEvaluator Evaluator = (powBase, powPower) => Math.Pow(powBase, powPower);
+        public static readonly BinaryEvaluator Evaluator = (powBase, powPower) => Math.Pow(powBase, powPower);
         public ParseTreeNode Parse()
         {
             return new BinaryParseTreeNode(Evaluator, Base.Parse(), Power.Parse());

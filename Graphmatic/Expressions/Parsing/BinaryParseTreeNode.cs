@@ -8,19 +8,19 @@ namespace Graphmatic.Expressions.Parsing
 {
     public class BinaryParseTreeNode : ParseTreeNode
     {
-        public readonly BinaryEvaluator Evaluator
+        public BinaryEvaluator Evaluator
         {
             get;
             protected set;
         }
 
-        public readonly ParseTreeNode Left
+        public ParseTreeNode Left
         {
             get;
             protected set;
         }
 
-        public readonly ParseTreeNode Right
+        public ParseTreeNode Right
         {
             get;
             protected set;

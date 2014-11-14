@@ -52,8 +52,9 @@ namespace Graphmatic.Expressions.Tokens
             Height = Operand.Height;
         }
 
-        public const UnaryEvaluator Evaluator = x => Math.Abs(x);
-        public ParseTreeNode Parse()
+        public static readonly UnaryEvaluator Evaluator = x => Math.Abs(x);
+
+        public override ParseTreeNode Parse()
         {
             return new UnaryParseTreeNode(Evaluator, Operand.Parse());
         }

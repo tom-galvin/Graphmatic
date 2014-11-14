@@ -8,7 +8,7 @@ namespace Graphmatic.Expressions.Parsing
 {
     public class ConstantParseTreeNode : ParseTreeNode
     {
-        public readonly double Value
+        public double Value
         {
             get;
             protected set;

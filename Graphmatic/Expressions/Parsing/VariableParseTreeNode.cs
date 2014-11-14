@@ -8,7 +8,7 @@ namespace Graphmatic.Expressions.Parsing
 {
     public class VariableParseTreeNode : ParseTreeNode
     {
-        public readonly char Variable
+        public char Variable
         {
             get;
             protected set;

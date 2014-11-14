@@ -54,11 +54,6 @@ namespace Graphmatic.Expressions.Tokens
             Value = Int32.Parse(xml.Element("Value").Value);
         }
 
-        public override double Evaluate(Dictionary<char, double> variables)
-        {
-            throw new NotImplementedException();
-        }
-
         public override XElement ToXml()
         {
             return new XElement("Digit",

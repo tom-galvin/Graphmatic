@@ -119,7 +119,7 @@ namespace Graphmatic.Expressions.Tokens
                 (Power[0] as DigitToken).Value == 2;
         }
 
-        public const BinaryEvaluator Evaluator = (rootBase, rootPower) => Math.Pow(rootBase, 1 / rootPower);
+        public static readonly BinaryEvaluator Evaluator = (rootBase, rootPower) => Math.Pow(rootBase, 1 / rootPower);
 
         public ParseTreeNode Parse()
         {
