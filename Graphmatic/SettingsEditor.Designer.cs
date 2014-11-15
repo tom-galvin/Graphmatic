@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonReload = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageDefaults = new System.Windows.Forms.TabPage();
+            this.textBoxDefaultVaryingVariable = new System.Windows.Forms.TextBox();
+            this.labelDefaultVaryingVariable = new System.Windows.Forms.Label();
+            this.textBoxDefaultPlottedVariable = new System.Windows.Forms.TextBox();
+            this.labelDefaultPlottedVariable = new System.Windows.Forms.Label();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.colorChooserDefaultPageColor = new Graphmatic.ColorChooser();
@@ -41,20 +44,6 @@
             this.tabPageDefaults.SuspendLayout();
             this.SuspendLayout();
             // 
-            // buttonReload
-            // 
-            this.buttonReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonReload.Image = global::Graphmatic.Properties.Resources.Redo16;
-            this.buttonReload.Location = new System.Drawing.Point(291, 12);
-            this.buttonReload.Name = "buttonReload";
-            this.buttonReload.Size = new System.Drawing.Size(229, 23);
-            this.buttonReload.TabIndex = 1;
-            this.buttonReload.Text = "Error loading settings - click to retry";
-            this.buttonReload.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonReload.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.buttonReload.UseVisualStyleBackColor = true;
-            this.buttonReload.Click += new System.EventHandler(this.buttonReload_Click);
-            // 
             // tabControl
             // 
             this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -64,11 +53,15 @@
             this.tabControl.Location = new System.Drawing.Point(12, 22);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(512, 409);
+            this.tabControl.Size = new System.Drawing.Size(419, 170);
             this.tabControl.TabIndex = 2;
             // 
             // tabPageDefaults
             // 
+            this.tabPageDefaults.Controls.Add(this.textBoxDefaultVaryingVariable);
+            this.tabPageDefaults.Controls.Add(this.labelDefaultVaryingVariable);
+            this.tabPageDefaults.Controls.Add(this.textBoxDefaultPlottedVariable);
+            this.tabPageDefaults.Controls.Add(this.labelDefaultPlottedVariable);
             this.tabPageDefaults.Controls.Add(this.textBoxUserName);
             this.tabPageDefaults.Controls.Add(this.label3);
             this.tabPageDefaults.Controls.Add(this.colorChooserDefaultPageColor);
@@ -76,22 +69,54 @@
             this.tabPageDefaults.Location = new System.Drawing.Point(4, 24);
             this.tabPageDefaults.Name = "tabPageDefaults";
             this.tabPageDefaults.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDefaults.Size = new System.Drawing.Size(504, 381);
+            this.tabPageDefaults.Size = new System.Drawing.Size(411, 142);
             this.tabPageDefaults.TabIndex = 0;
             this.tabPageDefaults.Text = "Defaults";
             this.tabPageDefaults.UseVisualStyleBackColor = true;
             // 
+            // textBoxDefaultVaryingVariable
+            // 
+            this.textBoxDefaultVaryingVariable.Location = new System.Drawing.Point(359, 30);
+            this.textBoxDefaultVaryingVariable.Name = "textBoxDefaultVaryingVariable";
+            this.textBoxDefaultVaryingVariable.Size = new System.Drawing.Size(46, 23);
+            this.textBoxDefaultVaryingVariable.TabIndex = 7;
+            // 
+            // labelDefaultVaryingVariable
+            // 
+            this.labelDefaultVaryingVariable.AutoSize = true;
+            this.labelDefaultVaryingVariable.Location = new System.Drawing.Point(187, 33);
+            this.labelDefaultVaryingVariable.Name = "labelDefaultVaryingVariable";
+            this.labelDefaultVaryingVariable.Size = new System.Drawing.Size(167, 15);
+            this.labelDefaultVaryingVariable.TabIndex = 6;
+            this.labelDefaultVaryingVariable.Text = "Default varying variable name:";
+            // 
+            // textBoxDefaultPlottedVariable
+            // 
+            this.textBoxDefaultPlottedVariable.Location = new System.Drawing.Point(359, 6);
+            this.textBoxDefaultPlottedVariable.Name = "textBoxDefaultPlottedVariable";
+            this.textBoxDefaultPlottedVariable.Size = new System.Drawing.Size(46, 23);
+            this.textBoxDefaultPlottedVariable.TabIndex = 5;
+            // 
+            // labelDefaultPlottedVariable
+            // 
+            this.labelDefaultPlottedVariable.AutoSize = true;
+            this.labelDefaultPlottedVariable.Location = new System.Drawing.Point(187, 9);
+            this.labelDefaultPlottedVariable.Name = "labelDefaultPlottedVariable";
+            this.labelDefaultPlottedVariable.Size = new System.Drawing.Size(166, 15);
+            this.labelDefaultPlottedVariable.TabIndex = 4;
+            this.labelDefaultPlottedVariable.Text = "Default plotted variable name:";
+            // 
             // textBoxUserName
             // 
-            this.textBoxUserName.Location = new System.Drawing.Point(75, 27);
+            this.textBoxUserName.Location = new System.Drawing.Point(74, 30);
             this.textBoxUserName.Name = "textBoxUserName";
-            this.textBoxUserName.Size = new System.Drawing.Size(104, 23);
+            this.textBoxUserName.Size = new System.Drawing.Size(107, 23);
             this.textBoxUserName.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 30);
+            this.label3.Location = new System.Drawing.Point(5, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 15);
             this.label3.TabIndex = 2;
@@ -100,7 +125,7 @@
             // colorChooserDefaultPageColor
             // 
             this.colorChooserDefaultPageColor.Color = System.Drawing.Color.Empty;
-            this.colorChooserDefaultPageColor.Location = new System.Drawing.Point(124, 6);
+            this.colorChooserDefaultPageColor.Location = new System.Drawing.Point(126, 9);
             this.colorChooserDefaultPageColor.Name = "colorChooserDefaultPageColor";
             this.colorChooserDefaultPageColor.Size = new System.Drawing.Size(55, 15);
             this.colorChooserDefaultPageColor.TabIndex = 1;
@@ -108,7 +133,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 6);
+            this.label2.Location = new System.Drawing.Point(6, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(114, 15);
             this.label2.TabIndex = 0;
@@ -116,18 +141,20 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(445, 12);
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.Location = new System.Drawing.Point(352, 12);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 3;
-            this.buttonOK.Text = "O&K";
+            this.buttonOK.Text = "&OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(364, 12);
+            this.buttonCancel.Location = new System.Drawing.Point(271, 12);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 4;
@@ -135,14 +162,13 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // SettingsWindow
+            // SettingsEditor
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(536, 443);
-            this.Controls.Add(this.buttonReload);
+            this.ClientSize = new System.Drawing.Size(443, 204);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.tabControl);
@@ -151,7 +177,7 @@
             this.Icon = global::Graphmatic.Properties.Resources.SettingsIcon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "SettingsWindow";
+            this.Name = "SettingsEditor";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
@@ -166,7 +192,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonReload;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageDefaults;
         private System.Windows.Forms.Label label2;
@@ -175,5 +200,9 @@
         private ColorChooser colorChooserDefaultPageColor;
         private System.Windows.Forms.TextBox textBoxUserName;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelDefaultPlottedVariable;
+        private System.Windows.Forms.TextBox textBoxDefaultPlottedVariable;
+        private System.Windows.Forms.TextBox textBoxDefaultVaryingVariable;
+        private System.Windows.Forms.Label labelDefaultVaryingVariable;
     }
 }

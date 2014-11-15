@@ -22,5 +22,60 @@ namespace Graphmatic.Properties {
                 return defaultInstance;
             }
         }
+        
+        /// <summary>
+        /// Default background color for new document pages.
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Default background color for new document pages.")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color DefaultPageColor {
+            get {
+                return ((global::System.Drawing.Color)(this["DefaultPageColor"]));
+            }
+            set {
+                this["DefaultPageColor"] = value;
+            }
+        }
+        
+        /// <summary>
+        /// Default username for users.
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Default username for users.")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Anonymous")]
+        public string Username {
+            get {
+                return ((string)(this["Username"]));
+            }
+            set {
+                this["Username"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("y")]
+        public char DefaultPlottedVariable {
+            get {
+                return ((char)(this["DefaultPlottedVariable"]));
+            }
+            set {
+                this["DefaultPlottedVariable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("x")]
+        public char DefaultVaryingVariable {
+            get {
+                return ((char)(this["DefaultVaryingVariable"]));
+            }
+            set {
+                this["DefaultVaryingVariable"] = value;
+            }
+        }
     }
 }

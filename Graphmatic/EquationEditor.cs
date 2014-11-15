@@ -83,5 +83,11 @@ namespace Graphmatic
             textBoxVarying.Text = e.KeyChar.ToString();
             Equation.VaryingVariable = e.KeyChar;
         }
+
+        private void EquationEditor_Load(object sender, EventArgs e)
+        {
+            Text = Equation.Name + " - Equation Editor";
+            buttonEdit.Select();
+        }
     }
 }

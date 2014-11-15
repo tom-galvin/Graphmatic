@@ -70,9 +70,7 @@ namespace Graphmatic
         {
             if (listViewResources.SelectedItems.Count < 1) return;
             Resource resource = (Resource)listViewResources.SelectedItems[0].Tag;
-            Image captionImage = null;
-            if(resource is Equation) captionImage = Properties.Resources.Equation32;
-            else if(resource is Page) captionImage = Properties.Resources.Page;
+            Image captionImage = resource.GetResourceIcon(true);
 
             string newName = EnterText("Enter a new name for this resource.", "Rename", resource.Name, captionImage);
             if (newName != null)
@@ -80,6 +78,16 @@ namespace Graphmatic
                 resource.Name = newName;
                 DocumentModified = true;
             }
+            RefreshResourceListView();
+        }
+
+        private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listViewResources.SelectedItems.Count < 1) return;
+            Resource resource = (Resource)listViewResources.SelectedItems[0].Tag;
+            ResourcePropertiesEditor propertiesEditor = new ResourcePropertiesEditor(resource);
+            propertiesEditor.ShowDialog();
+            DocumentModified = true;
             RefreshResourceListView();
         }
 
@@ -152,7 +160,9 @@ namespace Graphmatic
 
             if (equationName != null)
             {
-                Equation equation = new Equation('y', 'x')
+                Equation equation = new Equation(
+                    Properties.Settings.Default.DefaultPlottedVariable,
+                    Properties.Settings.Default.DefaultVaryingVariable)
                 {
                     Name = equationName
                 };

@@ -40,11 +40,8 @@ namespace Graphmatic
             this.saveasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dispToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lorgorgoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.listViewResources = new System.Windows.Forms.ListView();
@@ -62,6 +59,7 @@ namespace Graphmatic
             this.toolStripToggleEquations = new System.Windows.Forms.ToolStripButton();
             this.toolStripToggleDataSets = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButtonAdd = new System.Windows.Forms.ToolStripDropDownButton();
+            this.equationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelPageEditor = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -94,7 +92,6 @@ namespace Graphmatic
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.display = new System.Windows.Forms.PictureBox();
             this.imageListTabs = new System.Windows.Forms.ImageList(this.components);
-            this.equationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -114,10 +111,7 @@ namespace Graphmatic
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.dispToolStripMenuItem,
-            this.lorgorgoToolStripMenuItem,
-            this.toolsToolStripMenuItem,
-            this.refreshToolStripMenuItem});
+            this.toolsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1012, 24);
@@ -195,20 +189,6 @@ namespace Graphmatic
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // dispToolStripMenuItem
-            // 
-            this.dispToolStripMenuItem.Name = "dispToolStripMenuItem";
-            this.dispToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
-            this.dispToolStripMenuItem.Text = "Disp";
-            this.dispToolStripMenuItem.Click += new System.EventHandler(this.dispToolStripMenuItem_Click);
-            // 
-            // lorgorgoToolStripMenuItem
-            // 
-            this.lorgorgoToolStripMenuItem.Name = "lorgorgoToolStripMenuItem";
-            this.lorgorgoToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.lorgorgoToolStripMenuItem.Text = "TestDlg";
-            this.lorgorgoToolStripMenuItem.Click += new System.EventHandler(this.lorgorgoToolStripMenuItem_Click);
-            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -224,13 +204,6 @@ namespace Graphmatic
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.optionsToolStripMenuItem.Text = "&Settings...";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
-            // 
-            // refreshToolStripMenuItem
-            // 
-            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.refreshToolStripMenuItem.Text = "Refresh";
-            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -303,30 +276,33 @@ namespace Graphmatic
             this.toolStripMenuItem3,
             this.removeToolStripMenuItem});
             this.contextMenuStripResources.Name = "contextMenuStripResources";
-            this.contextMenuStripResources.Size = new System.Drawing.Size(137, 76);
+            this.contextMenuStripResources.Size = new System.Drawing.Size(153, 98);
             // 
             // renameToolStripMenuItem
             // 
             this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
-            this.renameToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.renameToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.renameToolStripMenuItem.Text = "Re&name";
             this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
             // 
             // propertiesToolStripMenuItem
             // 
             this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.propertiesToolStripMenuItem.Text = "&Properties...";
+            this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propertiesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(133, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.removeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.removeToolStripMenuItem.Text = "&Remove";
             this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
@@ -402,6 +378,15 @@ namespace Graphmatic
             this.toolStripDropDownButtonAdd.Size = new System.Drawing.Size(42, 22);
             this.toolStripDropDownButtonAdd.Text = "Add";
             this.toolStripDropDownButtonAdd.ToolTipText = "Add resource";
+            // 
+            // equationToolStripMenuItem
+            // 
+            this.equationToolStripMenuItem.Name = "equationToolStripMenuItem";
+            this.equationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.E)));
+            this.equationToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.equationToolStripMenuItem.Text = "&Equation...";
+            this.equationToolStripMenuItem.Click += new System.EventHandler(this.equationToolStripMenuItem_Click);
             // 
             // panelPageEditor
             // 
@@ -727,15 +712,6 @@ namespace Graphmatic
             this.imageListTabs.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListTabs.Images.SetKeyName(0, "Resources16");
             // 
-            // equationToolStripMenuItem
-            // 
-            this.equationToolStripMenuItem.Name = "equationToolStripMenuItem";
-            this.equationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.E)));
-            this.equationToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.equationToolStripMenuItem.Text = "&Equation...";
-            this.equationToolStripMenuItem.Click += new System.EventHandler(this.equationToolStripMenuItem_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -780,10 +756,8 @@ namespace Graphmatic
 
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripMenuItem dispToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.ImageList imageListTabs;
-        private System.Windows.Forms.ToolStripMenuItem lorgorgoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ImageList imageListResources;
@@ -834,7 +808,6 @@ namespace Graphmatic
         private System.Windows.Forms.ColumnHeader columnHeaderIcon;
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderAuthor;
-        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripResources;
         private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem propertiesToolStripMenuItem;

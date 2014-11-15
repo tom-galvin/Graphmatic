@@ -35,6 +35,14 @@ namespace Graphmatic.Interaction
             set;
         }
 
+        public override string Type
+        {
+            get
+            {
+                return "Equation";
+            }
+        }
+
         public Equation(char plotted, char varying)
             : base()
         {
@@ -60,6 +68,13 @@ namespace Graphmatic.Interaction
             VaryingVariable = Char.Parse(xml.Element("Varying").Value);
             Expression = new Expression(null, xml.Element("Expression").Elements());
             ParseTree = Expression.Parse();
+        }
+
+        public override System.Drawing.Image GetResourceIcon(bool large)
+        {
+            return large ?
+                Properties.Resources.Equation32 :
+                Properties.Resources.Equation16;
         }
 
         public override XElement ToXml()

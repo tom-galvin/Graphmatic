@@ -35,6 +35,7 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\Graphmatic.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -131,7 +132,12 @@
     <Compile Include="Main.Resources.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings.cs" />
+    <Compile Include="ResourcePropertiesEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourcePropertiesEditor.Designer.cs">
+      <DependentUpon>ResourcePropertiesEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourcePropertiesEditor.resx">
+      <DependentUpon>ResourcePropertiesEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsEditor.resx">
       <DependentUpon>SettingsEditor.cs</DependentUpon>

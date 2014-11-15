@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,11 +40,19 @@ namespace Graphmatic.Interaction
             protected set;
         }
 
+        public virtual string Type
+        {
+            get
+            {
+                return "Resource";
+            }
+        }
+
         public Resource()
         {
-            Author = Program.Settings.UserName;
+            Author = Properties.Settings.Default.Username;
             CreationDate = DateTime.Now;
-            Name = "New " + GetType().Name;
+            Name = "New " + Type;
             Guid = Guid.NewGuid();
         }
 
@@ -54,6 +63,12 @@ namespace Graphmatic.Interaction
             CreationDate = DateTime.Parse(xml.Attribute("CreationDate").Value);
             Description = xml.Element("Description").Value;
             Guid = Guid.Parse(xml.Attribute("ID").Value);
+        }
+
+        public virtual Image GetResourceIcon(bool large)
+        {
+            return
+                Properties.Resources.GraphmaticDocument.ToBitmap();
         }
 
         public virtual XElement ToXml()

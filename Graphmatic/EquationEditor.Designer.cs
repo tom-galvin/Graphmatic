@@ -30,12 +30,12 @@
         {
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.expressionDisplay = new Graphmatic.ExpressionDisplay();
             this.textBoxPlotted = new System.Windows.Forms.TextBox();
             this.labelPlotted = new System.Windows.Forms.Label();
             this.labelVarying = new System.Windows.Forms.Label();
             this.textBoxVarying = new System.Windows.Forms.TextBox();
             this.labelDescription = new System.Windows.Forms.Label();
+            this.expressionDisplay = new Graphmatic.ExpressionDisplay();
             this.SuspendLayout();
             // 
             // buttonEdit
@@ -61,22 +61,6 @@
             this.buttonOK.Text = "&Close";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
-            // expressionDisplay
-            // 
-            this.expressionDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.expressionDisplay.BackColor = System.Drawing.Color.White;
-            this.expressionDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.expressionDisplay.DisplayScale = 2;
-            this.expressionDisplay.Edit = false;
-            this.expressionDisplay.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expressionDisplay.Location = new System.Drawing.Point(3, 12);
-            this.expressionDisplay.MoeinMode = false;
-            this.expressionDisplay.Name = "expressionDisplay";
-            this.expressionDisplay.Size = new System.Drawing.Size(422, 146);
-            this.expressionDisplay.TabIndex = 0;
             // 
             // textBoxPlotted
             // 
@@ -131,6 +115,22 @@
             this.labelDescription.Text = "The plotted variable (on the vertical axis) is the variable which is defined in t" +
     "erns of the varying variable (on the horizontal axis.)";
             // 
+            // expressionDisplay
+            // 
+            this.expressionDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.expressionDisplay.BackColor = System.Drawing.Color.White;
+            this.expressionDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.expressionDisplay.DisplayScale = 2;
+            this.expressionDisplay.Edit = false;
+            this.expressionDisplay.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expressionDisplay.Location = new System.Drawing.Point(3, 12);
+            this.expressionDisplay.MoeinMode = false;
+            this.expressionDisplay.Name = "expressionDisplay";
+            this.expressionDisplay.Size = new System.Drawing.Size(422, 146);
+            this.expressionDisplay.TabIndex = 0;
+            // 
             // EquationEditor
             // 
             this.AcceptButton = this.buttonOK;
@@ -155,6 +155,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Equation";
+            this.Load += new System.EventHandler(this.EquationEditor_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

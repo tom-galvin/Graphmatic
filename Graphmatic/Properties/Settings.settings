@@ -1,7 +1,18 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Graphmatic.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultPageColor" Description="Default background color for new document pages." Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Username" Description="Default username for users." Type="System.String" Scope="User">
+      <Value Profile="(Default)">Anonymous</Value>
+    </Setting>
+    <Setting Name="DefaultPlottedVariable" Type="System.Char" Scope="User">
+      <Value Profile="(Default)">y</Value>
+    </Setting>
+    <Setting Name="DefaultVaryingVariable" Type="System.Char" Scope="User">
+      <Value Profile="(Default)">x</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
