@@ -5,7 +5,7 @@ This is my coursework for the AQA Computing A2 coursework. Features do (or will)
 
 * Entering of expressions in the style of a *Casio fx-83* series calculator: *implementation complete (75%)*
 
-* Parsing the entered expressions: *complete (100%)*
+* Parsing the entered expressions: *feature complete (100%)*
 
 * Plotting those equations in graphical form: *not started (0%)*
 
