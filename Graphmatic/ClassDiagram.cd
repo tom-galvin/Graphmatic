@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Graphmatic.Expressions.Expression" BaseTypeListCollapsed="true">
+    <Position X="34.75" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAgkQAABAQAgAIAAIBAREAAgIAAAAAEAEhAAAAIQAQ=</HashCode>
+      <FileName>Expressions\Expression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Graphmatic.Expressions.ExpressionEngineExtensionMethods">
+    <Position X="22.75" Y="6.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expressions\ExpressionEngineExtensionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.FontHelperExtensionMethods">
+    <Position X="22.75" Y="9.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Expressions\FontHelperExtensionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Parsing.BinaryEvaluator">
+    <Position X="4.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expressions\Parsing\BinaryEvaluator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Parsing.BinaryParseTreeNode" Collapsed="true">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAACACAACAAAAA=</HashCode>
+      <FileName>Expressions\Parsing\BinaryParseTreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Parsing.ConstantParseTreeNode" Collapsed="true">
+    <Position X="6.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Expressions\Parsing\ConstantParseTreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Parsing.Evaluator" Collapsed="true">
+    <Position X="3.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expressions\Parsing\Evaluator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Parsing.ParseException">
+    <Position X="24.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expressions\Parsing\ParseException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Parsing.ParseTreeNode" Collapsed="true">
+    <Position X="5.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expressions\Parsing\ParseTreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Parsing.UnaryEvaluator" Collapsed="true">
+    <Position X="2" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expressions\Parsing\UnaryEvaluator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Parsing.UnaryParseTreeNode" Collapsed="true">
+    <Position X="9" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAACEAAAA=</HashCode>
+      <FileName>Expressions\Parsing\UnaryParseTreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Parsing.VariableParseTreeNode" Collapsed="true">
+    <Position X="4.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Expressions\Parsing\VariableParseTreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.AbsoluteToken" Collapsed="true">
+    <Position X="14.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAQAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAACAIAAA=</HashCode>
+      <FileName>Expressions\Tokens\AbsoluteToken.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.ConstantToken" Collapsed="true">
+    <Position X="18.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAABAAAAAAAAAAAAAAAAAEAAAgCAAAAAA=</HashCode>
+      <FileName>Expressions\Tokens\ConstantToken.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.DigitToken" Collapsed="true">
+    <Position X="21" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAEAAAgCAAAAAA=</HashCode>
+      <FileName>Expressions\Tokens\DigitToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.ExpToken" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAQAAAAAAAAAAAABAAAAAAAACAAAFAAAAACAYQAA=</HashCode>
+      <FileName>Expressions\Tokens\ExpToken.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.FractionToken" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAQAAAAAAAAAAAABQAAAAAAAKAAAEAAAAACAYAAA=</HashCode>
+      <FileName>Expressions\Tokens\FractionToken.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.FunctionToken" Collapsed="true">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAQAAAAAAAAAAAABAAQAAAAACAAAEAAAACAEIAAA=</HashCode>
+      <FileName>Expressions\Tokens\FunctionToken.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.LogToken" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAQAAAAAAAAAAAABAAAAAQAACAAAEAAAEACEISAA=</HashCode>
+      <FileName>Expressions\Tokens\LogToken.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.OperationToken" Collapsed="true">
+    <Position X="23.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAEACEAAAAA=</HashCode>
+      <FileName>Expressions\Tokens\OperationToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.PromptToken" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAQAAAgAAAAAAAABAAAAAAAACAAAEAAAACAAIAAA=</HashCode>
+      <FileName>Expressions\Tokens\PromptToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.RootToken" Collapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAgAQAAAAEAAAAAAABAAAAAAAACgAAFAAAAACAIQAA=</HashCode>
+      <FileName>Expressions\Tokens\RootToken.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.SimpleToken" Collapsed="true">
+    <Position X="21" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAABAAAAAAAAAAAAAAAAACAAIAAA=</HashCode>
+      <FileName>Expressions\Tokens\SimpleToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.SymbolicToken" Collapsed="true">
+    <Position X="16.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAQAACAAABAA=</HashCode>
+      <FileName>Expressions\Tokens\SymbolicToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.Token" Collapsed="true">
+    <Position X="14.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAABAAAgAAAAABEQEAAAAACAAAEAAAAAAAIAAA=</HashCode>
+      <FileName>Expressions\Tokens\Token.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.TokenSerializationExtensionMethods">
+    <Position X="22.75" Y="8" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Expressions\Tokens\TokenSerializationExtensionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Expressions.Tokens.VariableToken" Collapsed="true">
+    <Position X="25.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAgAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAACAA=</HashCode>
+      <FileName>Expressions\Tokens\VariableToken.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Interaction.Equation" BaseTypeListCollapsed="true">
+    <Position X="28" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUIAAIAAAAAAA=</HashCode>
+      <FileName>Interaction\Equation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Graphmatic.Interaction.Page" BaseTypeListCollapsed="true">
+    <Position X="31.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Interaction\Page.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Graphmatic.ExpressionCursor">
+    <Position X="37.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAgAEAAAAAAAAAAAAAQgAAAAAEAAAAQCEGAAAACAAA=</HashCode>
+      <FileName>ExpressionCursor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.XmlExtensionMethods">
+    <Position X="35.25" Y="8.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XmlExtensionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Graphmatic.Expressions.IPaintable">
+    <Position X="29.75" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAABAAAgAAAAABAAEAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Expressions\IPaintable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Graphmatic.Expressions.IParsable">
+    <Position X="32" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expressions\IParsable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Graphmatic.Expressions.Tokens.ICollectorToken">
+    <Position X="28" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Expressions\Tokens\ICollectorToken.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Graphmatic.IXmlConvertible">
+    <Position X="28" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>IXmlConvertible.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Graphmatic.Expressions.DisplaySize">
+    <Position X="31.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expressions\DisplaySize.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Graphmatic.Expressions.Tokens.CollectorTokenType">
+    <Position X="33.25" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Expressions\Tokens\ICollectorToken.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="Graphmatic.Expressions.Tokens.TokenDeserializationFactory">
+    <Position X="29.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expressions\Tokens\TokenSerializationExtensionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Graphmatic.ExpressionCursorHotspotClickedCallback">
+    <Position X="28" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExpressionCursor.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
