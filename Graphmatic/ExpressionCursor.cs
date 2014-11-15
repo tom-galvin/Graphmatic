@@ -288,8 +288,9 @@ namespace Graphmatic
                         if (collectedToken is OperationToken)
                         {
                             OperationToken opCollectedToken = collectedToken as OperationToken;
-                            if(opCollectedToken.Operation == OperationToken.OperationType.Add ||
-                                opCollectedToken.Operation == OperationToken.OperationType.Subtract)
+                            if (opCollectedToken.Operation == OperationToken.OperationType.Add ||
+                                opCollectedToken.Operation == OperationToken.OperationType.Subtract ||
+                                collectorToken.CollectorType == CollectorTokenType.Weak)
                             {
                                 break;
                             }
@@ -300,7 +301,8 @@ namespace Graphmatic
                         newIndex--;
                         addedTokens++;
 
-                        if (collectorToken.CollectorType == CollectorTokenType.Weak) break; // weak collection stops as soon as possible
+                        if (collectorToken.CollectorType == CollectorTokenType.Weak &&
+                            collectedToken is IParsable) break; // weak collection stops as soon as possible
                     }
                     if (addedTokens > 0)
                     {
