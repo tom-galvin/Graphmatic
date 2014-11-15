@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic
 {
@@ -27,8 +28,15 @@ namespace Graphmatic
             InputWindow inputWindow = new InputWindow(equation);
             if (inputWindow.ShowDialog() == DialogResult.OK)
             {
-                File.WriteAllText("test.xml", equation.ToXml().ToString());
-                Process.Start("test.xml");
+                try
+                {
+                    var tree = equation.Expression.Parse(); 
+                    MessageBox.Show(tree.Evaluate(new Dictionary<char, double>()).ToString(), "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (ParseException ex)
+                {
+                    MessageBox.Show(ex.Message, "Parse error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

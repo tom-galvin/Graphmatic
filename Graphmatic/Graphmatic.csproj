@@ -75,6 +75,7 @@
     <Compile Include="Expressions\Parsing\BinaryParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\ConstantParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\Evaluator.cs" />
+    <Compile Include="Expressions\Parsing\ParseException.cs" />
     <Compile Include="Expressions\Parsing\ParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\UnaryParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\VariableParseTreeNode.cs" />

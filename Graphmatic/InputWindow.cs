@@ -151,13 +151,13 @@ namespace Graphmatic
             }, "Ctrl-R", Keys.R, Keys.Control);
             #endregion
             #region Logs
-            CreateExpressionButton(buttonLogN, expression => new LogToken(expression), "Alt-L", Keys.L, Keys.Alt);
+            CreateExpressionButton(buttonLogN, expression => new LogToken(expression), "Ctrl-L", Keys.L, Keys.Control);
             CreateExpressionButton(buttonLogE, expression =>
             {
                 var token = new LogToken(expression);
                 token.Base.Add(new ConstantToken(token.Base, ConstantToken.ConstantType.E));
                 return token;
-            }, "Alt-Shift-L", Keys.L, Keys.Shift | Keys.Alt);
+            }, "Ctrl-Shift-L", Keys.L, Keys.Shift | Keys.Control);
             CreateExpressionButton(buttonLog10, expression =>
             {
                 var token = new LogToken(expression);
@@ -283,6 +283,10 @@ namespace Graphmatic
             if (e.KeyCode == Keys.Back)
             {
                 buttonDelete.PerformClick();
+            }
+            else if (e.KeyCode == Keys.D0 && e.Modifiers == Keys.Shift)
+            {
+                buttonRight.PerformClick();
             }
             else
             {
