@@ -62,7 +62,7 @@ namespace Graphmatic
         {
             get
             {
-                return false;
+                return true;
             }
         }
 
