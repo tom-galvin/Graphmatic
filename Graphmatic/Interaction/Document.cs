@@ -63,7 +63,7 @@ namespace Graphmatic.Interaction
                 stream = new GZipStream(stream, CompressionMode.Compress);
             }
 
-            XDocument document = new XDocument(new XDeclaration("1.0", "utf8", "yes"),
+            XDocument document = new XDocument(new XDeclaration("1.0", "utf-8", "yes"),
                 ToXml());
             document.Save(stream);
             stream.Close();
