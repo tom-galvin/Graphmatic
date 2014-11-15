@@ -48,8 +48,8 @@ namespace Graphmatic.Expressions.Tokens
         public ConstantToken(Expression parent, XElement xml)
             : base(parent)
         {
-            string constantName = xml.Element("Value").Value;
-            if (Enum.TryParse<ConstantType>(constantName, out _Value))
+            string constantName = xml.Attribute("Value").Value;
+            if (!Enum.TryParse<ConstantType>(constantName, out _Value))
                 throw new NotImplementedException("The constant value " + constantName + " is not implemented.");
         }
 

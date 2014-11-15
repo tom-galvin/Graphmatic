@@ -63,6 +63,12 @@ namespace Graphmatic
             }
         }
 
+        public bool Visible
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Gets the dictionary of Hotspots in the equation.
         /// </summary>
@@ -92,6 +98,7 @@ namespace Graphmatic
         {
             Expression = expression;
             Index = index;
+            Visible = true;
             Hotspots = new Dictionary<Rectangle, ExpressionCursorHotspotClickedCallback>();
         }
 

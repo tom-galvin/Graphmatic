@@ -1,6 +1,6 @@
 ﻿namespace Graphmatic
 {
-    partial class InputWindow
+    partial class ExpressionEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -541,6 +541,7 @@
             this.MinimumSize = new System.Drawing.Size(673, 254);
             this.Name = "InputWindow";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Enter Input";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InputWindow_FormClosing);
             this.Load += new System.EventHandler(this.InputWindow_Load);

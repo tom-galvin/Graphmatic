@@ -40,7 +40,7 @@ namespace Graphmatic.Expressions.Tokens
         public VariableToken(Expression parent, XElement xml)
             :base(parent)
         {
-            string symbolString = xml.Element("Symbol").Value;
+            string symbolString = xml.Attribute("Symbol").Value;
             if (symbolString.Length == 1)
                 _Symbol = symbolString[0];
             else

@@ -65,10 +65,11 @@ namespace Graphmatic.Interaction
         public override XElement ToXml()
         {
             XElement baseElement = base.ToXml();
-            baseElement.Add(new XElement("Equation",
+            baseElement.Name = "Equation";
+            baseElement.Add(
                 new XElement("Expression", Expression.ToXml()),
                 new XElement("Plotted", PlottedVariable),
-                new XElement("Varying", VaryingVariable)));
+                new XElement("Varying", VaryingVariable));
             return baseElement;
         }
     }

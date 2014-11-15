@@ -51,7 +51,7 @@ namespace Graphmatic.Expressions.Tokens
         public DigitToken(Expression parent, XElement xml)
             : base(parent)
         {
-            Value = Int32.Parse(xml.Element("Value").Value);
+            Value = Int32.Parse(xml.Attribute("Value").Value);
         }
 
         public override XElement ToXml()

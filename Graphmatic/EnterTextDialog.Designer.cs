@@ -92,7 +92,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(331, 93);
+            this.ClientSize = new System.Drawing.Size(331, 92);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.textBoxName);
@@ -107,7 +107,9 @@
             this.MinimumSize = new System.Drawing.Size(347, 131);
             this.Name = "EnterTextDialog";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Creation";
+            this.Load += new System.EventHandler(this.EnterTextDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

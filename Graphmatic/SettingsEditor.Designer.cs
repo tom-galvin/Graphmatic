@@ -1,6 +1,6 @@
 ﻿namespace Graphmatic
 {
-    partial class SettingsWindow
+    partial class SettingsEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.buttonReload = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageDefaults = new System.Windows.Forms.TabPage();
@@ -42,20 +41,11 @@
             this.tabPageDefaults.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Change settings here.";
-            // 
             // buttonReload
             // 
             this.buttonReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonReload.Image = global::Graphmatic.Properties.Resources.Redo16;
-            this.buttonReload.Location = new System.Drawing.Point(295, 5);
+            this.buttonReload.Location = new System.Drawing.Point(291, 12);
             this.buttonReload.Name = "buttonReload";
             this.buttonReload.Size = new System.Drawing.Size(229, 23);
             this.buttonReload.TabIndex = 1;
@@ -71,10 +61,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabPageDefaults);
-            this.tabControl.Location = new System.Drawing.Point(12, 34);
+            this.tabControl.Location = new System.Drawing.Point(12, 22);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(512, 397);
+            this.tabControl.Size = new System.Drawing.Size(512, 409);
             this.tabControl.TabIndex = 2;
             // 
             // tabPageDefaults
@@ -86,7 +76,7 @@
             this.tabPageDefaults.Location = new System.Drawing.Point(4, 24);
             this.tabPageDefaults.Name = "tabPageDefaults";
             this.tabPageDefaults.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDefaults.Size = new System.Drawing.Size(504, 369);
+            this.tabPageDefaults.Size = new System.Drawing.Size(504, 381);
             this.tabPageDefaults.TabIndex = 0;
             this.tabPageDefaults.Text = "Defaults";
             this.tabPageDefaults.UseVisualStyleBackColor = true;
@@ -126,7 +116,7 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(449, 5);
+            this.buttonOK.Location = new System.Drawing.Point(445, 12);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 3;
@@ -137,7 +127,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(368, 5);
+            this.buttonCancel.Location = new System.Drawing.Point(364, 12);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 4;
@@ -156,7 +146,6 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = global::Graphmatic.Properties.Resources.SettingsIcon;
@@ -164,6 +153,7 @@
             this.MinimizeBox = false;
             this.Name = "SettingsWindow";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Options_FormClosed);
             this.Load += new System.EventHandler(this.Options_Load);
@@ -171,13 +161,11 @@
             this.tabPageDefaults.ResumeLayout(false);
             this.tabPageDefaults.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonReload;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageDefaults;

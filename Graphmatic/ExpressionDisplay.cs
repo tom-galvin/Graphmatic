@@ -26,6 +26,18 @@ namespace Graphmatic
             set;
         }
 
+        private bool _Edit;
+        /// <summary>
+        /// Gets or sets if the expression display is in editing mode or not.
+        /// </summary>
+        [Description("Changes whether the expression display is in editing mode or not.")]
+        [DefaultValue(true)]
+        public bool Edit
+        {
+            get { return _Edit; }
+            set { _Edit = value; ExpressionCursor.Visible = value; }
+        }
+
         /// <summary>
         /// Gets the mathematical expression to display.
         /// </summary>
@@ -104,20 +116,10 @@ namespace Graphmatic
         {
             Expression = new Expressions.Expression(null);
             ExpressionCursor = new ExpressionCursor(Expression, 0);
+            Edit = true;
             DisplayScale = 1;
             InitializeComponent();
             DoubleBuffered = true;
-        }
-
-        /// <summary>
-        /// Create a new instance of the ExpressionDisplay class with an empty expression.
-        /// </summary>
-        /// <param name="displayScale">The scale to display the expression at.</param>
-        public ExpressionDisplay(int displayScale)
-        {
-            Expression = new Expressions.Expression(null);
-            DisplayScale = displayScale;
-            InitializeComponent();
         }
 
         private void ExpressionDisplay_Resize(object sender, EventArgs e)
@@ -184,18 +186,21 @@ namespace Graphmatic
 
         private void ExpressionDisplay_MouseDown(object sender, MouseEventArgs e)
         {
-            Point position = e.Location;
-            position.X = position.X / _DisplayScale - (Width / _DisplayScale - ExpressionSize.Width) / 2;
-            position.Y = position.Y / _DisplayScale - (Height / _DisplayScale - ExpressionSize.Height) / 2;
-            foreach (var keyValuePair in ExpressionCursor.Hotspots)
+            if (Edit)
             {
-                if (keyValuePair.Key.Contains(position))
+                Point position = e.Location;
+                position.X = position.X / _DisplayScale - (Width / _DisplayScale - ExpressionSize.Width) / 2;
+                position.Y = position.Y / _DisplayScale - (Height / _DisplayScale - ExpressionSize.Height) / 2;
+                foreach (var keyValuePair in ExpressionCursor.Hotspots)
                 {
-                    Point pointInHotspotClicked = new Point(
-                        position.X - keyValuePair.Key.X,
-                        position.Y - keyValuePair.Key.Y);
-                    keyValuePair.Value(pointInHotspotClicked, ExpressionCursor);
-                    break;
+                    if (keyValuePair.Key.Contains(position))
+                    {
+                        Point pointInHotspotClicked = new Point(
+                            position.X - keyValuePair.Key.X,
+                            position.Y - keyValuePair.Key.Y);
+                        keyValuePair.Value(pointInHotspotClicked, ExpressionCursor);
+                        break;
+                    }
                 }
             }
         }

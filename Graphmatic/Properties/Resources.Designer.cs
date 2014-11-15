@@ -543,6 +543,16 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap DataSet16 {
+            get {
+                object obj = ResourceManager.GetObject("DataSet16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap DecreaseSize16 {
             get {
                 object obj = ResourceManager.GetObject("DecreaseSize16", resourceCulture);
@@ -572,9 +582,9 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap disk_return {
+        public static System.Drawing.Bitmap DiskReturn16 {
             get {
-                object obj = ResourceManager.GetObject("disk-return", resourceCulture);
+                object obj = ResourceManager.GetObject("DiskReturn16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -582,9 +592,9 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap document {
+        public static System.Drawing.Bitmap Document16 {
             get {
-                object obj = ResourceManager.GetObject("document", resourceCulture);
+                object obj = ResourceManager.GetObject("Document16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -592,9 +602,9 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap door_open_in {
+        public static System.Drawing.Bitmap Documents16 {
             get {
-                object obj = ResourceManager.GetObject("door-open-in", resourceCulture);
+                object obj = ResourceManager.GetObject("Documents16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -612,9 +622,39 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap folder_open {
+        public static System.Drawing.Bitmap Equation16 {
             get {
-                object obj = ResourceManager.GetObject("folder-open", resourceCulture);
+                object obj = ResourceManager.GetObject("Equation16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Equation32 {
+            get {
+                object obj = ResourceManager.GetObject("Equation32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Exit16 {
+            get {
+                object obj = ResourceManager.GetObject("Exit16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap FolderOpen16 {
+            get {
+                object obj = ResourceManager.GetObject("FolderOpen16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -694,6 +734,16 @@ namespace Graphmatic.Properties {
         public static System.Drawing.Bitmap Moein {
             get {
                 object obj = ResourceManager.GetObject("Moein", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Page {
+            get {
+                object obj = ResourceManager.GetObject("Page", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

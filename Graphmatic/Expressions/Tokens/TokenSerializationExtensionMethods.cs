@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,7 +47,10 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The deserialized form of the given XML.</returns>
         public static Token FromXml(Expression parent, XElement xml)
         {
-            return TokenDeserializers[xml.Name.LocalName](parent, xml);
+            string elementName = xml.Name.LocalName;
+            if (!TokenDeserializers.ContainsKey(elementName))
+                throw new IOException("Unknown token type: " + elementName);
+            return TokenDeserializers[elementName](parent, xml);
         }
     }
 }

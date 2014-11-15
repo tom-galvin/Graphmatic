@@ -50,7 +50,7 @@ namespace Graphmatic.Expressions.Tokens
         public SymbolicToken(Expression parent, XElement xml)
             : base(parent)
         {
-            string symbolicTypeName = xml.Element("Type").Value;
+            string symbolicTypeName = xml.Attribute("Type").Value;
             if (!Enum.TryParse<SymbolicType>(symbolicTypeName, out _Type))
                 throw new NotImplementedException("The symbolic type " + symbolicTypeName + " is not implemented.");
         }

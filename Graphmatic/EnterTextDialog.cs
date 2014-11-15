@@ -35,6 +35,7 @@ namespace Graphmatic
             Value = defaultValue;
             labelPrompt.Text = prompt;
             Text = title;
+            textBoxName.SelectAll();
 
             DialogResult = DialogResult.Cancel;
         }
@@ -62,6 +63,11 @@ namespace Graphmatic
             {
                 return null;
             }
+        }
+
+        private void EnterTextDialog_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

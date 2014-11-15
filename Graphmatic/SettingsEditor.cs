@@ -11,11 +11,11 @@ using System.Xml.XPath;
 
 namespace Graphmatic
 {
-    public partial class SettingsWindow : Form
+    public partial class SettingsEditor : Form
     {
         private bool IsReloading = false;
 
-        public SettingsWindow()
+        public SettingsEditor()
         {
             InitializeComponent();
             InitializeSettings();

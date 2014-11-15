@@ -1,4 +1,5 @@
-﻿namespace Graphmatic
+﻿using System.Windows.Forms;
+namespace Graphmatic
 {
     partial class Main
     {
@@ -43,13 +44,25 @@
             this.lorgorgoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.tabControlLeftPanel = new System.Windows.Forms.TabControl();
-            this.tabPagePages = new System.Windows.Forms.TabPage();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.imageListPages = new System.Windows.Forms.ImageList(this.components);
-            this.imageListTabs = new System.Windows.Forms.ImageList(this.components);
+            this.listViewResources = new System.Windows.Forms.ListView();
+            this.columnHeaderIcon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderAuthor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripResources = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageListResources = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripResources = new System.Windows.Forms.ToolStrip();
+            this.toolStripTogglePages = new System.Windows.Forms.ToolStripButton();
+            this.toolStripToggleEquations = new System.Windows.Forms.ToolStripButton();
+            this.toolStripToggleDataSets = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButtonAdd = new System.Windows.Forms.ToolStripDropDownButton();
+            this.panelPageEditor = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonIncreasePenSize = new System.Windows.Forms.ToolStripButton();
@@ -80,13 +93,16 @@
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.display = new System.Windows.Forms.PictureBox();
+            this.imageListTabs = new System.Windows.Forms.ImageList(this.components);
+            this.equationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            this.tabControlLeftPanel.SuspendLayout();
-            this.tabPagePages.SuspendLayout();
+            this.contextMenuStripResources.SuspendLayout();
+            this.toolStripResources.SuspendLayout();
+            this.panelPageEditor.SuspendLayout();
             this.toolStripContainer.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
@@ -100,7 +116,8 @@
             this.fileToolStripMenuItem,
             this.dispToolStripMenuItem,
             this.lorgorgoToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.toolsToolStripMenuItem,
+            this.refreshToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1012, 24);
@@ -123,18 +140,20 @@
             // 
             // newToolStripMenuItem
             // 
-            this.newToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.document;
+            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.ToolTipText = "Create a new document";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.folder_open;
+            this.openToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.FolderOpen16;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.openToolStripMenuItem.Text = "&Open...";
             this.openToolStripMenuItem.ToolTipText = "Open an existing document";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
@@ -142,13 +161,14 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 6);
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.disk_return;
+            this.saveToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.DiskReturn16;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.ToolTipText = "Save the current document";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
@@ -156,7 +176,7 @@
             // saveasToolStripMenuItem
             // 
             this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.saveasToolStripMenuItem.Text = "Save &As...";
             this.saveasToolStripMenuItem.ToolTipText = "Save the current document to a specified location";
             this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
@@ -164,13 +184,14 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 6);
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.door_open_in;
+            this.exitToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Exit16;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -200,9 +221,16 @@
             // 
             this.optionsToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Settings16;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.optionsToolStripMenuItem.Text = "&Settings...";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -220,62 +248,169 @@
             // 
             // splitContainer.Panel1
             // 
-            this.splitContainer.Panel1.Controls.Add(this.tabControlLeftPanel);
+            this.splitContainer.Panel1.Controls.Add(this.listViewResources);
+            this.splitContainer.Panel1.Controls.Add(this.toolStripResources);
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.toolStripContainer);
+            this.splitContainer.Panel2.Controls.Add(this.panelPageEditor);
             this.splitContainer.Size = new System.Drawing.Size(1012, 490);
             this.splitContainer.SplitterDistance = 337;
             this.splitContainer.TabIndex = 2;
             // 
-            // tabControlLeftPanel
+            // listViewResources
             // 
-            this.tabControlLeftPanel.Controls.Add(this.tabPagePages);
-            this.tabControlLeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlLeftPanel.ImageList = this.imageListTabs;
-            this.tabControlLeftPanel.Location = new System.Drawing.Point(0, 0);
-            this.tabControlLeftPanel.Name = "tabControlLeftPanel";
-            this.tabControlLeftPanel.SelectedIndex = 0;
-            this.tabControlLeftPanel.ShowToolTips = true;
-            this.tabControlLeftPanel.Size = new System.Drawing.Size(337, 490);
-            this.tabControlLeftPanel.TabIndex = 0;
+            this.listViewResources.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderIcon,
+            this.columnHeaderName,
+            this.columnHeaderAuthor});
+            this.listViewResources.ContextMenuStrip = this.contextMenuStripResources;
+            this.listViewResources.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewResources.FullRowSelect = true;
+            this.listViewResources.GridLines = true;
+            this.listViewResources.Location = new System.Drawing.Point(0, 25);
+            this.listViewResources.MultiSelect = false;
+            this.listViewResources.Name = "listViewResources";
+            this.listViewResources.Size = new System.Drawing.Size(337, 465);
+            this.listViewResources.SmallImageList = this.imageListResources;
+            this.listViewResources.TabIndex = 1;
+            this.listViewResources.UseCompatibleStateImageBehavior = false;
+            this.listViewResources.View = System.Windows.Forms.View.Details;
+            this.listViewResources.SelectedIndexChanged += new System.EventHandler(this.listViewResources_SelectedIndexChanged);
+            this.listViewResources.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewResources_MouseDoubleClick);
+            this.listViewResources.Resize += new System.EventHandler(this.listViewResources_Resize);
             // 
-            // tabPagePages
+            // columnHeaderIcon
             // 
-            this.tabPagePages.Controls.Add(this.listView1);
-            this.tabPagePages.ImageIndex = 0;
-            this.tabPagePages.Location = new System.Drawing.Point(4, 24);
-            this.tabPagePages.Name = "tabPagePages";
-            this.tabPagePages.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePages.Size = new System.Drawing.Size(329, 462);
-            this.tabPagePages.TabIndex = 0;
-            this.tabPagePages.Text = "Pages";
-            this.tabPagePages.ToolTipText = "See the pages in the Graphmatic document.";
-            this.tabPagePages.UseVisualStyleBackColor = true;
+            this.columnHeaderIcon.Text = "";
+            this.columnHeaderIcon.Width = 36;
             // 
-            // listView1
+            // columnHeaderName
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(3, 3);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(323, 456);
-            this.listView1.SmallImageList = this.imageListPages;
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.columnHeaderName.Text = "Name";
+            this.columnHeaderName.Width = 200;
             // 
-            // imageListPages
+            // columnHeaderAuthor
             // 
-            this.imageListPages.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.imageListPages.ImageSize = new System.Drawing.Size(32, 32);
-            this.imageListPages.TransparentColor = System.Drawing.Color.Transparent;
+            this.columnHeaderAuthor.Text = "Author";
+            this.columnHeaderAuthor.Width = 100;
             // 
-            // imageListTabs
+            // contextMenuStripResources
             // 
-            this.imageListTabs.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTabs.ImageStream")));
-            this.imageListTabs.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListTabs.Images.SetKeyName(0, "Document16");
+            this.contextMenuStripResources.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renameToolStripMenuItem,
+            this.propertiesToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.removeToolStripMenuItem});
+            this.contextMenuStripResources.Name = "contextMenuStripResources";
+            this.contextMenuStripResources.Size = new System.Drawing.Size(137, 76);
+            // 
+            // renameToolStripMenuItem
+            // 
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.renameToolStripMenuItem.Text = "Re&name";
+            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
+            // 
+            // propertiesToolStripMenuItem
+            // 
+            this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
+            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.propertiesToolStripMenuItem.Text = "&Properties...";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(133, 6);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.removeToolStripMenuItem.Text = "&Remove";
+            this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
+            // 
+            // imageListResources
+            // 
+            this.imageListResources.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListResources.ImageStream")));
+            this.imageListResources.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListResources.Images.SetKeyName(0, "Page");
+            this.imageListResources.Images.SetKeyName(1, "Equation");
+            this.imageListResources.Images.SetKeyName(2, "Table");
+            // 
+            // toolStripResources
+            // 
+            this.toolStripResources.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripResources.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTogglePages,
+            this.toolStripToggleEquations,
+            this.toolStripToggleDataSets,
+            this.toolStripDropDownButtonAdd});
+            this.toolStripResources.Location = new System.Drawing.Point(0, 0);
+            this.toolStripResources.Name = "toolStripResources";
+            this.toolStripResources.Size = new System.Drawing.Size(337, 25);
+            this.toolStripResources.TabIndex = 0;
+            this.toolStripResources.Text = "toolStrip1";
+            // 
+            // toolStripTogglePages
+            // 
+            this.toolStripTogglePages.Checked = true;
+            this.toolStripTogglePages.CheckOnClick = true;
+            this.toolStripTogglePages.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolStripTogglePages.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripTogglePages.Image = global::Graphmatic.Properties.Resources.Documents16;
+            this.toolStripTogglePages.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripTogglePages.Name = "toolStripTogglePages";
+            this.toolStripTogglePages.Size = new System.Drawing.Size(23, 22);
+            this.toolStripTogglePages.ToolTipText = "Toggle Pages";
+            this.toolStripTogglePages.Click += new System.EventHandler(this.toolStripTogglePages_Click);
+            // 
+            // toolStripToggleEquations
+            // 
+            this.toolStripToggleEquations.Checked = true;
+            this.toolStripToggleEquations.CheckOnClick = true;
+            this.toolStripToggleEquations.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolStripToggleEquations.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripToggleEquations.Image = global::Graphmatic.Properties.Resources.Equation16;
+            this.toolStripToggleEquations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripToggleEquations.Name = "toolStripToggleEquations";
+            this.toolStripToggleEquations.Size = new System.Drawing.Size(23, 22);
+            this.toolStripToggleEquations.ToolTipText = "Toggle Equations";
+            this.toolStripToggleEquations.Click += new System.EventHandler(this.toolStripToggleEquations_Click);
+            // 
+            // toolStripToggleDataSets
+            // 
+            this.toolStripToggleDataSets.Checked = true;
+            this.toolStripToggleDataSets.CheckOnClick = true;
+            this.toolStripToggleDataSets.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolStripToggleDataSets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripToggleDataSets.Image = global::Graphmatic.Properties.Resources.DataSet16;
+            this.toolStripToggleDataSets.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripToggleDataSets.Name = "toolStripToggleDataSets";
+            this.toolStripToggleDataSets.Size = new System.Drawing.Size(23, 22);
+            this.toolStripToggleDataSets.ToolTipText = "Toggle Data Sets";
+            this.toolStripToggleDataSets.Click += new System.EventHandler(this.toolStripToggleDataSets_Click);
+            // 
+            // toolStripDropDownButtonAdd
+            // 
+            this.toolStripDropDownButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButtonAdd.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.equationToolStripMenuItem});
+            this.toolStripDropDownButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButtonAdd.Image")));
+            this.toolStripDropDownButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButtonAdd.Name = "toolStripDropDownButtonAdd";
+            this.toolStripDropDownButtonAdd.Size = new System.Drawing.Size(42, 22);
+            this.toolStripDropDownButtonAdd.Text = "Add";
+            this.toolStripDropDownButtonAdd.ToolTipText = "Add resource";
+            // 
+            // panelPageEditor
+            // 
+            this.panelPageEditor.Controls.Add(this.toolStripContainer);
+            this.panelPageEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPageEditor.Location = new System.Drawing.Point(0, 0);
+            this.panelPageEditor.Name = "panelPageEditor";
+            this.panelPageEditor.Size = new System.Drawing.Size(671, 490);
+            this.panelPageEditor.TabIndex = 0;
             // 
             // toolStripContainer
             // 
@@ -294,7 +429,7 @@
             this.toolStripContainer.Name = "toolStripContainer";
             this.toolStripContainer.RightToolStripPanelVisible = false;
             this.toolStripContainer.Size = new System.Drawing.Size(671, 490);
-            this.toolStripContainer.TabIndex = 3;
+            this.toolStripContainer.TabIndex = 4;
             this.toolStripContainer.Text = "toolStripContainer1";
             // 
             // toolStrip
@@ -586,6 +721,21 @@
             this.display.TabIndex = 0;
             this.display.TabStop = false;
             // 
+            // imageListTabs
+            // 
+            this.imageListTabs.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTabs.ImageStream")));
+            this.imageListTabs.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListTabs.Images.SetKeyName(0, "Resources16");
+            // 
+            // equationToolStripMenuItem
+            // 
+            this.equationToolStripMenuItem.Name = "equationToolStripMenuItem";
+            this.equationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.E)));
+            this.equationToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.equationToolStripMenuItem.Text = "&Equation...";
+            this.equationToolStripMenuItem.Click += new System.EventHandler(this.equationToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -599,16 +749,20 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Main";
             this.Text = "Graphmatic";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel1.PerformLayout();
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            this.tabControlLeftPanel.ResumeLayout(false);
-            this.tabPagePages.ResumeLayout(false);
+            this.contextMenuStripResources.ResumeLayout(false);
+            this.toolStripResources.ResumeLayout(false);
+            this.toolStripResources.PerformLayout();
+            this.panelPageEditor.ResumeLayout(false);
             this.toolStripContainer.BottomToolStripPanel.ResumeLayout(false);
             this.toolStripContainer.BottomToolStripPanel.PerformLayout();
             this.toolStripContainer.ContentPanel.ResumeLayout(false);
@@ -628,44 +782,11 @@
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripMenuItem dispToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer;
-        private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.ToolStripButton toolStripButtonIncreasePenSize;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDecreasePenSize;
-        private System.Windows.Forms.ToolStripLabel toolStripLabelPenSize;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButtonTextAnnotation;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonDrawAnnotation;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonEraseAnnotation;
-        private System.Windows.Forms.ToolStripMenuItem drawAnnotationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem highlightAnnotationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eraseAnnotationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clearAnnotationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonColorAnnotation;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton toolStripButtonPreviousPage;
-        private System.Windows.Forms.ToolStripButton toolStripButtonNextPage;
-        private System.Windows.Forms.ToolStripButton toolStripButtonAddPage;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton toolStripButtonUndo;
-        private System.Windows.Forms.ToolStripButton toolStripButtonRedo;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonGraph;
-        private System.Windows.Forms.ToolStripMenuItem plotEquationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem plotDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDataSets;
-        private System.Windows.Forms.ToolStripButton toolStripButtonSquareSelect;
-        private System.Windows.Forms.ToolStripButton toolStripButtonCustomSelect;
-        private System.Windows.Forms.ToolStripContainer toolStripContainer;
-        private System.Windows.Forms.PictureBox display;
-        private System.Windows.Forms.TabControl tabControlLeftPanel;
-        private System.Windows.Forms.TabPage tabPagePages;
         private System.Windows.Forms.ImageList imageListTabs;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ToolStripMenuItem lorgorgoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ImageList imageListPages;
+        private System.Windows.Forms.ImageList imageListResources;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -674,6 +795,53 @@
         private System.Windows.Forms.ToolStripMenuItem saveasToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStripResources;
+        private System.Windows.Forms.ListView listViewResources;
+        private System.Windows.Forms.ToolStripButton toolStripTogglePages;
+        private System.Windows.Forms.ToolStripButton toolStripToggleEquations;
+        private System.Windows.Forms.ToolStripButton toolStripToggleDataSets;
+        private System.Windows.Forms.Panel panelPageEditor;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer;
+        private System.Windows.Forms.ToolStrip toolStrip;
+        private System.Windows.Forms.ToolStripButton toolStripButtonIncreasePenSize;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDecreasePenSize;
+        private System.Windows.Forms.ToolStripLabel toolStripLabelPenSize;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonDrawAnnotation;
+        private System.Windows.Forms.ToolStripMenuItem drawAnnotationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem highlightAnnotationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonEraseAnnotation;
+        private System.Windows.Forms.ToolStripMenuItem eraseAnnotationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearAnnotationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonTextAnnotation;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonColorAnnotation;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonGraph;
+        private System.Windows.Forms.ToolStripMenuItem plotEquationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem plotDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDataSets;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPreviousPage;
+        private System.Windows.Forms.ToolStripButton toolStripButtonNextPage;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAddPage;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton toolStripButtonUndo;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRedo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton toolStripButtonSquareSelect;
+        private System.Windows.Forms.ToolStripButton toolStripButtonCustomSelect;
+        private System.Windows.Forms.PictureBox display;
+        private System.Windows.Forms.ColumnHeader columnHeaderIcon;
+        private System.Windows.Forms.ColumnHeader columnHeaderName;
+        private System.Windows.Forms.ColumnHeader columnHeaderAuthor;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripResources;
+        private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem propertiesToolStripMenuItem;
+        private ToolStripDropDownButton toolStripDropDownButtonAdd;
+        private ToolStripSeparator toolStripMenuItem3;
+        private ToolStripMenuItem removeToolStripMenuItem;
+        private ToolStripMenuItem equationToolStripMenuItem;
     }
 }
 

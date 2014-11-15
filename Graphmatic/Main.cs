@@ -27,6 +27,7 @@ namespace Graphmatic
             set
             {
                 _CurrentDocument = value;
+                RefreshResourceListView();
             }
         }
 
@@ -87,7 +88,7 @@ namespace Graphmatic
         private void dispToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Equation equation = new Equation('y', 'x');
-            InputWindow inputWindow = new InputWindow(equation);
+            ExpressionEditor inputWindow = new ExpressionEditor(equation);
             inputWindow.Verify += delegate(object verificationSender, ExpressionVerificationEventArgs verificationEventArgs)
             {
                 try
@@ -122,7 +123,7 @@ namespace Graphmatic
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new SettingsWindow().ShowDialog(this);
+            new SettingsEditor().ShowDialog(this);
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -130,139 +131,32 @@ namespace Graphmatic
             CurrentDocument = new Document();
             DocumentPath = null;
             DocumentModified = false;
-        }
 
-        public void SaveDocument(string path)
-        {
-            CurrentDocument.Save(path, SaveCompressed);
-            DocumentPath = path;
-            DocumentModified = false;
-        }
-
-        private SaveFileDialog CreateSaveFileDialog()
-        {
-            return new SaveFileDialog()
-            {
-                Filter = Properties.Resources.DialogFilter,
-                FilterIndex = 0
-            };
-        }
-
-        private OpenFileDialog CreateOpenFileDialog()
-        {
-            return new OpenFileDialog()
-            {
-                Filter = Properties.Resources.DialogFilter,
-                FilterIndex = 0,
-                CheckPathExists = true,
-                CheckFileExists = true
-            };
-        }
-
-        public void SaveDocumentAs()
-        {
-            SaveFileDialog saveFileDialog = CreateSaveFileDialog();
-            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (File.Exists(saveFileDialog.FileName) && false)
-                {
-                    if (MessageBox.Show(
-                        "This file already exists. Do you want to overwrite it?",
-                        "Save",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
-                        return;
-                }
-                SaveDocument(saveFileDialog.FileName);
-            }
-        }
-
-        public void SaveDocument()
-        {
-            if (DocumentPath == null)
-            {
-                SaveDocumentAs();
-            }
-            else
-            {
-                SaveDocument(DocumentPath);
-            }
-        }
-
-        public void OpenDocument(string path)
-        {
-            CurrentDocument = Document.Open(path, SaveCompressed);
-            DocumentPath = path;
-            DocumentModified = false;
-        }
-
-        public void OpenDocument()
-        {
-            if (!CheckDocument()) return;
-            OpenFileDialog openFileDialog = CreateOpenFileDialog();
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (File.Exists(openFileDialog.FileName))
-                {
-                    OpenDocument(openFileDialog.FileName);
-                }
-                else
-                {
-                    MessageBox.Show("The file does not exist.", "Open", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        public bool CheckDocument()
-        {
-            if (DocumentModified)
-            {
-                DialogResult result = MessageBox.Show(
-                    "You have unsaved changes to your current document. Do you wish to save them?",
-                    "New Document",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Warning);
-
-                if (result == System.Windows.Forms.DialogResult.Cancel)
-                    return false;
-                else if (result == System.Windows.Forms.DialogResult.Yes)
-                    SaveDocument();
-            }
-            return true;
-        }
-
-        public void NewDocument()
-        {
-            if (!CheckDocument()) return;
-            CurrentDocument = new Document();
-            DocumentPath = null;
-            DocumentModified = false;
-        }
-
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            NewDocument();
-        }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenDocument();
-        }
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveDocument();
-        }
-
-        private void saveasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveDocumentAs();
+            listViewResources_SelectedIndexChanged(sender, e);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!CheckDocument()) return;
             Application.Exit();
+        }
+
+        public string EnterText(string prompt, string title, string defaultValue = "", Image captionImage = null)
+        {
+            EnterTextDialog dialog = new EnterTextDialog(title, prompt, defaultValue, captionImage);
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                return dialog.Value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!CheckDocument()) e.Cancel = true;
         }
     }
 }

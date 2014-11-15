@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction
 {
-    public abstract class Resource : IXmlConvertible
+    public class Resource : IXmlConvertible
     {
         public string Name
         {

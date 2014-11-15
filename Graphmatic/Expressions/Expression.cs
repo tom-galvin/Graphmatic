@@ -149,7 +149,7 @@ namespace Graphmatic.Expressions
         {
             if (Count == 0) // draw box if expression is empty
             {
-                if (expressionCursor.Expression == this)
+                if (expressionCursor.Expression == this && expressionCursor.Visible)
                     g.FillRectangle(Brushes.Blue, x, y, Width, Height);
                 else
                     g.DrawRectangle(Pens.Gray, x, y, Width - 1, Height - 1);
@@ -163,7 +163,7 @@ namespace Graphmatic.Expressions
             }
             else
             {
-                if (expressionCursor.Expression == this) // draw yellow background if selected by cursor
+                if (expressionCursor.Visible && expressionCursor.Expression == this) // draw yellow background if selected by cursor
                 {
                     g.FillRectangle(Brushes.Yellow, x, y, Width + 1, Height + 1);
                 }
@@ -193,7 +193,7 @@ namespace Graphmatic.Expressions
                         tokenX += token.Width + TokenSpacing;
                     }
 
-                    if (expressionCursor.Expression == this && expressionCursor.Index == i) // draw red line at cursor
+                    if (expressionCursor.Visible && expressionCursor.Expression == this && expressionCursor.Index == i) // draw red line at cursor
                     {
                         g.DrawLine(Pens.Blue,
                             cursorX,

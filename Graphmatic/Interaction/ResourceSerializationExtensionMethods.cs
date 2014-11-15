@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,9 @@ namespace Graphmatic.Interaction
         /// </summary>
         private static Dictionary<string, ResourceDeserializationFactory> ResourceDeserializers = new Dictionary<string, ResourceDeserializationFactory>
         {
-            { "Page", xml => new Page(xml) }
+            { "Page", xml => new Page(xml) },
+            { "Equation", xml => new Equation(xml) },
+            { "Resource", xml => new Resource(xml) }
         };
 
         /// <summary>
@@ -34,7 +37,10 @@ namespace Graphmatic.Interaction
         /// <returns>The deserialized form of the given XML.</returns>
         public static Resource FromXml(XElement xml)
         {
-            return ResourceDeserializers[xml.Name.LocalName](xml);
+            string elementName = xml.Name.LocalName;
+            if (!ResourceDeserializers.ContainsKey(elementName))
+                throw new IOException("Unknown resource type: " + elementName);
+            return ResourceDeserializers[elementName](xml);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -9,7 +10,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction
 {
-    public class Document : IXmlConvertible
+    public class Document : IXmlConvertible, IEnumerable<Resource>
     {
         private Dictionary<Guid, Resource> Resources;
 
@@ -20,6 +21,8 @@ namespace Graphmatic.Interaction
 
         public Document(XElement xml)
         {
+            Resources = new Dictionary<Guid, Resource>();
+
             var resourcesElements = xml.Element("Resources").Elements();
             foreach (XElement resourceElement in resourcesElements)
             {
@@ -87,6 +90,16 @@ namespace Graphmatic.Interaction
             return new XElement("Document",
                 new XElement("Resources",
                     Resources.Values.Select(r => r.ToXml())));
+        }
+
+        public IEnumerator<Resource> GetEnumerator()
+        {
+            return ((IEnumerable<Resource>)Resources.Values).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)Resources.Values).GetEnumerator();
         }
     }
 }

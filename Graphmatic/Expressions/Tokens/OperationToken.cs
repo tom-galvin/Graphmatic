@@ -50,7 +50,7 @@ namespace Graphmatic.Expressions.Tokens
         public OperationToken(Expression parent, XElement xml)
             : base(parent)
         {
-            string operationName = xml.Element("Operation").Value;
+            string operationName = xml.Attribute("Operation").Value;
             if (!Enum.TryParse<OperationType>(operationName, out _Operation))
                 throw new NotImplementedException("The operation " + operationName + " is not implemented.");
         }

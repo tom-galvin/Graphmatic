@@ -13,7 +13,7 @@ using Graphmatic.Interaction;
 
 namespace Graphmatic
 {
-    public partial class InputWindow : Form
+    public partial class ExpressionEditor : Form
     {
         private PromptToken _Prompt;
 
@@ -61,7 +61,7 @@ namespace Graphmatic
             return true;
         }
 
-        public InputWindow(Equation equation)
+        public ExpressionEditor(Equation equation)
         {
             Equation = equation;
             Shortcuts = new Dictionary<Tuple<Keys, Keys>, Control>();
@@ -213,7 +213,10 @@ namespace Graphmatic
 
         private void InputWindow_Load(object sender, EventArgs e)
         {
-
+            if (Equation.Expression != null)
+            {
+                expressionDisplay.ExpressionCursor.Index = Equation.Expression.Count;
+            }
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
