@@ -25,7 +25,7 @@ namespace Graphmatic.Expressions.Tokens
         /// </summary>
         private static Dictionary<string, TokenDeserializationFactory> TokenDeserializers = new Dictionary<string, TokenDeserializationFactory>
         {
-            { "BinaryOperation", (parent, xml) => new BinaryOperationToken(parent, xml) },
+            { "Operation", (parent, xml) => new OperationToken(parent, xml) },
             { "Digit", (parent, xml) => new DigitToken(parent, xml) },
             { "Exp", (parent, xml) => new ExpToken(parent, xml) },
             { "Fraction", (parent, xml) => new FractionToken(parent, xml) },

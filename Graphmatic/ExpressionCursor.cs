@@ -285,11 +285,11 @@ namespace Graphmatic
                     for (int i = Index - 1; i >= 0; i--)
                     {
                         Token collectedToken = Expression[i];
-                        if (collectedToken is BinaryOperationToken)
+                        if (collectedToken is OperationToken)
                         {
-                            BinaryOperationToken opCollectedToken = collectedToken as BinaryOperationToken;
-                            if(opCollectedToken.Operation == BinaryOperationToken.BinaryOperationType.Add ||
-                                opCollectedToken.Operation == BinaryOperationToken.BinaryOperationType.Subtract)
+                            OperationToken opCollectedToken = collectedToken as OperationToken;
+                            if(opCollectedToken.Operation == OperationToken.OperationType.Add ||
+                                opCollectedToken.Operation == OperationToken.OperationType.Subtract)
                             {
                                 break;
                             }

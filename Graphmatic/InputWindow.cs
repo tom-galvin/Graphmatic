@@ -136,10 +136,10 @@ namespace Graphmatic
             CreateExpressionButton(buttonDecimalPoint, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.DecimalPoint), ". key", Keys.OemPeriod);
             #endregion
             #region Basic Operations
-            CreateExpressionButton(buttonAdd, expression => new BinaryOperationToken(expression, BinaryOperationToken.BinaryOperationType.Add), "Plus Key", Keys.Oemplus, Keys.Shift);
-            CreateExpressionButton(buttonSubtract, expression => new BinaryOperationToken(expression, BinaryOperationToken.BinaryOperationType.Subtract), "Minus Key", Keys.OemMinus);
-            CreateExpressionButton(buttonMultiply, expression => new BinaryOperationToken(expression, BinaryOperationToken.BinaryOperationType.Multiply), "Shift-8 (*)", Keys.D8, Keys.Shift);
-            CreateExpressionButton(buttonDivide, expression => new BinaryOperationToken(expression, BinaryOperationToken.BinaryOperationType.Divide), "Backslash", Keys.Oem5);
+            CreateExpressionButton(buttonAdd, expression => new OperationToken(expression, OperationToken.OperationType.Add), "Plus Key", Keys.Oemplus, Keys.Shift);
+            CreateExpressionButton(buttonSubtract, expression => new OperationToken(expression, OperationToken.OperationType.Subtract), "Minus Key", Keys.OemMinus);
+            CreateExpressionButton(buttonMultiply, expression => new OperationToken(expression, OperationToken.OperationType.Multiply), "Shift-8 (*)", Keys.D8, Keys.Shift);
+            CreateExpressionButton(buttonDivide, expression => new OperationToken(expression, OperationToken.OperationType.Divide), "Backslash", Keys.Oem5);
             #endregion
             #region Roots
             CreateExpressionButton(buttonRoot, expression => new RootToken(expression), "Ctrl-Shift-R", Keys.R, Keys.Control | Keys.Shift);
@@ -183,7 +183,7 @@ namespace Graphmatic
             CreateExpressionButton(buttonReciprocate, expression =>
             {
                 var token = new ExpToken(expression);
-                token.Power.Add(new BinaryOperationToken(token.Power, BinaryOperationToken.BinaryOperationType.Subtract));
+                token.Power.Add(new OperationToken(token.Power, OperationToken.OperationType.Subtract));
                 token.Power.Add(new DigitToken(token.Power, 1));
                 return token;
             }, "Alt-Minus", Keys.OemMinus, Keys.Alt);

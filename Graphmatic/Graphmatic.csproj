@@ -81,7 +81,7 @@
     <Compile Include="Expressions\Parsing\VariableParseTreeNode.cs" />
     <Compile Include="Expressions\Tokens\ICollectorToken.cs" />
     <Compile Include="Expressions\IPaintable.cs" />
-    <Compile Include="Expressions\Tokens\BinaryOperationToken.cs" />
+    <Compile Include="Expressions\Tokens\OperationToken.cs" />
     <Compile Include="Expressions\Tokens\AbsoluteToken.cs" />
     <Compile Include="Expressions\Tokens\SymbolicToken.cs" />
     <Compile Include="Expressions\Tokens\SimpleToken.cs" />

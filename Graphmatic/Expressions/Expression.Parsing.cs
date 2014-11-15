@@ -53,12 +53,12 @@ namespace Graphmatic.Expressions
             {
                 builder.Append('e');
                 if (!enumerator.MoveNext()) goto EndFast;
-                if(enumerator.Current is BinaryOperationToken) // symbol
+                if(enumerator.Current is OperationToken) // symbol
                 {
-                    BinaryOperationToken.BinaryOperationType operation = (enumerator.Current as BinaryOperationToken).Operation;
-                    if (operation == BinaryOperationToken.BinaryOperationType.Add)
+                    OperationToken.OperationType operation = (enumerator.Current as OperationToken).Operation;
+                    if (operation == OperationToken.OperationType.Add)
                         builder.Append('+');
-                    else if (operation == BinaryOperationToken.BinaryOperationType.Subtract)
+                    else if (operation == OperationToken.OperationType.Subtract)
                         builder.Append('-');
                     else
                         throw new ParseException("Invalid symbol here - must be a +, - or digit.", enumerator.Current);
@@ -119,15 +119,15 @@ namespace Graphmatic.Expressions
         protected ParseTreeNode ParseUnary(IEnumerator<Token> enumerator)
         {
             bool positive = true;
-            while (enumerator.Current != null && enumerator.Current is BinaryOperationToken)
+            while (enumerator.Current != null && enumerator.Current is OperationToken)
             {
-                BinaryOperationToken current = enumerator.Current as BinaryOperationToken;
+                OperationToken current = enumerator.Current as OperationToken;
 
-                if (current.Operation == BinaryOperationToken.BinaryOperationType.Add)
+                if (current.Operation == OperationToken.OperationType.Add)
                 {
                     // do nothing
                 }
-                else if (current.Operation == BinaryOperationToken.BinaryOperationType.Subtract)
+                else if (current.Operation == OperationToken.OperationType.Subtract)
                 {
                     positive = !positive;
                 }
@@ -150,16 +150,16 @@ namespace Graphmatic.Expressions
         protected ParseTreeNode ParseProduction(IEnumerator<Token> enumerator)
         {
             ParseTreeNode currentNode = ParseUnary(enumerator);
-            while (enumerator.Current != null && enumerator.Current is BinaryOperationToken)
+            while (enumerator.Current != null && enumerator.Current is OperationToken)
             {
-                BinaryOperationToken current = enumerator.Current as BinaryOperationToken;
+                OperationToken current = enumerator.Current as OperationToken;
 
-                if (current.Operation == BinaryOperationToken.BinaryOperationType.Multiply)
+                if (current.Operation == OperationToken.OperationType.Multiply)
                 {
                     if (!enumerator.MoveNext()) goto EndFast;
                     currentNode = new BinaryParseTreeNode(MultiplyEvaluator, currentNode, ParseUnary(enumerator));
                 }
-                else if (current.Operation == BinaryOperationToken.BinaryOperationType.Divide)
+                else if (current.Operation == OperationToken.OperationType.Divide)
                 {
                     if (!enumerator.MoveNext()) goto EndFast;
                     currentNode = new BinaryParseTreeNode(DivideEvaluator, currentNode, ParseUnary(enumerator));
@@ -179,16 +179,16 @@ namespace Graphmatic.Expressions
         protected ParseTreeNode ParseSummation(IEnumerator<Token> enumerator)
         {
             ParseTreeNode currentNode = ParseUnary(enumerator);
-            while (enumerator.Current != null && enumerator.Current is BinaryOperationToken)
+            while (enumerator.Current != null && enumerator.Current is OperationToken)
             {
-                BinaryOperationToken current = enumerator.Current as BinaryOperationToken;
+                OperationToken current = enumerator.Current as OperationToken;
 
-                if (current.Operation == BinaryOperationToken.BinaryOperationType.Add)
+                if (current.Operation == OperationToken.OperationType.Add)
                 {
                     if (!enumerator.MoveNext()) goto EndFast;
                     currentNode = new BinaryParseTreeNode(AddEvaluator, currentNode, ParseProduction(enumerator));
                 }
-                else if (current.Operation == BinaryOperationToken.BinaryOperationType.Subtract)
+                else if (current.Operation == OperationToken.OperationType.Subtract)
                 {
                     if (!enumerator.MoveNext()) goto EndFast;
                     currentNode = new BinaryParseTreeNode(SubtractEvaluator, currentNode, ParseProduction(enumerator));

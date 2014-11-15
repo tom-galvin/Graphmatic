@@ -8,10 +8,10 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Expressions.Tokens
 {
-    public class BinaryOperationToken : SimpleToken
+    public class OperationToken : SimpleToken
     {
-        private BinaryOperationType _Operation;
-        public BinaryOperationType Operation
+        private OperationType _Operation;
+        public OperationType Operation
         {
             get { return _Operation; }
             set { _Operation = value; }
@@ -23,13 +23,13 @@ namespace Graphmatic.Expressions.Tokens
             {
                 switch (_Operation)
                 {
-                    case BinaryOperationType.Add:
+                    case OperationType.Add:
                         return "+";
-                    case BinaryOperationType.Subtract:
+                    case OperationType.Subtract:
                         return "-";
-                    case BinaryOperationType.Multiply:
+                    case OperationType.Multiply:
                         return "*";
-                    case BinaryOperationType.Divide:
+                    case OperationType.Divide:
                         return "/";
                     default:
                         return "<unknown operation>";
@@ -41,17 +41,17 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public BinaryOperationToken(Expression parent, BinaryOperationType operation)
+        public OperationToken(Expression parent, OperationType operation)
             : base(parent)
         {
             Operation = operation;
         }
 
-        public BinaryOperationToken(Expression parent, XElement xml)
+        public OperationToken(Expression parent, XElement xml)
             : base(parent)
         {
             string operationName = xml.Element("Operation").Value;
-            if (!Enum.TryParse<BinaryOperationType>(operationName, out _Operation))
+            if (!Enum.TryParse<OperationType>(operationName, out _Operation))
                 throw new NotImplementedException("The operation " + operationName + " is not implemented.");
         }
 
@@ -61,7 +61,7 @@ namespace Graphmatic.Expressions.Tokens
                 new XAttribute("Operation", Operation.ToString()));
         }
 
-        public enum BinaryOperationType
+        public enum OperationType
         {
             Add,
             Subtract,
