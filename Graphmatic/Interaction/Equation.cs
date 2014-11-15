@@ -9,7 +9,7 @@ using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic.Interaction
 {
-    public class Equation : IXmlConvertible
+    public class Equation : Resource
     {
         public Expression Expression
         {
@@ -36,6 +36,7 @@ namespace Graphmatic.Interaction
         }
 
         public Equation(char plotted, char varying)
+            : base()
         {
             PlottedVariable = plotted;
             VaryingVariable = varying;
@@ -44,6 +45,7 @@ namespace Graphmatic.Interaction
         }
 
         public Equation(char plotted, char varying, Expression expression)
+            : base()
         {
             PlottedVariable = plotted;
             VaryingVariable = varying;
@@ -52,17 +54,22 @@ namespace Graphmatic.Interaction
         }
 
         public Equation(XElement xml)
-            : this(Char.Parse(xml.Element("Plotted").Value), Char.Parse(xml.Element("Varying").Value), new Expression(null, xml.Element("Expression").Elements()))
+            : base(xml)
         {
+            PlottedVariable = Char.Parse(xml.Element("Plotted").Value);
+            VaryingVariable = Char.Parse(xml.Element("Varying").Value);
+            Expression = new Expression(null, xml.Element("Expression").Elements());
             ParseTree = Expression.Parse();
         }
 
-        public XElement ToXml()
+        public override XElement ToXml()
         {
-            return new XElement("Equation",
+            XElement baseElement = base.ToXml();
+            baseElement.Add(new XElement("Equation",
                 new XElement("Expression", Expression.ToXml()),
                 new XElement("Plotted", PlottedVariable),
-                new XElement("Varying", VaryingVariable));
+                new XElement("Varying", VaryingVariable)));
+            return baseElement;
         }
     }
 }

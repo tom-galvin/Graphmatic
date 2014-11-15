@@ -11,11 +11,11 @@ using System.Xml.XPath;
 
 namespace Graphmatic
 {
-    public partial class Options : Form
+    public partial class SettingsWindow : Form
     {
         private bool IsReloading = false;
 
-        public Options()
+        public SettingsWindow()
         {
             InitializeComponent();
             InitializeSettings();
@@ -23,12 +23,14 @@ namespace Graphmatic
 
         private void InitializeSettings()
         {
-            CreateSetting(
-                "default-page-color",
+            CreateSetting<Color, ColorChooser>(
                 colorChooserDefaultPageColor,
-                editor => editor.Color,
-                (editor, value) => editor.Color = value,
-                Color.White);
+                (settings, editor) => editor.Color = settings.DefaultPageColor,
+                (settings, editor) => settings.DefaultPageColor = editor.Color);
+            CreateSetting<string, TextBox>(
+                textBoxUserName,
+                (settings, editor) => editor.Text = settings.UserName,
+                (settings, editor) => settings.UserName = editor.Text);
         }
 
         private void Options_Load(object sender, EventArgs e)
@@ -61,14 +63,12 @@ namespace Graphmatic
         }
 
         private void CreateSetting<TSetting, TSettingEditor>(
-            string settingName,
             TSettingEditor settingEditor,
-            Func<TSettingEditor, TSetting> getEditorValue,
-            Action<TSettingEditor, TSetting> setEditorValue,
-            TSetting defaultSettingValue = default(TSetting)) where TSettingEditor : Control
+            Action<Settings, TSettingEditor> loadValue,
+            Action<Settings, TSettingEditor> saveValue) where TSettingEditor : Control
         {
-            setEditorValue(settingEditor, Program.Settings.Root.GetOrDefault<TSetting>(settingName, defaultSettingValue));
-            this.FormClosing += (sender, e) => Program.Settings.Root.Set<TSetting>(settingName, getEditorValue(settingEditor));
+            loadValue(Program.Settings, settingEditor);
+            this.FormClosing += (sender, e) => saveValue(Program.Settings, settingEditor);
         }
     }
 }

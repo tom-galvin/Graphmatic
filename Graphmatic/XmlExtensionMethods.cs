@@ -10,7 +10,7 @@ namespace Graphmatic
 {
     public static class XmlExtensionMethods
     {
-        public static T GetOrDefault<T>(this XElement element, string name, T defaultValue)
+        public static T Get<T>(this XElement element, string name, T defaultValue = default(T))
         {
             var e = element.Element(name);
             if (e == null) return defaultValue;

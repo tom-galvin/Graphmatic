@@ -7,22 +7,18 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction
 {
-    public class Page : IXmlConvertible
+    public class Page : Resource
     {
-        public string PageName
+        public Page(XElement xml)
+            : base(xml)
         {
-            get;
-            set;
+            
         }
 
-        public Page(string pageName)
+        public override XElement ToXml()
         {
-            PageName = pageName;
-        }
-
-        public XElement ToXml()
-        {
-            return null;
+            XElement baseElement = base.ToXml();
+            return baseElement;
         }
     }
 }

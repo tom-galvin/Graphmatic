@@ -206,15 +206,13 @@
       <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAUIAAIAAAAAAA=</HashCode>
       <FileName>Interaction\Equation.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Graphmatic.Interaction.Page" BaseTypeListCollapsed="true">
     <Position X="31.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Interaction\Page.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Graphmatic.ExpressionCursor">
     <Position X="37.5" Y="3" Width="1.5" />

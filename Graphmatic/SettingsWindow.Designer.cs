@@ -1,6 +1,6 @@
 ﻿namespace Graphmatic
 {
-    partial class Options
+    partial class SettingsWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -32,10 +32,12 @@
             this.buttonReload = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageDefaults = new System.Windows.Forms.TabPage();
+            this.textBoxUserName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.colorChooserDefaultPageColor = new Graphmatic.ColorChooser();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.colorChooserDefaultPageColor = new Graphmatic.ColorChooser();
             this.tabControl.SuspendLayout();
             this.tabPageDefaults.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +79,8 @@
             // 
             // tabPageDefaults
             // 
+            this.tabPageDefaults.Controls.Add(this.textBoxUserName);
+            this.tabPageDefaults.Controls.Add(this.label3);
             this.tabPageDefaults.Controls.Add(this.colorChooserDefaultPageColor);
             this.tabPageDefaults.Controls.Add(this.label2);
             this.tabPageDefaults.Location = new System.Drawing.Point(4, 24);
@@ -86,6 +90,30 @@
             this.tabPageDefaults.TabIndex = 0;
             this.tabPageDefaults.Text = "Defaults";
             this.tabPageDefaults.UseVisualStyleBackColor = true;
+            // 
+            // textBoxUserName
+            // 
+            this.textBoxUserName.Location = new System.Drawing.Point(75, 27);
+            this.textBoxUserName.Name = "textBoxUserName";
+            this.textBoxUserName.Size = new System.Drawing.Size(104, 23);
+            this.textBoxUserName.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Username:";
+            // 
+            // colorChooserDefaultPageColor
+            // 
+            this.colorChooserDefaultPageColor.Color = System.Drawing.Color.Empty;
+            this.colorChooserDefaultPageColor.Location = new System.Drawing.Point(124, 6);
+            this.colorChooserDefaultPageColor.Name = "colorChooserDefaultPageColor";
+            this.colorChooserDefaultPageColor.Size = new System.Drawing.Size(55, 15);
+            this.colorChooserDefaultPageColor.TabIndex = 1;
             // 
             // label2
             // 
@@ -117,15 +145,7 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // colorChooserDefaultPageColor
-            // 
-            this.colorChooserDefaultPageColor.Color = System.Drawing.Color.Empty;
-            this.colorChooserDefaultPageColor.Location = new System.Drawing.Point(124, 6);
-            this.colorChooserDefaultPageColor.Name = "colorChooserDefaultPageColor";
-            this.colorChooserDefaultPageColor.Size = new System.Drawing.Size(55, 15);
-            this.colorChooserDefaultPageColor.TabIndex = 1;
-            // 
-            // Options
+            // SettingsWindow
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -142,9 +162,9 @@
             this.Icon = global::Graphmatic.Properties.Resources.SettingsIcon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Options";
+            this.Name = "SettingsWindow";
             this.ShowInTaskbar = false;
-            this.Text = "Options";
+            this.Text = "Settings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Options_FormClosed);
             this.Load += new System.EventHandler(this.Options_Load);
             this.tabControl.ResumeLayout(false);
@@ -165,5 +185,7 @@
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private ColorChooser colorChooserDefaultPageColor;
+        private System.Windows.Forms.TextBox textBoxUserName;
+        private System.Windows.Forms.Label label3;
     }
 }

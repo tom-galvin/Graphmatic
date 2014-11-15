@@ -57,7 +57,7 @@ namespace Graphmatic.Expressions.Tokens
 
         public override XElement ToXml()
         {
-            return new XElement("BinaryOperation",
+            return new XElement("Operation",
                 new XAttribute("Operation", Operation.ToString()));
         }
 

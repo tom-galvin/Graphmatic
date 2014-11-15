@@ -11,7 +11,7 @@ namespace Graphmatic
 {
     public static class Program
     {
-        public static XDocument Settings
+        public static Settings Settings
         {
             get;
             set;
@@ -60,17 +60,11 @@ namespace Graphmatic
             Application.Run(new Main());
         }
 
-        public static XDocument CreateSettings(string nodeName)
-        {
-            Debug.WriteLine(String.Format("Creating new settings file, Root={0}.", nodeName));
-            return new XDocument(new XElement("settings"));
-        }
-
         public static void LoadSettings()
         {
             try
             {
-                Settings = LoadSettings(SettingsFilePath, SettingsNodeName);
+                Settings = LoadSettings(SettingsFilePath);
                 SettingsError = false;
             }
             catch (IOException ex)
@@ -78,12 +72,12 @@ namespace Graphmatic
                 MessageBox.Show("There was a problem accessing the settings file. " +
                     "Settings changed will not be kept.\r\n" +
                     ex.Message, ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Settings = CreateSettings(SettingsNodeName);
+                Settings = new Settings();
                 SettingsError = true;
             }
         }
 
-        public static XDocument LoadSettings(string path, string nodeName)
+        public static Settings LoadSettings(string path)
         {
             if (!Directory.Exists(Path.GetDirectoryName(path)))
             {
@@ -92,24 +86,26 @@ namespace Graphmatic
 
             if (!File.Exists(SettingsFilePath))
             {
-                return CreateSettings(nodeName);
+                return new Settings();
             }
             else
             {
                 using (StreamReader reader = new StreamReader(path))
                 {
                     Debug.WriteLine(String.Format("Loading settings from {0}.", path));
-                    return XDocument.Load(reader);
+                    return new Settings(XDocument.Load(reader).Root);
                 }
             }
         }
 
-        public static void SaveSettings(string path, XDocument document)
+        public static void SaveSettings(string path)
         {
             using (StreamWriter writer = new StreamWriter(path))
             {
                 Debug.WriteLine(String.Format("Saving settings to {0}.", path));
-                document.Save(writer);
+                XDocument settingsDocument = new XDocument(new XDeclaration("1.0", "utf-8", "yes"),
+                    Settings.ToXml());
+                settingsDocument.Save(writer);
             }
         }
 
@@ -117,7 +113,7 @@ namespace Graphmatic
         {
             try
             {
-                SaveSettings(SettingsFilePath, Settings);
+                SaveSettings(SettingsFilePath);
             }
             catch (IOException ex)
             {
