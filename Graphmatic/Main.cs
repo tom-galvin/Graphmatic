@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Graphmatic.Expressions;
 using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic
@@ -26,18 +27,24 @@ namespace Graphmatic
         private void dispToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InputWindow inputWindow = new InputWindow(equation);
-            if (inputWindow.ShowDialog() == DialogResult.OK)
+            inputWindow.Verify += delegate(object verificationSender, ExpressionVerificationEventArgs verificationEventArgs)
             {
                 try
                 {
-                    var tree = equation.Expression.Parse();
-                    MessageBox.Show(tree.ToString());
-                    MessageBox.Show(tree.Evaluate(new Dictionary<char, double>()).ToString(), "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    verificationEventArgs.Equation.ParseTree = verificationEventArgs.Equation.Expression.Parse();
                 }
                 catch (ParseException ex)
                 {
-                    MessageBox.Show(ex.Message, "Parse error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Equation Parse Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    verificationEventArgs.Cursor.Expression = ex.Cause.Parent;
+                    verificationEventArgs.Cursor.Index = ex.Cause.IndexInParent();
+                    verificationEventArgs.Failure = true;
                 }
+            };
+            if (inputWindow.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show(equation.ParseTree.ToString());
+                MessageBox.Show(equation.ParseTree.Evaluate(new Dictionary<char, double>()).ToString(), "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

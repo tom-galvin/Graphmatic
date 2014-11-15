@@ -17,34 +17,10 @@ namespace Graphmatic
     {
         private PromptToken _Prompt;
 
-        private char _PlottedVariable;
-        public char PlottedVariable
+        private Equation Equation
         {
-            get
-            {
-                return _PlottedVariable;
-            }
-            set
-            {
-                _PlottedVariable = value;
-                UpdatePromptString();
-            }
-        }
-
-        private char _VaryingVariable;
-        public char VaryingVariable
-        {
-            get
-            {
-                return _VaryingVariable;
-            }
-            set
-            {
-                _VaryingVariable = value;
-                UpdatePromptString();
-                buttonVariable.Text = _VaryingVariable.ToString();
-                toolTip.SetToolTip(buttonVariable, ConvertCharToTooltip(_VaryingVariable));
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -52,56 +28,57 @@ namespace Graphmatic
         /// </summary>
         public Expression Result
         {
-            get;
-            protected set;
+            get
+            {
+                return Equation.Expression;
+            }
         }
 
         public Dictionary<Tuple<Keys, Keys>, Control> Shortcuts;
 
+        public event EventHandler<ExpressionVerificationEventArgs> Verify;
+        private bool VerifyExpression()
+        {
+            EventHandler<ExpressionVerificationEventArgs> eventHandler = Verify;
+            if (eventHandler != null)
+            {
+                var multicastHandlers = eventHandler.GetInvocationList();
+                var eventArgs = new ExpressionVerificationEventArgs()
+                {
+                    Cursor = expressionDisplay.ExpressionCursor,
+                    Failure = false,
+                    Equation = Equation
+                };
+                foreach (EventHandler<ExpressionVerificationEventArgs> multicastHandler in multicastHandlers)
+                {
+                    multicastHandler(this, eventArgs);
+                    if (eventArgs.Failure)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         public InputWindow(Equation equation)
-            : this(equation.PlottedVariable, equation.VaryingVariable, equation.Expression)
         {
-
-        }
-
-        public InputWindow(char plottedVariable, char varyingVariable, Expression expression)
-        {
+            Equation = equation;
             Shortcuts = new Dictionary<Tuple<Keys, Keys>, Control>();
 
             InitializeComponent();
             InitializeButtons();
 
-            _Prompt = new PromptToken(null, "Loading... ");
-            _Prompt.RecalculateDimensions(expressionDisplay.ExpressionCursor);
-            expressionDisplay.Expression.Add(_Prompt);
-            expression.Parent = _Prompt;
-            _Prompt.Content = expression;
-            expressionDisplay.ExpressionCursor.Expression = _Prompt.Content;
-            Result = _Prompt.Content;
-            DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            expressionDisplay.ExpressionCursor.Moved += ExpressionCursor_Moved;
-
-            PlottedVariable = plottedVariable;
-            VaryingVariable = varyingVariable;
-        }
-
-        public InputWindow(char plottedVariable, char varyingVariable)
-        {
-            Shortcuts = new Dictionary<Tuple<Keys, Keys>, Control>();
-
-            InitializeComponent();
-            InitializeButtons();
-
-            _Prompt = new PromptToken(null, "Loading... ");
+            _Prompt = new PromptToken(null, "Loading... ", equation.Expression);
             _Prompt.RecalculateDimensions(expressionDisplay.ExpressionCursor);
             expressionDisplay.Expression.Add(_Prompt);
             expressionDisplay.ExpressionCursor.Expression = _Prompt.Content;
-            Result = _Prompt.Content;
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
             expressionDisplay.ExpressionCursor.Moved += ExpressionCursor_Moved;
 
-            PlottedVariable = plottedVariable;
-            VaryingVariable = varyingVariable;
+            UpdatePromptString();
+            buttonVariable.Text = Equation.VaryingVariable.ToString();
+            toolTip.SetToolTip(buttonVariable, ConvertCharToTooltip(Equation.VaryingVariable));
         }
 
         public string ConvertCharToTooltip(char c)
@@ -112,7 +89,7 @@ namespace Graphmatic
 
         private void UpdatePromptString()
         {
-            _Prompt.Text = CreatePromptString(_PlottedVariable, _VaryingVariable);
+            _Prompt.Text = CreatePromptString(Equation.PlottedVariable, Equation.VaryingVariable);
         }
 
         private string CreatePromptString(char plottedVariable, char varyingVariable)
@@ -201,7 +178,7 @@ namespace Graphmatic
             CreateExpressionButton(buttonSymbolicExp, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Exp10), "Ctrl-E", Keys.E, Keys.Control);
             
             #endregion
-            CreateExpressionButton(buttonVariable, expression => new VariableToken(expression, VaryingVariable));
+            CreateExpressionButton(buttonVariable, expression => new VariableToken(expression, Equation.VaryingVariable));
         }
 
         private void CreateExpressionButton(Button button, Func<Expression, Token> token, string label = "", Keys shortcutKey = Keys.None, Keys modifierKey = Keys.None)
@@ -256,8 +233,11 @@ namespace Graphmatic
 
         private void buttonDone_Click(object sender, EventArgs e)
         {
-            DialogResult = System.Windows.Forms.DialogResult.OK;
-            Close();
+            if (VerifyExpression())
+            {
+                DialogResult = System.Windows.Forms.DialogResult.OK;
+                Close();
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -309,7 +289,7 @@ namespace Graphmatic
         // KeyPress needed to detect variable being pressed
         private void InputWindow_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == _VaryingVariable)
+            if (e.KeyChar == Equation.VaryingVariable)
                 buttonVariable.PerformClick();
         }
 

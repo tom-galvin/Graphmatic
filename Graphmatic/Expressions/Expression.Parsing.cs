@@ -75,7 +75,7 @@ namespace Graphmatic.Expressions
                 }
                 else
                 {
-                    throw new ParseException("Exponentiation symbol in a literal number must be followed by a digit, optionally preceded by a symbol.", enumerator.Current);
+                    throw new ParseException("Exponent symbol in a literal number must be followed by a digit, optionally preceded by a symbol.", enumerator.Current);
                 }
             }
 
@@ -216,7 +216,7 @@ namespace Graphmatic.Expressions
             }
             else
             {
-                throw new ParseException("Child token empty.", Parent);
+                throw new ParseException("Expression empty.", Parent);
             }
         }
     }

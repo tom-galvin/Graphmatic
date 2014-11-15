@@ -25,9 +25,9 @@ namespace Graphmatic.Expressions.Parsing
             {
                 return variables[Variable];
             }
-            catch (KeyNotFoundException)
+            catch (KeyNotFoundException e)
             {
-                throw new ApplicationException("No variable " + Variable + " is defined.", e);
+                throw new EvaluationException("No variable " + Variable + " is defined.", e);
             }
         }
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Graphmatic.Expressions;
+using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic.Interaction
 {
@@ -14,6 +15,12 @@ namespace Graphmatic.Interaction
         {
             get;
             protected set;
+        }
+
+        public ParseTreeNode ParseTree
+        {
+            get;
+            set;
         }
 
         public char PlottedVariable
@@ -29,9 +36,11 @@ namespace Graphmatic.Interaction
         }
 
         public Equation(char plotted, char varying)
-            : this(plotted, varying, new Expression(null))
         {
-
+            PlottedVariable = plotted;
+            VaryingVariable = varying;
+            Expression = new Expression(null);
+            ParseTree = new ConstantParseTreeNode(0);
         }
 
         public Equation(char plotted, char varying, Expression expression)
@@ -39,12 +48,13 @@ namespace Graphmatic.Interaction
             PlottedVariable = plotted;
             VaryingVariable = varying;
             Expression = expression;
+            ParseTree = Expression.Parse();
         }
 
         public Equation(XElement xml)
             : this(Char.Parse(xml.Element("Plotted").Value), Char.Parse(xml.Element("Varying").Value), new Expression(null, xml.Element("Expression").Elements()))
         {
-
+            ParseTree = Expression.Parse();
         }
 
         public XElement ToXml()

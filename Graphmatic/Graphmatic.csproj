@@ -76,6 +76,7 @@
     <Compile Include="Expressions\Parsing\BinaryParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\ConstantParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\Evaluator.cs" />
+    <Compile Include="Expressions\Parsing\EvaluationException.cs" />
     <Compile Include="Expressions\Parsing\ParseException.cs" />
     <Compile Include="Expressions\Parsing\ParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\UnaryEvaluator.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Expressions\Tokens\Token.cs" />
     <Compile Include="Expressions\Tokens\TokenSerializationExtensionMethods.cs" />
     <Compile Include="Expressions\Tokens\VariableToken.cs" />
+    <Compile Include="ExpressionVerificationEventArgs.cs" />
     <Compile Include="Interaction\Equation.cs" />
     <Compile Include="Interaction\Page.cs" />
     <Compile Include="InputWindow.cs">
