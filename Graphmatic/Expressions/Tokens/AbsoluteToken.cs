@@ -52,7 +52,7 @@ namespace Graphmatic.Expressions.Tokens
             Height = Operand.Height;
         }
 
-        public static readonly UnaryEvaluator Evaluator = x => Math.Abs(x);
+        public static readonly UnaryEvaluator Evaluator = new UnaryEvaluator(x => Math.Abs(x), "|{0}|");
 
         public override ParseTreeNode Parse()
         {

@@ -115,7 +115,7 @@ namespace Graphmatic.Expressions
             return currentNode;
         }
 
-        public static UnaryEvaluator NegationEvaluator = x => -x;
+        public static UnaryEvaluator NegationEvaluator = new UnaryEvaluator(x => -x, "-{0}");
         protected ParseTreeNode ParseUnary(IEnumerator<Token> enumerator)
         {
             bool positive = true;
@@ -145,8 +145,8 @@ namespace Graphmatic.Expressions
             throw new ParseException("Unexpected end of expression.", enumerator.Current);
         }
 
-        public static readonly BinaryEvaluator MultiplyEvaluator = (l, r) => l * r;
-        public static readonly BinaryEvaluator DivideEvaluator = (l, r) => l / r;
+        public static readonly BinaryEvaluator MultiplyEvaluator = new BinaryEvaluator((l, r) => l * r, "{0} * {1}");
+        public static readonly BinaryEvaluator DivideEvaluator = new BinaryEvaluator((l, r) => l / r, "{0} / {1}");
         protected ParseTreeNode ParseProduction(IEnumerator<Token> enumerator)
         {
             ParseTreeNode currentNode = ParseUnary(enumerator);
@@ -174,8 +174,8 @@ namespace Graphmatic.Expressions
             throw new ParseException("Unexpected end of expression.", enumerator.Current);
         }
 
-        public static readonly BinaryEvaluator AddEvaluator = (l, r) => l + r;
-        public static readonly BinaryEvaluator SubtractEvaluator = (l, r) => l - r;
+        public static readonly BinaryEvaluator AddEvaluator = new BinaryEvaluator((l, r) => l + r, "{0} + {1}");
+        public static readonly BinaryEvaluator SubtractEvaluator = new BinaryEvaluator((l, r) => l - r, "{0} - {1}");
         protected ParseTreeNode ParseSummation(IEnumerator<Token> enumerator)
         {
             ParseTreeNode currentNode = ParseUnary(enumerator);

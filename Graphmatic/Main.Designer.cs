@@ -40,6 +40,7 @@
             this.tabControlLeftPanel = new System.Windows.Forms.TabControl();
             this.tabPagePages = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.imageListPages = new System.Windows.Forms.ImageList(this.components);
             this.imageListTabs = new System.Windows.Forms.ImageList(this.components);
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -71,7 +72,6 @@
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.display = new System.Windows.Forms.PictureBox();
-            this.imageListPages = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -188,6 +188,12 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // imageListPages
+            // 
+            this.imageListPages.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageListPages.ImageSize = new System.Drawing.Size(32, 32);
+            this.imageListPages.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // imageListTabs
             // 
@@ -504,12 +510,6 @@
             this.display.TabIndex = 0;
             this.display.TabStop = false;
             // 
-            // imageListPages
-            // 
-            this.imageListPages.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.imageListPages.ImageSize = new System.Drawing.Size(32, 32);
-            this.imageListPages.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -524,6 +524,7 @@
             this.Name = "Main";
             this.Text = "Graphmatic";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);

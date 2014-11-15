@@ -14,5 +14,7 @@ namespace Graphmatic.Expressions.Parsing
         /// <param name="variables">The variable values to use in calculation.</param>
         /// <returns>Returns the result of the evaluation.</returns>
         public abstract double Evaluate(Dictionary<char, double> variables);
+
+        public abstract override string ToString();
     }
 }

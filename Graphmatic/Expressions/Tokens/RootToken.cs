@@ -119,11 +119,15 @@ namespace Graphmatic.Expressions.Tokens
                 (Power[0] as DigitToken).Value == 2;
         }
 
-        public static readonly BinaryEvaluator Evaluator = (rootBase, rootPower) => Math.Pow(rootBase, 1 / rootPower);
+        public static readonly BinaryEvaluator Evaluator = new BinaryEvaluator((rootBase, rootPower) => Math.Pow(rootBase, 1 / rootPower), "√[{1}]({0})");
+        public static readonly UnaryEvaluator SquareRootEvaluator = new UnaryEvaluator(x => Math.Sqrt(x), "√({0})");
 
         public ParseTreeNode Parse()
         {
-            return new BinaryParseTreeNode(Evaluator, Base.Parse(), Power.Parse());
+            if(Power.Count == 1 && Power[0] is DigitToken && (Power[0] as DigitToken).Value == 2)
+                return new UnaryParseTreeNode(SquareRootEvaluator, Base.Parse());
+            else
+                return new BinaryParseTreeNode(Evaluator, Base.Parse(), Power.Parse());
         }
     }
 }

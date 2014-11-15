@@ -6,21 +6,18 @@ using System.Threading.Tasks;
 
 namespace Graphmatic.Expressions.Parsing
 {
-    public abstract class Evaluator
+    public class UnaryEvaluator : Evaluator
     {
-        public string FormatString
+        public Func<double, double> Function
         {
             get;
             protected set;
         }
 
-        protected Evaluator()
+        public UnaryEvaluator(Func<double, double> function, string formatString)
+            : base(formatString)
         {
-
-        }
-
-        protected Evaluator(string formatString) {
-            FormatString = formatString;
+            Function = function;
         }
     }
 }

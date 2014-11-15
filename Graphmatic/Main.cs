@@ -30,7 +30,8 @@ namespace Graphmatic
             {
                 try
                 {
-                    var tree = equation.Expression.Parse(); 
+                    var tree = equation.Expression.Parse();
+                    MessageBox.Show(tree.ToString());
                     MessageBox.Show(tree.Evaluate(new Dictionary<char, double>()).ToString(), "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (ParseException ex)
@@ -53,6 +54,11 @@ namespace Graphmatic
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new Options().ShowDialog(this);
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

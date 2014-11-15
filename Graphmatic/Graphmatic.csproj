@@ -72,11 +72,13 @@
     <Compile Include="Expressions\ExpressionEngineExtensionMethods.cs" />
     <Compile Include="Expressions\FontHelperExtensionMethods.cs" />
     <Compile Include="Expressions\IParsable.cs" />
+    <Compile Include="Expressions\Parsing\BinaryEvaluator.cs" />
     <Compile Include="Expressions\Parsing\BinaryParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\ConstantParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\Evaluator.cs" />
     <Compile Include="Expressions\Parsing\ParseException.cs" />
     <Compile Include="Expressions\Parsing\ParseTreeNode.cs" />
+    <Compile Include="Expressions\Parsing\UnaryEvaluator.cs" />
     <Compile Include="Expressions\Parsing\UnaryParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\VariableParseTreeNode.cs" />
     <Compile Include="Expressions\Tokens\ICollectorToken.cs" />

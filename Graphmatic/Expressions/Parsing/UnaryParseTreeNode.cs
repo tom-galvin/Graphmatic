@@ -29,7 +29,12 @@ namespace Graphmatic.Expressions.Parsing
         public override double Evaluate(Dictionary<char, double> variables)
         {
             double operandResult = Operand.Evaluate(variables);
-            return Evaluator(operandResult);
+            return Evaluator.Function(operandResult);
+        }
+
+        public override string ToString()
+        {
+            return String.Format(Evaluator.FormatString, Operand.ToString());
         }
     }
 }

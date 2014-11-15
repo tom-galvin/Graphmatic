@@ -21,7 +21,19 @@ namespace Graphmatic.Expressions.Parsing
 
         public override double Evaluate(Dictionary<char, double> variables)
         {
-            return variables[Variable];
+            try
+            {
+                return variables[Variable];
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                throw new ApplicationException("No variable " + Variable + " is defined.", e);
+            }
+        }
+
+        public override string ToString()
+        {
+            return Variable.ToString();
         }
     }
 }

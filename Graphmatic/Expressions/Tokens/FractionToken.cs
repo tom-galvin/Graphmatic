@@ -93,7 +93,7 @@ namespace Graphmatic.Expressions.Tokens
             Height = Top.Height + Bottom.Height + 3;
         }
 
-        public static readonly BinaryEvaluator Evaluator = (fracTop, fracBottom) => fracTop / fracBottom;
+        public static readonly BinaryEvaluator Evaluator = new BinaryEvaluator((fracTop, fracBottom) => fracTop / fracBottom, "({0})/({1})");
         public ParseTreeNode Parse()
         {
             return new BinaryParseTreeNode(Evaluator, Top.Parse(), Bottom.Parse());

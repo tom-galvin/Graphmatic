@@ -37,7 +37,12 @@ namespace Graphmatic.Expressions.Parsing
         {
             double leftResult = Left.Evaluate(variables);
             double rightResult = Right.Evaluate(variables);
-            return Evaluator(leftResult, rightResult);
+            return Evaluator.Function(leftResult, rightResult);
+        }
+
+        public override string ToString()
+        {
+            return String.Format(Evaluator.FormatString, Left.ToString(), Right.ToString());
         }
     }
 }

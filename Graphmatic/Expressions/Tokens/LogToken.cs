@@ -193,10 +193,14 @@ namespace Graphmatic.Expressions.Tokens
             return SimplificationType.None;
         }
 
-        public static readonly BinaryEvaluator Evaluator = (logBase, logOperand) => Math.Log(logOperand, logBase);
+        public static readonly UnaryEvaluator NaturalLogEvaluator = new UnaryEvaluator(logOperand => Math.Log(logOperand), "ln({0})");
+        public static readonly BinaryEvaluator Evaluator = new BinaryEvaluator((logBase, logOperand) => Math.Log(logOperand, logBase), "log[{0}]({1})");
         public ParseTreeNode Parse()
         {
-            return new BinaryParseTreeNode(Evaluator, Base.Parse(), Operand.Parse());
+            if (Base.Count == 1 && Base[0] is ConstantToken && (Base[0] as ConstantToken).Value == ConstantToken.ConstantType.E)
+                return new UnaryParseTreeNode(NaturalLogEvaluator, Operand.Parse());
+            else
+                return new BinaryParseTreeNode(Evaluator, Base.Parse(), Operand.Parse());
         }
 
         private enum SimplificationType

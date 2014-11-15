@@ -13,10 +13,10 @@ namespace Graphmatic.Expressions.Tokens
     {
         public static readonly Dictionary<string, UnaryEvaluator> Evaluators = new Dictionary<string, UnaryEvaluator>()
         {
-            { "sin", x => Math.Sin(x) },
-            { "cos", x => Math.Cos(x) },
-            { "tan", x => Math.Tan(x) },
-            { "", x => x },
+            { "sin", new UnaryEvaluator(x => Math.Sin(x), "sin({0})") },
+            { "cos", new UnaryEvaluator(x => Math.Cos(x), "cos({0})") },
+            { "tan", new UnaryEvaluator(x => Math.Tan(x), "tan({0})") },
+            { "", new UnaryEvaluator(x => x, "({0})") },
         };
 
         public override int BaselineOffset
