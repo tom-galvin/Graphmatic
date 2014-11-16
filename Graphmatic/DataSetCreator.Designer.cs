@@ -34,14 +34,14 @@ namespace Graphmatic
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.listBoxVariables = new System.Windows.Forms.ListBox();
-            this.labelVariables = new System.Windows.Forms.Label();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStripVariableList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.moveUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelVariables = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStripVariableList.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +59,7 @@ namespace Graphmatic
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(73, 161);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -81,15 +82,6 @@ namespace Graphmatic
             this.listBoxVariables.TabIndex = 0;
             this.toolTip.SetToolTip(this.listBoxVariables, "Right-click to add or remove variables.");
             this.listBoxVariables.SelectedIndexChanged += new System.EventHandler(this.listBoxVariables_SelectedIndexChanged);
-            // 
-            // labelVariables
-            // 
-            this.labelVariables.AutoSize = true;
-            this.labelVariables.Location = new System.Drawing.Point(12, 9);
-            this.labelVariables.Name = "labelVariables";
-            this.labelVariables.Size = new System.Drawing.Size(57, 15);
-            this.labelVariables.TabIndex = 3;
-            this.labelVariables.Text = "Variables:";
             // 
             // contextMenuStripVariableList
             // 
@@ -139,6 +131,15 @@ namespace Graphmatic
             this.moveDownToolStripMenuItem.Text = "Move &Down";
             this.moveDownToolStripMenuItem.Click += new System.EventHandler(this.moveDownToolStripMenuItem_Click);
             // 
+            // labelVariables
+            // 
+            this.labelVariables.AutoSize = true;
+            this.labelVariables.Location = new System.Drawing.Point(12, 9);
+            this.labelVariables.Name = "labelVariables";
+            this.labelVariables.Size = new System.Drawing.Size(57, 15);
+            this.labelVariables.TabIndex = 3;
+            this.labelVariables.Text = "Variables:";
+            // 
             // DataSetCreator
             // 
             this.AcceptButton = this.buttonOK;
@@ -156,6 +157,7 @@ namespace Graphmatic
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create Data Set";
+            this.Load += new System.EventHandler(this.DataSetCreator_Load);
             this.contextMenuStripVariableList.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

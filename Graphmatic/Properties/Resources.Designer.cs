@@ -61,6 +61,17 @@ namespace Graphmatic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In development (dev. milestone 1.)
+        ///Available on Github: http://github.com/Quackmatic/Graphmatic
+        ///Originally developed for the AQA A2 Computing coursework..
+        /// </summary>
+        public static string AboutBoxMessage {
+            get {
+                return ResourceManager.GetString("AboutBoxMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap Add24 {
@@ -947,7 +958,7 @@ namespace Graphmatic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MS1.
+        ///   Looks up a localized string similar to Indev (MS1).
         /// </summary>
         public static string VersionString {
             get {

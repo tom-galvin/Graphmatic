@@ -60,6 +60,7 @@ namespace Graphmatic
                     newVariable,
                     0.0);
                 listBoxVariables.Items.Insert(index, newVariable);
+                listBoxVariables.SelectedIndex = index;
             }
         }
 
@@ -108,6 +109,11 @@ namespace Graphmatic
         {
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
+        }
+
+        private void DataSetCreator_Load(object sender, EventArgs e)
+        {
+            listBoxVariables_SelectedIndexChanged(sender, e); // fixes nasty IndexOutOfRangeException
         }
     }
 }

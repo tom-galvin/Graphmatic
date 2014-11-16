@@ -40,8 +40,12 @@ namespace Graphmatic
             this.saveasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.listViewResources = new System.Windows.Forms.ListView();
@@ -66,6 +70,14 @@ namespace Graphmatic
             this.equationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelImageViewer = new System.Windows.Forms.Panel();
+            this.toolStripContainerImageViewer = new System.Windows.Forms.ToolStripContainer();
+            this.pictureBoxImageViewer = new System.Windows.Forms.PictureBox();
+            this.toolStripImageViewer = new System.Windows.Forms.ToolStrip();
+            this.toolStripDropDownButtonView = new System.Windows.Forms.ToolStripDropDownButton();
+            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.centerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stretchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelPageEditor = new System.Windows.Forms.Panel();
             this.toolStripContainerPageEditor = new System.Windows.Forms.ToolStripContainer();
             this.toolStripPageEditor = new System.Windows.Forms.ToolStrip();
@@ -98,14 +110,6 @@ namespace Graphmatic
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.display = new System.Windows.Forms.PictureBox();
-            this.panelImageViewer = new System.Windows.Forms.Panel();
-            this.toolStripImageViewer = new System.Windows.Forms.ToolStrip();
-            this.toolStripContainerImageViewer = new System.Windows.Forms.ToolStripContainer();
-            this.pictureBoxImageViewer = new System.Windows.Forms.PictureBox();
-            this.toolStripDropDownButtonView = new System.Windows.Forms.ToolStripDropDownButton();
-            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.centerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stretchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -113,25 +117,27 @@ namespace Graphmatic
             this.splitContainer.SuspendLayout();
             this.contextMenuStripResources.SuspendLayout();
             this.toolStripResources.SuspendLayout();
+            this.panelImageViewer.SuspendLayout();
+            this.toolStripContainerImageViewer.ContentPanel.SuspendLayout();
+            this.toolStripContainerImageViewer.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainerImageViewer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImageViewer)).BeginInit();
+            this.toolStripImageViewer.SuspendLayout();
             this.panelPageEditor.SuspendLayout();
             this.toolStripContainerPageEditor.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainerPageEditor.ContentPanel.SuspendLayout();
             this.toolStripContainerPageEditor.SuspendLayout();
             this.toolStripPageEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
-            this.panelImageViewer.SuspendLayout();
-            this.toolStripImageViewer.SuspendLayout();
-            this.toolStripContainerImageViewer.ContentPanel.SuspendLayout();
-            this.toolStripContainerImageViewer.TopToolStripPanel.SuspendLayout();
-            this.toolStripContainerImageViewer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImageViewer)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.toolsToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1012, 24);
@@ -210,6 +216,23 @@ namespace Graphmatic
             this.exitToolStripMenuItem.ToolTipText = "Exit the program";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resourcesToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "&View";
+            // 
+            // resourcesToolStripMenuItem
+            // 
+            this.resourcesToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.zones;
+            this.resourcesToolStripMenuItem.Name = "resourcesToolStripMenuItem";
+            this.resourcesToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.resourcesToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.resourcesToolStripMenuItem.Text = "&Resources";
+            this.resourcesToolStripMenuItem.Click += new System.EventHandler(this.resourcesToolStripMenuItem_Click);
+            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -226,6 +249,21 @@ namespace Graphmatic
             this.optionsToolStripMenuItem.Text = "&Settings...";
             this.optionsToolStripMenuItem.ToolTipText = "Edit settings relating to the functioning of the program";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutToolStripMenuItem.Text = "&About...";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -436,7 +474,7 @@ namespace Graphmatic
             this.toolStripToggleHidden.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripToggleHidden.Name = "toolStripToggleHidden";
             this.toolStripToggleHidden.Size = new System.Drawing.Size(23, 22);
-            this.toolStripToggleHidden.ToolTipText = "Toggle Hidden";
+            this.toolStripToggleHidden.ToolTipText = "Toggle Hidden resources";
             this.toolStripToggleHidden.Click += new System.EventHandler(this.toolStripToggleHidden_Click);
             // 
             // toolStripDropDownButtonAdd
@@ -482,6 +520,95 @@ namespace Graphmatic
             this.pictureToolStripMenuItem.Text = "&Picture...";
             this.pictureToolStripMenuItem.ToolTipText = "Add a Picture to the document";
             this.pictureToolStripMenuItem.Click += new System.EventHandler(this.pictureToolStripMenuItem_Click);
+            // 
+            // panelImageViewer
+            // 
+            this.panelImageViewer.Controls.Add(this.toolStripContainerImageViewer);
+            this.panelImageViewer.Location = new System.Drawing.Point(62, 62);
+            this.panelImageViewer.Name = "panelImageViewer";
+            this.panelImageViewer.Size = new System.Drawing.Size(299, 276);
+            this.panelImageViewer.TabIndex = 1;
+            // 
+            // toolStripContainerImageViewer
+            // 
+            // 
+            // toolStripContainerImageViewer.ContentPanel
+            // 
+            this.toolStripContainerImageViewer.ContentPanel.Controls.Add(this.pictureBoxImageViewer);
+            this.toolStripContainerImageViewer.ContentPanel.Size = new System.Drawing.Size(299, 251);
+            this.toolStripContainerImageViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStripContainerImageViewer.LeftToolStripPanelVisible = false;
+            this.toolStripContainerImageViewer.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainerImageViewer.Name = "toolStripContainerImageViewer";
+            this.toolStripContainerImageViewer.RightToolStripPanelVisible = false;
+            this.toolStripContainerImageViewer.Size = new System.Drawing.Size(299, 276);
+            this.toolStripContainerImageViewer.TabIndex = 3;
+            this.toolStripContainerImageViewer.Text = "toolStripContainer1";
+            // 
+            // toolStripContainerImageViewer.TopToolStripPanel
+            // 
+            this.toolStripContainerImageViewer.TopToolStripPanel.Controls.Add(this.toolStripImageViewer);
+            // 
+            // pictureBoxImageViewer
+            // 
+            this.pictureBoxImageViewer.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pictureBoxImageViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxImageViewer.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxImageViewer.Name = "pictureBoxImageViewer";
+            this.pictureBoxImageViewer.Size = new System.Drawing.Size(299, 251);
+            this.pictureBoxImageViewer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxImageViewer.TabIndex = 0;
+            this.pictureBoxImageViewer.TabStop = false;
+            // 
+            // toolStripImageViewer
+            // 
+            this.toolStripImageViewer.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStripImageViewer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButtonView});
+            this.toolStripImageViewer.Location = new System.Drawing.Point(3, 0);
+            this.toolStripImageViewer.Name = "toolStripImageViewer";
+            this.toolStripImageViewer.Size = new System.Drawing.Size(41, 25);
+            this.toolStripImageViewer.TabIndex = 0;
+            this.toolStripImageViewer.Text = "toolStrip1";
+            // 
+            // toolStripDropDownButtonView
+            // 
+            this.toolStripDropDownButtonView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButtonView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zoomToolStripMenuItem,
+            this.centerToolStripMenuItem,
+            this.stretchToolStripMenuItem});
+            this.toolStripDropDownButtonView.Image = global::Graphmatic.Properties.Resources.Image16;
+            this.toolStripDropDownButtonView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButtonView.Name = "toolStripDropDownButtonView";
+            this.toolStripDropDownButtonView.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButtonView.Text = "View";
+            this.toolStripDropDownButtonView.ToolTipText = "Image view settings";
+            // 
+            // zoomToolStripMenuItem
+            // 
+            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.zoomToolStripMenuItem.Text = "&Zoom";
+            this.zoomToolStripMenuItem.ToolTipText = "Stretch the image as much as possible to fill the screen without changing the asp" +
+    "ect ratio";
+            this.zoomToolStripMenuItem.Click += new System.EventHandler(this.zoomToolStripMenuItem_Click);
+            // 
+            // centerToolStripMenuItem
+            // 
+            this.centerToolStripMenuItem.Name = "centerToolStripMenuItem";
+            this.centerToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.centerToolStripMenuItem.Text = "&Center";
+            this.centerToolStripMenuItem.ToolTipText = "Show the image unzoomed in the center of the page";
+            this.centerToolStripMenuItem.Click += new System.EventHandler(this.centerToolStripMenuItem_Click);
+            // 
+            // stretchToolStripMenuItem
+            // 
+            this.stretchToolStripMenuItem.Name = "stretchToolStripMenuItem";
+            this.stretchToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.stretchToolStripMenuItem.Text = "&Stretch";
+            this.stretchToolStripMenuItem.ToolTipText = "Stretch the image to cover the whole page";
+            this.stretchToolStripMenuItem.Click += new System.EventHandler(this.stretchToolStripMenuItem_Click);
             // 
             // panelPageEditor
             // 
@@ -811,95 +938,6 @@ namespace Graphmatic
             this.display.TabIndex = 0;
             this.display.TabStop = false;
             // 
-            // panelImageViewer
-            // 
-            this.panelImageViewer.Controls.Add(this.toolStripContainerImageViewer);
-            this.panelImageViewer.Location = new System.Drawing.Point(62, 62);
-            this.panelImageViewer.Name = "panelImageViewer";
-            this.panelImageViewer.Size = new System.Drawing.Size(299, 276);
-            this.panelImageViewer.TabIndex = 1;
-            // 
-            // toolStripImageViewer
-            // 
-            this.toolStripImageViewer.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStripImageViewer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButtonView});
-            this.toolStripImageViewer.Location = new System.Drawing.Point(3, 0);
-            this.toolStripImageViewer.Name = "toolStripImageViewer";
-            this.toolStripImageViewer.Size = new System.Drawing.Size(72, 25);
-            this.toolStripImageViewer.TabIndex = 0;
-            this.toolStripImageViewer.Text = "toolStrip1";
-            // 
-            // toolStripContainerImageViewer
-            // 
-            // 
-            // toolStripContainerImageViewer.ContentPanel
-            // 
-            this.toolStripContainerImageViewer.ContentPanel.Controls.Add(this.pictureBoxImageViewer);
-            this.toolStripContainerImageViewer.ContentPanel.Size = new System.Drawing.Size(299, 226);
-            this.toolStripContainerImageViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainerImageViewer.LeftToolStripPanelVisible = false;
-            this.toolStripContainerImageViewer.Location = new System.Drawing.Point(0, 0);
-            this.toolStripContainerImageViewer.Name = "toolStripContainerImageViewer";
-            this.toolStripContainerImageViewer.RightToolStripPanelVisible = false;
-            this.toolStripContainerImageViewer.Size = new System.Drawing.Size(299, 276);
-            this.toolStripContainerImageViewer.TabIndex = 3;
-            this.toolStripContainerImageViewer.Text = "toolStripContainer1";
-            // 
-            // toolStripContainerImageViewer.TopToolStripPanel
-            // 
-            this.toolStripContainerImageViewer.TopToolStripPanel.Controls.Add(this.toolStripImageViewer);
-            // 
-            // pictureBoxImageViewer
-            // 
-            this.pictureBoxImageViewer.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.pictureBoxImageViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxImageViewer.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxImageViewer.Name = "pictureBoxImageViewer";
-            this.pictureBoxImageViewer.Size = new System.Drawing.Size(299, 226);
-            this.pictureBoxImageViewer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxImageViewer.TabIndex = 0;
-            this.pictureBoxImageViewer.TabStop = false;
-            // 
-            // toolStripDropDownButtonView
-            // 
-            this.toolStripDropDownButtonView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButtonView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zoomToolStripMenuItem,
-            this.centerToolStripMenuItem,
-            this.stretchToolStripMenuItem});
-            this.toolStripDropDownButtonView.Image = global::Graphmatic.Properties.Resources.Image16;
-            this.toolStripDropDownButtonView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButtonView.Name = "toolStripDropDownButtonView";
-            this.toolStripDropDownButtonView.Size = new System.Drawing.Size(29, 22);
-            this.toolStripDropDownButtonView.Text = "View";
-            this.toolStripDropDownButtonView.ToolTipText = "Image view settings";
-            // 
-            // zoomToolStripMenuItem
-            // 
-            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.zoomToolStripMenuItem.Text = "&Zoom";
-            this.zoomToolStripMenuItem.ToolTipText = "Stretch the image as much as possible to fill the screen without changing the asp" +
-    "ect ratio";
-            this.zoomToolStripMenuItem.Click += new System.EventHandler(this.zoomToolStripMenuItem_Click);
-            // 
-            // centerToolStripMenuItem
-            // 
-            this.centerToolStripMenuItem.Name = "centerToolStripMenuItem";
-            this.centerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.centerToolStripMenuItem.Text = "&Center";
-            this.centerToolStripMenuItem.ToolTipText = "Show the image unzoomed in the center of the page";
-            this.centerToolStripMenuItem.Click += new System.EventHandler(this.centerToolStripMenuItem_Click);
-            // 
-            // stretchToolStripMenuItem
-            // 
-            this.stretchToolStripMenuItem.Name = "stretchToolStripMenuItem";
-            this.stretchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.stretchToolStripMenuItem.Text = "&Stretch";
-            this.stretchToolStripMenuItem.ToolTipText = "Stretch the image to cover the whole page";
-            this.stretchToolStripMenuItem.Click += new System.EventHandler(this.stretchToolStripMenuItem_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -926,6 +964,15 @@ namespace Graphmatic
             this.contextMenuStripResources.ResumeLayout(false);
             this.toolStripResources.ResumeLayout(false);
             this.toolStripResources.PerformLayout();
+            this.panelImageViewer.ResumeLayout(false);
+            this.toolStripContainerImageViewer.ContentPanel.ResumeLayout(false);
+            this.toolStripContainerImageViewer.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainerImageViewer.TopToolStripPanel.PerformLayout();
+            this.toolStripContainerImageViewer.ResumeLayout(false);
+            this.toolStripContainerImageViewer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImageViewer)).EndInit();
+            this.toolStripImageViewer.ResumeLayout(false);
+            this.toolStripImageViewer.PerformLayout();
             this.panelPageEditor.ResumeLayout(false);
             this.toolStripContainerPageEditor.BottomToolStripPanel.ResumeLayout(false);
             this.toolStripContainerPageEditor.BottomToolStripPanel.PerformLayout();
@@ -935,15 +982,6 @@ namespace Graphmatic
             this.toolStripPageEditor.ResumeLayout(false);
             this.toolStripPageEditor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
-            this.panelImageViewer.ResumeLayout(false);
-            this.toolStripImageViewer.ResumeLayout(false);
-            this.toolStripImageViewer.PerformLayout();
-            this.toolStripContainerImageViewer.ContentPanel.ResumeLayout(false);
-            this.toolStripContainerImageViewer.TopToolStripPanel.ResumeLayout(false);
-            this.toolStripContainerImageViewer.TopToolStripPanel.PerformLayout();
-            this.toolStripContainerImageViewer.ResumeLayout(false);
-            this.toolStripContainerImageViewer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImageViewer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1026,6 +1064,10 @@ namespace Graphmatic
         private ToolStripMenuItem zoomToolStripMenuItem;
         private ToolStripMenuItem centerToolStripMenuItem;
         private ToolStripMenuItem stretchToolStripMenuItem;
+        private ToolStripMenuItem viewToolStripMenuItem;
+        private ToolStripMenuItem resourcesToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

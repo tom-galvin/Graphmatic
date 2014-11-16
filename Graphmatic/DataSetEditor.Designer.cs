@@ -42,7 +42,7 @@
             this.buttonOK.Location = new System.Drawing.Point(316, 298);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 0;
+            this.buttonOK.TabIndex = 1;
             this.buttonOK.Text = "&OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -56,7 +56,7 @@
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(379, 280);
-            this.dataGridView.TabIndex = 1;
+            this.dataGridView.TabIndex = 0;
             this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
             this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
             this.dataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView_RowsAdded);
@@ -68,7 +68,7 @@
             this.buttonEditVariables.Location = new System.Drawing.Point(154, 298);
             this.buttonEditVariables.Name = "buttonEditVariables";
             this.buttonEditVariables.Size = new System.Drawing.Size(75, 23);
-            this.buttonEditVariables.TabIndex = 2;
+            this.buttonEditVariables.TabIndex = 3;
             this.buttonEditVariables.Text = "&Variables...";
             this.buttonEditVariables.UseVisualStyleBackColor = true;
             this.buttonEditVariables.Click += new System.EventHandler(this.buttonEditVariables_Click);
@@ -79,7 +79,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(235, 298);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 3;
+            this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);

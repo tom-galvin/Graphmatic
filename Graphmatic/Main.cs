@@ -152,5 +152,19 @@ namespace Graphmatic
         {
             RefreshResourceListView();
         }
+
+        private void resourcesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listViewResources.Focus();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                Properties.Resources.AboutBoxMessage,
+                "About " + String.Format(Properties.Resources.TitleBarName, Properties.Resources.VersionString),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
     }
 }

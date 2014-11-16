@@ -82,6 +82,7 @@ namespace Graphmatic
                 if (MessageBox.Show("Editing the variables will save any changed data beforehand.\r\n" +
                     "Are you sure you want to do this?", "Edit Variables", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
                     return;
+                SaveChanges();
                 DialogResult = System.Windows.Forms.DialogResult.None;
             }
             DataSetCreator creator = new DataSetCreator(DataSet);
