@@ -9,7 +9,7 @@ namespace Graphmatic
 {
     public partial class Main : Form
     {
-        private void LoadPicturePanel(Picture picture)
+        private void OpenPictureViewer(Picture picture)
         {
             CloseResourcePanels();
             panelImageViewer.Visible = panelImageViewer.Enabled = true;

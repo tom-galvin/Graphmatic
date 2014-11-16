@@ -16,13 +16,25 @@ namespace Graphmatic
 
         private void InitializeEditors()
         {
-            RegisterEditor<Equation>(r => new EquationEditor(r as Equation).ShowDialog());
-            RegisterEditor<DataSet>(r => new DataSetEditor(r as DataSet).ShowDialog());
-            RegisterEditor<Picture>(r => LoadPicturePanel(r as Picture));
+            RegisterEditor<Equation>(OpenEquationEditor);
+            RegisterEditor<DataSet>(OpenDataSetEditor);
+            RegisterEditor<Picture>(OpenPictureViewer);
 
             panelPageEditor.Dock = DockStyle.Fill;
             panelImageViewer.Dock = DockStyle.Fill;
             CloseResourcePanels();
+        }
+
+        private void OpenEquationEditor(Equation equation)
+        {
+            new EquationEditor(equation).ShowDialog();
+            DocumentModified = true;
+        }
+
+        private void OpenDataSetEditor(DataSet dataSet)
+        {
+            new DataSetEditor(dataSet).ShowDialog();
+            DocumentModified = true;
         }
 
         private void CloseResourcePanels()
@@ -31,9 +43,9 @@ namespace Graphmatic
             panelImageViewer.Visible = panelImageViewer.Enabled = false;
         }
 
-        private void RegisterEditor<T>(Action<Resource> editor)
+        private void RegisterEditor<T>(Action<T> editor) where T : Resource
         {
-            ResourceEditors.Add(typeof(T), editor);
+            ResourceEditors.Add(typeof(T), r => editor(r as T));
         }
 
         private void listViewResources_Resize(object sender, EventArgs e)
@@ -150,7 +162,6 @@ namespace Graphmatic
             {
                 CurrentResource = resource;
                 ResourceEditors[resourceType](resource);
-                DocumentModified = true;
                 RefreshResourceListView();
             }
             else
