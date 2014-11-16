@@ -56,7 +56,7 @@ namespace Graphmatic
             }
 
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
+            dataGridView.Rows.Clear();
             foreach (double[] rowData in DataSet)
             {
                 int newRowIndex = dataGridView.Rows.Add();
@@ -82,12 +82,13 @@ namespace Graphmatic
                 if (MessageBox.Show("Editing the variables will save any changed data beforehand.\r\n" +
                     "Are you sure you want to do this?", "Edit Variables", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
                     return;
+                DialogResult = System.Windows.Forms.DialogResult.None;
             }
-            SaveChanges();
             DataSetCreator creator = new DataSetCreator(DataSet);
-            if (creator.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (creator.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 RefreshDataList();
+                DialogResult = System.Windows.Forms.DialogResult.None;
             }
         }
 
@@ -96,6 +97,7 @@ namespace Graphmatic
             if (e.Exception is FormatException)
             {
                 MessageBox.Show("The number entered is invalid.", "Format Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult = System.Windows.Forms.DialogResult.None;
             }
             else
             {
@@ -124,6 +126,7 @@ namespace Graphmatic
                     if (row.Cells[i].Value == null)
                     {
                         MessageBox.Show("This cell is empty. Please put a value in it or remove the row.", "Save Changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        DialogResult = System.Windows.Forms.DialogResult.None;
                         dataGridView.ClearSelection();
                         row.Cells[i].Selected = true;
                         return;
@@ -146,7 +149,10 @@ namespace Graphmatic
                     "Cancel",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
+                {
+                    DialogResult = System.Windows.Forms.DialogResult.None;
                     return;
+                }
             }
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Close();
@@ -167,6 +173,11 @@ namespace Graphmatic
             SaveChanges();
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
+        }
+
+        private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            DataChanged = true;
         }
     }
 }

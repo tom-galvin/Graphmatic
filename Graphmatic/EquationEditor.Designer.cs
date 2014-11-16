@@ -155,6 +155,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Equation";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EquationEditor_FormClosing);
             this.Load += new System.EventHandler(this.EquationEditor_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

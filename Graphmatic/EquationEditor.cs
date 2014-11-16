@@ -89,5 +89,10 @@ namespace Graphmatic
             Text = Equation.Name + " - Equation Editor";
             buttonEdit.Select();
         }
+
+        private void EquationEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // MessageBox.Show(e.CloseReason.ToString());
+        }
     }
 }

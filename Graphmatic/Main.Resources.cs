@@ -118,13 +118,15 @@ namespace Graphmatic
         {
             if (resource is Equation)
             {
-                new EquationEditor(resource as Equation).ShowDialog();
+                EquationEditor editor = new EquationEditor(resource as Equation);
+                editor.ShowDialog();
                 DocumentModified = true;
                 RefreshResourceListView();
             }
             else if (resource is DataSet)
             {
-                new DataSetEditor(resource as DataSet).ShowDialog();
+                DataSetEditor editor = new DataSetEditor(resource as DataSet);
+                editor.ShowDialog();
                 DocumentModified = true;
                 RefreshResourceListView();
             }
@@ -217,6 +219,7 @@ namespace Graphmatic
                 DataSetCreator creator = new DataSetCreator(dataSet);
                 if (creator.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
+                    DialogResult = System.Windows.Forms.DialogResult.None;
                     AddResource(dataSet);
                     OpenResourceEditor(dataSet);
                 }
