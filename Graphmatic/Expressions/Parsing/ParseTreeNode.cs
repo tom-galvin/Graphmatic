@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Graphmatic.Expressions.Parsing
 {
+    /// <summary>
+    /// Represents a singular node in the parse tree, from which other nodes may be referenced.
+    /// </summary>
     public abstract class ParseTreeNode
     {
         /// <summary>
@@ -15,6 +18,10 @@ namespace Graphmatic.Expressions.Parsing
         /// <returns>Returns the result of the evaluation.</returns>
         public abstract double Evaluate(Dictionary<char, double> variables);
 
+        /// <summary>
+        /// Convert this parse tree node into a string representation of the syntax it represents.
+        /// </summary>
+        /// <returns>A string representation of the syntax it represents.</returns>
         public abstract override string ToString();
     }
 }

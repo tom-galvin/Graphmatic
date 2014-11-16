@@ -7,6 +7,9 @@ using Graphmatic.Expressions.Tokens;
 
 namespace Graphmatic.Expressions.Parsing
 {
+    /// <summary>
+    /// Represents errors that occur during evaluation of a parse tree.
+    /// </summary>
     [Serializable]
     public class EvaluationException : Exception
     {
