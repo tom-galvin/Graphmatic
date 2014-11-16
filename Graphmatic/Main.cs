@@ -146,5 +146,10 @@ namespace Graphmatic
         {
             RefreshResourceListView();
         }
+
+        private void toolStripTogglePictures_Click(object sender, EventArgs e)
+        {
+            RefreshResourceListView();
+        }
     }
 }

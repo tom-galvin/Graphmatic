@@ -41,7 +41,6 @@
             // buttonEdit
             // 
             this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEdit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonEdit.Location = new System.Drawing.Point(350, 164);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(75, 23);
@@ -53,7 +52,6 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonOK.Location = new System.Drawing.Point(350, 193);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
@@ -71,6 +69,7 @@
             this.textBoxPlotted.ReadOnly = true;
             this.textBoxPlotted.Size = new System.Drawing.Size(27, 23);
             this.textBoxPlotted.TabIndex = 3;
+            this.textBoxPlotted.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxPlotted.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPlotted_KeyPress);
             // 
             // labelPlotted
@@ -102,6 +101,7 @@
             this.textBoxVarying.ReadOnly = true;
             this.textBoxVarying.Size = new System.Drawing.Size(27, 23);
             this.textBoxVarying.TabIndex = 6;
+            this.textBoxVarying.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxVarying.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxVarying_KeyPress);
             // 
             // labelDescription

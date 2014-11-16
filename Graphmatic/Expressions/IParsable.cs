@@ -7,6 +7,9 @@ using Graphmatic.Expressions.Parsing;
 
 namespace Graphmatic.Expressions
 {
+    /// <summary>
+    /// Defines a token for expression tree elements that can be parsed to form a parse tree.
+    /// </summary>
     public interface IParsable
     {
         /// <summary>

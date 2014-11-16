@@ -88,6 +88,7 @@ namespace Graphmatic
             if (creator.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 RefreshDataList();
+                DataChanged = false;
                 DialogResult = System.Windows.Forms.DialogResult.None;
             }
         }
@@ -105,7 +106,7 @@ namespace Graphmatic
             }
         }
 
-        private void SaveChanges()
+        private bool SaveChanges()
         {
             List<double[]> rows = new List<double[]>();
             foreach (DataGridViewRow row in dataGridView.Rows)
@@ -126,10 +127,9 @@ namespace Graphmatic
                     if (row.Cells[i].Value == null)
                     {
                         MessageBox.Show("This cell is empty. Please put a value in it or remove the row.", "Save Changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        DialogResult = System.Windows.Forms.DialogResult.None;
                         dataGridView.ClearSelection();
                         row.Cells[i].Selected = true;
-                        return;
+                        return false;
                     }
                     rowData[i] = (double)row.Cells[i].Value;
                 }
@@ -138,6 +138,7 @@ namespace Graphmatic
             DataSet.Set(rows);
             RefreshDataList();
             DataChanged = false;
+            return true;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -170,9 +171,11 @@ namespace Graphmatic
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            SaveChanges();
-            DialogResult = System.Windows.Forms.DialogResult.OK;
-            Close();
+            if (SaveChanges())
+            {
+                DialogResult = System.Windows.Forms.DialogResult.OK;
+                Close();
+            }
         }
 
         private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)

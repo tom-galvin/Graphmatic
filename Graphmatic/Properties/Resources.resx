@@ -382,4 +382,13 @@
   <data name="AllowedVariables" xml:space="preserve">
     <value>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</value>
   </data>
+  <data name="Image16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\image16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\image32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Images16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,6 +30,7 @@ namespace Graphmatic.Interaction
             { "Page", xml => new Page(xml) },
             { "Equation", xml => new Equation(xml) },
             { "DataSet", xml => new DataSet(xml) },
+            { "Picture", xml => new Picture(xml) },
             { "Resource", xml => new Resource(xml) }
         };
 
@@ -42,6 +45,23 @@ namespace Graphmatic.Interaction
             if (!ResourceDeserializers.ContainsKey(elementName))
                 throw new IOException("Unknown resource type: " + elementName);
             return ResourceDeserializers[elementName](xml);
+        }
+
+        public static byte[] ToByteArray(this Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
+
+        public static Image ImageToByteArray(byte[] data)
+        {
+            using (MemoryStream ms = new MemoryStream(data))
+            {
+                return Image.FromStream(ms);
+            }
         }
     }
 }

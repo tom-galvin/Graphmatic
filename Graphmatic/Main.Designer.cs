@@ -60,10 +60,12 @@ namespace Graphmatic
             this.toolStripTogglePages = new System.Windows.Forms.ToolStripButton();
             this.toolStripToggleEquations = new System.Windows.Forms.ToolStripButton();
             this.toolStripToggleDataSets = new System.Windows.Forms.ToolStripButton();
+            this.toolStripTogglePictures = new System.Windows.Forms.ToolStripButton();
             this.toolStripToggleHidden = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButtonAdd = new System.Windows.Forms.ToolStripDropDownButton();
             this.equationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelPageEditor = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.toolStripPageEditor = new System.Windows.Forms.ToolStrip();
@@ -341,6 +343,7 @@ namespace Graphmatic
             this.imageListResources.Images.SetKeyName(1, "Equation");
             this.imageListResources.Images.SetKeyName(2, "Table");
             this.imageListResources.Images.SetKeyName(3, "Data");
+            this.imageListResources.Images.SetKeyName(4, "Picture");
             // 
             // toolStripResources
             // 
@@ -349,6 +352,7 @@ namespace Graphmatic
             this.toolStripTogglePages,
             this.toolStripToggleEquations,
             this.toolStripToggleDataSets,
+            this.toolStripTogglePictures,
             this.toolStripToggleHidden,
             this.toolStripDropDownButtonAdd});
             this.toolStripResources.Location = new System.Drawing.Point(0, 0);
@@ -396,6 +400,19 @@ namespace Graphmatic
             this.toolStripToggleDataSets.ToolTipText = "Toggle Data Sets";
             this.toolStripToggleDataSets.Click += new System.EventHandler(this.toolStripToggleDataSets_Click);
             // 
+            // toolStripTogglePictures
+            // 
+            this.toolStripTogglePictures.Checked = true;
+            this.toolStripTogglePictures.CheckOnClick = true;
+            this.toolStripTogglePictures.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolStripTogglePictures.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripTogglePictures.Image = global::Graphmatic.Properties.Resources.Images16;
+            this.toolStripTogglePictures.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripTogglePictures.Name = "toolStripTogglePictures";
+            this.toolStripTogglePictures.Size = new System.Drawing.Size(23, 22);
+            this.toolStripTogglePictures.ToolTipText = "Toggle Pictures";
+            this.toolStripTogglePictures.Click += new System.EventHandler(this.toolStripTogglePictures_Click);
+            // 
             // toolStripToggleHidden
             // 
             this.toolStripToggleHidden.CheckOnClick = true;
@@ -412,7 +429,8 @@ namespace Graphmatic
             this.toolStripDropDownButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButtonAdd.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.equationToolStripMenuItem,
-            this.dataSetToolStripMenuItem});
+            this.dataSetToolStripMenuItem,
+            this.pictureToolStripMenuItem});
             this.toolStripDropDownButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButtonAdd.Image")));
             this.toolStripDropDownButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButtonAdd.Name = "toolStripDropDownButtonAdd";
@@ -439,6 +457,16 @@ namespace Graphmatic
             this.dataSetToolStripMenuItem.Text = "&Data Set...";
             this.dataSetToolStripMenuItem.ToolTipText = "Add a data set to the document";
             this.dataSetToolStripMenuItem.Click += new System.EventHandler(this.dataSetToolStripMenuItem_Click);
+            // 
+            // pictureToolStripMenuItem
+            // 
+            this.pictureToolStripMenuItem.Name = "pictureToolStripMenuItem";
+            this.pictureToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.P)));
+            this.pictureToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.pictureToolStripMenuItem.Text = "&Picture...";
+            this.pictureToolStripMenuItem.ToolTipText = "Add a Picture to the document";
+            this.pictureToolStripMenuItem.Click += new System.EventHandler(this.pictureToolStripMenuItem_Click);
             // 
             // panelPageEditor
             // 
@@ -876,6 +904,8 @@ namespace Graphmatic
         private ToolStripSeparator toolStripMenuItem4;
         private ToolStripMenuItem dataSetToolStripMenuItem;
         private ToolStripButton toolStripToggleHidden;
+        private ToolStripButton toolStripTogglePictures;
+        private ToolStripMenuItem pictureToolStripMenuItem;
     }
 }
 

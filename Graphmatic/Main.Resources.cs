@@ -29,6 +29,8 @@ namespace Graphmatic
                 item.ImageIndex = 1;
             else if (resource is DataSet)
                 item.ImageIndex = 2;
+            else if (resource is Picture)
+                item.ImageIndex = 4;
             else
                 item.ImageIndex = 3;
             return item;
@@ -41,6 +43,7 @@ namespace Graphmatic
                     (r is Equation && toolStripToggleEquations.Checked) ||
                     (r is Page && toolStripTogglePages.Checked) ||
                     (r is DataSet && toolStripToggleDataSets.Checked) ||
+                    (r is Picture && toolStripTogglePictures.Checked) ||
                     (r.Hidden && toolStripToggleHidden.Checked));
             listViewResources.Items.Clear();
 
@@ -223,6 +226,34 @@ namespace Graphmatic
                     AddResource(dataSet);
                     OpenResourceEditor(dataSet);
                 }
+            }
+        }
+
+        private void pictureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog()
+            {
+                Filter = "Image files (*.png; *.jpg; *.jpe; *.jpeg; *.bmp; *.gif; *.tga; *.tif)|*.png;*.jpg;*.jpe;*.jpeg;*.bmp;*.gif;*.tga;*.tif|All files|*",
+                Title = "Import Image"
+            };
+
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string fileName = String.Join(".", dialog.FileName
+                    .Split('\\', '/')
+                    .Last()
+                    .Split('.')
+                    .Reverse()
+                    .Skip(1)
+                    .Reverse()
+                    .ToArray());
+
+                Picture picture = new Picture(Image.FromFile(dialog.FileName))
+                {
+                    Name = fileName
+                };
+                AddResource(picture);
+                OpenResourceEditor(picture);
             }
         }
     }

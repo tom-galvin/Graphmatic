@@ -129,6 +129,7 @@
     <Compile Include="Interaction\DataSet.cs" />
     <Compile Include="Interaction\Document.cs" />
     <Compile Include="Interaction\Equation.cs" />
+    <Compile Include="Interaction\Picture.cs" />
     <Compile Include="Interaction\Resource.cs" />
     <Compile Include="Interaction\Page.cs" />
     <Compile Include="ExpressionEditor.cs">
@@ -238,6 +239,9 @@
     <None Include="Resources\AddEquation24.png" />
     <None Include="Resources\pencil.png" />
     <None Include="Resources\blue-document-data.png" />
+    <Content Include="Resources\Image16.png" />
+    <Content Include="Resources\Image32.png" />
+    <Content Include="Resources\Images16.png" />
     <Content Include="Resources\Properties.ico" />
     <Content Include="Resources\CalcButtons\abs.png" />
     <Content Include="Resources\CalcButtons\add.png" />
