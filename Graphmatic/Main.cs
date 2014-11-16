@@ -116,7 +116,6 @@ namespace Graphmatic
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!CheckDocument()) return;
             Application.Exit();
         }
 
@@ -136,6 +135,16 @@ namespace Graphmatic
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!CheckDocument()) e.Cancel = true;
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripToggleHidden_Click(object sender, EventArgs e)
+        {
+            RefreshResourceListView();
         }
     }
 }

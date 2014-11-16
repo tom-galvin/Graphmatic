@@ -36,10 +36,12 @@
             this.labelDefaultPlottedVariable = new System.Windows.Forms.Label();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.colorChooserDefaultPageColor = new Graphmatic.ColorChooser();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.labelDefaultDataSetVariables = new System.Windows.Forms.Label();
+            this.textBoxDefaultDataSetVariables = new System.Windows.Forms.TextBox();
+            this.colorChooserDefaultPageColor = new Graphmatic.ColorChooser();
             this.tabControl.SuspendLayout();
             this.tabPageDefaults.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +60,8 @@
             // 
             // tabPageDefaults
             // 
+            this.tabPageDefaults.Controls.Add(this.textBoxDefaultDataSetVariables);
+            this.tabPageDefaults.Controls.Add(this.labelDefaultDataSetVariables);
             this.tabPageDefaults.Controls.Add(this.textBoxDefaultVaryingVariable);
             this.tabPageDefaults.Controls.Add(this.labelDefaultVaryingVariable);
             this.tabPageDefaults.Controls.Add(this.textBoxDefaultPlottedVariable);
@@ -122,14 +126,6 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Username:";
             // 
-            // colorChooserDefaultPageColor
-            // 
-            this.colorChooserDefaultPageColor.Color = System.Drawing.Color.Empty;
-            this.colorChooserDefaultPageColor.Location = new System.Drawing.Point(126, 9);
-            this.colorChooserDefaultPageColor.Name = "colorChooserDefaultPageColor";
-            this.colorChooserDefaultPageColor.Size = new System.Drawing.Size(55, 15);
-            this.colorChooserDefaultPageColor.TabIndex = 1;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -161,6 +157,30 @@
             this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // labelDefaultDataSetVariables
+            // 
+            this.labelDefaultDataSetVariables.AutoSize = true;
+            this.labelDefaultDataSetVariables.Location = new System.Drawing.Point(6, 62);
+            this.labelDefaultDataSetVariables.Name = "labelDefaultDataSetVariables";
+            this.labelDefaultDataSetVariables.Size = new System.Drawing.Size(141, 15);
+            this.labelDefaultDataSetVariables.TabIndex = 8;
+            this.labelDefaultDataSetVariables.Text = "Default data set variables:";
+            // 
+            // textBoxDefaultDataSetVariables
+            // 
+            this.textBoxDefaultDataSetVariables.Location = new System.Drawing.Point(153, 59);
+            this.textBoxDefaultDataSetVariables.Name = "textBoxDefaultDataSetVariables";
+            this.textBoxDefaultDataSetVariables.Size = new System.Drawing.Size(252, 23);
+            this.textBoxDefaultDataSetVariables.TabIndex = 9;
+            // 
+            // colorChooserDefaultPageColor
+            // 
+            this.colorChooserDefaultPageColor.Color = System.Drawing.Color.Empty;
+            this.colorChooserDefaultPageColor.Location = new System.Drawing.Point(126, 9);
+            this.colorChooserDefaultPageColor.Name = "colorChooserDefaultPageColor";
+            this.colorChooserDefaultPageColor.Size = new System.Drawing.Size(55, 15);
+            this.colorChooserDefaultPageColor.TabIndex = 1;
             // 
             // SettingsEditor
             // 
@@ -204,5 +224,7 @@
         private System.Windows.Forms.TextBox textBoxDefaultPlottedVariable;
         private System.Windows.Forms.TextBox textBoxDefaultVaryingVariable;
         private System.Windows.Forms.Label labelDefaultVaryingVariable;
+        private System.Windows.Forms.TextBox textBoxDefaultDataSetVariables;
+        private System.Windows.Forms.Label labelDefaultDataSetVariables;
     }
 }

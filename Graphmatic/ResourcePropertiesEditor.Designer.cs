@@ -29,20 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResourcePropertiesEditor));
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.labelResourceType = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageAttributes = new System.Windows.Forms.TabPage();
-            this.tabPageDescription = new System.Windows.Forms.TabPage();
-            this.textBoxAuthor = new System.Windows.Forms.TextBox();
-            this.labelAuthor = new System.Windows.Forms.Label();
-            this.labelCreatedOn = new System.Windows.Forms.Label();
-            this.textBoxCreationDate = new System.Windows.Forms.TextBox();
             this.labelID = new System.Windows.Forms.Label();
             this.textBoxID = new System.Windows.Forms.TextBox();
-            this.buttonOK = new System.Windows.Forms.Button();
+            this.labelCreatedOn = new System.Windows.Forms.Label();
+            this.textBoxCreationDate = new System.Windows.Forms.TextBox();
+            this.labelAuthor = new System.Windows.Forms.Label();
+            this.textBoxAuthor = new System.Windows.Forms.TextBox();
+            this.tabPageDescription = new System.Windows.Forms.TabPage();
             this.richTextBoxDescription = new System.Windows.Forms.RichTextBox();
             this.contextMenuStripFormatting = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.boldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +52,7 @@
             this.rightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonOK = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageAttributes.SuspendLayout();
@@ -75,7 +74,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxName.Location = new System.Drawing.Point(66, 12);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(253, 23);
+            this.textBoxName.Size = new System.Drawing.Size(309, 23);
             this.textBoxName.TabIndex = 1;
             this.textBoxName.TextChanged += new System.EventHandler(this.textBoxName_TextChanged);
             // 
@@ -84,9 +83,9 @@
             this.labelResourceType.AutoSize = true;
             this.labelResourceType.Location = new System.Drawing.Point(63, 45);
             this.labelResourceType.Name = "labelResourceType";
-            this.labelResourceType.Size = new System.Drawing.Size(38, 15);
+            this.labelResourceType.Size = new System.Drawing.Size(86, 15);
             this.labelResourceType.TabIndex = 2;
-            this.labelResourceType.Text = "label1";
+            this.labelResourceType.Text = "(resource type)";
             // 
             // tabControl
             // 
@@ -98,7 +97,7 @@
             this.tabControl.Location = new System.Drawing.Point(12, 66);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(307, 223);
+            this.tabControl.Size = new System.Drawing.Size(363, 293);
             this.tabControl.TabIndex = 3;
             // 
             // tabPageAttributes
@@ -112,63 +111,11 @@
             this.tabPageAttributes.Location = new System.Drawing.Point(4, 24);
             this.tabPageAttributes.Name = "tabPageAttributes";
             this.tabPageAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAttributes.Size = new System.Drawing.Size(299, 195);
+            this.tabPageAttributes.Size = new System.Drawing.Size(355, 265);
             this.tabPageAttributes.TabIndex = 0;
             this.tabPageAttributes.Text = "Attributes";
             this.tabPageAttributes.ToolTipText = "Resource attributes";
             this.tabPageAttributes.UseVisualStyleBackColor = true;
-            // 
-            // tabPageDescription
-            // 
-            this.tabPageDescription.Controls.Add(this.richTextBoxDescription);
-            this.tabPageDescription.Location = new System.Drawing.Point(4, 24);
-            this.tabPageDescription.Name = "tabPageDescription";
-            this.tabPageDescription.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDescription.Size = new System.Drawing.Size(299, 195);
-            this.tabPageDescription.TabIndex = 1;
-            this.tabPageDescription.Text = "Description";
-            this.tabPageDescription.ToolTipText = "User-editable resource description";
-            this.tabPageDescription.UseVisualStyleBackColor = true;
-            // 
-            // textBoxAuthor
-            // 
-            this.textBoxAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAuthor.Location = new System.Drawing.Point(75, 6);
-            this.textBoxAuthor.Name = "textBoxAuthor";
-            this.textBoxAuthor.ReadOnly = true;
-            this.textBoxAuthor.Size = new System.Drawing.Size(218, 23);
-            this.textBoxAuthor.TabIndex = 0;
-            this.textBoxAuthor.TextChanged += new System.EventHandler(this.textBoxAuthor_TextChanged);
-            // 
-            // labelAuthor
-            // 
-            this.labelAuthor.AutoSize = true;
-            this.labelAuthor.Location = new System.Drawing.Point(25, 9);
-            this.labelAuthor.Name = "labelAuthor";
-            this.labelAuthor.Size = new System.Drawing.Size(44, 15);
-            this.labelAuthor.TabIndex = 1;
-            this.labelAuthor.Text = "Author";
-            // 
-            // labelCreatedOn
-            // 
-            this.labelCreatedOn.AutoSize = true;
-            this.labelCreatedOn.Location = new System.Drawing.Point(4, 38);
-            this.labelCreatedOn.Name = "labelCreatedOn";
-            this.labelCreatedOn.Size = new System.Drawing.Size(65, 15);
-            this.labelCreatedOn.TabIndex = 3;
-            this.labelCreatedOn.Text = "Created on";
-            // 
-            // textBoxCreationDate
-            // 
-            this.textBoxCreationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCreationDate.Location = new System.Drawing.Point(75, 35);
-            this.textBoxCreationDate.Name = "textBoxCreationDate";
-            this.textBoxCreationDate.ReadOnly = true;
-            this.textBoxCreationDate.Size = new System.Drawing.Size(218, 23);
-            this.textBoxCreationDate.TabIndex = 2;
-            this.textBoxCreationDate.TextChanged += new System.EventHandler(this.textBoxCreationDate_TextChanged);
             // 
             // labelID
             // 
@@ -186,21 +133,61 @@
             this.textBoxID.Location = new System.Drawing.Point(75, 64);
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.ReadOnly = true;
-            this.textBoxID.Size = new System.Drawing.Size(218, 23);
+            this.textBoxID.Size = new System.Drawing.Size(274, 23);
             this.textBoxID.TabIndex = 4;
             this.textBoxID.TextChanged += new System.EventHandler(this.textBoxID_TextChanged);
             // 
-            // buttonOK
+            // labelCreatedOn
             // 
-            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonOK.Location = new System.Drawing.Point(244, 41);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 4;
-            this.buttonOK.Text = "&OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            this.labelCreatedOn.AutoSize = true;
+            this.labelCreatedOn.Location = new System.Drawing.Point(4, 38);
+            this.labelCreatedOn.Name = "labelCreatedOn";
+            this.labelCreatedOn.Size = new System.Drawing.Size(65, 15);
+            this.labelCreatedOn.TabIndex = 3;
+            this.labelCreatedOn.Text = "Created on";
+            // 
+            // textBoxCreationDate
+            // 
+            this.textBoxCreationDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCreationDate.Location = new System.Drawing.Point(75, 35);
+            this.textBoxCreationDate.Name = "textBoxCreationDate";
+            this.textBoxCreationDate.ReadOnly = true;
+            this.textBoxCreationDate.Size = new System.Drawing.Size(274, 23);
+            this.textBoxCreationDate.TabIndex = 2;
+            this.textBoxCreationDate.TextChanged += new System.EventHandler(this.textBoxCreationDate_TextChanged);
+            // 
+            // labelAuthor
+            // 
+            this.labelAuthor.AutoSize = true;
+            this.labelAuthor.Location = new System.Drawing.Point(25, 9);
+            this.labelAuthor.Name = "labelAuthor";
+            this.labelAuthor.Size = new System.Drawing.Size(44, 15);
+            this.labelAuthor.TabIndex = 1;
+            this.labelAuthor.Text = "Author";
+            // 
+            // textBoxAuthor
+            // 
+            this.textBoxAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxAuthor.Location = new System.Drawing.Point(75, 6);
+            this.textBoxAuthor.Name = "textBoxAuthor";
+            this.textBoxAuthor.ReadOnly = true;
+            this.textBoxAuthor.Size = new System.Drawing.Size(274, 23);
+            this.textBoxAuthor.TabIndex = 0;
+            this.textBoxAuthor.TextChanged += new System.EventHandler(this.textBoxAuthor_TextChanged);
+            // 
+            // tabPageDescription
+            // 
+            this.tabPageDescription.Controls.Add(this.richTextBoxDescription);
+            this.tabPageDescription.Location = new System.Drawing.Point(4, 24);
+            this.tabPageDescription.Name = "tabPageDescription";
+            this.tabPageDescription.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDescription.Size = new System.Drawing.Size(299, 195);
+            this.tabPageDescription.TabIndex = 1;
+            this.tabPageDescription.Text = "Description";
+            this.tabPageDescription.ToolTipText = "User-editable resource description";
+            this.tabPageDescription.UseVisualStyleBackColor = true;
             // 
             // richTextBoxDescription
             // 
@@ -291,20 +278,32 @@
             this.colorToolStripMenuItem.Text = "Color...";
             this.colorToolStripMenuItem.Click += new System.EventHandler(this.colorToolStripMenuItem_Click);
             // 
+            // buttonOK
+            // 
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonOK.Location = new System.Drawing.Point(300, 41);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.TabIndex = 4;
+            this.buttonOK.Text = "&OK";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            // 
             // ResourcePropertiesEditor
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonOK;
-            this.ClientSize = new System.Drawing.Size(331, 301);
+            this.ClientSize = new System.Drawing.Size(387, 371);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.labelResourceType);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.pictureBoxIcon);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = global::Graphmatic.Properties.Resources.Properties;
             this.Name = "ResourcePropertiesEditor";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

@@ -43,6 +43,14 @@ namespace Graphmatic.Interaction
             }
         }
 
+        public override bool Hidden
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         public Equation(char plotted, char varying)
             : base()
         {

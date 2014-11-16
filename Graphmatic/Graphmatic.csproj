@@ -55,6 +55,24 @@
     <Compile Include="ColorChooser.Designer.cs">
       <DependentUpon>ColorChooser.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateVariableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateVariableDialog.Designer.cs">
+      <DependentUpon>CreateVariableDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataSetCreator.Designer.cs">
+      <DependentUpon>DataSetCreator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataSetEditor.Designer.cs">
+      <DependentUpon>DataSetEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="EnterTextDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +126,7 @@
     <Compile Include="Expressions\Tokens\TokenSerializationExtensionMethods.cs" />
     <Compile Include="Expressions\Tokens\VariableToken.cs" />
     <Compile Include="ExpressionVerificationEventArgs.cs" />
+    <Compile Include="Interaction\DataSet.cs" />
     <Compile Include="Interaction\Document.cs" />
     <Compile Include="Interaction\Equation.cs" />
     <Compile Include="Interaction\Resource.cs" />
@@ -138,6 +157,7 @@
     <Compile Include="ResourcePropertiesEditor.Designer.cs">
       <DependentUpon>ResourcePropertiesEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="SettingsEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +169,15 @@
     <Compile Include="XmlExtensionMethods.cs" />
     <EmbeddedResource Include="ColorChooser.resx">
       <DependentUpon>ColorChooser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateVariableDialog.resx">
+      <DependentUpon>CreateVariableDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataSetCreator.resx">
+      <DependentUpon>DataSetCreator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataSetEditor.resx">
+      <DependentUpon>DataSetEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EnterTextDialog.resx">
       <DependentUpon>EnterTextDialog.cs</DependentUpon>
@@ -185,6 +214,7 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -202,6 +232,13 @@
     <None Include="Resources\SmallFont.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\zones.png" />
+    <None Include="Resources\cross-script.png" />
+    <None Include="Resources\document--minus.png" />
+    <None Include="Resources\AddEquation24.png" />
+    <None Include="Resources\pencil.png" />
+    <None Include="Resources\blue-document-data.png" />
+    <Content Include="Resources\Properties.ico" />
     <Content Include="Resources\CalcButtons\abs.png" />
     <Content Include="Resources\CalcButtons\add.png" />
     <Content Include="Resources\CalcButtons\bracket.png" />
@@ -249,6 +286,7 @@
     <Content Include="Resources\LeftArrow.png" />
     <Content Include="Resources\SettingsIcon.ico" />
     <None Include="Resources\tables.png" />
+    <Content Include="Resources\Table.png" />
     <Content Include="Resources\ToolbarIcons\AnnotateDraw16.png" />
     <Content Include="Resources\ToolbarIcons\AnnotateEraseAll16.png" />
     <Content Include="Resources\ToolbarIcons\AnnotateErase16.png" />

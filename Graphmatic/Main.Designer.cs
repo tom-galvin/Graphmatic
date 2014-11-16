@@ -49,20 +49,24 @@ namespace Graphmatic
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderAuthor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripResources = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageListResources = new System.Windows.Forms.ImageList(this.components);
             this.toolStripResources = new System.Windows.Forms.ToolStrip();
             this.toolStripTogglePages = new System.Windows.Forms.ToolStripButton();
             this.toolStripToggleEquations = new System.Windows.Forms.ToolStripButton();
             this.toolStripToggleDataSets = new System.Windows.Forms.ToolStripButton();
+            this.toolStripToggleHidden = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButtonAdd = new System.Windows.Forms.ToolStripDropDownButton();
             this.equationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelPageEditor = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolStripPageEditor = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonIncreasePenSize = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDecreasePenSize = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabelPenSize = new System.Windows.Forms.ToolStripLabel();
@@ -80,6 +84,7 @@ namespace Graphmatic
             this.plotEquationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plotDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonDataSets = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAddEquation = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonPreviousPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNextPage = new System.Windows.Forms.ToolStripButton();
@@ -91,7 +96,6 @@ namespace Graphmatic
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.display = new System.Windows.Forms.PictureBox();
-            this.imageListTabs = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -103,7 +107,7 @@ namespace Graphmatic
             this.toolStripContainer.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
-            this.toolStrip.SuspendLayout();
+            this.toolStripPageEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
             this.SuspendLayout();
             // 
@@ -187,6 +191,7 @@ namespace Graphmatic
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.ToolTipText = "Exit the program";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
@@ -203,6 +208,7 @@ namespace Graphmatic
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.optionsToolStripMenuItem.Text = "&Settings...";
+            this.optionsToolStripMenuItem.ToolTipText = "Edit settings relating to the functioning of the program";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // statusStrip
@@ -271,40 +277,61 @@ namespace Graphmatic
             // contextMenuStripResources
             // 
             this.contextMenuStripResources.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.toolStripMenuItem4,
+            this.removeToolStripMenuItem,
             this.renameToolStripMenuItem,
-            this.propertiesToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.removeToolStripMenuItem});
+            this.propertiesToolStripMenuItem});
             this.contextMenuStripResources.Name = "contextMenuStripResources";
-            this.contextMenuStripResources.Size = new System.Drawing.Size(153, 98);
+            this.contextMenuStripResources.Size = new System.Drawing.Size(142, 104);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.pencil;
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.editToolStripMenuItem.Text = "&Edit...";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(138, 6);
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.document__minus;
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.removeToolStripMenuItem.Text = "&Remove";
+            this.removeToolStripMenuItem.ToolTipText = "Remove the resource from the document";
+            this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
             // renameToolStripMenuItem
             // 
             this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
             this.renameToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.renameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.renameToolStripMenuItem.Text = "Re&name";
+            this.renameToolStripMenuItem.ToolTipText = "Rename the resource";
             this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
-            // 
-            // propertiesToolStripMenuItem
-            // 
-            this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.propertiesToolStripMenuItem.Text = "&Properties...";
-            this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propertiesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(138, 6);
             // 
-            // removeToolStripMenuItem
+            // propertiesToolStripMenuItem
             // 
-            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.removeToolStripMenuItem.Text = "&Remove";
-            this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
+            this.propertiesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("propertiesToolStripMenuItem.Image")));
+            this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
+            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.propertiesToolStripMenuItem.Text = "&Properties...";
+            this.propertiesToolStripMenuItem.ToolTipText = "See properties of the resource";
+            this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propertiesToolStripMenuItem_Click);
             // 
             // imageListResources
             // 
@@ -313,6 +340,7 @@ namespace Graphmatic
             this.imageListResources.Images.SetKeyName(0, "Page");
             this.imageListResources.Images.SetKeyName(1, "Equation");
             this.imageListResources.Images.SetKeyName(2, "Table");
+            this.imageListResources.Images.SetKeyName(3, "Data");
             // 
             // toolStripResources
             // 
@@ -321,6 +349,7 @@ namespace Graphmatic
             this.toolStripTogglePages,
             this.toolStripToggleEquations,
             this.toolStripToggleDataSets,
+            this.toolStripToggleHidden,
             this.toolStripDropDownButtonAdd});
             this.toolStripResources.Location = new System.Drawing.Point(0, 0);
             this.toolStripResources.Name = "toolStripResources";
@@ -367,11 +396,23 @@ namespace Graphmatic
             this.toolStripToggleDataSets.ToolTipText = "Toggle Data Sets";
             this.toolStripToggleDataSets.Click += new System.EventHandler(this.toolStripToggleDataSets_Click);
             // 
+            // toolStripToggleHidden
+            // 
+            this.toolStripToggleHidden.CheckOnClick = true;
+            this.toolStripToggleHidden.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripToggleHidden.Image = global::Graphmatic.Properties.Resources.zones;
+            this.toolStripToggleHidden.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripToggleHidden.Name = "toolStripToggleHidden";
+            this.toolStripToggleHidden.Size = new System.Drawing.Size(23, 22);
+            this.toolStripToggleHidden.ToolTipText = "Toggle Hidden";
+            this.toolStripToggleHidden.Click += new System.EventHandler(this.toolStripToggleHidden_Click);
+            // 
             // toolStripDropDownButtonAdd
             // 
             this.toolStripDropDownButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButtonAdd.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.equationToolStripMenuItem});
+            this.equationToolStripMenuItem,
+            this.dataSetToolStripMenuItem});
             this.toolStripDropDownButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButtonAdd.Image")));
             this.toolStripDropDownButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButtonAdd.Name = "toolStripDropDownButtonAdd";
@@ -386,7 +427,18 @@ namespace Graphmatic
             | System.Windows.Forms.Keys.E)));
             this.equationToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.equationToolStripMenuItem.Text = "&Equation...";
+            this.equationToolStripMenuItem.ToolTipText = "Add an equation to the document";
             this.equationToolStripMenuItem.Click += new System.EventHandler(this.equationToolStripMenuItem_Click);
+            // 
+            // dataSetToolStripMenuItem
+            // 
+            this.dataSetToolStripMenuItem.Name = "dataSetToolStripMenuItem";
+            this.dataSetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.D)));
+            this.dataSetToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.dataSetToolStripMenuItem.Text = "&Data Set...";
+            this.dataSetToolStripMenuItem.ToolTipText = "Add a data set to the document";
+            this.dataSetToolStripMenuItem.Click += new System.EventHandler(this.dataSetToolStripMenuItem_Click);
             // 
             // panelPageEditor
             // 
@@ -402,7 +454,7 @@ namespace Graphmatic
             // 
             // toolStripContainer.BottomToolStripPanel
             // 
-            this.toolStripContainer.BottomToolStripPanel.Controls.Add(this.toolStrip);
+            this.toolStripContainer.BottomToolStripPanel.Controls.Add(this.toolStripPageEditor);
             // 
             // toolStripContainer.ContentPanel
             // 
@@ -417,12 +469,12 @@ namespace Graphmatic
             this.toolStripContainer.TabIndex = 4;
             this.toolStripContainer.Text = "toolStripContainer1";
             // 
-            // toolStrip
+            // toolStripPageEditor
             // 
-            this.toolStrip.AllowItemReorder = true;
-            this.toolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripPageEditor.AllowItemReorder = true;
+            this.toolStripPageEditor.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStripPageEditor.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStripPageEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonIncreasePenSize,
             this.toolStripButtonDecreasePenSize,
             this.toolStripLabelPenSize,
@@ -434,6 +486,7 @@ namespace Graphmatic
             this.toolStripSeparator5,
             this.toolStripSplitButtonGraph,
             this.toolStripButtonDataSets,
+            this.toolStripButtonAddEquation,
             this.toolStripSeparator2,
             this.toolStripButtonPreviousPage,
             this.toolStripButtonNextPage,
@@ -444,11 +497,11 @@ namespace Graphmatic
             this.toolStripSeparator4,
             this.toolStripButtonSquareSelect,
             this.toolStripButtonCustomSelect});
-            this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStrip.Location = new System.Drawing.Point(3, 0);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(490, 31);
-            this.toolStrip.TabIndex = 0;
+            this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
+            this.toolStripPageEditor.Name = "toolStripPageEditor";
+            this.toolStripPageEditor.Size = new System.Drawing.Size(518, 31);
+            this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
             // 
@@ -608,6 +661,16 @@ namespace Graphmatic
             this.toolStripButtonDataSets.Text = "toolStripButton1";
             this.toolStripButtonDataSets.ToolTipText = "Edit data sets";
             // 
+            // toolStripButtonAddEquation
+            // 
+            this.toolStripButtonAddEquation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddEquation.Image = global::Graphmatic.Properties.Resources.AddEquation24;
+            this.toolStripButtonAddEquation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonAddEquation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddEquation.Name = "toolStripButtonAddEquation";
+            this.toolStripButtonAddEquation.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonAddEquation.ToolTipText = "Add an equation to this page";
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -706,12 +769,6 @@ namespace Graphmatic
             this.display.TabIndex = 0;
             this.display.TabStop = false;
             // 
-            // imageListTabs
-            // 
-            this.imageListTabs.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTabs.ImageStream")));
-            this.imageListTabs.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListTabs.Images.SetKeyName(0, "Resources16");
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -744,8 +801,8 @@ namespace Graphmatic
             this.toolStripContainer.ContentPanel.ResumeLayout(false);
             this.toolStripContainer.ResumeLayout(false);
             this.toolStripContainer.PerformLayout();
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
+            this.toolStripPageEditor.ResumeLayout(false);
+            this.toolStripPageEditor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -757,7 +814,6 @@ namespace Graphmatic
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.SplitContainer splitContainer;
-        private System.Windows.Forms.ImageList imageListTabs;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ImageList imageListResources;
@@ -776,7 +832,7 @@ namespace Graphmatic
         private System.Windows.Forms.ToolStripButton toolStripToggleDataSets;
         private System.Windows.Forms.Panel panelPageEditor;
         private System.Windows.Forms.ToolStripContainer toolStripContainer;
-        private System.Windows.Forms.ToolStrip toolStrip;
+        private System.Windows.Forms.ToolStrip toolStripPageEditor;
         private System.Windows.Forms.ToolStripButton toolStripButtonIncreasePenSize;
         private System.Windows.Forms.ToolStripButton toolStripButtonDecreasePenSize;
         private System.Windows.Forms.ToolStripLabel toolStripLabelPenSize;
@@ -815,6 +871,11 @@ namespace Graphmatic
         private ToolStripSeparator toolStripMenuItem3;
         private ToolStripMenuItem removeToolStripMenuItem;
         private ToolStripMenuItem equationToolStripMenuItem;
+        private ToolStripButton toolStripButtonAddEquation;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem4;
+        private ToolStripMenuItem dataSetToolStripMenuItem;
+        private ToolStripButton toolStripToggleHidden;
     }
 }
 

@@ -17,6 +17,14 @@ namespace Graphmatic.Interaction
             }
         }
 
+        public override bool Hidden
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         public Page(XElement xml)
             : base(xml)
         {

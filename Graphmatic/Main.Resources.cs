@@ -27,6 +27,10 @@ namespace Graphmatic
                 item.ImageIndex = 0;
             else if (resource is Equation)
                 item.ImageIndex = 1;
+            else if (resource is DataSet)
+                item.ImageIndex = 2;
+            else
+                item.ImageIndex = 3;
             return item;
         }
 
@@ -35,7 +39,9 @@ namespace Graphmatic
             IEnumerable<Resource> displayedResources = CurrentDocument
                 .Where(r =>
                     (r is Equation && toolStripToggleEquations.Checked) ||
-                    (r is Page && toolStripTogglePages.Checked));
+                    (r is Page && toolStripTogglePages.Checked) ||
+                    (r is DataSet && toolStripToggleDataSets.Checked) ||
+                    (r.Hidden && toolStripToggleHidden.Checked));
             listViewResources.Items.Clear();
 
             foreach (Resource resource in displayedResources)
@@ -93,18 +99,18 @@ namespace Graphmatic
 
         private void listViewResources_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listViewResources.SelectedIndices.Count >= 1)
+            bool somethingSelected = listViewResources.SelectedIndices.Count >= 1;
+            renameToolStripMenuItem.Enabled =
+                propertiesToolStripMenuItem.Enabled =
+                removeToolStripMenuItem.Enabled =
+                editToolStripMenuItem.Enabled = somethingSelected;
+            if (somethingSelected)
             {
                 int selectedIndex = listViewResources.SelectedIndices[0];
-                renameToolStripMenuItem.Enabled = true;
-                propertiesToolStripMenuItem.Enabled = true;
-                removeToolStripMenuItem.Enabled = true;
             }
             else
             {
-                renameToolStripMenuItem.Enabled = false;
-                propertiesToolStripMenuItem.Enabled = false;
-                removeToolStripMenuItem.Enabled = false;
+                
             }
         }
 
@@ -116,13 +122,26 @@ namespace Graphmatic
                 DocumentModified = true;
                 RefreshResourceListView();
             }
+            else if (resource is DataSet)
+            {
+                new DataSetEditor(resource as DataSet).ShowDialog();
+                DocumentModified = true;
+                RefreshResourceListView();
+            }
             else
             {
-                MessageBox.Show("This resource does not have an associated editor.", "Open Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("This resource cannot be edited.", "Open Editor", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
         private void listViewResources_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listViewResources.SelectedItems.Count < 1) return;
+            Resource resource = (Resource)listViewResources.SelectedItems[0].Tag;
+            OpenResourceEditor(resource);
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listViewResources.SelectedItems.Count < 1) return;
             Resource resource = (Resource)listViewResources.SelectedItems[0].Tag;
@@ -154,9 +173,22 @@ namespace Graphmatic
             RefreshResourceListView();
         }
 
+        private string GetNextName(string root)
+        {
+            int number = 0;
+            string derived;
+            do
+            {
+                number += 1;
+                derived = String.Format("{0} {1}", root, number);
+            } while (CurrentDocument.Any(r => r.Name.ToLowerInvariant() == derived.ToLowerInvariant()));
+
+            return derived;
+        }
+
         private void equationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string equationName = EnterText("Enter a name for the new equation.", "New Equation", "Equation", Properties.Resources.Equation32);
+            string equationName = EnterText("Enter a name for the new equation.", "New Equation", GetNextName("Equation"), Properties.Resources.Equation32);
 
             if (equationName != null)
             {
@@ -169,6 +201,25 @@ namespace Graphmatic
 
                 AddResource(equation);
                 OpenResourceEditor(equation);
+            }
+        }
+
+        private void dataSetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string dataSetName = EnterText("Enter a name for the new data set.", "New Data Set", GetNextName("Data Set"), Properties.Resources.DataSet32);
+
+            if (dataSetName != null)
+            {
+                DataSet dataSet = new DataSet(Properties.Settings.Default.DefaultDataSetVariables)
+                {
+                    Name = dataSetName
+                };
+                DataSetCreator creator = new DataSetCreator(dataSet);
+                if (creator.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    AddResource(dataSet);
+                    OpenResourceEditor(dataSet);
+                }
             }
         }
     }

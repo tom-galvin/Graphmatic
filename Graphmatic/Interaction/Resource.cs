@@ -10,25 +10,25 @@ namespace Graphmatic.Interaction
 {
     public class Resource : IXmlConvertible
     {
-        public string Name
+        public virtual string Name
         {
             get;
             set;
         }
 
-        public string Description
+        public virtual string Description
         {
             get;
             set;
         }
 
-        public string Author
+        public virtual string Author
         {
             get;
             set;
         }
 
-        public DateTime CreationDate
+        public virtual DateTime CreationDate
         {
             get;
             set;
@@ -38,6 +38,14 @@ namespace Graphmatic.Interaction
         {
             get;
             protected set;
+        }
+
+        public virtual bool Hidden
+        {
+            get
+            {
+                return true;
+            }
         }
 
         public virtual string Type
@@ -68,7 +76,7 @@ namespace Graphmatic.Interaction
         public virtual Image GetResourceIcon(bool large)
         {
             return
-                Properties.Resources.GraphmaticDocument.ToBitmap();
+                Properties.Resources.Data32;
         }
 
         public virtual XElement ToXml()

@@ -73,6 +73,25 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap AddEquation24 {
+            get {
+                object obj = ResourceManager.GetObject("AddEquation24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.
+        /// </summary>
+        public static string AllowedVariables {
+            get {
+                return ResourceManager.GetString("AllowedVariables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap AnnotateDraw16 {
             get {
                 object obj = ResourceManager.GetObject("AnnotateDraw16", resourceCulture);
@@ -523,6 +542,16 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap cross_script {
+            get {
+                object obj = ResourceManager.GetObject("cross-script", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap CustomSelect24 {
             get {
                 object obj = ResourceManager.GetObject("CustomSelect24", resourceCulture);
@@ -543,9 +572,29 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Data32 {
+            get {
+                object obj = ResourceManager.GetObject("Data32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap DataSet16 {
             get {
                 object obj = ResourceManager.GetObject("DataSet16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap DataSet32 {
+            get {
+                object obj = ResourceManager.GetObject("DataSet32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -585,6 +634,16 @@ namespace Graphmatic.Properties {
         public static System.Drawing.Bitmap DiskReturn16 {
             get {
                 object obj = ResourceManager.GetObject("DiskReturn16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap document__minus {
+            get {
+                object obj = ResourceManager.GetObject("document--minus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -751,6 +810,26 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap pencil {
+            get {
+                object obj = ResourceManager.GetObject("pencil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        public static System.Drawing.Icon Properties {
+            get {
+                object obj = ResourceManager.GetObject("Properties", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Redo16 {
             get {
                 object obj = ResourceManager.GetObject("Redo16", resourceCulture);
@@ -843,6 +922,16 @@ namespace Graphmatic.Properties {
         public static string VersionString {
             get {
                 return ResourceManager.GetString("VersionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap zones {
+            get {
+                object obj = ResourceManager.GetObject("zones", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -13,9 +13,16 @@ namespace Graphmatic
     {
         public void SaveDocument(string path)
         {
-            CurrentDocument.Save(path, SaveCompressed);
-            DocumentPath = path;
-            DocumentModified = false;
+            try
+            {
+                CurrentDocument.Save(path, SaveCompressed);
+                DocumentPath = path;
+                DocumentModified = false;
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("The document cannot be saved.\r\n" + ex.Message, "Save - " + ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private SaveFileDialog CreateSaveFileDialog()
@@ -70,9 +77,16 @@ namespace Graphmatic
 
         public void OpenDocument(string path)
         {
-            CurrentDocument = Document.Open(path, SaveCompressed);
-            DocumentPath = path;
-            DocumentModified = false;
+            try
+            {
+                CurrentDocument = Document.Open(path, SaveCompressed);
+                DocumentPath = path;
+                DocumentModified = false;
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("The document cannot be opened.\r\n" + ex.Message, "Open - " + ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void OpenDocument()

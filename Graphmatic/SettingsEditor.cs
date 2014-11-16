@@ -24,6 +24,7 @@ namespace Graphmatic
         {
             textBox.ReadOnly = true;
             textBox.Text = defaultValue.ToString();
+            textBox.TextAlign = HorizontalAlignment.Center;
             textBox.KeyPress += delegate(object sender, KeyPressEventArgs e)
             {
                 textBox.Text = e.KeyChar.ToString();
@@ -49,6 +50,15 @@ namespace Graphmatic
             MakeCharBox(textBoxDefaultVaryingVariable,
                 Settings.Default.DefaultVaryingVariable,
                 c => Settings.Default.DefaultVaryingVariable = c);
+
+            textBoxDefaultDataSetVariables.Text = String.Join(", ", Settings.Default.DefaultDataSetVariables);
+            textBoxDefaultDataSetVariables.TextChanged += (sender, e) => Settings.Default.DefaultDataSetVariables =
+                textBoxDefaultDataSetVariables.Text
+                    .Split(',')
+                    .Select(s => s.Trim())
+                    .Where(s => s.Length == 1)
+                    .Select(s => Char.Parse(s))
+                    .ToArray();
         }
 
         private void Options_Load(object sender, EventArgs e)

@@ -77,5 +77,19 @@ namespace Graphmatic.Properties {
                 this["DefaultVaryingVariable"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfChar xmlns:xsi=\"http://www.w3.or" +
+            "g/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <cha" +
+            "r>120</char>\r\n  <char>121</char>\r\n</ArrayOfChar>")]
+        public char[] DefaultDataSetVariables {
+            get {
+                return ((char[])(this["DefaultDataSetVariables"]));
+            }
+            set {
+                this["DefaultDataSetVariables"] = value;
+            }
+        }
     }
 }

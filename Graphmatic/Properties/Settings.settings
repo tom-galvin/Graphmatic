@@ -14,5 +14,12 @@
     <Setting Name="DefaultVaryingVariable" Type="System.Char" Scope="User">
       <Value Profile="(Default)">x</Value>
     </Setting>
+    <Setting Name="DefaultDataSetVariables" Type="System.Char[]" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfChar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;char&gt;120&lt;/char&gt;
+  &lt;char&gt;121&lt;/char&gt;
+&lt;/ArrayOfChar&gt;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
