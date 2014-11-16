@@ -70,6 +70,7 @@ namespace Graphmatic
         public Main()
         {
             InitializeComponent();
+            InitializeEditors();
         }
 
         private void UpdateTitle()

@@ -11,6 +11,31 @@ namespace Graphmatic
 {
     public partial class Main
     {
+        private Dictionary<Type, Action<Resource>> ResourceEditors = new Dictionary<Type, Action<Resource>>();
+        private Resource CurrentResource = null;
+
+        private void InitializeEditors()
+        {
+            RegisterEditor<Equation>(r => new EquationEditor(r as Equation).ShowDialog());
+            RegisterEditor<DataSet>(r => new DataSetEditor(r as DataSet).ShowDialog());
+            RegisterEditor<Picture>(r => LoadPicturePanel(r as Picture));
+
+            panelPageEditor.Dock = DockStyle.Fill;
+            panelImageViewer.Dock = DockStyle.Fill;
+            CloseResourcePanels();
+        }
+
+        private void CloseResourcePanels()
+        {
+            panelPageEditor.Visible = panelPageEditor.Enabled = false;
+            panelImageViewer.Visible = panelImageViewer.Enabled = false;
+        }
+
+        private void RegisterEditor<T>(Action<Resource> editor)
+        {
+            ResourceEditors.Add(typeof(T), editor);
+        }
+
         private void listViewResources_Resize(object sender, EventArgs e)
         {
             listViewResources.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -40,10 +65,11 @@ namespace Graphmatic
         {
             IEnumerable<Resource> displayedResources = CurrentDocument
                 .Where(r =>
-                    (r is Equation && toolStripToggleEquations.Checked) ||
+                    (!r.Hidden &&
+                    ((r is Equation && toolStripToggleEquations.Checked) ||
                     (r is Page && toolStripTogglePages.Checked) ||
                     (r is DataSet && toolStripToggleDataSets.Checked) ||
-                    (r is Picture && toolStripTogglePictures.Checked) ||
+                    (r is Picture && toolStripTogglePictures.Checked))) ||
                     (r.Hidden && toolStripToggleHidden.Checked));
             listViewResources.Items.Clear();
 
@@ -119,17 +145,11 @@ namespace Graphmatic
 
         private void OpenResourceEditor(Resource resource)
         {
-            if (resource is Equation)
+            Type resourceType = resource.GetType();
+            if (ResourceEditors.ContainsKey(resourceType))
             {
-                EquationEditor editor = new EquationEditor(resource as Equation);
-                editor.ShowDialog();
-                DocumentModified = true;
-                RefreshResourceListView();
-            }
-            else if (resource is DataSet)
-            {
-                DataSetEditor editor = new DataSetEditor(resource as DataSet);
-                editor.ShowDialog();
+                CurrentResource = resource;
+                ResourceEditors[resourceType](resource);
                 DocumentModified = true;
                 RefreshResourceListView();
             }
@@ -168,6 +188,11 @@ namespace Graphmatic
         {
             CurrentDocument.Remove(resource);
             DocumentModified = true;
+            if (CurrentResource == resource)
+            {
+                CurrentResource = null;
+                CloseResourcePanels();
+            }
             RefreshResourceListView();
         }
 

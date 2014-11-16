@@ -25,14 +25,6 @@ namespace Graphmatic.Interaction
             }
         }
 
-        public override bool Hidden
-        {
-            get
-            {
-                return false;
-            }
-        }
-
         public double[] this[int index]
         {
             get

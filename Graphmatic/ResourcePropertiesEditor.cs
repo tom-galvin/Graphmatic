@@ -36,6 +36,7 @@ namespace Graphmatic
                 resource.CreationDate.ToLongTimeString();
             textBoxID.Text = resource.Guid.ToString();
             richTextBoxDescription.Rtf = resource.Description;
+            checkBoxHidden.Checked = resource.Hidden;
             pictureBoxIcon.Image = resource.GetResourceIcon(true);
         }
 
@@ -124,6 +125,11 @@ namespace Graphmatic
         {
             Resource.Name = textBoxName.Text;
             Text = Resource.Name + " - Properties";
+        }
+
+        private void checkBoxHidden_CheckedChanged(object sender, EventArgs e)
+        {
+            Resource.Hidden = checkBoxHidden.Checked;
         }
     }
 }

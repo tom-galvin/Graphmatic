@@ -40,12 +40,10 @@ namespace Graphmatic.Interaction
             protected set;
         }
 
-        public virtual bool Hidden
+        public bool Hidden
         {
-            get
-            {
-                return true;
-            }
+            get;
+            set;
         }
 
         public virtual string Type
@@ -71,6 +69,9 @@ namespace Graphmatic.Interaction
             CreationDate = DateTime.Parse(xml.Attribute("CreationDate").Value);
             Description = xml.Element("Description").Value;
             Guid = Guid.Parse(xml.Attribute("ID").Value);
+            Hidden = xml.Attribute("Hidden") != null ?
+                Boolean.Parse(xml.Attribute("Hidden").Value) :
+                false;
         }
 
         public virtual Image GetResourceIcon(bool large)
@@ -86,6 +87,7 @@ namespace Graphmatic.Interaction
                 new XAttribute("Author", Author),
                 new XAttribute("CreationDate", CreationDate),
                 new XAttribute("ID", Guid),
+                new XAttribute("Hidden", Hidden),
                 new XElement("Description", Description));
         }
     }

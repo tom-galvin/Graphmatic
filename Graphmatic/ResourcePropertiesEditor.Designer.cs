@@ -53,6 +53,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonOK = new System.Windows.Forms.Button();
+            this.checkBoxHidden = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageAttributes.SuspendLayout();
@@ -102,6 +103,7 @@
             // 
             // tabPageAttributes
             // 
+            this.tabPageAttributes.Controls.Add(this.checkBoxHidden);
             this.tabPageAttributes.Controls.Add(this.labelID);
             this.tabPageAttributes.Controls.Add(this.textBoxID);
             this.tabPageAttributes.Controls.Add(this.labelCreatedOn);
@@ -183,7 +185,7 @@
             this.tabPageDescription.Location = new System.Drawing.Point(4, 24);
             this.tabPageDescription.Name = "tabPageDescription";
             this.tabPageDescription.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDescription.Size = new System.Drawing.Size(299, 195);
+            this.tabPageDescription.Size = new System.Drawing.Size(355, 265);
             this.tabPageDescription.TabIndex = 1;
             this.tabPageDescription.Text = "Description";
             this.tabPageDescription.ToolTipText = "User-editable resource description";
@@ -196,7 +198,7 @@
             this.richTextBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxDescription.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxDescription.Name = "richTextBoxDescription";
-            this.richTextBoxDescription.Size = new System.Drawing.Size(293, 189);
+            this.richTextBoxDescription.Size = new System.Drawing.Size(349, 259);
             this.richTextBoxDescription.TabIndex = 0;
             this.richTextBoxDescription.Text = "";
             this.richTextBoxDescription.TextChanged += new System.EventHandler(this.richTextBoxDescription_TextChanged);
@@ -290,6 +292,17 @@
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
+            // checkBoxHidden
+            // 
+            this.checkBoxHidden.AutoSize = true;
+            this.checkBoxHidden.Location = new System.Drawing.Point(75, 93);
+            this.checkBoxHidden.Name = "checkBoxHidden";
+            this.checkBoxHidden.Size = new System.Drawing.Size(65, 19);
+            this.checkBoxHidden.TabIndex = 6;
+            this.checkBoxHidden.Text = "Hidden";
+            this.checkBoxHidden.UseVisualStyleBackColor = true;
+            this.checkBoxHidden.CheckedChanged += new System.EventHandler(this.checkBoxHidden_CheckedChanged);
+            // 
             // ResourcePropertiesEditor
             // 
             this.AcceptButton = this.buttonOK;
@@ -346,5 +359,6 @@
         private System.Windows.Forms.ToolStripMenuItem rightToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxHidden;
     }
 }
