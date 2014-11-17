@@ -70,6 +70,7 @@ namespace Graphmatic
             this.equationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelImageViewer = new System.Windows.Forms.Panel();
             this.toolStripContainerImageViewer = new System.Windows.Forms.ToolStripContainer();
             this.pictureBoxImageViewer = new System.Windows.Forms.PictureBox();
@@ -109,8 +110,7 @@ namespace Graphmatic
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
-            this.display = new System.Windows.Forms.PictureBox();
-            this.pageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pageDisplay = new System.Windows.Forms.PictureBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -129,7 +129,7 @@ namespace Graphmatic
             this.toolStripContainerPageEditor.ContentPanel.SuspendLayout();
             this.toolStripContainerPageEditor.SuspendLayout();
             this.toolStripPageEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageDisplay)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -523,6 +523,15 @@ namespace Graphmatic
             this.pictureToolStripMenuItem.ToolTipText = "Add a Picture to the document";
             this.pictureToolStripMenuItem.Click += new System.EventHandler(this.pictureToolStripMenuItem_Click);
             // 
+            // pageToolStripMenuItem
+            // 
+            this.pageToolStripMenuItem.Name = "pageToolStripMenuItem";
+            this.pageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
+            this.pageToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.pageToolStripMenuItem.Text = "&Page...";
+            this.pageToolStripMenuItem.Click += new System.EventHandler(this.pageToolStripMenuItem_Click);
+            // 
             // panelImageViewer
             // 
             this.panelImageViewer.Controls.Add(this.toolStripContainerImageViewer);
@@ -629,7 +638,7 @@ namespace Graphmatic
             // 
             // toolStripContainerPageEditor.ContentPanel
             // 
-            this.toolStripContainerPageEditor.ContentPanel.Controls.Add(this.display);
+            this.toolStripContainerPageEditor.ContentPanel.Controls.Add(this.pageDisplay);
             this.toolStripContainerPageEditor.ContentPanel.Size = new System.Drawing.Size(277, 199);
             this.toolStripContainerPageEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainerPageEditor.LeftToolStripPanelVisible = false;
@@ -929,25 +938,16 @@ namespace Graphmatic
             this.toolStripButtonCustomSelect.Text = "toolStripButton1";
             this.toolStripButtonCustomSelect.ToolTipText = "Select objects with a free-form shape";
             // 
-            // display
+            // pageDisplay
             // 
-            this.display.BackColor = System.Drawing.Color.White;
-            this.display.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.display.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.display.Location = new System.Drawing.Point(0, 0);
-            this.display.Name = "display";
-            this.display.Size = new System.Drawing.Size(277, 199);
-            this.display.TabIndex = 0;
-            this.display.TabStop = false;
-            // 
-            // pageToolStripMenuItem
-            // 
-            this.pageToolStripMenuItem.Name = "pageToolStripMenuItem";
-            this.pageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.N)));
-            this.pageToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.pageToolStripMenuItem.Text = "&Page...";
-            this.pageToolStripMenuItem.Click += new System.EventHandler(this.pageToolStripMenuItem_Click);
+            this.pageDisplay.BackColor = System.Drawing.Color.White;
+            this.pageDisplay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pageDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pageDisplay.Location = new System.Drawing.Point(0, 0);
+            this.pageDisplay.Name = "pageDisplay";
+            this.pageDisplay.Size = new System.Drawing.Size(277, 199);
+            this.pageDisplay.TabIndex = 0;
+            this.pageDisplay.TabStop = false;
             // 
             // Main
             // 
@@ -992,7 +992,7 @@ namespace Graphmatic
             this.toolStripContainerPageEditor.PerformLayout();
             this.toolStripPageEditor.ResumeLayout(false);
             this.toolStripPageEditor.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageDisplay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1049,7 +1049,7 @@ namespace Graphmatic
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButtonSquareSelect;
         private System.Windows.Forms.ToolStripButton toolStripButtonCustomSelect;
-        private System.Windows.Forms.PictureBox display;
+        private System.Windows.Forms.PictureBox pageDisplay;
         private System.Windows.Forms.ColumnHeader columnHeaderIcon;
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderAuthor;

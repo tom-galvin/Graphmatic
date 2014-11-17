@@ -85,6 +85,11 @@ namespace Graphmatic.Interaction
             return new Document(document.Root);
         }
 
+        public Resource FromGuid(Guid guid)
+        {
+            return this.First(r => r.Guid == guid);
+        }
+
         public XElement ToXml()
         {
             return new XElement("Document",

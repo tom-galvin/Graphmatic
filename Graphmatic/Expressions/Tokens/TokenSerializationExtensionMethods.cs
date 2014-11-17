@@ -30,12 +30,12 @@ namespace Graphmatic.Expressions.Tokens
             { "Digit", (parent, xml) => new DigitToken(parent, xml) },
             { "Exp", (parent, xml) => new ExpToken(parent, xml) },
             { "Fraction", (parent, xml) => new FractionToken(parent, xml) },
-            { "Function", (parent, xml) => new FunctionToken(parent, xml) },
             { "Root", (parent, xml) => new RootToken(parent, xml) },
             { "Log", (parent, xml) => new LogToken(parent, xml) },
             { "Constant", (parent, xml) => new ConstantToken(parent, xml) },
             { "Symbolic", (parent, xml) => new SymbolicToken(parent, xml) },
-            { "Absolute", (parent, xml) => new AbsoluteToken(parent, xml) },
+            { "Absolute", (parent, xml) => new AbsoluteToken(parent, xml) }, // must be ABOVE function to deserialize correctly
+            { "Function", (parent, xml) => new FunctionToken(parent, xml) },
             { "Variable", (parent, xml) => new VariableToken(parent, xml) },
         };
 

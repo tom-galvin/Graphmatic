@@ -129,6 +129,7 @@
     <Compile Include="Interaction\DataSet.cs" />
     <Compile Include="Interaction\Document.cs" />
     <Compile Include="Interaction\Equation.cs" />
+    <Compile Include="Interaction\PageOrder.cs" />
     <Compile Include="Interaction\Picture.cs" />
     <Compile Include="Interaction\Resource.cs" />
     <Compile Include="Interaction\Page.cs" />

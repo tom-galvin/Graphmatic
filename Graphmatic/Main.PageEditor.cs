@@ -13,6 +13,12 @@ namespace Graphmatic
         {
             CloseResourcePanels();
             panelPageEditor.Visible = panelPageEditor.Enabled = true;
+            RenderPage(page);
+        }
+
+        private void RenderPage(Page page)
+        {
+            pageDisplay.BackColor = page.BackgroundColor;
         }
     }
 }
