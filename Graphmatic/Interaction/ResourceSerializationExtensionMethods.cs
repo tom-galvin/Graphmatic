@@ -31,6 +31,7 @@ namespace Graphmatic.Interaction
             { "Equation", xml => new Equation(xml) },
             { "DataSet", xml => new DataSet(xml) },
             { "Picture", xml => new Picture(xml) },
+            { "HtmlPage", xml => new HtmlPage(xml) },
             { "Resource", xml => new Resource(xml) }
         };
 
@@ -72,6 +73,16 @@ namespace Graphmatic.Interaction
         public static Color XmlStringToColor(string data)
         {
             return ColorTranslator.FromHtml(data);
+        }
+
+        public static string ToBase64(this string s)
+        {
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(s));
+        }
+
+        public static string FromBase64(this string s)
+        {
+            return Encoding.UTF8.GetString(Convert.FromBase64String(s));
         }
     }
 }

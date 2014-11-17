@@ -76,8 +76,9 @@ namespace Graphmatic.Interaction
 
         public virtual Image GetResourceIcon(bool large)
         {
-            return
-                Properties.Resources.Data32;
+            return large ?
+                Properties.Resources.Data32 :
+                Properties.Resources.Data16;
         }
 
         public virtual XElement ToXml()
@@ -89,6 +90,11 @@ namespace Graphmatic.Interaction
                 new XAttribute("ID", Guid),
                 new XAttribute("Hidden", Hidden),
                 new XElement("Description", Description));
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

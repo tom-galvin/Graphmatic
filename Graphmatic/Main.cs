@@ -59,14 +59,6 @@ namespace Graphmatic
             }
         }
 
-        public bool SaveCompressed
-        {
-            get
-            {
-                return true;
-            }
-        }
-
         public Main()
         {
             InitializeComponent();
@@ -86,17 +78,7 @@ namespace Graphmatic
                 String.Format(Properties.Resources.TitleBarName, Properties.Resources.VersionString));
         }
 
-        private void Main_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            
-        }
-
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new SettingsEditor().ShowDialog(this);
-        }
-
-        private void CheckNewUser()
+        private void NewUserUsernameCheck()
         {
             if (Properties.Settings.Default.Username == "Anonymous")
             {
@@ -105,22 +87,7 @@ namespace Graphmatic
             }
         }
 
-        private void Main_Load(object sender, EventArgs e)
-        {
-            CurrentDocument = new Document();
-            DocumentPath = null;
-            DocumentModified = false;
-
-            listViewResources_SelectedIndexChanged(sender, e);
-            CheckNewUser();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        public string EnterText(string prompt, string title, string defaultValue = "", Image captionImage = null)
+        private string GetUserTextInput(string prompt, string title, string defaultValue = "", Image captionImage = null)
         {
             EnterTextDialog dialog = new EnterTextDialog(title, prompt, defaultValue, captionImage);
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -133,6 +100,32 @@ namespace Graphmatic
             }
         }
 
+        #region WinForms code
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new SettingsEditor().ShowDialog(this);
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            CurrentDocument = new Document();
+            DocumentPath = null;
+            DocumentModified = false;
+
+            listViewResources_SelectedIndexChanged(sender, e);
+            NewUserUsernameCheck();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!CheckDocument()) e.Cancel = true;
@@ -141,16 +134,6 @@ namespace Graphmatic
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void toolStripToggleHidden_Click(object sender, EventArgs e)
-        {
-            RefreshResourceListView();
-        }
-
-        private void toolStripTogglePictures_Click(object sender, EventArgs e)
-        {
-            RefreshResourceListView();
         }
 
         private void resourcesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -166,5 +149,6 @@ namespace Graphmatic
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
+        #endregion
     }
 }

@@ -15,7 +15,7 @@ namespace Graphmatic
         {
             try
             {
-                CurrentDocument.Save(path, SaveCompressed);
+                CurrentDocument.Save(path, path.EndsWith(".xml") ? false : true);
                 DocumentPath = path;
                 DocumentModified = false;
             }
@@ -79,9 +79,11 @@ namespace Graphmatic
         {
             try
             {
-                CurrentDocument = Document.Open(path, SaveCompressed);
+                CurrentDocument = Document.Open(path, path.EndsWith(".xml") ? false : true);
                 DocumentPath = path;
                 DocumentModified = false;
+                if (CurrentDocument.CurrentResource != null)
+                    OpenResourceEditor(CurrentDocument.CurrentResource);
             }
             catch (IOException ex)
             {
@@ -132,6 +134,7 @@ namespace Graphmatic
             DocumentModified = false;
         }
 
+        #region WinForms code
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NewDocument();
@@ -151,5 +154,6 @@ namespace Graphmatic
         {
             SaveDocumentAs();
         }
+        #endregion
     }
 }

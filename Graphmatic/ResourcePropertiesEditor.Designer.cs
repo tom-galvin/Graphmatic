@@ -34,6 +34,7 @@
             this.labelResourceType = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageAttributes = new System.Windows.Forms.TabPage();
+            this.checkBoxHidden = new System.Windows.Forms.CheckBox();
             this.labelID = new System.Windows.Forms.Label();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.labelCreatedOn = new System.Windows.Forms.Label();
@@ -53,7 +54,6 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.checkBoxHidden = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageAttributes.SuspendLayout();
@@ -118,6 +118,17 @@
             this.tabPageAttributes.Text = "Attributes";
             this.tabPageAttributes.ToolTipText = "Resource attributes";
             this.tabPageAttributes.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHidden
+            // 
+            this.checkBoxHidden.AutoSize = true;
+            this.checkBoxHidden.Location = new System.Drawing.Point(75, 93);
+            this.checkBoxHidden.Name = "checkBoxHidden";
+            this.checkBoxHidden.Size = new System.Drawing.Size(65, 19);
+            this.checkBoxHidden.TabIndex = 6;
+            this.checkBoxHidden.Text = "Hidden";
+            this.checkBoxHidden.UseVisualStyleBackColor = true;
+            this.checkBoxHidden.CheckedChanged += new System.EventHandler(this.checkBoxHidden_CheckedChanged);
             // 
             // labelID
             // 
@@ -292,17 +303,6 @@
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // checkBoxHidden
-            // 
-            this.checkBoxHidden.AutoSize = true;
-            this.checkBoxHidden.Location = new System.Drawing.Point(75, 93);
-            this.checkBoxHidden.Name = "checkBoxHidden";
-            this.checkBoxHidden.Size = new System.Drawing.Size(65, 19);
-            this.checkBoxHidden.TabIndex = 6;
-            this.checkBoxHidden.Text = "Hidden";
-            this.checkBoxHidden.UseVisualStyleBackColor = true;
-            this.checkBoxHidden.CheckedChanged += new System.EventHandler(this.checkBoxHidden_CheckedChanged);
-            // 
             // ResourcePropertiesEditor
             // 
             this.AcceptButton = this.buttonOK;
@@ -317,6 +317,8 @@
             this.Controls.Add(this.pictureBoxIcon);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Graphmatic.Properties.Resources.Properties;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ResourcePropertiesEditor";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

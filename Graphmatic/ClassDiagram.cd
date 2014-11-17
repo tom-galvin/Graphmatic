@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Graphmatic.Expressions.Expression" BaseTypeListCollapsed="true">
-    <Position X="34.75" Y="1.75" Width="2.5" />
+    <Position X="38" Y="8.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>EAAgkQAABAQAgAIAAIBAREAAgIAAAAAEAEhAAAAIQAQ=</HashCode>
       <FileName>Expressions\Expression.cs</FileName>
@@ -203,28 +203,28 @@
   <Class Name="Graphmatic.Interaction.Equation" BaseTypeListCollapsed="true">
     <Position X="28" Y="2.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAUIAAIAAAAAAA=</HashCode>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAACUIQAIAAAAAAA=</HashCode>
       <FileName>Interaction\Equation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Graphmatic.Interaction.Page" BaseTypeListCollapsed="true">
     <Position X="31.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAACEAQAAAAAAAAA=</HashCode>
       <FileName>Interaction\Page.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Graphmatic.ExpressionCursor">
     <Position X="37.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAgAEAAAAAAAAAAAAAQgAAAAAEAAAAQCEGAAAACAAA=</HashCode>
+      <HashCode>ACAgAEAAAAAAAAAAAAAQgAAAAAEAAAAYCEGAAAACAAA=</HashCode>
       <FileName>ExpressionCursor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Graphmatic.XmlExtensionMethods">
     <Position X="35.25" Y="8.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAABABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>XmlExtensionMethods.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -240,6 +240,51 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAEAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>ExpressionVerificationEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Interaction.DataSet" Collapsed="true">
+    <Position X="19.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAEAAAAAABBAACAAgBAAAAAABBBCEAQQAAABEAAA=</HashCode>
+      <FileName>Interaction\DataSet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Interaction.Document" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAIgBIAAIAAAIBAAqAgABQAAAAAAAAAEAAAAAAAAARA=</HashCode>
+      <FileName>Interaction\Document.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Graphmatic.Interaction.HtmlPage" Collapsed="true">
+    <Position X="34" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEAQAAAAAAAAI=</HashCode>
+      <FileName>Interaction\HtmlPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Interaction.Picture" Collapsed="true">
+    <Position X="36.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAACEAQAAAAAAAAA=</HashCode>
+      <FileName>Interaction\Picture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphmatic.Interaction.Resource" Collapsed="true">
+    <Position X="24" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAgAAAEgAAAAAQAAAAABACEAQAAAAAEAAA=</HashCode>
+      <FileName>Interaction\Resource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphmatic.Interaction.ResourceSerializationExtensionMethods" Collapsed="true">
+    <Position X="40.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAgAAIAAAKgAAAAAAAACACAAAAAAAAA=</HashCode>
+      <FileName>Interaction\ResourceSerializationExtensionMethods.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="Graphmatic.Expressions.IPaintable">
@@ -296,6 +341,13 @@
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ExpressionCursor.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Graphmatic.Interaction.ResourceDeserializationFactory" Collapsed="true">
+    <Position X="38.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interaction\ResourceSerializationExtensionMethods.cs</FileName>
     </TypeIdentifier>
   </Delegate>
   <Font Name="Segoe UI" Size="9" />

@@ -573,6 +573,16 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Data16 {
+            get {
+                object obj = ResourceManager.GetObject("Data16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Data24 {
             get {
                 object obj = ResourceManager.GetObject("Data24", resourceCulture);
@@ -631,7 +641,7 @@ namespace Graphmatic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Graphmatic document (*.gmd)|*.gmd|All files|*.
+        ///   Looks up a localized string similar to Graphmatic document (*.gmd; *.xml)|*.gmd;*.xml|All files|*.
         /// </summary>
         public static string DialogFilter {
             get {
@@ -771,6 +781,36 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap HtmlPage16 {
+            get {
+                object obj = ResourceManager.GetObject("HtmlPage16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap HtmlPage32 {
+            get {
+                object obj = ResourceManager.GetObject("HtmlPage32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap HtmlPages {
+            get {
+                object obj = ResourceManager.GetObject("HtmlPages", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Image16 {
             get {
                 object obj = ResourceManager.GetObject("Image16", resourceCulture);
@@ -834,6 +874,36 @@ namespace Graphmatic.Properties {
         public static System.Drawing.Bitmap Moein {
             get {
                 object obj = ResourceManager.GetObject("Moein", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap navigation_000_button {
+            get {
+                object obj = ResourceManager.GetObject("navigation-000-button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap navigation_180_button {
+            get {
+                object obj = ResourceManager.GetObject("navigation-180-button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap node {
+            get {
+                object obj = ResourceManager.GetObject("node", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

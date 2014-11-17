@@ -129,7 +129,7 @@
     <Compile Include="Interaction\DataSet.cs" />
     <Compile Include="Interaction\Document.cs" />
     <Compile Include="Interaction\Equation.cs" />
-    <Compile Include="Interaction\PageOrder.cs" />
+    <Compile Include="Interaction\HtmlPage.cs" />
     <Compile Include="Interaction\Picture.cs" />
     <Compile Include="Interaction\Resource.cs" />
     <Compile Include="Interaction\Page.cs" />
@@ -147,6 +147,9 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main.HtmlViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main.PageEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +161,17 @@
     </Compile>
     <Compile Include="Main.Resources.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PageOrderEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PageOrderEditor.Designer.cs">
+      <DependentUpon>PageOrderEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ResourcePropertiesEditor.cs">
       <SubType>Form</SubType>
@@ -202,6 +216,9 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PageOrderEditor.resx">
+      <DependentUpon>PageOrderEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ResourcePropertiesEditor.resx">
       <DependentUpon>ResourcePropertiesEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -210,14 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="ClassDiagram.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -246,9 +258,16 @@
     <None Include="Resources\AddEquation24.png" />
     <None Include="Resources\pencil.png" />
     <None Include="Resources\blue-document-data.png" />
+    <None Include="Resources\blue-document-binary.png" />
+    <None Include="Resources\HtmlPage32.png" />
+    <None Include="Resources\HtmlPage16.png" />
+    <None Include="Resources\blue-documents-globe.png" />
     <Content Include="Resources\Image16.png" />
     <Content Include="Resources\Image32.png" />
     <Content Include="Resources\Images16.png" />
+    <None Include="Resources\node.png" />
+    <None Include="Resources\navigation-000-button.png" />
+    <None Include="Resources\navigation-180-button.png" />
     <Content Include="Resources\Properties.ico" />
     <Content Include="Resources\CalcButtons\abs.png" />
     <Content Include="Resources\CalcButtons\add.png" />
