@@ -19,6 +19,7 @@ namespace Graphmatic
             RegisterEditor<Equation>(OpenEquationEditor);
             RegisterEditor<DataSet>(OpenDataSetEditor);
             RegisterEditor<Picture>(OpenPictureViewer);
+            RegisterEditor<Page>(OpenPageEditor);
 
             panelPageEditor.Dock = DockStyle.Fill;
             panelImageViewer.Dock = DockStyle.Fill;
@@ -262,6 +263,21 @@ namespace Graphmatic
                     AddResource(dataSet);
                     OpenResourceEditor(dataSet);
                 }
+            }
+        }
+
+        private void pageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pageName = EnterText("Enter a name for the new page.", "New Page", GetNextName("Page"), Properties.Resources.Page);
+
+            if (pageName != null)
+            {
+                Page page = new Page()
+                {
+                    Name = pageName
+                };
+                AddResource(page);
+                OpenResourceEditor(page);
             }
         }
 

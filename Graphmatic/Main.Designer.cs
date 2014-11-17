@@ -110,6 +110,7 @@ namespace Graphmatic
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.display = new System.Windows.Forms.PictureBox();
+            this.pageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -483,7 +484,8 @@ namespace Graphmatic
             this.toolStripDropDownButtonAdd.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.equationToolStripMenuItem,
             this.dataSetToolStripMenuItem,
-            this.pictureToolStripMenuItem});
+            this.pictureToolStripMenuItem,
+            this.pageToolStripMenuItem});
             this.toolStripDropDownButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButtonAdd.Image")));
             this.toolStripDropDownButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButtonAdd.Name = "toolStripDropDownButtonAdd";
@@ -515,9 +517,9 @@ namespace Graphmatic
             // 
             this.pictureToolStripMenuItem.Name = "pictureToolStripMenuItem";
             this.pictureToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.P)));
+            | System.Windows.Forms.Keys.I)));
             this.pictureToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.pictureToolStripMenuItem.Text = "&Picture...";
+            this.pictureToolStripMenuItem.Text = "P&icture...";
             this.pictureToolStripMenuItem.ToolTipText = "Add a Picture to the document";
             this.pictureToolStripMenuItem.Click += new System.EventHandler(this.pictureToolStripMenuItem_Click);
             // 
@@ -938,6 +940,15 @@ namespace Graphmatic
             this.display.TabIndex = 0;
             this.display.TabStop = false;
             // 
+            // pageToolStripMenuItem
+            // 
+            this.pageToolStripMenuItem.Name = "pageToolStripMenuItem";
+            this.pageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
+            this.pageToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.pageToolStripMenuItem.Text = "&Page...";
+            this.pageToolStripMenuItem.Click += new System.EventHandler(this.pageToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1068,6 +1079,7 @@ namespace Graphmatic
         private ToolStripMenuItem resourcesToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
+        private ToolStripMenuItem pageToolStripMenuItem;
     }
 }
 

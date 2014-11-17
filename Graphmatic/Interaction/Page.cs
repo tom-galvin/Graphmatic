@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +18,24 @@ namespace Graphmatic.Interaction
             }
         }
 
+        public Color BackgroundColor
+        {
+            get;
+            set;
+        }
+
+        public Page()
+        {
+            BackgroundColor = Properties.Settings.Default.DefaultPageColor;
+        }
+
         public Page(XElement xml)
             : base(xml)
         {
-            
+            BackgroundColor = ResourceSerializationExtensionMethods.XmlStringToColor(xml.Element("BackgroundColor").Value);
         }
 
-        public override System.Drawing.Image GetResourceIcon(bool large)
+        public override Image GetResourceIcon(bool large)
         {
             return large ?
                 Properties.Resources.Page :
@@ -33,6 +45,8 @@ namespace Graphmatic.Interaction
         public override XElement ToXml()
         {
             XElement baseElement = base.ToXml();
+            baseElement.Name = "Page";
+            baseElement.Add(new XElement("BackgroundColor", BackgroundColor.ToXmlString()));
             return baseElement;
         }
     }

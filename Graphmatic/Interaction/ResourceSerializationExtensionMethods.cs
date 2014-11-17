@@ -63,5 +63,15 @@ namespace Graphmatic.Interaction
                 return Image.FromStream(ms);
             }
         }
+
+        public static string ToXmlString(this Color color)
+        {
+            return ColorTranslator.ToHtml(color);
+        }
+
+        public static Color XmlStringToColor(string data)
+        {
+            return ColorTranslator.FromHtml(data);
+        }
     }
 }
