@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.textBoxPlotted = new System.Windows.Forms.TextBox();
@@ -36,6 +37,7 @@
             this.textBoxVarying = new System.Windows.Forms.TextBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.expressionDisplay = new Graphmatic.ExpressionDisplay();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // buttonEdit
@@ -52,6 +54,7 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonOK.Location = new System.Drawing.Point(350, 193);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
@@ -137,7 +140,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonOK;
-            this.ClientSize = new System.Drawing.Size(437, 232);
+            this.ClientSize = new System.Drawing.Size(437, 233);
             this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.textBoxVarying);
             this.Controls.Add(this.labelVarying);
@@ -172,5 +175,6 @@
         private System.Windows.Forms.Label labelVarying;
         private System.Windows.Forms.TextBox textBoxVarying;
         private System.Windows.Forms.Label labelDescription;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

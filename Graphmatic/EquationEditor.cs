@@ -21,12 +21,14 @@ namespace Graphmatic
         }
 
         public EquationEditor()
+            : this(new Equation('y', 'x'))
         {
-            InitializeComponent();
-            Equation = new Equation('y', 'x');
-            expressionDisplay.Expression = Equation.Expression;
-            textBoxPlotted.Text = Equation.PlottedVariable.ToString();
-            textBoxVarying.Text = Equation.VaryingVariable.ToString();
+        }
+
+        private void RefreshDisplay()
+        {
+            toolTip.SetToolTip(expressionDisplay, Equation.ParseTree.ToString());
+            expressionDisplay.Refresh();
         }
 
         public EquationEditor(Equation equation)
@@ -36,6 +38,7 @@ namespace Graphmatic
             expressionDisplay.Expression = Equation.Expression;
             textBoxPlotted.Text = Equation.PlottedVariable.ToString();
             textBoxVarying.Text = Equation.VaryingVariable.ToString();
+            RefreshDisplay();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -68,8 +71,8 @@ namespace Graphmatic
                 }
             };
 
-            if(inputWindow.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                expressionDisplay.Refresh();
+            if (inputWindow.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                RefreshDisplay();
         }
 
         private void textBoxPlotted_KeyPress(object sender, KeyPressEventArgs e)
