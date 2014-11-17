@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -83,6 +84,7 @@ namespace Graphmatic
 
             if (CurrentDocument.CurrentResource == resource)
                 item.Selected = true;
+
             return item;
         }
 
@@ -134,11 +136,24 @@ namespace Graphmatic
             return sb.ToString();
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            if(!IsRefreshingResourceListView)
+                base.OnPaint(e);
+        }
+
+        /// <summary>
+        /// This boolean works around an internal bug in the .NET Framework's ListView layout engine.
+        /// </summary>
+        private bool IsRefreshingResourceListView = false;
+
         private void RefreshResourceListView()
         {
             IEnumerable<Resource> displayedResources = CurrentDocument
                 .Where(IsResourceDisplayed)
                 .OrderBy(GetResourceOrderComparer);
+            IsRefreshingResourceListView = true;
+            listViewResources.SuspendLayout();
             listViewResources.Items.Clear();
 
             foreach (Resource resource in displayedResources)
@@ -146,7 +161,9 @@ namespace Graphmatic
                 listViewResources.Items.Add(CreateListViewItem(resource));
             }
 
+            IsRefreshingResourceListView = false;
             listViewResources.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listViewResources.ResumeLayout();
         }
 
         private void OpenResourceEditor(Resource resource)
@@ -283,7 +300,18 @@ namespace Graphmatic
 
         private void listViewResources_Resize(object sender, EventArgs e)
         {
-            listViewResources.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            if (!IsRefreshingResourceListView)
+            {
+                try
+                {
+                    // throws .NET framework exception... see IsRefreshingResourceListView
+                    listViewResources.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
         }
 
         private void renameToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1107,6 +1107,7 @@ namespace Graphmatic
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::Graphmatic.Properties.Resources.Graphmatic;
             this.MainMenuStrip = this.menuStrip;
