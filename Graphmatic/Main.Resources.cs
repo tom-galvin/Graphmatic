@@ -127,7 +127,10 @@ namespace Graphmatic
             sb.Append('.');
             if (resource is Page)
             {
-                sb.Append(CurrentDocument.PageOrder.IndexOf(resource as Page));
+                sb.Append(CurrentDocument.PageOrder
+                    .IndexOf(resource as Page)
+                    .ToString()
+                    .PadLeft(10, '0'));
             }
             else
             {
@@ -136,22 +139,18 @@ namespace Graphmatic
             return sb.ToString();
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            if(!IsRefreshingResourceListView)
-                base.OnPaint(e);
-        }
-
         /// <summary>
         /// This boolean works around an internal bug in the .NET Framework's ListView layout engine.
         /// </summary>
         private bool IsRefreshingResourceListView = false;
-
         private void RefreshResourceListView()
         {
             IEnumerable<Resource> displayedResources = CurrentDocument
                 .Where(IsResourceDisplayed)
                 .OrderBy(GetResourceOrderComparer);
+
+            var topItemIndex = listViewResources.TopItem != null ? listViewResources.TopItem.Index : 0;
+
             IsRefreshingResourceListView = true;
             listViewResources.SuspendLayout();
             listViewResources.Items.Clear();
@@ -161,9 +160,12 @@ namespace Graphmatic
                 listViewResources.Items.Add(CreateListViewItem(resource));
             }
 
-            IsRefreshingResourceListView = false;
             listViewResources.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            listViewResources.ResumeLayout();
+            listViewResources.ResumeLayout(false);
+
+            if(topItemIndex != 0 && listViewResources.Items.Count >= topItemIndex - 1)
+                listViewResources.TopItem = listViewResources.Items[topItemIndex];
+            IsRefreshingResourceListView = false;
         }
 
         private void OpenResourceEditor(Resource resource)
@@ -302,15 +304,8 @@ namespace Graphmatic
         {
             if (!IsRefreshingResourceListView)
             {
-                try
-                {
-                    // throws .NET framework exception... see IsRefreshingResourceListView
-                    listViewResources.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
+                // throws .NET framework exception without if statement... see IsRefreshingResourceListView
+                listViewResources.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
         }
 

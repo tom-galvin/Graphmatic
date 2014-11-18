@@ -392,7 +392,7 @@ namespace Graphmatic
             // 
             // removeToolStripMenuItem
             // 
-            this.removeToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.document__minus;
+            this.removeToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Document16Remove;
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             this.removeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.removeToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
@@ -663,7 +663,7 @@ namespace Graphmatic
             // toolStripButtonBack
             // 
             this.toolStripButtonBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonBack.Image = global::Graphmatic.Properties.Resources.navigation_180_button;
+            this.toolStripButtonBack.Image = global::Graphmatic.Properties.Resources.NavBackward16;
             this.toolStripButtonBack.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBack.Name = "toolStripButtonBack";
             this.toolStripButtonBack.Size = new System.Drawing.Size(23, 22);
@@ -674,7 +674,7 @@ namespace Graphmatic
             // toolStripButtonForward
             // 
             this.toolStripButtonForward.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonForward.Image = global::Graphmatic.Properties.Resources.navigation_000_button;
+            this.toolStripButtonForward.Image = global::Graphmatic.Properties.Resources.NavForward16;
             this.toolStripButtonForward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonForward.Name = "toolStripButtonForward";
             this.toolStripButtonForward.Size = new System.Drawing.Size(23, 22);
