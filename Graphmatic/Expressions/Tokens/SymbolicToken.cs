@@ -31,6 +31,8 @@ namespace Graphmatic.Expressions.Tokens
                         return "*~";
                     case SymbolicType.Percent:
                         return "%";
+                    case SymbolicType.Equals:
+                        return "=";
                     default:
                         return "<unknown symbolic>";
                 }
@@ -66,7 +68,8 @@ namespace Graphmatic.Expressions.Tokens
             Comma,
             Percent,
             Exp10,
-            DecimalPoint
+            DecimalPoint,
+            Equals
         }
     }
 }

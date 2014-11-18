@@ -57,24 +57,24 @@ namespace Graphmatic.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("y")]
-        public char DefaultPlottedVariable {
+        public char DefaultVerticalAxis {
             get {
-                return ((char)(this["DefaultPlottedVariable"]));
+                return ((char)(this["DefaultVerticalAxis"]));
             }
             set {
-                this["DefaultPlottedVariable"] = value;
+                this["DefaultVerticalAxis"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("x")]
-        public char DefaultVaryingVariable {
+        public char DefaultHorizontalAxis {
             get {
-                return ((char)(this["DefaultVaryingVariable"]));
+                return ((char)(this["DefaultHorizontalAxis"]));
             }
             set {
-                this["DefaultVaryingVariable"] = value;
+                this["DefaultHorizontalAxis"] = value;
             }
         }
         

@@ -44,12 +44,12 @@ namespace Graphmatic
                 Settings.Default.Username = textBoxUserName.Text;
 
             MakeCharBox(textBoxDefaultPlottedVariable,
-                Settings.Default.DefaultPlottedVariable,
-                c => Settings.Default.DefaultPlottedVariable = c);
+                Settings.Default.DefaultVerticalAxis,
+                c => Settings.Default.DefaultVerticalAxis = c);
 
             MakeCharBox(textBoxDefaultVaryingVariable,
-                Settings.Default.DefaultVaryingVariable,
-                c => Settings.Default.DefaultVaryingVariable = c);
+                Settings.Default.DefaultHorizontalAxis,
+                c => Settings.Default.DefaultHorizontalAxis = c);
 
             textBoxDefaultDataSetVariables.Text = String.Join(", ", Settings.Default.DefaultDataSetVariables);
             textBoxDefaultDataSetVariables.TextChanged += (sender, e) => Settings.Default.DefaultDataSetVariables =

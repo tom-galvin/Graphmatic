@@ -203,13 +203,36 @@ namespace Graphmatic.Expressions
             throw new ParseException("Unexpected end of expression.", enumerator.Current);
         }
 
-        public ParseTreeNode Parse()
+        public static readonly BinaryEvaluator EqualsEvaluator = new BinaryEvaluator((l, r) => l - r, "{0}={1}");
+        protected ParseTreeNode ParseEquation(IEnumerator<Token> enumerator)
+        {
+            ParseTreeNode leftNode = ParseSummation(enumerator), rightNode;
+            SymbolicToken current = enumerator.Current as SymbolicToken;
+            if (current != null && current.Type == SymbolicToken.SymbolicType.Equals)
+            {
+                if (!enumerator.MoveNext()) goto EndFast;
+                rightNode = ParseSummation(enumerator);
+            }
+            else
+            {
+                throw new ParseException("Unexpected symbol in equation. Have you used an equals sign?", enumerator.Current);
+            }
+            if(enumerator.MoveNext())
+                throw new ParseException("Unexpected symbol after equation.", enumerator.Current);
+            return new BinaryParseTreeNode(EqualsEvaluator, leftNode, rightNode);
+        EndFast:
+            throw new ParseException("Unexpected end of equation.", enumerator.Current);
+        }
+
+        public ParseTreeNode Parse(bool equationParse)
         {
             IEnumerator<Token> enumerator = ((IEnumerable<Token>)this).GetEnumerator();
             enumerator.Reset();
             if (enumerator.MoveNext())
             {
-                ParseTreeNode tree = ParseSummation(enumerator);
+                ParseTreeNode tree = equationParse ?
+                    ParseEquation(enumerator) :
+                    ParseSummation(enumerator);
                 enumerator.Reset();
 
                 return tree;
@@ -218,6 +241,11 @@ namespace Graphmatic.Expressions
             {
                 throw new ParseException("Expression empty.", Parent);
             }
+        }
+
+        public ParseTreeNode Parse()
+        {
+            return Parse(false);
         }
     }
 }

@@ -36,8 +36,8 @@ namespace Graphmatic
             InitializeComponent();
             Equation = equation;
             expressionDisplay.Expression = Equation.Expression;
-            textBoxPlotted.Text = Equation.PlottedVariable.ToString();
-            textBoxVarying.Text = Equation.VaryingVariable.ToString();
+            textBoxPlotted.Text = Equation.VerticalVariable.ToString();
+            textBoxVarying.Text = Equation.HorizontalVariable.ToString();
             RefreshDisplay();
         }
 
@@ -56,35 +56,40 @@ namespace Graphmatic
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             ExpressionEditor inputWindow = new ExpressionEditor(Equation);
-            inputWindow.Verify += delegate(object verificationSender, ExpressionVerificationEventArgs verificationEventArgs)
-            {
-                try
-                {
-                    verificationEventArgs.Equation.ParseTree = verificationEventArgs.Equation.Expression.Parse();
-                }
-                catch (ParseException ex)
-                {
-                    MessageBox.Show(ex.Message, "Equation Parse Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    verificationEventArgs.Cursor.Expression = ex.Cause.Parent;
-                    verificationEventArgs.Cursor.Index = ex.Cause.IndexInParent();
-                    verificationEventArgs.Failure = true;
-                }
-            };
+            inputWindow.Verify += inputWindow_Verify;
 
             if (inputWindow.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 RefreshDisplay();
         }
 
+        private void inputWindow_Verify(object sender, ExpressionVerificationEventArgs e)
+        {
+            try
+            {
+                e.Equation.Parse();
+            }
+            catch (ParseException ex)
+            {
+                MessageBox.Show(ex.Message, "Equation Parse Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.Cause != null)
+                {
+                    e.Cursor.Expression = ex.Cause.Parent;
+                    e.Cursor.Index = ex.Cause.IndexInParent();
+                }
+                e.Failure = true;
+            }
+        }
+
         private void textBoxPlotted_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxPlotted.Text = e.KeyChar.ToString();
-            Equation.PlottedVariable = e.KeyChar;
+            Equation.VerticalVariable = e.KeyChar;
         }
 
         private void textBoxVarying_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxVarying.Text = e.KeyChar.ToString();
-            Equation.VaryingVariable = e.KeyChar;
+            Equation.HorizontalVariable = e.KeyChar;
         }
 
         private void EquationEditor_Load(object sender, EventArgs e)
@@ -96,6 +101,11 @@ namespace Graphmatic
         private void EquationEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             // MessageBox.Show(e.CloseReason.ToString());
+        }
+
+        private void expressionDisplay_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            new TestPlotter(Equation).ShowDialog();
         }
     }
 }

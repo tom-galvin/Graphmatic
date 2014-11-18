@@ -302,6 +302,9 @@ namespace Graphmatic
                                 break;
                             }
                         }
+                        if (collectedToken is SymbolicToken &&
+                            (collectedToken as SymbolicToken).Type == SymbolicToken.SymbolicType.Equals)
+                            break;
                         collectedToken.Parent = defaultExpression;
                         defaultExpression.Insert(0, collectedToken);
                         Expression.RemoveAt(i);

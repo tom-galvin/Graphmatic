@@ -38,14 +38,22 @@ namespace Graphmatic
             set { _Edit = value; ExpressionCursor.Visible = value; }
         }
 
+        private Expression _Expression;
         /// <summary>
         /// Gets the mathematical expression to display.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Expression Expression
         {
-            get;
-            set;
+            get
+            {
+                return _Expression;
+            }
+            set
+            {
+                _Expression = value;
+                RecalculateExpressionDimensions();
+            }
         }
 
         private int _DisplayScale;
@@ -114,12 +122,18 @@ namespace Graphmatic
         /// </summary>
         public ExpressionDisplay()
         {
-            Expression = new Expressions.Expression(null);
+            _Expression = new Expressions.Expression(null);
             ExpressionCursor = new ExpressionCursor(Expression, 0);
+            RecalculateExpressionDimensions();
             Edit = true;
             DisplayScale = 1;
             InitializeComponent();
             DoubleBuffered = true;
+        }
+
+        private void RecalculateExpressionDimensions()
+        {
+            _Expression.RecalculateDimensions(ExpressionCursor);
         }
 
         private void ExpressionDisplay_Resize(object sender, EventArgs e)

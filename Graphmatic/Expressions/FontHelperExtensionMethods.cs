@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,29 @@ namespace Graphmatic.Expressions
         public static Rectangle RectOf(char c, bool small)
         {
             return RectOf(Properties.Resources.FontChars.IndexOf(c), small);
+        }
+
+        public static Bitmap GetCharacterImage(char c, bool small, int scale)
+        {
+            Rectangle sourceRect = RectOf(c, small);
+            sourceRect.X -= 1;
+            sourceRect.Width += 1;
+            Rectangle destRect = new Rectangle(
+                1,
+                1,
+                sourceRect.Width * scale,
+                sourceRect.Height * scale);
+            Bitmap characterImage = new Bitmap(sourceRect.Width * scale + 2, sourceRect.Height * scale + 2);
+            Graphics graphics = Graphics.FromImage(characterImage);
+            graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+            graphics.DrawImage(
+                small ?
+                    Properties.Resources.SmallFont :
+                    Properties.Resources.LargeFont,
+                destRect,
+                sourceRect,
+                GraphicsUnit.Pixel);
+            return characterImage;
         }
 
         public static void DrawPixelString(this Graphics g, string s, bool small, int x, int y)

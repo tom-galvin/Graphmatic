@@ -388,8 +388,8 @@ namespace Graphmatic
             if (equationName != null)
             {
                 Equation equation = new Equation(
-                    Properties.Settings.Default.DefaultPlottedVariable,
-                    Properties.Settings.Default.DefaultVaryingVariable)
+                    Properties.Settings.Default.DefaultVerticalAxis,
+                    Properties.Settings.Default.DefaultHorizontalAxis)
                 {
                     Name = equationName
                 };

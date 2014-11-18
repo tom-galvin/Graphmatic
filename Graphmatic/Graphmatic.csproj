@@ -140,6 +140,12 @@
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Interaction\ResourceSerializationExtensionMethods.cs" />
+    <Compile Include="Interaction\TestPlotter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interaction\TestPlotter.Designer.cs">
+      <DependentUpon>TestPlotter.cs</DependentUpon>
+    </Compile>
     <Compile Include="IXmlConvertible.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -179,7 +185,6 @@
     <Compile Include="ResourcePropertiesEditor.Designer.cs">
       <DependentUpon>ResourcePropertiesEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
     <Compile Include="SettingsEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExpressionEditor.resx">
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interaction\TestPlotter.resx">
+      <DependentUpon>TestPlotter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

@@ -23,13 +23,13 @@ namespace Graphmatic.Interaction
             set;
         }
 
-        public char PlottedVariable
+        public char VerticalVariable
         {
             get;
             set;
         }
 
-        public char VaryingVariable
+        public char HorizontalVariable
         {
             get;
             set;
@@ -43,31 +43,35 @@ namespace Graphmatic.Interaction
             }
         }
 
-        public Equation(char plotted, char varying)
-            : base()
+        public Equation(char vertical, char horizontal)
+            : this(vertical, horizontal, new Expression(null))
         {
-            PlottedVariable = plotted;
-            VaryingVariable = varying;
-            Expression = new Expression(null);
-            ParseTree = new ConstantParseTreeNode(0);
         }
 
-        public Equation(char plotted, char varying, Expression expression)
+        public Equation(char vertical, char horizontal, Expression expression)
             : base()
         {
-            PlottedVariable = plotted;
-            VaryingVariable = varying;
+            VerticalVariable = vertical;
+            HorizontalVariable = horizontal;
             Expression = expression;
-            ParseTree = Expression.Parse();
+            if(Expression.Count == 0)
+                ParseTree = new ConstantParseTreeNode(0);
+            else
+                ParseTree = Expression.Parse();
         }
 
         public Equation(XElement xml)
             : base(xml)
         {
-            PlottedVariable = Char.Parse(xml.Element("Plotted").Value);
-            VaryingVariable = Char.Parse(xml.Element("Varying").Value);
+            VerticalVariable = Char.Parse(xml.Element("Vertical").Value);
+            HorizontalVariable = Char.Parse(xml.Element("Horizontal").Value);
             Expression = new Expression(null, xml.Element("Expression").Elements());
             ParseTree = Expression.Parse();
+        }
+
+        public void Parse()
+        {
+            ParseTree = Expression.Parse(true);
         }
 
         public override System.Drawing.Image GetResourceIcon(bool large)
@@ -83,8 +87,8 @@ namespace Graphmatic.Interaction
             baseElement.Name = "Equation";
             baseElement.Add(
                 new XElement("Expression", Expression.ToXml()),
-                new XElement("Plotted", PlottedVariable),
-                new XElement("Varying", VaryingVariable));
+                new XElement("Vertical", VerticalVariable),
+                new XElement("Horizontal", HorizontalVariable));
             return baseElement;
         }
     }

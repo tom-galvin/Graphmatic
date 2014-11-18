@@ -30,6 +30,8 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageDefaults = new System.Windows.Forms.TabPage();
+            this.textBoxDefaultDataSetVariables = new System.Windows.Forms.TextBox();
+            this.labelDefaultDataSetVariables = new System.Windows.Forms.Label();
             this.textBoxDefaultVaryingVariable = new System.Windows.Forms.TextBox();
             this.labelDefaultVaryingVariable = new System.Windows.Forms.Label();
             this.textBoxDefaultPlottedVariable = new System.Windows.Forms.TextBox();
@@ -39,8 +41,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.labelDefaultDataSetVariables = new System.Windows.Forms.Label();
-            this.textBoxDefaultDataSetVariables = new System.Windows.Forms.TextBox();
             this.colorChooserDefaultPageColor = new Graphmatic.ColorChooser();
             this.tabControl.SuspendLayout();
             this.tabPageDefaults.SuspendLayout();
@@ -78,6 +78,22 @@
             this.tabPageDefaults.Text = "Defaults";
             this.tabPageDefaults.UseVisualStyleBackColor = true;
             // 
+            // textBoxDefaultDataSetVariables
+            // 
+            this.textBoxDefaultDataSetVariables.Location = new System.Drawing.Point(153, 59);
+            this.textBoxDefaultDataSetVariables.Name = "textBoxDefaultDataSetVariables";
+            this.textBoxDefaultDataSetVariables.Size = new System.Drawing.Size(252, 23);
+            this.textBoxDefaultDataSetVariables.TabIndex = 9;
+            // 
+            // labelDefaultDataSetVariables
+            // 
+            this.labelDefaultDataSetVariables.AutoSize = true;
+            this.labelDefaultDataSetVariables.Location = new System.Drawing.Point(6, 62);
+            this.labelDefaultDataSetVariables.Name = "labelDefaultDataSetVariables";
+            this.labelDefaultDataSetVariables.Size = new System.Drawing.Size(141, 15);
+            this.labelDefaultDataSetVariables.TabIndex = 8;
+            this.labelDefaultDataSetVariables.Text = "Default data set variables:";
+            // 
             // textBoxDefaultVaryingVariable
             // 
             this.textBoxDefaultVaryingVariable.Location = new System.Drawing.Point(359, 30);
@@ -88,11 +104,11 @@
             // labelDefaultVaryingVariable
             // 
             this.labelDefaultVaryingVariable.AutoSize = true;
-            this.labelDefaultVaryingVariable.Location = new System.Drawing.Point(187, 33);
+            this.labelDefaultVaryingVariable.Location = new System.Drawing.Point(205, 33);
             this.labelDefaultVaryingVariable.Name = "labelDefaultVaryingVariable";
-            this.labelDefaultVaryingVariable.Size = new System.Drawing.Size(167, 15);
+            this.labelDefaultVaryingVariable.Size = new System.Drawing.Size(148, 15);
             this.labelDefaultVaryingVariable.TabIndex = 6;
-            this.labelDefaultVaryingVariable.Text = "Default varying variable name:";
+            this.labelDefaultVaryingVariable.Text = "Default horizontal variable:";
             // 
             // textBoxDefaultPlottedVariable
             // 
@@ -104,17 +120,17 @@
             // labelDefaultPlottedVariable
             // 
             this.labelDefaultPlottedVariable.AutoSize = true;
-            this.labelDefaultPlottedVariable.Location = new System.Drawing.Point(187, 9);
+            this.labelDefaultPlottedVariable.Location = new System.Drawing.Point(220, 9);
             this.labelDefaultPlottedVariable.Name = "labelDefaultPlottedVariable";
-            this.labelDefaultPlottedVariable.Size = new System.Drawing.Size(166, 15);
+            this.labelDefaultPlottedVariable.Size = new System.Drawing.Size(133, 15);
             this.labelDefaultPlottedVariable.TabIndex = 4;
-            this.labelDefaultPlottedVariable.Text = "Default plotted variable name:";
+            this.labelDefaultPlottedVariable.Text = "Default vertical variable:";
             // 
             // textBoxUserName
             // 
             this.textBoxUserName.Location = new System.Drawing.Point(74, 30);
             this.textBoxUserName.Name = "textBoxUserName";
-            this.textBoxUserName.Size = new System.Drawing.Size(107, 23);
+            this.textBoxUserName.Size = new System.Drawing.Size(125, 23);
             this.textBoxUserName.TabIndex = 3;
             // 
             // label3
@@ -149,6 +165,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(271, 12);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -157,28 +174,12 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // labelDefaultDataSetVariables
-            // 
-            this.labelDefaultDataSetVariables.AutoSize = true;
-            this.labelDefaultDataSetVariables.Location = new System.Drawing.Point(6, 62);
-            this.labelDefaultDataSetVariables.Name = "labelDefaultDataSetVariables";
-            this.labelDefaultDataSetVariables.Size = new System.Drawing.Size(141, 15);
-            this.labelDefaultDataSetVariables.TabIndex = 8;
-            this.labelDefaultDataSetVariables.Text = "Default data set variables:";
-            // 
-            // textBoxDefaultDataSetVariables
-            // 
-            this.textBoxDefaultDataSetVariables.Location = new System.Drawing.Point(153, 59);
-            this.textBoxDefaultDataSetVariables.Name = "textBoxDefaultDataSetVariables";
-            this.textBoxDefaultDataSetVariables.Size = new System.Drawing.Size(252, 23);
-            this.textBoxDefaultDataSetVariables.TabIndex = 9;
-            // 
             // colorChooserDefaultPageColor
             // 
             this.colorChooserDefaultPageColor.Color = System.Drawing.Color.Empty;
             this.colorChooserDefaultPageColor.Location = new System.Drawing.Point(126, 9);
             this.colorChooserDefaultPageColor.Name = "colorChooserDefaultPageColor";
-            this.colorChooserDefaultPageColor.Size = new System.Drawing.Size(55, 15);
+            this.colorChooserDefaultPageColor.Size = new System.Drawing.Size(73, 15);
             this.colorChooserDefaultPageColor.TabIndex = 1;
             // 
             // SettingsEditor

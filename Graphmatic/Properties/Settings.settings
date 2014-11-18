@@ -8,10 +8,10 @@
     <Setting Name="Username" Description="Default username for users." Type="System.String" Scope="User">
       <Value Profile="(Default)">Anonymous</Value>
     </Setting>
-    <Setting Name="DefaultPlottedVariable" Type="System.Char" Scope="User">
+    <Setting Name="DefaultVerticalAxis" Type="System.Char" Scope="User">
       <Value Profile="(Default)">y</Value>
     </Setting>
-    <Setting Name="DefaultVaryingVariable" Type="System.Char" Scope="User">
+    <Setting Name="DefaultHorizontalAxis" Type="System.Char" Scope="User">
       <Value Profile="(Default)">x</Value>
     </Setting>
     <Setting Name="DefaultDataSetVariables" Type="System.Char[]" Scope="User">

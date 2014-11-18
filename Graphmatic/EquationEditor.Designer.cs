@@ -43,7 +43,7 @@
             // buttonEdit
             // 
             this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEdit.Location = new System.Drawing.Point(350, 164);
+            this.buttonEdit.Location = new System.Drawing.Point(350, 169);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(75, 23);
             this.buttonEdit.TabIndex = 1;
@@ -55,7 +55,7 @@
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonOK.Location = new System.Drawing.Point(350, 193);
+            this.buttonOK.Location = new System.Drawing.Point(350, 198);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             this.textBoxPlotted.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxPlotted.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxPlotted.Location = new System.Drawing.Point(112, 164);
+            this.textBoxPlotted.Location = new System.Drawing.Point(112, 169);
             this.textBoxPlotted.Name = "textBoxPlotted";
             this.textBoxPlotted.ReadOnly = true;
             this.textBoxPlotted.Size = new System.Drawing.Size(27, 23);
@@ -79,27 +79,27 @@
             // 
             this.labelPlotted.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPlotted.AutoSize = true;
-            this.labelPlotted.Location = new System.Drawing.Point(14, 167);
+            this.labelPlotted.Location = new System.Drawing.Point(20, 173);
             this.labelPlotted.Name = "labelPlotted";
-            this.labelPlotted.Size = new System.Drawing.Size(92, 15);
+            this.labelPlotted.Size = new System.Drawing.Size(86, 15);
             this.labelPlotted.TabIndex = 4;
-            this.labelPlotted.Text = "Plotted variable:";
+            this.labelPlotted.Text = "V. axis variable:";
             // 
             // labelVarying
             // 
             this.labelVarying.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelVarying.AutoSize = true;
-            this.labelVarying.Location = new System.Drawing.Point(12, 196);
+            this.labelVarying.Location = new System.Drawing.Point(18, 201);
             this.labelVarying.Name = "labelVarying";
-            this.labelVarying.Size = new System.Drawing.Size(94, 15);
+            this.labelVarying.Size = new System.Drawing.Size(88, 15);
             this.labelVarying.TabIndex = 5;
-            this.labelVarying.Text = "Varying variable:";
+            this.labelVarying.Text = "H. axis variable:";
             // 
             // textBoxVarying
             // 
             this.textBoxVarying.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxVarying.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxVarying.Location = new System.Drawing.Point(112, 193);
+            this.textBoxVarying.Location = new System.Drawing.Point(112, 198);
             this.textBoxVarying.Name = "textBoxVarying";
             this.textBoxVarying.ReadOnly = true;
             this.textBoxVarying.Size = new System.Drawing.Size(27, 23);
@@ -111,12 +111,12 @@
             // 
             this.labelDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelDescription.Location = new System.Drawing.Point(145, 167);
+            this.labelDescription.Location = new System.Drawing.Point(145, 175);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(199, 64);
+            this.labelDescription.Size = new System.Drawing.Size(199, 49);
             this.labelDescription.TabIndex = 7;
-            this.labelDescription.Text = "The plotted variable (on the vertical axis) is the variable which is defined in t" +
-    "erns of the varying variable (on the horizontal axis.)";
+            this.labelDescription.Text = "The two variables are the names of the value plotted on the vertical and horizont" +
+    "al axes respectively.";
             // 
             // expressionDisplay
             // 
@@ -131,8 +131,9 @@
             this.expressionDisplay.Location = new System.Drawing.Point(3, 12);
             this.expressionDisplay.MoeinMode = false;
             this.expressionDisplay.Name = "expressionDisplay";
-            this.expressionDisplay.Size = new System.Drawing.Size(422, 146);
+            this.expressionDisplay.Size = new System.Drawing.Size(422, 151);
             this.expressionDisplay.TabIndex = 0;
+            this.expressionDisplay.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.expressionDisplay_MouseDoubleClick);
             // 
             // EquationEditor
             // 

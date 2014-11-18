@@ -16,6 +16,9 @@ namespace Graphmatic.Expressions.Tokens
             { "sin", new UnaryEvaluator(x => Math.Sin(x), "sin({0})") },
             { "cos", new UnaryEvaluator(x => Math.Cos(x), "cos({0})") },
             { "tan", new UnaryEvaluator(x => Math.Tan(x), "tan({0})") },
+            { "sin`", new UnaryEvaluator(x => Math.Asin(x), "arcsin({0})") },
+            { "cos`", new UnaryEvaluator(x => Math.Acos(x), "arccos({0})") },
+            { "tan`", new UnaryEvaluator(x => Math.Atan(x), "arctan({0})") },
             { "", new UnaryEvaluator(x => x, "({0})") },
         };
 
