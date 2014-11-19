@@ -73,6 +73,7 @@ namespace Graphmatic
             expressionDisplay.ExpressionCursor.Moved += ExpressionCursor_Moved;
 
             toolTip.SetToolTip(buttonHorizontalVariable, ConvertCharToTooltip(Equation.HorizontalVariable));
+            toolTip.SetToolTip(buttonVerticalVariable, ConvertCharToTooltip(Equation.VerticalVariable));
 
             buttonHorizontalVariable.Image = FontHelperExtensionMethods.GetCharacterImage(Equation.HorizontalVariable, false, 2);
             buttonVerticalVariable.Image = FontHelperExtensionMethods.GetCharacterImage(Equation.VerticalVariable, false, 2);
