@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Graphmatic.Interaction;
+using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic
 {
@@ -182,6 +183,32 @@ namespace Graphmatic
         private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             DataChanged = true;
+        }
+
+        private void buttonGraph_Click(object sender, EventArgs e)
+        {
+            SaveChanges();
+
+            PictureBox pbDisplay = new PictureBox();
+            pbDisplay.Size = ClientSize;
+            pbDisplay.Location = Point.Empty;
+
+            Graph graph = new Graph();
+            graph.Add(DataSet, Color.Red);
+
+            PlotParameters parameters = new PlotParameters()
+            {
+                CenterHorizontal = 0,
+                CenterVertical = 0,
+                HorizontalPixelScale = 0.1,
+                VerticalPixelScale = 0.1
+            };
+            
+            Image image = graph.ToImage(pbDisplay.ClientSize, parameters);
+            pbDisplay.Image = image;
+
+            Controls.Add(pbDisplay);
+            pbDisplay.BringToFront();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Graphmatic.Interaction.Plotting;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,7 +10,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction
 {
-    public class DataSet : Resource, IEnumerable<double[]>
+    public class DataSet : Resource, IEnumerable<double[]>, IPlottable
     {
         public char[] Variables
         {
@@ -228,6 +229,49 @@ namespace Graphmatic.Interaction
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable)Data).GetEnumerator();
+        }
+
+        private int IndexOfVariable(char variable)
+        {
+            for (int i = 0; i < Variables.Length; i++)
+            {
+                if (Variables[i] == variable)
+                    return i;
+            }
+            return -1;
+        }
+
+        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, Color color, PlotParameters parameters)
+        {
+            Pen dataPointPen = new Pen(color);
+
+            int horizontalVariableIndex = IndexOfVariable(graph.HorizontalAxis),
+                verticalVariableIndex = IndexOfVariable(graph.VerticalAxis);
+
+            if (horizontalVariableIndex == -1)
+                throw new Exception("This data set cannot be plotted over the " +
+                                    graph.HorizontalAxis.ToString() +
+                                    " variable, as it does not contain such a variable.");
+
+            if (verticalVariableIndex == -1)
+                throw new Exception("This data set cannot be plotted over the " +
+                                    graph.VerticalAxis.ToString() +
+                                    " variable, as it does not contain such a variable.");
+
+            foreach (double[] row in Data)
+            {
+                double horizontal = row[horizontalVariableIndex],
+                       vertical = row[verticalVariableIndex];
+
+                int graphX, graphY;
+                graph.ToImageSpace(
+                    graphSize, parameters,
+                    horizontal, vertical,
+                    out graphX, out graphY);
+
+                graphics.DrawLine(dataPointPen, graphX - 2, graphY - 2, graphX + 2, graphY + 2);
+                graphics.DrawLine(dataPointPen, graphX - 2, graphY + 2, graphX + 2, graphY - 2);
+            }
         }
     }
 }
