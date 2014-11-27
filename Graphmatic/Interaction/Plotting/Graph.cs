@@ -43,7 +43,12 @@ namespace Graphmatic.Interaction.Plotting
         public Graph()
         {
             Resources = new Dictionary<IPlottable, Color>();
-            Axes = new GraphAxis();
+            Axes = new GraphAxis(1, 5)
+            {
+                AxisPen = Pens.Black,
+                MajorPen = Pens.Gray,
+                MinorPen = Pens.Silver
+            };
             Resources.Add(Axes, Color.Black);
             HorizontalAxis = Properties.Settings.Default.DefaultHorizontalAxis;
             VerticalAxis = Properties.Settings.Default.DefaultVerticalAxis;
