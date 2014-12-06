@@ -129,6 +129,7 @@
     <Compile Include="Interaction\DataSet.cs" />
     <Compile Include="Interaction\Document.cs" />
     <Compile Include="Interaction\Equation.cs" />
+    <Compile Include="Interaction\Equation.Plotting.cs" />
     <Compile Include="Interaction\HtmlPage.cs" />
     <Compile Include="Interaction\Picture.cs" />
     <Compile Include="Interaction\Plotting\GraphAxis.cs" />
@@ -144,12 +145,6 @@
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Interaction\ResourceSerializationExtensionMethods.cs" />
-    <Compile Include="Interaction\TestPlotter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interaction\TestPlotter.Designer.cs">
-      <DependentUpon>TestPlotter.cs</DependentUpon>
-    </Compile>
     <Compile Include="IXmlConvertible.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -221,9 +216,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExpressionEditor.resx">
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Interaction\TestPlotter.resx">
-      <DependentUpon>TestPlotter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

@@ -241,9 +241,11 @@ namespace Graphmatic.Interaction
             return -1;
         }
 
+        public const float DataPointPenWidth = 2f;
+        public const int DataPointCrossSize = 3;
         public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, Color color, PlotParameters parameters)
         {
-            Pen dataPointPen = new Pen(color);
+            Pen dataPointPen = new Pen(color, DataPointPenWidth);
 
             int horizontalVariableIndex = IndexOfVariable(graph.HorizontalAxis),
                 verticalVariableIndex = IndexOfVariable(graph.VerticalAxis);
@@ -269,8 +271,8 @@ namespace Graphmatic.Interaction
                     horizontal, vertical,
                     out graphX, out graphY);
 
-                graphics.DrawLine(dataPointPen, graphX - 2, graphY - 2, graphX + 2, graphY + 2);
-                graphics.DrawLine(dataPointPen, graphX - 2, graphY + 2, graphX + 2, graphY - 2);
+                graphics.DrawLine(dataPointPen, graphX - DataPointCrossSize, graphY - DataPointCrossSize, graphX + DataPointCrossSize, graphY + DataPointCrossSize);
+                graphics.DrawLine(dataPointPen, graphX - DataPointCrossSize, graphY + DataPointCrossSize, graphX + DataPointCrossSize, graphY - DataPointCrossSize);
             }
         }
     }

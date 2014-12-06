@@ -133,6 +133,7 @@
             this.expressionDisplay.Name = "expressionDisplay";
             this.expressionDisplay.Size = new System.Drawing.Size(422, 151);
             this.expressionDisplay.TabIndex = 0;
+            this.expressionDisplay.Load += new System.EventHandler(this.expressionDisplay_Load);
             this.expressionDisplay.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.expressionDisplay_MouseDoubleClick);
             // 
             // EquationEditor

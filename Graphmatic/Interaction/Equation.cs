@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Graphmatic.Expressions;
 using Graphmatic.Expressions.Parsing;
+using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic.Interaction
 {
-    public class Equation : Resource
+    public partial class Equation : Resource, IPlottable
     {
         public Expression Expression
         {

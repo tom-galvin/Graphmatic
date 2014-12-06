@@ -71,6 +71,9 @@ namespace Graphmatic.Interaction.Plotting
 
         private void PlotGridLinesOnto(Graphics g, Size graphSize, PlotParameters parameters, int axisX, int axisY)
         {
+            Font valueFont = SystemFonts.DefaultFont;
+            Brush valueBrush = MajorPen.Brush;
+
             double incrementX = GridSize / parameters.HorizontalPixelScale,
                    incrementY = GridSize / parameters.VerticalPixelScale;
 
@@ -78,32 +81,56 @@ namespace Graphmatic.Interaction.Plotting
             int index = 0;
             while (value < graphSize.Width)
             {
-                g.DrawLine(index % MajorInterval == 0 ? MajorPen : MinorPen,
+                bool major = index % MajorInterval == 0;
+                g.DrawLine(major ? MajorPen : MinorPen,
                     (int)value, 0, (int)value, graphSize.Height);
+                if (major)
+                {
+                    double horizontal = parameters.HorizontalPixelScale * (value - graphSize.Width / 2) + parameters.CenterHorizontal;
+                    g.DrawString(horizontal.ToString(), valueFont, valueBrush, (int)value, (int)axisY);
+                }
                 value += incrementX; index++;
             }
 
             value = axisX; index = 0;
             while (value >= 0)
             {
-                g.DrawLine(index % MajorInterval == 0 ? MajorPen : MinorPen,
+                bool major = index % MajorInterval == 0;
+                g.DrawLine(major ? MajorPen : MinorPen,
                     (int)value, 0, (int)value, graphSize.Height);
+                if (major)
+                {
+                    double horizontal = parameters.HorizontalPixelScale * (value - graphSize.Width / 2) + parameters.CenterHorizontal;
+                    g.DrawString(horizontal.ToString(), valueFont, valueBrush, (int)value, (int)axisY);
+                }
                 value -= incrementX; index++;
             }
 
             value = axisY; index = 0;
             while (value < graphSize.Height)
             {
-                g.DrawLine(index % MajorInterval == 0 ? MajorPen : MinorPen,
+                bool major = index % MajorInterval == 0;
+                g.DrawLine(major ? MajorPen : MinorPen,
                     0, (int)value, graphSize.Width, (int)value);
+                if (major)
+                {
+                    double vertical = parameters.VerticalPixelScale * -(value - graphSize.Height / 2) + parameters.CenterVertical;
+                    g.DrawString(vertical.ToString(), valueFont, valueBrush, (int)axisX, (int)value);
+                }
                 value += incrementY; index++;
             }
 
             value = axisY; index = 0;
             while (value >= 0)
             {
-                g.DrawLine(index % MajorInterval == 0 ? MajorPen : MinorPen,
+                bool major = index % MajorInterval == 0;
+                g.DrawLine(major ? MajorPen : MinorPen,
                     0, (int)value, graphSize.Width, (int)value);
+                if (major)
+                {
+                    double vertical = parameters.VerticalPixelScale * -(value - graphSize.Height / 2) + parameters.CenterVertical;
+                    g.DrawString(vertical.ToString(), valueFont, valueBrush, (int)axisX, (int)value);
+                }
                 value -= incrementY; index++;
             }
         }

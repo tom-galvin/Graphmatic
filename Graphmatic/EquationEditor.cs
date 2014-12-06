@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Graphmatic.Expressions;
 using Graphmatic.Expressions.Parsing;
 using Graphmatic.Interaction;
+using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic
 {
@@ -105,7 +106,37 @@ namespace Graphmatic
 
         private void expressionDisplay_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            new TestPlotter(Equation).ShowDialog();
+            PictureBox pbDisplay = new PictureBox();
+            pbDisplay.Size = ClientSize;
+            pbDisplay.Location = Point.Empty;
+            pbDisplay.Click += (sender2, e2) =>
+            {
+                Controls.Remove(pbDisplay);
+                pbDisplay.Visible = false;
+                pbDisplay.Dispose();
+            };
+
+            Graph graph = new Graph();
+            graph.Add(Equation, Color.Red);
+
+            PlotParameters parameters = new PlotParameters()
+            {
+                CenterHorizontal = 0,
+                CenterVertical = 0,
+                HorizontalPixelScale = 0.1,
+                VerticalPixelScale = 0.1
+            };
+
+            Image image = graph.ToImage(pbDisplay.ClientSize, parameters);
+            pbDisplay.Image = image;
+
+            Controls.Add(pbDisplay);
+            pbDisplay.BringToFront();
+        }
+
+        private void expressionDisplay_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

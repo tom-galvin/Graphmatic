@@ -219,6 +219,10 @@ namespace Graphmatic.Expressions
             }
             if(enumerator.MoveNext())
                 throw new ParseException("Unexpected symbol after equation.", enumerator.Current);
+            if (leftNode == null || rightNode == null)
+            {
+                throw new ParseException("Equation must have both a left-hand side and a right-hand side.", enumerator.Current);
+            }
             return new BinaryParseTreeNode(EqualsEvaluator, leftNode, rightNode);
         EndFast:
             throw new ParseException("Unexpected end of equation.", enumerator.Current);

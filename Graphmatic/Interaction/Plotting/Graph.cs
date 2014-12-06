@@ -102,14 +102,24 @@ namespace Graphmatic.Interaction.Plotting
             Resources.Clear();
         }
 
-        public Image ToImage(Size size, PlotParameters parameters)
+        public Image ToImage(Size size, PlotParameters parameters, bool renderContent = true)
         {
             Bitmap graphBitmap = new Bitmap(size.Width, size.Height);
             Graphics g = Graphics.FromImage(graphBitmap);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
 
-            foreach (KeyValuePair<IPlottable, Color> plottable in Resources)
+            if (renderContent)
             {
-                plottable.Key.PlotOnto(this, g, size, plottable.Value, parameters);
+                foreach (KeyValuePair<IPlottable, Color> plottable in Resources)
+                {
+                    plottable.Key.PlotOnto(this, g, size, plottable.Value, parameters);
+                }
+            }
+            else
+            {
+                Axes.PlotOnto(this, g, size, Color.Black, parameters);
             }
 
             return graphBitmap;
