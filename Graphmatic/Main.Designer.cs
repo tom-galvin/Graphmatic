@@ -1098,6 +1098,7 @@ namespace Graphmatic
             this.pageDisplay.Size = new System.Drawing.Size(277, 199);
             this.pageDisplay.TabIndex = 0;
             this.pageDisplay.TabStop = false;
+            this.pageDisplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pageDisplay_MouseClick);
             // 
             // Main
             // 

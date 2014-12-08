@@ -68,7 +68,7 @@ namespace Graphmatic.Interaction
             VerticalVariable = Char.Parse(xml.Element("Vertical").Value);
             HorizontalVariable = Char.Parse(xml.Element("Horizontal").Value);
             Expression = new Expression(null, xml.Element("Expression").Elements());
-            ParseTree = Expression.Parse();
+            ParseTree = Expression.Parse(true);
         }
 
         public void Parse()

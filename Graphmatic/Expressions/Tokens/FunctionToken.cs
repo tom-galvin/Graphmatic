@@ -61,7 +61,7 @@ namespace Graphmatic.Expressions.Tokens
         public FunctionToken(Expression parent, XElement xml)
             : base(parent)
         {
-            Text = xml.Element("Name").Value;
+            Text = xml.Attribute("Name").Value;
             Operand = new Expression(this, xml.Element("Operand").Elements());
             Children = new Expression[] { Operand };
         }

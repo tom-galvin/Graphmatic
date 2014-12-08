@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Graphmatic.Expressions;
 using Graphmatic.Expressions.Parsing;
+using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic
 {
@@ -150,5 +151,36 @@ namespace Graphmatic
                 MessageBoxIcon.Information);
         }
         #endregion
+
+        private void pageDisplay_MouseClick(object sender, MouseEventArgs e)
+        {
+            Graph graph = new Graph();
+            var plottable = CurrentDocument.Where(page => page is IPlottable);
+            Color[] colors = new[] {
+                Color.DarkGray,
+                Color.Red,
+                Color.Orange,
+                Color.Lime,
+                Color.Green,
+                Color.Teal,
+                Color.Blue,
+                Color.Purple
+            };
+            int index = 0;
+            foreach (var resource in plottable)
+            {
+                graph.Add(resource as IPlottable, colors[index++ % colors.Length]);
+            }
+            var plotParameters = new PlotParameters()
+            {
+                CenterHorizontal = 0,
+                CenterVertical = 0,
+                HorizontalAxis = 'x',
+                VerticalAxis = 'y',
+                HorizontalPixelScale = 0.05,
+                VerticalPixelScale = 0.05
+            };
+            pageDisplay.Image = graph.ToImage(pageDisplay.ClientSize, plotParameters);
+        }
     }
 }
