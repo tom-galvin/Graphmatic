@@ -515,7 +515,7 @@ namespace Graphmatic
             this.toolStripToggleHtmlPages.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripToggleHtmlPages.Name = "toolStripToggleHtmlPages";
             this.toolStripToggleHtmlPages.Size = new System.Drawing.Size(23, 22);
-            this.toolStripToggleHtmlPages.Text = "toolStripButton1";
+            this.toolStripToggleHtmlPages.ToolTipText = "Toggle HTML Pages";
             this.toolStripToggleHtmlPages.Click += new System.EventHandler(this.toolStripToggleHtmlPages_Click);
             // 
             // toolStripToggleHidden
