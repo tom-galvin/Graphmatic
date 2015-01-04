@@ -20,7 +20,7 @@ namespace Graphmatic.Expressions
                 while (enumerator.Current != null && enumerator.Current is DigitToken)
                 {
                     builder.Append((enumerator.Current as DigitToken).Text);
-                    if (!enumerator.MoveNext()) goto EndFast;
+                    if (!enumerator.MoveNext()) break;
                 }
             }
             else
@@ -32,19 +32,21 @@ namespace Graphmatic.Expressions
                 (enumerator.Current as SymbolicToken).Type == SymbolicToken.SymbolicType.DecimalPoint)
             {
                 builder.Append('.');
-                if (!enumerator.MoveNext()) goto EndFast;
+                if (enumerator.MoveNext())
+                {
 
-                if (enumerator.Current is DigitToken) // fractional component
-                {
-                    while (enumerator.Current != null && enumerator.Current is DigitToken)
+                    if (enumerator.Current is DigitToken) // fractional component
                     {
-                        builder.Append((enumerator.Current as DigitToken).Text);
-                        if (!enumerator.MoveNext()) goto EndFast;
+                        while (enumerator.Current != null && enumerator.Current is DigitToken)
+                        {
+                            builder.Append((enumerator.Current as DigitToken).Text);
+                            if (!enumerator.MoveNext()) break;
+                        }
                     }
-                }
-                else
-                {
-                    throw new ParseException("Decimal point in a literal number must be followed by a digit.", enumerator.Current);
+                    else
+                    {
+                        throw new ParseException("Decimal point in a literal number must be followed by a digit.", enumerator.Current);
+                    }
                 }
             }
 
@@ -52,7 +54,8 @@ namespace Graphmatic.Expressions
                 (enumerator.Current as SymbolicToken).Type == SymbolicToken.SymbolicType.Exp10)
             {
                 builder.Append('e');
-                if (!enumerator.MoveNext()) goto EndFast;
+                if (!enumerator.MoveNext())
+                    throw new ParseException("Expected exponent after exponent symbol.", enumerator.Current);
                 if(enumerator.Current is OperationToken) // symbol
                 {
                     OperationToken.OperationType operation = (enumerator.Current as OperationToken).Operation;
@@ -62,7 +65,7 @@ namespace Graphmatic.Expressions
                         builder.Append('-');
                     else
                         throw new ParseException("Invalid symbol here - must be a +, - or digit.", enumerator.Current);
-                    if (!enumerator.MoveNext()) goto EndFast;
+                    enumerator.MoveNext();
                 }
 
                 if (enumerator.Current is DigitToken) // exponent component
@@ -70,7 +73,7 @@ namespace Graphmatic.Expressions
                     while (enumerator.Current != null && enumerator.Current is DigitToken)
                     {
                         builder.Append((enumerator.Current as DigitToken).Text);
-                        if (!enumerator.MoveNext()) goto EndFast;
+                        if (!enumerator.MoveNext()) break;
                     }
                 }
                 else
@@ -83,9 +86,9 @@ namespace Graphmatic.Expressions
                 (enumerator.Current as SymbolicToken).Type == SymbolicToken.SymbolicType.Percent)
             {
                 scaleFactor /= 100.0;
-                if (!enumerator.MoveNext()) goto EndFast;
+                enumerator.MoveNext();
             }
-        EndFast:
+
             return new ConstantParseTreeNode(Double.Parse(builder.ToString()) * scaleFactor);
         }
 
@@ -109,9 +112,9 @@ namespace Graphmatic.Expressions
                         currentNode,
                         (enumerator.Current as IParsable).Parse());
                 }
-                if (!enumerator.MoveNext()) goto EndFast;
+                if (!enumerator.MoveNext()) break;
             }
-        EndFast:
+
             return currentNode;
         }
 
@@ -135,14 +138,13 @@ namespace Graphmatic.Expressions
                 {
                     break;
                 }
-                if (!enumerator.MoveNext()) goto EndFast;
+                if (!enumerator.MoveNext())
+                    throw new ParseException("Unexpected end of expression.", enumerator.Current);
             }
             if (positive)
                 return ParseAtomic(enumerator);
             else
                 return new UnaryParseTreeNode(NegationEvaluator, ParseAtomic(enumerator));
-        EndFast:
-            throw new ParseException("Unexpected end of expression.", enumerator.Current);
         }
 
         public static readonly BinaryEvaluator MultiplyEvaluator = new BinaryEvaluator((l, r) => l * r, "{0}*{1}");
@@ -173,6 +175,17 @@ namespace Graphmatic.Expressions
         EndFast:
             throw new ParseException("Unexpected end of expression.", enumerator.Current);
         }
+
+        /* I believe that by presenting such a view I am not in fact disagreeing sharply
+         * with Dijkstra's ideas, since he recently wrote the following: "Please don't
+         * fall into the trap of believing that I am terribly dogmatical about [the go to
+         * statement]. I have the uncomfortable feeling that others are making a religion
+         * out of it, as if the conceptual problems of programming could be solved by a
+         * single trick, by a simple form of coding discipline!"
+         * 
+         * - Donald E. Knuth
+         * 
+         * Goto isn't evil here, as it avoids nasty temporary variables everywhere. */
 
         public static readonly BinaryEvaluator AddEvaluator = new BinaryEvaluator((l, r) => l + r, "{0}+{1}");
         public static readonly BinaryEvaluator SubtractEvaluator = new BinaryEvaluator((l, r) => l - r, "{0}-{1}");
@@ -210,7 +223,8 @@ namespace Graphmatic.Expressions
             SymbolicToken current = enumerator.Current as SymbolicToken;
             if (current != null && current.Type == SymbolicToken.SymbolicType.Equals)
             {
-                if (!enumerator.MoveNext()) goto EndFast;
+                if (!enumerator.MoveNext())
+                    throw new ParseException("Unexpected end of equation.", enumerator.Current);
                 rightNode = ParseSummation(enumerator);
             }
             else
@@ -224,8 +238,6 @@ namespace Graphmatic.Expressions
                 throw new ParseException("Equation must have both a left-hand side and a right-hand side.", enumerator.Current);
             }
             return new BinaryParseTreeNode(EqualsEvaluator, leftNode, rightNode);
-        EndFast:
-            throw new ParseException("Unexpected end of equation.", enumerator.Current);
         }
 
         public ParseTreeNode Parse(bool equationParse)
