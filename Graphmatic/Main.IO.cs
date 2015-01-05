@@ -15,7 +15,7 @@ namespace Graphmatic
         {
             try
             {
-                CurrentDocument.Save(path, path.EndsWith(".xml") ? false : true);
+                CurrentDocument.Save(path, path.ToLowerInvariant().EndsWith(".xml") ? false : true);
                 DocumentPath = path;
                 DocumentModified = false;
             }
@@ -79,7 +79,7 @@ namespace Graphmatic
         {
             try
             {
-                CurrentDocument = Document.Open(path, path.EndsWith(".xml") ? false : true);
+                CurrentDocument = Document.Open(path, path.ToLowerInvariant().EndsWith(".xml") ? false : true);
                 DocumentPath = path;
                 DocumentModified = false;
                 if (CurrentDocument.CurrentResource != null)
