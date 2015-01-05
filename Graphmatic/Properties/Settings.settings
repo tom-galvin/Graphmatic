@@ -21,5 +21,17 @@
   &lt;char&gt;121&lt;/char&gt;
 &lt;/ArrayOfChar&gt;</Value>
     </Setting>
+    <Setting Name="BackupInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="BackupEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="BackupPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%APPDATA%/Graphmatic/Backup</Value>
+    </Setting>
+    <Setting Name="RestoreLastResource" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

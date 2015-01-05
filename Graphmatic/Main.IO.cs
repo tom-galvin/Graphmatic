@@ -11,18 +11,112 @@ namespace Graphmatic
 {
     public partial class Main
     {
-        public void SaveDocument(string path)
+        bool FailedBackup
         {
+            get;
+            set;
+        }
+
+        public void Backup()
+        {
+            if (CurrentDocument != null)
+            {
+                SaveBackupDocument();
+            }
+        }
+
+        public void RemoveBackupDocument()
+        {
+            string backupPath = GetBackupPath();
+
             try
             {
-                CurrentDocument.Save(path, path.ToLowerInvariant().EndsWith(".xml") ? false : true);
-                DocumentPath = path;
-                DocumentModified = false;
+                if (File.Exists(backupPath))
+                {
+                    File.Delete(backupPath);
+                }
             }
             catch (IOException ex)
             {
-                MessageBox.Show("The document cannot be saved.\r\n" + ex.Message, "Save - " + ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Backup document cannot be removed.\r\n" +
+                    ex.Message, "Backup - " + ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public void SaveBackupDocument()
+        {
+            string backupPath = GetBackupPath();
+
+            try
+            {
+                CurrentDocument.Save(backupPath, true);
+            }
+            catch (IOException ex)
+            {
+                if (!FailedBackup)
+                {
+                    MessageBox.Show("A backup document cannot be created for this document. This message will only be shown once while this document is open.\r\n" +
+                        ex.Message, "Backup and Restore - " + ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    FailedBackup = true;
+                }
+            }
+        }
+
+        public void RecoverBackupDocument(string backupPath)
+        {
+            SaveFileDialog saveFileDialog = CreateSaveFileDialog();
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    File.Move(backupPath, saveFileDialog.FileName);
+                }
+                catch (IOException ex)
+                {
+                    if (!FailedBackup)
+                    {
+                        MessageBox.Show("The backup document cannot be recovered.\r\n" +
+                            ex.Message, "Backup and Restore - " + ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        FailedBackup = true;
+                    }
+                }
+            }
+        }
+
+        public void CheckBackupDocument()
+        {
+            string backupPath = GetBackupPath();
+            if (File.Exists(backupPath))
+            {
+                DialogResult result = MessageBox.Show("It appears that the program ended unexpectedly before the document was closed. Do you want to recover the backup document?", "Backup and Restore", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    RecoverBackupDocument(backupPath);
+                }
+                else if (result == DialogResult.No)
+                {
+                    RemoveBackupDocument();
+                }
+            }
+            else
+            {
+            }
+        }
+
+        public string GetBackupPath()
+        {
+            string path = Environment.ExpandEnvironmentVariables(
+                String.Format("{0}/{1}", GetBackupFolder(), CurrentDocument.BackupFileName));
+            return path;
+        }
+
+        public string GetBackupFolder()
+        {
+            string folderPath = Properties.Settings.Default.BackupPath;
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            return folderPath;
         }
 
         private SaveFileDialog CreateSaveFileDialog()
@@ -45,20 +139,25 @@ namespace Graphmatic
             };
         }
 
+        public void SaveDocument(string path)
+        {
+            try
+            {
+                CurrentDocument.Save(path, path.ToLowerInvariant().EndsWith(".xml") ? false : true);
+                DocumentPath = path;
+                DocumentModified = false;
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("The document cannot be saved.\r\n" + ex.Message, "Save - " + ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public void SaveDocumentAs()
         {
             SaveFileDialog saveFileDialog = CreateSaveFileDialog();
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (File.Exists(saveFileDialog.FileName) && false)
-                {
-                    if (MessageBox.Show(
-                        "This file already exists. Do you want to overwrite it?",
-                        "Save",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
-                        return;
-                }
                 SaveDocument(saveFileDialog.FileName);
             }
         }
@@ -80,10 +179,16 @@ namespace Graphmatic
             try
             {
                 CurrentDocument = Document.Open(path, path.ToLowerInvariant().EndsWith(".xml") ? false : true);
+                FailedBackup = false;
+                CheckBackupDocument();
+
                 DocumentPath = path;
                 DocumentModified = false;
-                if (CurrentDocument.CurrentResource != null)
+                if (CurrentDocument.CurrentResource != null &&
+                    Properties.Settings.Default.RestoreLastResource)
                     OpenResourceEditor(CurrentDocument.CurrentResource);
+
+                Backup();
             }
             catch (IOException ex)
             {
@@ -94,6 +199,7 @@ namespace Graphmatic
         public void OpenDocument()
         {
             if (!CheckDocument()) return;
+            RemoveBackupDocument();
             OpenFileDialog openFileDialog = CreateOpenFileDialog();
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

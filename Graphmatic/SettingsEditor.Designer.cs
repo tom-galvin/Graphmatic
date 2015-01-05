@@ -41,9 +41,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.textBoxBackupPath = new System.Windows.Forms.TextBox();
+            this.labelBackupPath = new System.Windows.Forms.Label();
+            this.checkBoxBackup = new System.Windows.Forms.CheckBox();
+            this.numericBackupInterval = new System.Windows.Forms.NumericUpDown();
             this.colorChooserDefaultPageColor = new Graphmatic.ColorChooser();
             this.tabControl.SuspendLayout();
             this.tabPageDefaults.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericBackupInterval)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -60,6 +65,10 @@
             // 
             // tabPageDefaults
             // 
+            this.tabPageDefaults.Controls.Add(this.numericBackupInterval);
+            this.tabPageDefaults.Controls.Add(this.checkBoxBackup);
+            this.tabPageDefaults.Controls.Add(this.labelBackupPath);
+            this.tabPageDefaults.Controls.Add(this.textBoxBackupPath);
             this.tabPageDefaults.Controls.Add(this.textBoxDefaultDataSetVariables);
             this.tabPageDefaults.Controls.Add(this.labelDefaultDataSetVariables);
             this.tabPageDefaults.Controls.Add(this.textBoxDefaultVaryingVariable);
@@ -174,6 +183,54 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // textBoxBackupPath
+            // 
+            this.textBoxBackupPath.Location = new System.Drawing.Point(153, 88);
+            this.textBoxBackupPath.Name = "textBoxBackupPath";
+            this.textBoxBackupPath.Size = new System.Drawing.Size(252, 23);
+            this.textBoxBackupPath.TabIndex = 10;
+            // 
+            // labelBackupPath
+            // 
+            this.labelBackupPath.AutoSize = true;
+            this.labelBackupPath.Location = new System.Drawing.Point(71, 91);
+            this.labelBackupPath.Name = "labelBackupPath";
+            this.labelBackupPath.Size = new System.Drawing.Size(76, 15);
+            this.labelBackupPath.TabIndex = 11;
+            this.labelBackupPath.Text = "Backup path:";
+            // 
+            // checkBoxBackup
+            // 
+            this.checkBoxBackup.AutoSize = true;
+            this.checkBoxBackup.Location = new System.Drawing.Point(9, 118);
+            this.checkBoxBackup.Name = "checkBoxBackup";
+            this.checkBoxBackup.Size = new System.Drawing.Size(164, 19);
+            this.checkBoxBackup.TabIndex = 12;
+            this.checkBoxBackup.Text = "Backup interval (seconds):";
+            this.checkBoxBackup.UseVisualStyleBackColor = true;
+            // 
+            // numericBackupInterval
+            // 
+            this.numericBackupInterval.Location = new System.Drawing.Point(179, 117);
+            this.numericBackupInterval.Maximum = new decimal(new int[] {
+            7200,
+            0,
+            0,
+            0});
+            this.numericBackupInterval.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericBackupInterval.Name = "numericBackupInterval";
+            this.numericBackupInterval.Size = new System.Drawing.Size(226, 23);
+            this.numericBackupInterval.TabIndex = 14;
+            this.numericBackupInterval.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // colorChooserDefaultPageColor
             // 
             this.colorChooserDefaultPageColor.Color = System.Drawing.Color.Empty;
@@ -206,6 +263,7 @@
             this.tabControl.ResumeLayout(false);
             this.tabPageDefaults.ResumeLayout(false);
             this.tabPageDefaults.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericBackupInterval)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -226,5 +284,9 @@
         private System.Windows.Forms.Label labelDefaultVaryingVariable;
         private System.Windows.Forms.TextBox textBoxDefaultDataSetVariables;
         private System.Windows.Forms.Label labelDefaultDataSetVariables;
+        private System.Windows.Forms.Label labelBackupPath;
+        private System.Windows.Forms.TextBox textBoxBackupPath;
+        private System.Windows.Forms.CheckBox checkBoxBackup;
+        private System.Windows.Forms.NumericUpDown numericBackupInterval;
     }
 }

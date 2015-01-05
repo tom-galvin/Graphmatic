@@ -59,6 +59,23 @@ namespace Graphmatic
                     .Where(s => s.Length == 1)
                     .Select(s => Char.Parse(s))
                     .ToArray();
+
+            numericBackupInterval.Value = (decimal)Settings.Default.BackupInterval;
+            numericBackupInterval.ValueChanged += (sender, e) =>
+                Settings.Default.BackupInterval = (int)numericBackupInterval.Value;
+
+            checkBoxBackup.CheckedChanged += (sender, e) =>
+            {
+                Settings.Default.BackupEnabled =
+                    numericBackupInterval.Enabled =
+                    textBoxBackupPath.Enabled =
+                    checkBoxBackup.Checked;
+            };
+            checkBoxBackup.Checked = Settings.Default.BackupEnabled;
+
+            textBoxBackupPath.Text = Settings.Default.BackupPath;
+            textBoxBackupPath.TextChanged += (sender, e) =>
+                Settings.Default.BackupPath = textBoxBackupPath.Text;
         }
 
         private void Options_Load(object sender, EventArgs e)

@@ -123,6 +123,7 @@ namespace Graphmatic
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.pageDisplay = new System.Windows.Forms.PictureBox();
+            this.timerBackup = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -1100,6 +1101,12 @@ namespace Graphmatic
             this.pageDisplay.TabStop = false;
             this.pageDisplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pageDisplay_MouseClick);
             // 
+            // timerBackup
+            // 
+            this.timerBackup.Enabled = true;
+            this.timerBackup.Interval = 60000;
+            this.timerBackup.Tick += new System.EventHandler(this.timerBackup_Tick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1252,6 +1259,7 @@ namespace Graphmatic
         private ToolStripButton toolStripButtonForward;
         private ToolStripButton toolStripToggleHtmlPages;
         private ToolStripMenuItem webPageToolStripMenuItem;
+        private Timer timerBackup;
     }
 }
 

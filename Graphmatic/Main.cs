@@ -64,6 +64,13 @@ namespace Graphmatic
         {
             InitializeComponent();
             InitializeEditors();
+            InitializeBackupTimer();
+        }
+
+        public void InitializeBackupTimer()
+        {
+            timerBackup.Interval = Properties.Settings.Default.BackupInterval * 1000;
+            timerBackup.Enabled = Properties.Settings.Default.BackupEnabled;
         }
 
         private void UpdateTitle()
@@ -129,7 +136,14 @@ namespace Graphmatic
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!CheckDocument()) e.Cancel = true;
+            if (!CheckDocument())
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                RemoveBackupDocument();
+            }
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
@@ -181,6 +195,11 @@ namespace Graphmatic
                 VerticalPixelScale = 0.05
             };
             pageDisplay.Image = graph.ToImage(pageDisplay.ClientSize, plotParameters);
+        }
+
+        private void timerBackup_Tick(object sender, EventArgs e)
+        {
+            Backup();
         }
     }
 }

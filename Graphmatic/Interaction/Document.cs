@@ -38,10 +38,24 @@ namespace Graphmatic.Interaction
             protected set;
         }
 
+        public Guid Guid
+        {
+            get;
+            protected set;
+        }
+
         public Resource CurrentResource
         {
             get;
             set;
+        }
+
+        public string BackupFileName
+        {
+            get
+            {
+                return String.Format("{0}.gmd", Guid.ToString());
+            }
         }
 
         public Document()
@@ -53,6 +67,7 @@ namespace Graphmatic.Interaction
             OriginalVersion = Properties.Resources.VersionString;
             CurrentResource = null;
             CreationDate = DateTime.Now;
+            Guid = Guid.NewGuid();
         }
 
         public Document(XElement xml)
@@ -71,6 +86,7 @@ namespace Graphmatic.Interaction
             Author = xml.Attribute("Author").Value;
             OriginalVersion = xml.Attribute("OriginalVersion").Value;
             CreationDate = DateTime.Parse(xml.Attribute("CreationDate").Value);
+            Guid = Guid.Parse(xml.Attribute("ID").Value);
 
             var resourcesElements = xml.Element("Resources").Elements();
             foreach (XElement resourceElement in resourcesElements)
@@ -158,6 +174,7 @@ namespace Graphmatic.Interaction
                 new XAttribute("Version", Properties.Resources.VersionString), // most recent editing version
                 new XAttribute("OriginalVersion", OriginalVersion), // original editing version
                 new XAttribute("CreationDate", CreationDate.ToString()), // date the document was created
+                new XAttribute("ID", Guid.ToString()), // guid of the document
                 new XElement("Resources",
                     Resources.Values.Select(r => r.ToXml())),
                 new XElement("PageOrder",
