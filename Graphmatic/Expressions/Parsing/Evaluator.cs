@@ -32,7 +32,8 @@ namespace Graphmatic.Expressions.Parsing
         /// Initialize a new instance of the Evaluator class, with the given formatting string.
         /// </summary>
         /// <param name="formatString">The formatting string to use when converting the parse tree into a string.</param>
-        protected Evaluator(string formatString) {
+        protected Evaluator(string formatString)
+        {
             FormatString = formatString;
         }
     }
