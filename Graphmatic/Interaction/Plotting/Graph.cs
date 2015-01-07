@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Graphmatic.Interaction.Plotting
 {
-    public class Graph
+    public class Graph : IEnumerable<KeyValuePair<IPlottable, Color>>
     {
         private Dictionary<IPlottable, Color> Resources;
 
@@ -131,6 +131,16 @@ namespace Graphmatic.Interaction.Plotting
                 (int)((horizontal - parameters.CenterHorizontal) / parameters.HorizontalPixelScale);
             y = graphSize.Height / 2 -
                 (int)((vertical - parameters.CenterVertical) / parameters.VerticalPixelScale);
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return Resources.GetEnumerator();
+        }
+
+        IEnumerator<KeyValuePair<IPlottable, Color>> IEnumerable<KeyValuePair<IPlottable, Color>>.GetEnumerator()
+        {
+            return Resources.GetEnumerator() as IEnumerator<KeyValuePair<IPlottable, Color>>;
         }
     }
 }
