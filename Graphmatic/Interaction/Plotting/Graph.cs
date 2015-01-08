@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Graphmatic.Interaction.Plotting
 {
-    public class Graph : IEnumerable<KeyValuePair<IPlottable, Color>>
+    public class Graph : IEnumerable<KeyValuePair<IPlottable, PlottableParameters>>
     {
-        private Dictionary<IPlottable, Color> Resources;
+        private Dictionary<IPlottable, PlottableParameters> Resources;
 
         public char HorizontalAxis
         {
@@ -28,60 +28,62 @@ namespace Graphmatic.Interaction.Plotting
             set;
         }
 
+        protected GraphKey Key
+        {
+            get;
+            set;
+        }
+
         protected Color AxisColor
         {
             get
             {
-                return GetColor(Axes);
+                return Resources[Axes].PlotColor;
             }
             set
             {
-                SetColor(Axes, value);
+                Resources[Axes].PlotColor = value;
+            }
+        }
+
+        protected Color KeyTextColor
+        {
+            get
+            {
+                return Resources[Key].PlotColor;
+            }
+            set
+            {
+                Resources[Key].PlotColor = value;
             }
         }
 
         public Graph()
         {
-            Resources = new Dictionary<IPlottable, Color>();
-            Axes = new GraphAxis(1, 5)
+            Resources = new Dictionary<IPlottable, PlottableParameters>();
+            Axes = new GraphAxis(1, 5);
+            Key = new GraphKey();
+            Resources.Add(Axes, new PlottableParameters()
             {
-                AxisPen = Pens.Black,
-                MajorPen = Pens.Gray,
-                MinorPen = Pens.Silver
-            };
-            Resources.Add(Axes, Color.Black);
+                PlotColor = Color.Black
+            });
+            Resources.Add(Key, new PlottableParameters()
+            {
+                PlotColor = Color.Black
+            });
             HorizontalAxis = Properties.Settings.Default.DefaultHorizontalAxis;
             VerticalAxis = Properties.Settings.Default.DefaultVerticalAxis;
         }
 
-        public IEnumerable<IPlottable> GetContent()
-        {
-            foreach(IPlottable plottable in Resources.Keys)
-            {
-                if (plottable != Axes)
-                {
-                    yield return plottable;
-                }
-            }
-        }
-
-        public void Add(IPlottable plottable, Color color)
+        public void Add(IPlottable plottable, PlottableParameters parameters)
         {
             if(Resources.ContainsKey(plottable))
                 throw new InvalidOperationException("The Graph already contains this IPlottable.");
             else
-                Resources.Add(plottable, color);
+                Resources.Add(plottable, parameters);
         }
 
-        public void SetColor(IPlottable plottable, Color color)
-        {
-            if (Resources.ContainsKey(plottable))
-                Resources[plottable] = color;
-            else
-                throw new InvalidOperationException("The Graph does not contain this IPlottable.");
-        }
-
-        public Color GetColor(IPlottable plottable)
+        public PlottableParameters GetParameters(IPlottable plottable)
         {
             if (Resources.ContainsKey(plottable))
                 return Resources[plottable];
@@ -102,7 +104,7 @@ namespace Graphmatic.Interaction.Plotting
             Resources.Clear();
         }
 
-        public Image ToImage(Size size, PlotParameters parameters, bool renderContent = true)
+        public Image ToImage(Size size, GraphParameters parameters, bool renderContent = true)
         {
             Bitmap graphBitmap = new Bitmap(size.Width, size.Height);
             Graphics g = Graphics.FromImage(graphBitmap);
@@ -112,20 +114,20 @@ namespace Graphmatic.Interaction.Plotting
 
             if (renderContent)
             {
-                foreach (KeyValuePair<IPlottable, Color> plottable in Resources)
+                foreach (KeyValuePair<IPlottable, PlottableParameters> plottable in Resources)
                 {
                     plottable.Key.PlotOnto(this, g, size, plottable.Value, parameters);
                 }
             }
             else
             {
-                Axes.PlotOnto(this, g, size, Color.Black, parameters);
+                Axes.PlotOnto(this, g, size, Resources[Axes], parameters);
             }
 
             return graphBitmap;
         }
 
-        public void ToImageSpace(Size graphSize, PlotParameters parameters, double horizontal, double vertical, out int x, out int y)
+        public void ToImageSpace(Size graphSize, GraphParameters parameters, double horizontal, double vertical, out int x, out int y)
         {
             x = graphSize.Width / 2 +
                 (int)((horizontal - parameters.CenterHorizontal) / parameters.HorizontalPixelScale);
@@ -138,9 +140,9 @@ namespace Graphmatic.Interaction.Plotting
             return Resources.GetEnumerator();
         }
 
-        IEnumerator<KeyValuePair<IPlottable, Color>> IEnumerable<KeyValuePair<IPlottable, Color>>.GetEnumerator()
+        IEnumerator<KeyValuePair<IPlottable, PlottableParameters>> IEnumerable<KeyValuePair<IPlottable, PlottableParameters>>.GetEnumerator()
         {
-            return Resources.GetEnumerator() as IEnumerator<KeyValuePair<IPlottable, Color>>;
+            return Resources.GetEnumerator() as IEnumerator<KeyValuePair<IPlottable, PlottableParameters>>;
         }
     }
 }

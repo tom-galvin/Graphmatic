@@ -33,7 +33,6 @@
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonEditVariables = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonGraph = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,23 +84,11 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // buttonGraph
-            // 
-            this.buttonGraph.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGraph.Location = new System.Drawing.Point(73, 298);
-            this.buttonGraph.Name = "buttonGraph";
-            this.buttonGraph.Size = new System.Drawing.Size(75, 23);
-            this.buttonGraph.TabIndex = 4;
-            this.buttonGraph.Text = "Graph";
-            this.buttonGraph.UseVisualStyleBackColor = true;
-            this.buttonGraph.Click += new System.EventHandler(this.buttonGraph_Click);
-            // 
             // DataSetEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(403, 333);
-            this.Controls.Add(this.buttonGraph);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonEditVariables);
             this.Controls.Add(this.dataGridView);
@@ -123,7 +110,6 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonEditVariables;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonGraph;
 
     }
 }

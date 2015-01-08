@@ -105,16 +105,16 @@ namespace Graphmatic
 
         public string GetBackupPath()
         {
-            string path = Environment.ExpandEnvironmentVariables(
-                String.Format("{0}/{1}", GetBackupFolder(), CurrentDocument.BackupFileName));
+            string path = String.Format("{0}/{1}", GetBackupFolder(), CurrentDocument.BackupFileName);
             return path;
         }
 
         public string GetBackupFolder()
         {
-            string folderPath = Properties.Settings.Default.BackupPath;
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
+            string folderPath = Environment.ExpandEnvironmentVariables(Properties.Settings.Default.BackupPath);
+
+            // if the directory already exists, this does nothing
+            Directory.CreateDirectory(folderPath);
 
             return folderPath;
         }

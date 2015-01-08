@@ -171,7 +171,6 @@ namespace Graphmatic
             Graph graph = new Graph();
             var plottable = CurrentDocument.Where(page => page is IPlottable);
             Color[] colors = new[] {
-                Color.DarkGray,
                 Color.Red,
                 Color.Orange,
                 Color.Lime,
@@ -183,9 +182,9 @@ namespace Graphmatic
             int index = 0;
             foreach (var resource in plottable)
             {
-                graph.Add(resource as IPlottable, colors[index++ % colors.Length]);
+                graph.Add(resource as IPlottable, new PlottableParameters() { PlotColor = colors[index++ % colors.Length] });
             }
-            var plotParameters = new PlotParameters()
+            var plotParameters = new GraphParameters()
             {
                 CenterHorizontal = 0,
                 CenterVertical = 0,

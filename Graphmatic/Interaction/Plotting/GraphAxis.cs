@@ -20,73 +20,55 @@ namespace Graphmatic.Interaction.Plotting
             set;
         }
 
-        public Pen AxisPen
-        {
-            get;
-            set;
-        }
-
-        public Pen MajorPen
-        {
-            get;
-            set;
-        }
-
-        public Pen MinorPen
-        {
-            get;
-            set;
-        }
-
         public GraphAxis(double gridSize, int majorInterval)
         {
             GridSize = gridSize;
             MajorInterval = majorInterval;
-
-            AxisPen = Pens.Black;
-            MajorPen = Pens.Gray;
-            MinorPen = Pens.Silver;
         }
 
-        public void PlotOnto(Graph graph, Graphics g, Size graphSize, Color color, PlotParameters parameters)
+        public void PlotOnto(Graph graph, Graphics g, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams)
         {
             int axisX, axisY;
-            graph.ToImageSpace(graphSize, parameters, 0, 0, out axisX, out axisY);
+            graph.ToImageSpace(graphSize, graphParams, 0, 0, out axisX, out axisY);
 
-            PlotGridLinesOnto(g, graphSize, parameters, axisX, axisY);
-            PlotAxesOnto(g, graphSize, axisX, axisY);
+            PlotGridLinesOnto(g, graphSize, plotParams, graphParams, axisX, axisY);
+            PlotAxesOnto(g, graphSize, plotParams, axisX, axisY);
         }
 
-        private void PlotAxesOnto(Graphics g, Size graphSize, int axisX, int axisY)
+        private void PlotAxesOnto(Graphics g, Size graphSize, PlottableParameters plotParams, int axisX, int axisY)
         {
+            Pen axisPen = new Pen(plotParams.PlotColor);
             if (axisY >= 0 && axisY < graphSize.Height)
             {
-                g.DrawLine(AxisPen, 0, axisY, graphSize.Width, axisY);
+                g.DrawLine(axisPen, 0, axisY, graphSize.Width, axisY);
             }
             if (axisX >= 0 && axisX < graphSize.Width)
             {
-                g.DrawLine(AxisPen, axisX, 0, axisX, graphSize.Height);
+                g.DrawLine(axisPen, axisX, 0, axisX, graphSize.Height);
             }
         }
 
-        private void PlotGridLinesOnto(Graphics g, Size graphSize, PlotParameters parameters, int axisX, int axisY)
+        private void PlotGridLinesOnto(Graphics g, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, int axisX, int axisY)
         {
-            Font valueFont = SystemFonts.DefaultFont;
-            Brush valueBrush = MajorPen.Brush;
+            Pen majorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.5));
+            Pen minorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.333));
 
-            double incrementX = GridSize / parameters.HorizontalPixelScale,
-                   incrementY = GridSize / parameters.VerticalPixelScale;
+            Font valueFont = SystemFonts.DefaultFont;
+            Brush valueBrush = majorPen.Brush;
+
+            double incrementX = GridSize / graphParams.HorizontalPixelScale,
+                   incrementY = GridSize / graphParams.VerticalPixelScale;
 
             double value = axisX;
             int index = 0;
             while (value < graphSize.Width)
             {
                 bool major = index % MajorInterval == 0;
-                g.DrawLine(major ? MajorPen : MinorPen,
+                g.DrawLine(major ? majorPen : minorPen,
                     (int)value, 0, (int)value, graphSize.Height);
                 if (major)
                 {
-                    double horizontal = parameters.HorizontalPixelScale * (value - graphSize.Width / 2) + parameters.CenterHorizontal;
+                    double horizontal = graphParams.HorizontalPixelScale * (value - graphSize.Width / 2) + graphParams.CenterHorizontal;
                     g.DrawString(horizontal.ToString(), valueFont, valueBrush, (int)value, (int)axisY);
                 }
                 value += incrementX; index++;
@@ -96,11 +78,11 @@ namespace Graphmatic.Interaction.Plotting
             while (value >= 0)
             {
                 bool major = index % MajorInterval == 0;
-                g.DrawLine(major ? MajorPen : MinorPen,
+                g.DrawLine(major ? majorPen : minorPen,
                     (int)value, 0, (int)value, graphSize.Height);
                 if (major)
                 {
-                    double horizontal = parameters.HorizontalPixelScale * (value - graphSize.Width / 2) + parameters.CenterHorizontal;
+                    double horizontal = graphParams.HorizontalPixelScale * (value - graphSize.Width / 2) + graphParams.CenterHorizontal;
                     g.DrawString(horizontal.ToString(), valueFont, valueBrush, (int)value, (int)axisY);
                 }
                 value -= incrementX; index++;
@@ -110,11 +92,11 @@ namespace Graphmatic.Interaction.Plotting
             while (value < graphSize.Height)
             {
                 bool major = index % MajorInterval == 0;
-                g.DrawLine(major ? MajorPen : MinorPen,
+                g.DrawLine(major ? majorPen : minorPen,
                     0, (int)value, graphSize.Width, (int)value);
                 if (major)
                 {
-                    double vertical = parameters.VerticalPixelScale * -(value - graphSize.Height / 2) + parameters.CenterVertical;
+                    double vertical = graphParams.VerticalPixelScale * -(value - graphSize.Height / 2) + graphParams.CenterVertical;
                     g.DrawString(vertical.ToString(), valueFont, valueBrush, (int)axisX, (int)value);
                 }
                 value += incrementY; index++;
@@ -124,11 +106,11 @@ namespace Graphmatic.Interaction.Plotting
             while (value >= 0)
             {
                 bool major = index % MajorInterval == 0;
-                g.DrawLine(major ? MajorPen : MinorPen,
+                g.DrawLine(major ? majorPen : minorPen,
                     0, (int)value, graphSize.Width, (int)value);
                 if (major)
                 {
-                    double vertical = parameters.VerticalPixelScale * -(value - graphSize.Height / 2) + parameters.CenterVertical;
+                    double vertical = graphParams.VerticalPixelScale * -(value - graphSize.Height / 2) + graphParams.CenterVertical;
                     g.DrawString(vertical.ToString(), valueFont, valueBrush, (int)axisX, (int)value);
                 }
                 value -= incrementY; index++;

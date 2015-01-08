@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Graphmatic.Interaction.Plotting
 {
-    public struct PlotParameters
+    public class GraphParameters
     {
         public double CenterHorizontal
         {

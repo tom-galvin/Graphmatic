@@ -136,7 +136,9 @@
     <Compile Include="Interaction\Plotting\GraphKey.cs" />
     <Compile Include="Interaction\Plotting\IPlottable.cs" />
     <Compile Include="Interaction\Plotting\Graph.cs" />
-    <Compile Include="Interaction\Plotting\PlotParameters.cs" />
+    <Compile Include="Interaction\Plotting\GraphParameters.cs" />
+    <Compile Include="Interaction\Plotting\PlotExtensionMethods.cs" />
+    <Compile Include="Interaction\Plotting\PlottableParameters.cs" />
     <Compile Include="Interaction\Resource.cs" />
     <Compile Include="Interaction\Page.cs" />
     <Compile Include="ExpressionEditor.cs">

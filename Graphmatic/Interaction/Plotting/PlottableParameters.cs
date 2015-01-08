@@ -6,8 +6,12 @@ using System.Text;
 
 namespace Graphmatic.Interaction.Plotting
 {
-    public interface IPlottable
+    public class PlottableParameters
     {
-        void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams);
+        public Color PlotColor
+        {
+            get;
+            set;
+        }
     }
 }

@@ -184,31 +184,5 @@ namespace Graphmatic
         {
             DataChanged = true;
         }
-
-        private void buttonGraph_Click(object sender, EventArgs e)
-        {
-            SaveChanges();
-
-            PictureBox pbDisplay = new PictureBox();
-            pbDisplay.Size = ClientSize;
-            pbDisplay.Location = Point.Empty;
-
-            Graph graph = new Graph();
-            graph.Add(DataSet, Color.Red);
-
-            PlotParameters parameters = new PlotParameters()
-            {
-                CenterHorizontal = 0,
-                CenterVertical = 0,
-                HorizontalPixelScale = 0.1,
-                VerticalPixelScale = 0.1
-            };
-            
-            Image image = graph.ToImage(pbDisplay.ClientSize, parameters);
-            pbDisplay.Image = image;
-
-            Controls.Add(pbDisplay);
-            pbDisplay.BringToFront();
-        }
     }
 }
