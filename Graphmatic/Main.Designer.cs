@@ -107,11 +107,8 @@ namespace Graphmatic
             this.toolStripButtonTextAnnotation = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButtonColorAnnotation = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSplitButtonGraph = new System.Windows.Forms.ToolStripSplitButton();
-            this.plotEquationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.plotDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButtonDataSets = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAddEquation = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonPlotDataSet = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonPlotEquation = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonPreviousPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNextPage = new System.Windows.Forms.ToolStripButton();
@@ -124,6 +121,7 @@ namespace Graphmatic
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.pageDisplay = new System.Windows.Forms.PictureBox();
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
+            this.toolStripButtonEditGraph = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -611,7 +609,7 @@ namespace Graphmatic
             // panelHtmlViewer
             // 
             this.panelHtmlViewer.Controls.Add(this.toolStripContainerHtmlViewer);
-            this.panelHtmlViewer.Location = new System.Drawing.Point(411, 87);
+            this.panelHtmlViewer.Location = new System.Drawing.Point(414, 87);
             this.panelHtmlViewer.Name = "panelHtmlViewer";
             this.panelHtmlViewer.Size = new System.Drawing.Size(200, 100);
             this.panelHtmlViewer.TabIndex = 2;
@@ -775,9 +773,9 @@ namespace Graphmatic
             // panelPageEditor
             // 
             this.panelPageEditor.Controls.Add(this.toolStripContainerPageEditor);
-            this.panelPageEditor.Location = new System.Drawing.Point(361, 185);
+            this.panelPageEditor.Location = new System.Drawing.Point(62, 160);
             this.panelPageEditor.Name = "panelPageEditor";
-            this.panelPageEditor.Size = new System.Drawing.Size(277, 255);
+            this.panelPageEditor.Size = new System.Drawing.Size(579, 280);
             this.panelPageEditor.TabIndex = 0;
             // 
             // toolStripContainerPageEditor
@@ -790,13 +788,13 @@ namespace Graphmatic
             // toolStripContainerPageEditor.ContentPanel
             // 
             this.toolStripContainerPageEditor.ContentPanel.Controls.Add(this.pageDisplay);
-            this.toolStripContainerPageEditor.ContentPanel.Size = new System.Drawing.Size(277, 199);
+            this.toolStripContainerPageEditor.ContentPanel.Size = new System.Drawing.Size(579, 224);
             this.toolStripContainerPageEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainerPageEditor.LeftToolStripPanelVisible = false;
             this.toolStripContainerPageEditor.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainerPageEditor.Name = "toolStripContainerPageEditor";
             this.toolStripContainerPageEditor.RightToolStripPanelVisible = false;
-            this.toolStripContainerPageEditor.Size = new System.Drawing.Size(277, 255);
+            this.toolStripContainerPageEditor.Size = new System.Drawing.Size(579, 280);
             this.toolStripContainerPageEditor.TabIndex = 4;
             this.toolStripContainerPageEditor.Text = "toolStripContainer1";
             // 
@@ -815,9 +813,9 @@ namespace Graphmatic
             this.toolStripButtonTextAnnotation,
             this.toolStripSplitButtonColorAnnotation,
             this.toolStripSeparator5,
-            this.toolStripSplitButtonGraph,
-            this.toolStripButtonDataSets,
-            this.toolStripButtonAddEquation,
+            this.toolStripButtonEditGraph,
+            this.toolStripButtonPlotDataSet,
+            this.toolStripButtonPlotEquation,
             this.toolStripSeparator2,
             this.toolStripButtonPreviousPage,
             this.toolStripButtonNextPage,
@@ -831,7 +829,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(274, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(506, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -953,54 +951,25 @@ namespace Graphmatic
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
-            // toolStripSplitButtonGraph
+            // toolStripButtonPlotDataSet
             // 
-            this.toolStripSplitButtonGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButtonGraph.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.plotEquationToolStripMenuItem,
-            this.plotDataToolStripMenuItem});
-            this.toolStripSplitButtonGraph.Image = global::Graphmatic.Properties.Resources.Chart24;
-            this.toolStripSplitButtonGraph.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButtonGraph.Name = "toolStripSplitButtonGraph";
-            this.toolStripSplitButtonGraph.Size = new System.Drawing.Size(40, 28);
-            this.toolStripSplitButtonGraph.Text = "toolStripSplitButton1";
-            this.toolStripSplitButtonGraph.ToolTipText = "Add an empty graph";
+            this.toolStripButtonPlotDataSet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPlotDataSet.Image = global::Graphmatic.Properties.Resources.Data24;
+            this.toolStripButtonPlotDataSet.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPlotDataSet.Name = "toolStripButtonPlotDataSet";
+            this.toolStripButtonPlotDataSet.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonPlotDataSet.Text = "toolStripButton1";
+            this.toolStripButtonPlotDataSet.ToolTipText = "Plot a data set on this graph";
             // 
-            // plotEquationToolStripMenuItem
+            // toolStripButtonPlotEquation
             // 
-            this.plotEquationToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Graph24;
-            this.plotEquationToolStripMenuItem.Name = "plotEquationToolStripMenuItem";
-            this.plotEquationToolStripMenuItem.Size = new System.Drawing.Size(153, 30);
-            this.plotEquationToolStripMenuItem.Text = "Plot Equation";
-            this.plotEquationToolStripMenuItem.ToolTipText = "Plot an equation on a graph";
-            // 
-            // plotDataToolStripMenuItem
-            // 
-            this.plotDataToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Data24;
-            this.plotDataToolStripMenuItem.Name = "plotDataToolStripMenuItem";
-            this.plotDataToolStripMenuItem.Size = new System.Drawing.Size(153, 30);
-            this.plotDataToolStripMenuItem.Text = "Plot Data";
-            this.plotDataToolStripMenuItem.ToolTipText = "Plot a data set on a graph";
-            // 
-            // toolStripButtonDataSets
-            // 
-            this.toolStripButtonDataSets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDataSets.Image = global::Graphmatic.Properties.Resources.Statistics24;
-            this.toolStripButtonDataSets.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDataSets.Name = "toolStripButtonDataSets";
-            this.toolStripButtonDataSets.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButtonDataSets.Text = "toolStripButton1";
-            this.toolStripButtonDataSets.ToolTipText = "Edit data sets";
-            // 
-            // toolStripButtonAddEquation
-            // 
-            this.toolStripButtonAddEquation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAddEquation.Image = global::Graphmatic.Properties.Resources.AddEquation24;
-            this.toolStripButtonAddEquation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonAddEquation.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAddEquation.Name = "toolStripButtonAddEquation";
-            this.toolStripButtonAddEquation.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButtonAddEquation.ToolTipText = "Add an equation to this page";
+            this.toolStripButtonPlotEquation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPlotEquation.Image = global::Graphmatic.Properties.Resources.Graph24;
+            this.toolStripButtonPlotEquation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonPlotEquation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPlotEquation.Name = "toolStripButtonPlotEquation";
+            this.toolStripButtonPlotEquation.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonPlotEquation.ToolTipText = "Plot an equation on this graph";
             // 
             // toolStripSeparator2
             // 
@@ -1096,7 +1065,7 @@ namespace Graphmatic
             this.pageDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageDisplay.Location = new System.Drawing.Point(0, 0);
             this.pageDisplay.Name = "pageDisplay";
-            this.pageDisplay.Size = new System.Drawing.Size(277, 199);
+            this.pageDisplay.Size = new System.Drawing.Size(579, 224);
             this.pageDisplay.TabIndex = 0;
             this.pageDisplay.TabStop = false;
             this.pageDisplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pageDisplay_MouseClick);
@@ -1106,6 +1075,15 @@ namespace Graphmatic
             this.timerBackup.Enabled = true;
             this.timerBackup.Interval = 60000;
             this.timerBackup.Tick += new System.EventHandler(this.timerBackup_Tick);
+            // 
+            // toolStripButtonEditGraph
+            // 
+            this.toolStripButtonEditGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonEditGraph.Image = global::Graphmatic.Properties.Resources.Chart24;
+            this.toolStripButtonEditGraph.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEditGraph.Name = "toolStripButtonEditGraph";
+            this.toolStripButtonEditGraph.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonEditGraph.ToolTipText = "Add or edit resources plotted on this graph";
             // 
             // Main
             // 
@@ -1202,10 +1180,7 @@ namespace Graphmatic
         private System.Windows.Forms.ToolStripButton toolStripButtonTextAnnotation;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonColorAnnotation;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonGraph;
-        private System.Windows.Forms.ToolStripMenuItem plotEquationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem plotDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDataSets;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPlotDataSet;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButtonPreviousPage;
         private System.Windows.Forms.ToolStripButton toolStripButtonNextPage;
@@ -1227,7 +1202,7 @@ namespace Graphmatic
         private ToolStripSeparator toolStripMenuItem3;
         private ToolStripMenuItem removeToolStripMenuItem;
         private ToolStripMenuItem equationToolStripMenuItem;
-        private ToolStripButton toolStripButtonAddEquation;
+        private ToolStripButton toolStripButtonPlotEquation;
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem4;
         private ToolStripMenuItem dataSetToolStripMenuItem;
@@ -1260,6 +1235,7 @@ namespace Graphmatic
         private ToolStripButton toolStripToggleHtmlPages;
         private ToolStripMenuItem webPageToolStripMenuItem;
         private Timer timerBackup;
+        private ToolStripButton toolStripButtonEditGraph;
     }
 }
 
