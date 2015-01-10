@@ -28,7 +28,10 @@ namespace Graphmatic
 
         private void RefreshDisplay()
         {
-            toolTip.SetToolTip(expressionDisplay, Equation.ParseTree.ToString());
+            if (Equation.ParseTree != null)
+            {
+                toolTip.SetToolTip(expressionDisplay, Equation.ParseTree.ToString());
+            }
             expressionDisplay.Refresh();
         }
 

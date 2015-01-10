@@ -255,7 +255,7 @@ namespace Graphmatic.Expressions
             }
             else
             {
-                throw new ParseException("Expression empty.", Parent);
+                return null;
             }
         }
 
