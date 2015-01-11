@@ -153,24 +153,30 @@ namespace Graphmatic
             }
         }
 
-        public void SaveDocumentAs()
+        public bool SaveDocumentAs()
         {
             SaveFileDialog saveFileDialog = CreateSaveFileDialog();
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 SaveDocument(saveFileDialog.FileName);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
-        public void SaveDocument()
+        public bool SaveDocument()
         {
             if (DocumentPath == null)
             {
-                SaveDocumentAs();
+                return SaveDocumentAs();
             }
             else
             {
                 SaveDocument(DocumentPath);
+                return true;
             }
         }
 
@@ -227,7 +233,7 @@ namespace Graphmatic
                 if (result == System.Windows.Forms.DialogResult.Cancel)
                     return false;
                 else if (result == System.Windows.Forms.DialogResult.Yes)
-                    SaveDocument();
+                    if (SaveDocument()) return true;
             }
             return true;
         }

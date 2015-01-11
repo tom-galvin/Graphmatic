@@ -951,6 +951,7 @@ namespace Graphmatic
             this.eraseAllToolStripMenuItem.Name = "eraseAllToolStripMenuItem";
             this.eraseAllToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.eraseAllToolStripMenuItem.Text = "Erase &all annotations";
+            this.eraseAllToolStripMenuItem.Click += new System.EventHandler(this.eraseAllToolStripMenuItem_Click);
             // 
             // toolStripButtonTextAnnotation
             // 
@@ -1090,7 +1091,7 @@ namespace Graphmatic
             "400%",
             "800%"});
             this.toolStripComboBoxZoom.Name = "toolStripComboBoxZoom";
-            this.toolStripComboBoxZoom.Size = new System.Drawing.Size(121, 23);
+            this.toolStripComboBoxZoom.Size = new System.Drawing.Size(121, 31);
             this.toolStripComboBoxZoom.Text = "100%";
             this.toolStripComboBoxZoom.ToolTipText = "Change the zoom level for this page";
             this.toolStripComboBoxZoom.TextChanged += new System.EventHandler(this.toolStripComboBoxZoom_TextChanged);
