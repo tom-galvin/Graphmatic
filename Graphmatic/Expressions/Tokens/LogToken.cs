@@ -85,7 +85,7 @@ namespace Graphmatic.Expressions.Tokens
                     x + xOffset + 2,
                     y + 2,
                     x + xOffset + 2,
-                    y + Height - 2);
+                    y + Operand.Height - 2);
                 g.DrawLine(Expression.ExpressionPen,
                     x + xOffset + 2,
                     y + 2,
@@ -93,15 +93,15 @@ namespace Graphmatic.Expressions.Tokens
                     y);
                 g.DrawLine(Expression.ExpressionPen,
                     x + xOffset + 4,
-                    y + Height,
+                    y + Operand.Height,
                     x + xOffset + 2,
-                    y + Height - 2);
+                    y + Operand.Height - 2);
 
                 g.DrawLine(Expression.ExpressionPen,
                     x + Operand.Width + xOffset + 9,
                     y + 2,
                     x + Operand.Width + xOffset + 9,
-                    y + Height - 2);
+                    y + Operand.Height - 2);
                 g.DrawLine(Expression.ExpressionPen,
                     x + Operand.Width + xOffset + 9,
                     y + 2,
@@ -109,9 +109,9 @@ namespace Graphmatic.Expressions.Tokens
                     y);
                 g.DrawLine(Expression.ExpressionPen,
                     x + Operand.Width + xOffset + 7,
-                    y + Height,
+                    y + Operand.Height,
                     x + Operand.Width + xOffset + 9,
-                    y + Height - 2);
+                    y + Operand.Height - 2);
             }
             else
             {
@@ -120,7 +120,7 @@ namespace Graphmatic.Expressions.Tokens
                     x + xOffset + 1,
                     y + 1,
                     x + xOffset + 1,
-                    y + Height - 1);
+                    y + Operand.Height - 1);
                 g.DrawLine(Expression.ExpressionPen,
                     x + xOffset + 1,
                     y + 1,
@@ -128,15 +128,15 @@ namespace Graphmatic.Expressions.Tokens
                     y);
                 g.DrawLine(Expression.ExpressionPen,
                     x + xOffset + 2,
-                    y + Height,
+                    y + Operand.Height,
                     x + xOffset + 1,
-                    y + Height - 1);
+                    y + Operand.Height - 1);
 
                 g.DrawLine(Expression.ExpressionPen,
                     x + Operand.Width + xOffset + 6,
                     y + 1,
                     x + Operand.Width + xOffset + 6,
-                    y + Height - 1);
+                    y + Operand.Height - 1);
                 g.DrawLine(Expression.ExpressionPen,
                     x + Operand.Width + xOffset + 6,
                     y + 1,
@@ -144,9 +144,9 @@ namespace Graphmatic.Expressions.Tokens
                     y);
                 g.DrawLine(Expression.ExpressionPen,
                     x + Operand.Width + xOffset + 5,
-                    y + Height,
+                    y + Operand.Height,
                     x + Operand.Width + xOffset + 6,
-                    y + Height - 1);
+                    y + Operand.Height - 1);
             }
         }
 
@@ -161,7 +161,7 @@ namespace Graphmatic.Expressions.Tokens
             Base.Size = DisplaySize.Small;
             Base.RecalculateDimensions(expressionCursor);
             Width = Operand.Width + 6 * text.Length + (Size == DisplaySize.Large ? 12 : 9) + (Simplification == SimplificationType.None ? 1 + Base.Width : 0);
-            int fnSize = (Size == DisplaySize.Large ? 3 : 2) + Base.Height + Operand.BaselineOffset;
+            int fnSize = (Size == DisplaySize.Large ? 5 : 4) + Base.Height + Operand.BaselineOffset;
             Height = Simplification != SimplificationType.None ? Operand.Height : Math.Max(Operand.Height, fnSize);
         }
 
