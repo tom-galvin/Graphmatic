@@ -108,6 +108,7 @@ namespace Graphmatic
             this.toolStripSplitButtonColorAnnotation = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownEditGraph = new System.Windows.Forms.ToolStripDropDownButton();
+            this.contextMenuStripPageEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripButtonPlotDataSet = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPlotEquation = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -121,7 +122,6 @@ namespace Graphmatic
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.pageDisplay = new System.Windows.Forms.PictureBox();
-            this.contextMenuStripPageEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -345,6 +345,7 @@ namespace Graphmatic
             this.listViewResources.TabIndex = 1;
             this.listViewResources.UseCompatibleStateImageBehavior = false;
             this.listViewResources.View = System.Windows.Forms.View.Details;
+            this.listViewResources.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewResources_ItemDrag);
             this.listViewResources.SelectedIndexChanged += new System.EventHandler(this.listViewResources_SelectedIndexChanged);
             this.listViewResources.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewResources_MouseDoubleClick);
             this.listViewResources.Resize += new System.EventHandler(this.listViewResources_Resize);
@@ -830,7 +831,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(546, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(515, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -964,6 +965,12 @@ namespace Graphmatic
             this.toolStripDropDownEditGraph.ToolTipText = "Edit page and plotted resources";
             this.toolStripDropDownEditGraph.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolStripDropDownEditGraph_MouseDown);
             // 
+            // contextMenuStripPageEditor
+            // 
+            this.contextMenuStripPageEditor.Name = "contextMenuStripPageEditor";
+            this.contextMenuStripPageEditor.OwnerItem = this.toolStripDropDownEditGraph;
+            this.contextMenuStripPageEditor.Size = new System.Drawing.Size(61, 4);
+            // 
             // toolStripButtonPlotDataSet
             // 
             this.toolStripButtonPlotDataSet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1074,7 +1081,6 @@ namespace Graphmatic
             // 
             // pageDisplay
             // 
-            this.pageDisplay.BackColor = System.Drawing.Color.White;
             this.pageDisplay.ContextMenuStrip = this.contextMenuStripPageEditor;
             this.pageDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageDisplay.Location = new System.Drawing.Point(0, 0);
@@ -1082,16 +1088,11 @@ namespace Graphmatic
             this.pageDisplay.Size = new System.Drawing.Size(579, 224);
             this.pageDisplay.TabIndex = 0;
             this.pageDisplay.TabStop = false;
+            this.pageDisplay.DragDrop += new System.Windows.Forms.DragEventHandler(this.pageDisplay_DragDrop);
+            this.pageDisplay.DragOver += new System.Windows.Forms.DragEventHandler(this.pageDisplay_DragOver);
+            this.pageDisplay.GiveFeedback += new System.Windows.Forms.GiveFeedbackEventHandler(this.pageDisplay_GiveFeedback);
             this.pageDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.pageDisplay_Paint);
-            this.pageDisplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pageDisplay_MouseClick);
-            this.pageDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pageDisplay_MouseDown);
             this.pageDisplay.Resize += new System.EventHandler(this.pageDisplay_Resize);
-            // 
-            // contextMenuStripPageEditor
-            // 
-            this.contextMenuStripPageEditor.Name = "contextMenuStripPageEditor";
-            this.contextMenuStripPageEditor.OwnerItem = this.toolStripDropDownEditGraph;
-            this.contextMenuStripPageEditor.Size = new System.Drawing.Size(153, 26);
             // 
             // timerBackup
             // 
@@ -1207,7 +1208,6 @@ namespace Graphmatic
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButtonSquareSelect;
         private System.Windows.Forms.ToolStripButton toolStripButtonCustomSelect;
-        private System.Windows.Forms.PictureBox pageDisplay;
         private System.Windows.Forms.ColumnHeader columnHeaderIcon;
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderAuthor;
@@ -1253,6 +1253,7 @@ namespace Graphmatic
         private Timer timerBackup;
         private ToolStripDropDownButton toolStripDropDownEditGraph;
         private ContextMenuStrip contextMenuStripPageEditor;
+        private PictureBox pageDisplay;
     }
 }
 

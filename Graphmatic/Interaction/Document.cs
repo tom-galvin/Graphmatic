@@ -139,6 +139,11 @@ namespace Graphmatic.Interaction
             Resources.Remove(guid);
         }
 
+        public bool Contains(Guid guid)
+        {
+            return Resources.ContainsKey(guid);
+        }
+
         public void Remove(Resource resource)
         {
             Remove(resource.Guid);

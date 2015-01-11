@@ -38,6 +38,11 @@ namespace Graphmatic
                                                      Color.DarkSlateGray
                                                  };
 
+        private void InitializeResourceDragDrop()
+        {
+            pageDisplay.AllowDrop = true;
+        }
+
         private void OpenPageEditor(Page page)
         {
             CloseResourcePanels();
@@ -69,10 +74,12 @@ namespace Graphmatic
         {
             if (CurrentPage != null)
             {
+                pageDisplay.SuspendLayout();
                 Graphics g = e.Graphics;
                 Brush backgroundBrush = new SolidBrush(CurrentPage.BackgroundColor);
                 g.FillRectangle(backgroundBrush, IsFormResizing ? e.ClipRectangle : pageDisplay.ClientRectangle);
                 CurrentPage.Graph.Draw(g, pageDisplay.ClientSize, !IsFormResizing);
+                pageDisplay.ResumeLayout(false);
             }
         }
 
@@ -178,11 +185,6 @@ namespace Graphmatic
             RegeneratePlottableEditingMenu();
         }
 
-        private void pageDisplay_MouseDown(object sender, MouseEventArgs e)
-        {
-            RegeneratePlottableEditingMenu();
-        }
-
         private void toolStripButtonPlotDataSet_Click(object sender, EventArgs e)
         {
             DataSet dataSet = new DataSet(Properties.Settings.Default.DefaultDataSetVariables)
@@ -215,6 +217,63 @@ namespace Graphmatic
             PlottableParameters parameters = new PlottableParameters();
             parameters.PlotColor = DefaultPlottableColors[Program.Random.Next(DefaultPlottableColors.Length)];
             return parameters;
+        }
+
+        private void pageDisplay_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(string)) &&
+                ((e.AllowedEffect & DragDropEffects.Link) == DragDropEffects.Link))
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+        }
+
+        private void pageDisplay_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+
+        }
+
+        private void pageDisplay_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(string)))
+            {
+                string guidData = (string)e.Data.GetData(typeof(string));
+                Guid guid;
+                if (Guid.TryParse(guidData, out guid))
+                {
+                    if (CurrentDocument.Contains(guid))
+                    {
+                        Resource resource = CurrentDocument[guid];
+                        if (resource is IPlottable)
+                        {
+                            try
+                            {
+                                CurrentPage.Graph.Add(resource as IPlottable, CreateNewPlottableParameters());
+                            }
+                            catch (InvalidOperationException)
+                            {
+                                MessageBox.Show("The Graph already contains this resource.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("This resource is not able to be added to the graph.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("This resource does not exist.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("This data cannot be added to the graph.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("This data cannot be added to the graph.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

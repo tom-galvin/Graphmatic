@@ -499,6 +499,11 @@ namespace Graphmatic
                 OpenResourceEditor(page);
             }
         }
+
+        private void listViewResources_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            listViewResources.DoDragDrop(SelectedResource.Guid.ToString(), DragDropEffects.Link);
+        }
         #endregion
     }
 }

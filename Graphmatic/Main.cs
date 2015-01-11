@@ -65,6 +65,7 @@ namespace Graphmatic
             InitializeComponent();
             InitializeEditors();
             InitializeBackupTimer();
+            InitializeResourceDragDrop();
         }
 
         public void InitializeBackupTimer()
@@ -168,27 +169,6 @@ namespace Graphmatic
                 MessageBoxIcon.Information);
         }
         #endregion
-
-        private void pageDisplay_MouseClick(object sender, MouseEventArgs e)
-        {
-            /* Graph graph = new Graph();
-            var plottable = CurrentDocument.Where(page => page is IPlottable);
-            Color[] colors = new[] {
-                Color.Red,
-                Color.Orange,
-                Color.Lime,
-                Color.Green,
-                Color.Teal,
-                Color.Blue,
-                Color.Purple
-            };
-            int index = 0;
-            foreach (var resource in plottable)
-            {
-                graph.Add(resource as IPlottable, new PlottableParameters() { PlotColor = colors[index++ % colors.Length] });
-            }
-            pageDisplay.Image = graph.ToImage(pageDisplay.ClientSize); */
-        }
 
         private void timerBackup_Tick(object sender, EventArgs e)
         {
