@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Graphmatic.Interaction.Annotations;
 using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic.Interaction
@@ -31,10 +32,17 @@ namespace Graphmatic.Interaction
             protected set;
         }
 
+        public List<Annotation> Annotations
+        {
+            get;
+            protected set;
+        }
+
         public Page()
         {
             BackgroundColor = Properties.Settings.Default.DefaultPageColor;
             Graph = new Graph();
+            Annotations = new List<Annotation>();
         }
 
         public Page(XElement xml)
@@ -42,6 +50,11 @@ namespace Graphmatic.Interaction
         {
             BackgroundColor = ResourceSerializationExtensionMethods.XmlStringToColor(xml.Element("BackgroundColor").Value);
             Graph = new Graph(xml.Element("Graph"));
+            Annotations = new List<Annotation>(
+                xml
+                .Element("Annotations")
+                .Elements()
+                .Select(ResourceSerializationExtensionMethods.AnnotationFromXml));
         }
 
         public override Image GetResourceIcon(bool large)
@@ -57,6 +70,9 @@ namespace Graphmatic.Interaction
             baseElement.Name = "Page";
             baseElement.Add(new XElement("BackgroundColor", BackgroundColor.ToXmlString()));
             baseElement.Add(Graph.ToXml());
+            baseElement.Add(new XElement("Annotations",
+                Annotations.Select(a =>
+                a.ToXml())));
             return baseElement;
         }
 

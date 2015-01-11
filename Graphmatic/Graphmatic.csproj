@@ -127,6 +127,7 @@
     <Compile Include="Expressions\Tokens\TokenSerializationExtensionMethods.cs" />
     <Compile Include="Expressions\Tokens\VariableToken.cs" />
     <Compile Include="ExpressionVerificationEventArgs.cs" />
+    <Compile Include="Interaction\Annotations\Annotation.cs" />
     <Compile Include="Interaction\DataSet.cs" />
     <Compile Include="Interaction\Document.cs" />
     <Compile Include="Interaction\Equation.cs" />
