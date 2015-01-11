@@ -42,6 +42,7 @@ namespace Graphmatic
             this.moveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelVariables = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripVariableList.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,12 +88,13 @@ namespace Graphmatic
             // 
             this.contextMenuStripVariableList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem,
+            this.renameToolStripMenuItem,
             this.removeToolStripMenuItem,
             this.toolStripMenuItem1,
             this.moveUpToolStripMenuItem,
             this.moveDownToolStripMenuItem});
             this.contextMenuStripVariableList.Name = "contextMenuStripVariableList";
-            this.contextMenuStripVariableList.Size = new System.Drawing.Size(204, 98);
+            this.contextMenuStripVariableList.Size = new System.Drawing.Size(204, 142);
             // 
             // addToolStripMenuItem
             // 
@@ -140,6 +142,14 @@ namespace Graphmatic
             this.labelVariables.TabIndex = 3;
             this.labelVariables.Text = "Variables:";
             // 
+            // renameToolStripMenuItem
+            // 
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.renameToolStripMenuItem.Text = "Re&name...";
+            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
+            // 
             // DataSetCreator
             // 
             this.AcceptButton = this.buttonOK;
@@ -179,5 +189,6 @@ namespace Graphmatic
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moveDownToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
     }
 }

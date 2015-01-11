@@ -18,7 +18,7 @@ namespace Graphmatic.Interaction
             BinaryParseTreeNode parseTreeRoot = ParseTree as BinaryParseTreeNode;
             Pen graphPen = new Pen(plotParams.PlotColor);
             if (parseTreeRoot.Left is VariableParseTreeNode &&
-                !VariableSearch(parseTreeRoot.Right, (parseTreeRoot.Left as VariableParseTreeNode).Variable))
+                !parseTreeRoot.Right.ContainsVariable((parseTreeRoot.Left as VariableParseTreeNode).Variable))
             {
                 PlotExplicit(
                     graph,
@@ -30,7 +30,7 @@ namespace Graphmatic.Interaction
                     parseTreeRoot.Right);
             }
             else if (parseTreeRoot.Right is VariableParseTreeNode &&
-                !VariableSearch(parseTreeRoot.Left, (parseTreeRoot.Right as VariableParseTreeNode).Variable))
+                !parseTreeRoot.Left.ContainsVariable((parseTreeRoot.Right as VariableParseTreeNode).Variable))
             {
                 PlotExplicit(
                     graph,
@@ -44,32 +44,6 @@ namespace Graphmatic.Interaction
             else
             {
                 PlotImplicit(graph, graphics, graphSize, graphPen, parameters);
-            }
-        }
-
-        private bool VariableSearch(ParseTreeNode node, char variable)
-        {
-            if (node is BinaryParseTreeNode)
-            {
-                BinaryParseTreeNode binaryNode = node as BinaryParseTreeNode;
-                return VariableSearch(binaryNode.Left, variable) || VariableSearch(binaryNode.Right, variable);
-            }
-            else if (node is UnaryParseTreeNode)
-            {
-                UnaryParseTreeNode unaryNode = node as UnaryParseTreeNode;
-                return VariableSearch(unaryNode.Operand, variable);
-            }
-            else if (node is ConstantParseTreeNode)
-            {
-                return false;
-            }
-            else if (node is VariableParseTreeNode)
-            {
-                return (node as VariableParseTreeNode).Variable == variable;
-            }
-            else
-            {
-                throw new InvalidOperationException("Unknown parse tree node type: " + node.GetType().Name);
             }
         }
 
@@ -94,8 +68,8 @@ namespace Graphmatic.Interaction
                 {
                     double horizontal = plotParams.HorizontalPixelScale * ((i * EquationResolution) - graphSize.Width / 2) + plotParams.CenterHorizontal,
                            vertical = plotParams.VerticalPixelScale * -((j * EquationResolution) - graphSize.Height / 2) + plotParams.CenterVertical;
-                    vars[HorizontalVariable] = horizontal;
-                    vars[VerticalVariable] = vertical;
+                    vars[plotParams.HorizontalAxis] = horizontal;
+                    vars[plotParams.VerticalAxis] = vertical;
                     values[i, j] = ParseTree.Evaluate(vars);
                 }
             }
@@ -149,20 +123,20 @@ namespace Graphmatic.Interaction
             }
         }
 
-        private void PlotExplicit(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters plotParams, char explicitVariable, ParseTreeNode node)
+        private void PlotExplicit(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters graphParams, char explicitVariable, ParseTreeNode node)
         {
-            if (explicitVariable == HorizontalVariable)
+            if (explicitVariable == graphParams.HorizontalAxis)
             {
-                PlotExplicitVertical(graph, graphics, graphSize, graphPen, plotParams, VerticalVariable, node); // x=...
+                PlotExplicitVertical(graph, graphics, graphSize, graphPen, graphParams, graphParams.VerticalAxis, node); // x=...
             }
-            else if (explicitVariable == VerticalVariable)
+            else if (explicitVariable == graphParams.VerticalAxis)
             {
-                PlotExplicitHorizontal(graph, graphics, graphSize, graphPen, plotParams, HorizontalVariable, node); // y=...
+                PlotExplicitHorizontal(graph, graphics, graphSize, graphPen, graphParams, graphParams.HorizontalAxis, node); // y=...
             }
             else
             {
                 // actually plotting implicitly in relation to a constant (eg. xy=a)
-                PlotImplicit(graph, graphics, graphSize, graphPen, plotParams);
+                PlotImplicit(graph, graphics, graphSize, graphPen, graphParams);
             }
         }
 
@@ -242,6 +216,15 @@ namespace Graphmatic.Interaction
                 previousX = x;
                 previousY = y;
             }
+        }
+
+        public bool CanPlot(char variable1, char variable2)
+        {
+            if (ParseTree == null){
+                Parse();
+            }
+            return ParseTree.ContainsVariable(variable1) &&
+                ParseTree.ContainsVariable(variable2);
         }
     }
 }

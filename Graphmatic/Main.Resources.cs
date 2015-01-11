@@ -176,6 +176,8 @@ namespace Graphmatic
                 CurrentDocument.CurrentResource = resource;
                 ResourceEditors[resourceType](resource);
                 RefreshResourceListView();
+
+                NotifyResourceModified(SelectedResource);
             }
             else
             {
@@ -200,6 +202,7 @@ namespace Graphmatic
                 }
                 RefreshResourceListView();
             }
+            resource.Removed = true;
         }
 
         private void AddResource(Resource resource)
@@ -262,6 +265,12 @@ namespace Graphmatic
                    .ToArray());
         }
 
+        private void NotifyResourceModified(Resource resource)
+        {
+            CurrentDocument.NotifyResourceModified(resource);
+            DocumentModified = true;
+        }
+
         #region WinForms code
         #region Toggles
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -321,8 +330,9 @@ namespace Graphmatic
                 {
                     resource.Name = newName;
                     DocumentModified = true;
+                    RefreshResourceListView();
+                    NotifyResourceModified(resource);
                 }
-                RefreshResourceListView();
             }
         }
 
@@ -335,6 +345,7 @@ namespace Graphmatic
                 propertiesEditor.ShowDialog();
                 DocumentModified = true;
                 RefreshResourceListView();
+                NotifyResourceModified(resource);
             }
         }
 
@@ -388,8 +399,8 @@ namespace Graphmatic
             if (equationName != null)
             {
                 Equation equation = new Equation(
-                    Properties.Settings.Default.DefaultVerticalAxis,
-                    Properties.Settings.Default.DefaultHorizontalAxis)
+                    Properties.Settings.Default.DefaultVariable2,
+                    Properties.Settings.Default.DefaultVariable1)
                 {
                     Name = equationName
                 };

@@ -105,6 +105,8 @@ namespace Graphmatic.Interaction
 
             if (xml.Element("CurrentResource") != null)
                 CurrentResource = FromGuid(Guid.Parse(xml.Element("CurrentResource").Value));
+
+            UpdateReferences(this);
         }
 
         public Resource this[Guid guid]
@@ -122,10 +124,18 @@ namespace Graphmatic.Interaction
         public void Add(Resource resource)
         {
             Resources.Add(resource.Guid, resource);
+            foreach (Resource otherResource in Resources.Values)
+            {
+                otherResource.ResourceModified(resource, ResourceModifyType.Add);
+            }
         }
 
         public void Remove(Guid guid)
         {
+            foreach (Resource otherResource in Resources.Values)
+            {
+                otherResource.ResourceModified(Resources[guid], ResourceModifyType.Remove);
+            }
             Resources.Remove(guid);
         }
 
@@ -235,6 +245,22 @@ namespace Graphmatic.Interaction
                 PageOrder.Insert(page1Index, page2);
                 PageOrder.RemoveAt(page2Index);
                 PageOrder.Insert(page2Index, page1);
+            }
+        }
+
+        public void UpdateReferences(Document document)
+        {
+            foreach (Resource resource in Resources.Values)
+            {
+                resource.UpdateReferences(document);
+            }
+        }
+
+        public void NotifyResourceModified(Resource resource)
+        {
+            foreach (Resource otherResource in Resources.Values)
+            {
+                otherResource.ResourceModified(resource, ResourceModifyType.Modify);
             }
         }
     }

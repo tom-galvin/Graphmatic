@@ -247,17 +247,17 @@ namespace Graphmatic.Interaction
         {
             Pen dataPointPen = new Pen(plotParams.PlotColor, DataPointPenWidth);
 
-            int horizontalVariableIndex = IndexOfVariable(graph.HorizontalAxis),
-                verticalVariableIndex = IndexOfVariable(graph.VerticalAxis);
+            int horizontalVariableIndex = IndexOfVariable(graph.Parameters.HorizontalAxis),
+                verticalVariableIndex = IndexOfVariable(graph.Parameters.VerticalAxis);
 
             if (horizontalVariableIndex == -1)
                 throw new Exception("This data set cannot be plotted over the " +
-                                    graph.HorizontalAxis.ToString() +
+                                    graph.Parameters.HorizontalAxis.ToString() +
                                     " variable, as it does not contain such a variable.");
 
             if (verticalVariableIndex == -1)
                 throw new Exception("This data set cannot be plotted over the " +
-                                    graph.VerticalAxis.ToString() +
+                                    graph.Parameters.VerticalAxis.ToString() +
                                     " variable, as it does not contain such a variable.");
 
             foreach (double[] row in Data)
@@ -274,6 +274,14 @@ namespace Graphmatic.Interaction
                 graphics.DrawLine(dataPointPen, graphX - DataPointCrossSize, graphY - DataPointCrossSize, graphX + DataPointCrossSize, graphY + DataPointCrossSize);
                 graphics.DrawLine(dataPointPen, graphX - DataPointCrossSize, graphY + DataPointCrossSize, graphX + DataPointCrossSize, graphY - DataPointCrossSize);
             }
+        }
+
+
+        public bool CanPlot(char variable1, char variable2)
+        {
+            return
+                IndexOfVariable(variable1) != -1 &&
+                IndexOfVariable(variable2) != -1;
         }
     }
 }

@@ -18,8 +18,14 @@ namespace Graphmatic
         }
 
         public CreateVariableDialog()
+            : this('?')
+        {
+        }
+
+        public CreateVariableDialog(char defaultChar)
         {
             InitializeComponent();
+            textBoxVariableName.Text = defaultChar.ToString();
         }
 
         private void textBoxVariableName_KeyPress(object sender, KeyPressEventArgs e)

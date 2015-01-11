@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Graphmatic.Interaction;
 
 namespace Graphmatic.Expressions.Tokens
 {
@@ -91,5 +92,9 @@ namespace Graphmatic.Expressions.Tokens
         public abstract void RecalculateDimensions(ExpressionCursor expressionCursor);
 
         public abstract XElement ToXml();
+
+        public void UpdateReferences(Document document)
+        {
+        }
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Graphmatic.Interaction.Plotting
 {
-    public class GraphAxis : IPlottable
+    public class GraphAxis : IPlottable, IXmlConvertible
     {
         public double GridSize
         {
@@ -24,6 +25,12 @@ namespace Graphmatic.Interaction.Plotting
         {
             GridSize = gridSize;
             MajorInterval = majorInterval;
+        }
+
+        public GraphAxis(XElement xml)
+        {
+            GridSize = Double.Parse(xml.Element("GridSize").Value);
+            MajorInterval = Double.Parse(xml.Element("MajorInterval").Value);
         }
 
         public void PlotOnto(Graph graph, Graphics g, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams)
@@ -54,10 +61,14 @@ namespace Graphmatic.Interaction.Plotting
             Pen minorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.333));
 
             Font valueFont = SystemFonts.DefaultFont;
+            Font axisFont = new Font(SystemFonts.MessageBoxFont.FontFamily, 15f, FontStyle.Italic);
             Brush valueBrush = majorPen.Brush;
 
             double incrementX = GridSize / graphParams.HorizontalPixelScale,
                    incrementY = GridSize / graphParams.VerticalPixelScale;
+
+            g.DrawString(graphParams.VerticalAxis.ToString(), axisFont, valueBrush, (int)axisX, 2);
+            g.DrawString(graphParams.HorizontalAxis.ToString(), axisFont, valueBrush, (int)graphSize.Width - 16, (int)axisY);
 
             double value = axisX;
             int index = 0;
@@ -115,6 +126,23 @@ namespace Graphmatic.Interaction.Plotting
                 }
                 value -= incrementY; index++;
             }
+        }
+
+        public XElement ToXml()
+        {
+            return new XElement("GraphAxis",
+                new XElement("GridSize", GridSize),
+                new XElement("MajorInterval", MajorInterval));
+        }
+
+        public void UpdateReferences(Document document)
+        {
+        }
+
+
+        public bool CanPlot(char variable1, char variable2)
+        {
+            return true;
         }
     }
 }

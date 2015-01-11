@@ -107,6 +107,7 @@ namespace Graphmatic
             this.toolStripButtonTextAnnotation = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButtonColorAnnotation = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripDropDownEditGraph = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripButtonPlotDataSet = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPlotEquation = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -120,8 +121,8 @@ namespace Graphmatic
             this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCustomSelect = new System.Windows.Forms.ToolStripButton();
             this.pageDisplay = new System.Windows.Forms.PictureBox();
+            this.contextMenuStripPageEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
-            this.toolStripButtonEditGraph = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -813,7 +814,7 @@ namespace Graphmatic
             this.toolStripButtonTextAnnotation,
             this.toolStripSplitButtonColorAnnotation,
             this.toolStripSeparator5,
-            this.toolStripButtonEditGraph,
+            this.toolStripDropDownEditGraph,
             this.toolStripButtonPlotDataSet,
             this.toolStripButtonPlotEquation,
             this.toolStripSeparator2,
@@ -829,7 +830,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(506, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(546, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -951,6 +952,18 @@ namespace Graphmatic
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
+            // toolStripDropDownEditGraph
+            // 
+            this.toolStripDropDownEditGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownEditGraph.DropDown = this.contextMenuStripPageEditor;
+            this.toolStripDropDownEditGraph.Image = global::Graphmatic.Properties.Resources.Chart24;
+            this.toolStripDropDownEditGraph.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownEditGraph.Name = "toolStripDropDownEditGraph";
+            this.toolStripDropDownEditGraph.Size = new System.Drawing.Size(37, 28);
+            this.toolStripDropDownEditGraph.Text = "Edit page and plotted resources";
+            this.toolStripDropDownEditGraph.ToolTipText = "Edit page and plotted resources";
+            this.toolStripDropDownEditGraph.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolStripDropDownEditGraph_MouseDown);
+            // 
             // toolStripButtonPlotDataSet
             // 
             this.toolStripButtonPlotDataSet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -958,8 +971,8 @@ namespace Graphmatic
             this.toolStripButtonPlotDataSet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonPlotDataSet.Name = "toolStripButtonPlotDataSet";
             this.toolStripButtonPlotDataSet.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButtonPlotDataSet.Text = "toolStripButton1";
             this.toolStripButtonPlotDataSet.ToolTipText = "Plot a data set on this graph";
+            this.toolStripButtonPlotDataSet.Click += new System.EventHandler(this.toolStripButtonPlotDataSet_Click);
             // 
             // toolStripButtonPlotEquation
             // 
@@ -970,6 +983,7 @@ namespace Graphmatic
             this.toolStripButtonPlotEquation.Name = "toolStripButtonPlotEquation";
             this.toolStripButtonPlotEquation.Size = new System.Drawing.Size(28, 28);
             this.toolStripButtonPlotEquation.ToolTipText = "Plot an equation on this graph";
+            this.toolStripButtonPlotEquation.Click += new System.EventHandler(this.toolStripButtonPlotEquation_Click);
             // 
             // toolStripSeparator2
             // 
@@ -1061,29 +1075,29 @@ namespace Graphmatic
             // pageDisplay
             // 
             this.pageDisplay.BackColor = System.Drawing.Color.White;
-            this.pageDisplay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pageDisplay.ContextMenuStrip = this.contextMenuStripPageEditor;
             this.pageDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageDisplay.Location = new System.Drawing.Point(0, 0);
             this.pageDisplay.Name = "pageDisplay";
             this.pageDisplay.Size = new System.Drawing.Size(579, 224);
             this.pageDisplay.TabIndex = 0;
             this.pageDisplay.TabStop = false;
+            this.pageDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.pageDisplay_Paint);
             this.pageDisplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pageDisplay_MouseClick);
+            this.pageDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pageDisplay_MouseDown);
+            this.pageDisplay.Resize += new System.EventHandler(this.pageDisplay_Resize);
+            // 
+            // contextMenuStripPageEditor
+            // 
+            this.contextMenuStripPageEditor.Name = "contextMenuStripPageEditor";
+            this.contextMenuStripPageEditor.OwnerItem = this.toolStripDropDownEditGraph;
+            this.contextMenuStripPageEditor.Size = new System.Drawing.Size(153, 26);
             // 
             // timerBackup
             // 
             this.timerBackup.Enabled = true;
             this.timerBackup.Interval = 60000;
             this.timerBackup.Tick += new System.EventHandler(this.timerBackup_Tick);
-            // 
-            // toolStripButtonEditGraph
-            // 
-            this.toolStripButtonEditGraph.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonEditGraph.Image = global::Graphmatic.Properties.Resources.Chart24;
-            this.toolStripButtonEditGraph.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonEditGraph.Name = "toolStripButtonEditGraph";
-            this.toolStripButtonEditGraph.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButtonEditGraph.ToolTipText = "Add or edit resources plotted on this graph";
             // 
             // Main
             // 
@@ -1102,6 +1116,8 @@ namespace Graphmatic
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
+            this.ResizeBegin += new System.EventHandler(this.Main_ResizeBegin);
+            this.ResizeEnd += new System.EventHandler(this.Main_ResizeEnd);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
@@ -1235,7 +1251,8 @@ namespace Graphmatic
         private ToolStripButton toolStripToggleHtmlPages;
         private ToolStripMenuItem webPageToolStripMenuItem;
         private Timer timerBackup;
-        private ToolStripButton toolStripButtonEditGraph;
+        private ToolStripDropDownButton toolStripDropDownEditGraph;
+        private ContextMenuStrip contextMenuStripPageEditor;
     }
 }
 

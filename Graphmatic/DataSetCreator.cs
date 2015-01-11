@@ -115,5 +115,20 @@ namespace Graphmatic
         {
             listBoxVariables_SelectedIndexChanged(sender, e); // fixes nasty IndexOutOfRangeException
         }
+
+        private void renameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = listBoxVariables.SelectedIndex;
+            if (selectedIndex != -1)
+            {
+                CreateVariableDialog dialog = new CreateVariableDialog(DataSet.Variables[selectedIndex]);
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    DataSet.Variables[selectedIndex] = dialog.EnteredChar;
+                    listBoxVariables.Items.RemoveAt(selectedIndex);
+                    listBoxVariables.Items.Insert(selectedIndex, dialog.EnteredChar.ToString());
+                }
+            }
+        }
     }
 }

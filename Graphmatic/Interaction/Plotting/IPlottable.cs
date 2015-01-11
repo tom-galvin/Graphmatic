@@ -6,8 +6,10 @@ using System.Text;
 
 namespace Graphmatic.Interaction.Plotting
 {
-    public interface IPlottable
+    public interface IPlottable : IXmlConvertible
     {
         void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams);
+
+        bool CanPlot(char variable1, char variable2);
     }
 }

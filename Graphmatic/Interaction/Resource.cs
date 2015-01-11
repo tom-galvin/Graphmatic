@@ -54,8 +54,15 @@ namespace Graphmatic.Interaction
             }
         }
 
+        public bool Removed
+        {
+            get;
+            set;
+        }
+
         public Resource()
         {
+            Removed = false;
             Author = Properties.Settings.Default.Username;
             CreationDate = DateTime.Now;
             Name = "New " + Type;
@@ -64,6 +71,7 @@ namespace Graphmatic.Interaction
 
         public Resource(XElement xml)
         {
+            Removed = false;
             Name = xml.Attribute("Name").Value;
             Author = xml.Attribute("Author").Value;
             CreationDate = DateTime.Parse(xml.Attribute("CreationDate").Value);
@@ -92,9 +100,25 @@ namespace Graphmatic.Interaction
                 new XElement("Description", Description));
         }
 
+        public XElement ToResourceReference()
+        {
+            return new XElement("Reference",
+                new XAttribute("ID", Guid));
+        }
+
         public override string ToString()
         {
             return Name;
+        }
+
+        public virtual void UpdateReferences(Document document)
+        {
+
+        }
+
+        public virtual void ResourceModified(Resource resource, ResourceModifyType type)
+        {
+
         }
     }
 }

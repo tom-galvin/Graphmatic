@@ -136,13 +136,16 @@ namespace Graphmatic
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!CheckDocument())
+            if (e.CloseReason != CloseReason.ApplicationExitCall)
             {
-                e.Cancel = true;
-            }
-            else
-            {
-                RemoveBackupDocument();
+                if (!CheckDocument())
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    RemoveBackupDocument();
+                }
             }
         }
 
@@ -168,7 +171,7 @@ namespace Graphmatic
 
         private void pageDisplay_MouseClick(object sender, MouseEventArgs e)
         {
-            Graph graph = new Graph();
+            /* Graph graph = new Graph();
             var plottable = CurrentDocument.Where(page => page is IPlottable);
             Color[] colors = new[] {
                 Color.Red,
@@ -184,21 +187,23 @@ namespace Graphmatic
             {
                 graph.Add(resource as IPlottable, new PlottableParameters() { PlotColor = colors[index++ % colors.Length] });
             }
-            var plotParameters = new GraphParameters()
-            {
-                CenterHorizontal = 0,
-                CenterVertical = 0,
-                HorizontalAxis = 'x',
-                VerticalAxis = 'y',
-                HorizontalPixelScale = 0.05,
-                VerticalPixelScale = 0.05
-            };
-            pageDisplay.Image = graph.ToImage(pageDisplay.ClientSize, plotParameters);
+            pageDisplay.Image = graph.ToImage(pageDisplay.ClientSize); */
         }
 
         private void timerBackup_Tick(object sender, EventArgs e)
         {
             Backup();
+        }
+
+        private void Main_ResizeEnd(object sender, EventArgs e)
+        {
+            IsFormResizing = false;
+            pageDisplay.Refresh();
+        }
+
+        private void Main_ResizeBegin(object sender, EventArgs e)
+        {
+            IsFormResizing = true;
         }
     }
 }

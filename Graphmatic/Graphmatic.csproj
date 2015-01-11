@@ -104,6 +104,7 @@
     <Compile Include="Expressions\Parsing\Evaluator.cs" />
     <Compile Include="Expressions\Parsing\EvaluationException.cs" />
     <Compile Include="Expressions\Parsing\ParseException.cs" />
+    <Compile Include="Expressions\Parsing\ParserExtensionMethods.cs" />
     <Compile Include="Expressions\Parsing\ParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\UnaryEvaluator.cs" />
     <Compile Include="Expressions\Parsing\UnaryParseTreeNode.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="ExpressionEditor.Designer.cs">
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interaction\ResourceModifyType.cs" />
     <Compile Include="Interaction\ResourceSerializationExtensionMethods.cs" />
     <Compile Include="IXmlConvertible.cs" />
     <Compile Include="Main.cs">
