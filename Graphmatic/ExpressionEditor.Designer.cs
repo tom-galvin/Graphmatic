@@ -67,17 +67,18 @@
             this.buttonTabs = new System.Windows.Forms.TabControl();
             this.tabPageStandard = new System.Windows.Forms.TabPage();
             this.tabPageTrig = new System.Windows.Forms.TabPage();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.buttonHorizontalVariable = new System.Windows.Forms.Button();
-            this.buttonVerticalVariable = new System.Windows.Forms.Button();
-            this.buttonEquals = new System.Windows.Forms.Button();
-            this.expressionDisplay = new Graphmatic.ExpressionDisplay();
-            this.buttonSin = new System.Windows.Forms.Button();
-            this.buttonCos = new System.Windows.Forms.Button();
-            this.buttonTan = new System.Windows.Forms.Button();
             this.buttonArctan = new System.Windows.Forms.Button();
             this.buttonArccos = new System.Windows.Forms.Button();
             this.buttonArcsin = new System.Windows.Forms.Button();
+            this.buttonTan = new System.Windows.Forms.Button();
+            this.buttonCos = new System.Windows.Forms.Button();
+            this.buttonSin = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonXVariable = new System.Windows.Forms.Button();
+            this.buttonYVariable = new System.Windows.Forms.Button();
+            this.buttonEquals = new System.Windows.Forms.Button();
+            this.expressionDisplay = new Graphmatic.ExpressionDisplay();
+            this.buttonCustomVariable = new System.Windows.Forms.Button();
             this.buttonTabs.SuspendLayout();
             this.tabPageStandard.SuspendLayout();
             this.tabPageTrig.SuspendLayout();
@@ -505,81 +506,6 @@
             this.tabPageTrig.Text = "Trigonometric";
             this.tabPageTrig.UseVisualStyleBackColor = true;
             // 
-            // buttonHorizontalVariable
-            // 
-            this.buttonHorizontalVariable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonHorizontalVariable.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonHorizontalVariable.Location = new System.Drawing.Point(606, 209);
-            this.buttonHorizontalVariable.Name = "buttonHorizontalVariable";
-            this.buttonHorizontalVariable.Size = new System.Drawing.Size(39, 39);
-            this.buttonHorizontalVariable.TabIndex = 39;
-            this.buttonHorizontalVariable.UseVisualStyleBackColor = true;
-            // 
-            // buttonVerticalVariable
-            // 
-            this.buttonVerticalVariable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonVerticalVariable.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonVerticalVariable.Location = new System.Drawing.Point(606, 254);
-            this.buttonVerticalVariable.Name = "buttonVerticalVariable";
-            this.buttonVerticalVariable.Size = new System.Drawing.Size(39, 39);
-            this.buttonVerticalVariable.TabIndex = 40;
-            this.buttonVerticalVariable.UseVisualStyleBackColor = true;
-            // 
-            // buttonEquals
-            // 
-            this.buttonEquals.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEquals.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEquals.Location = new System.Drawing.Point(479, 344);
-            this.buttonEquals.Name = "buttonEquals";
-            this.buttonEquals.Size = new System.Drawing.Size(76, 39);
-            this.buttonEquals.TabIndex = 41;
-            this.buttonEquals.UseVisualStyleBackColor = true;
-            // 
-            // expressionDisplay
-            // 
-            this.expressionDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.expressionDisplay.BackColor = System.Drawing.Color.White;
-            this.expressionDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.expressionDisplay.DisplayScale = 3;
-            this.expressionDisplay.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expressionDisplay.Location = new System.Drawing.Point(12, 12);
-            this.expressionDisplay.MoeinMode = false;
-            this.expressionDisplay.Name = "expressionDisplay";
-            this.expressionDisplay.Size = new System.Drawing.Size(633, 191);
-            this.expressionDisplay.TabIndex = 0;
-            // 
-            // buttonSin
-            // 
-            this.buttonSin.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSin.Location = new System.Drawing.Point(6, 6);
-            this.buttonSin.Name = "buttonSin";
-            this.buttonSin.Size = new System.Drawing.Size(84, 39);
-            this.buttonSin.TabIndex = 9;
-            this.buttonSin.Text = "sin()";
-            this.buttonSin.UseVisualStyleBackColor = true;
-            // 
-            // buttonCos
-            // 
-            this.buttonCos.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCos.Location = new System.Drawing.Point(6, 51);
-            this.buttonCos.Name = "buttonCos";
-            this.buttonCos.Size = new System.Drawing.Size(84, 39);
-            this.buttonCos.TabIndex = 10;
-            this.buttonCos.Text = "cos()";
-            this.buttonCos.UseVisualStyleBackColor = true;
-            // 
-            // buttonTan
-            // 
-            this.buttonTan.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTan.Location = new System.Drawing.Point(6, 96);
-            this.buttonTan.Name = "buttonTan";
-            this.buttonTan.Size = new System.Drawing.Size(84, 39);
-            this.buttonTan.TabIndex = 11;
-            this.buttonTan.Text = "tan()";
-            this.buttonTan.UseVisualStyleBackColor = true;
-            // 
             // buttonArctan
             // 
             this.buttonArctan.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -610,15 +536,102 @@
             this.buttonArcsin.Text = "arcsin()";
             this.buttonArcsin.UseVisualStyleBackColor = true;
             // 
+            // buttonTan
+            // 
+            this.buttonTan.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTan.Location = new System.Drawing.Point(6, 96);
+            this.buttonTan.Name = "buttonTan";
+            this.buttonTan.Size = new System.Drawing.Size(84, 39);
+            this.buttonTan.TabIndex = 11;
+            this.buttonTan.Text = "tan()";
+            this.buttonTan.UseVisualStyleBackColor = true;
+            // 
+            // buttonCos
+            // 
+            this.buttonCos.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCos.Location = new System.Drawing.Point(6, 51);
+            this.buttonCos.Name = "buttonCos";
+            this.buttonCos.Size = new System.Drawing.Size(84, 39);
+            this.buttonCos.TabIndex = 10;
+            this.buttonCos.Text = "cos()";
+            this.buttonCos.UseVisualStyleBackColor = true;
+            // 
+            // buttonSin
+            // 
+            this.buttonSin.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSin.Location = new System.Drawing.Point(6, 6);
+            this.buttonSin.Name = "buttonSin";
+            this.buttonSin.Size = new System.Drawing.Size(84, 39);
+            this.buttonSin.TabIndex = 9;
+            this.buttonSin.Text = "sin()";
+            this.buttonSin.UseVisualStyleBackColor = true;
+            // 
+            // buttonXVariable
+            // 
+            this.buttonXVariable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonXVariable.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonXVariable.Location = new System.Drawing.Point(606, 209);
+            this.buttonXVariable.Name = "buttonXVariable";
+            this.buttonXVariable.Size = new System.Drawing.Size(39, 39);
+            this.buttonXVariable.TabIndex = 39;
+            this.buttonXVariable.UseVisualStyleBackColor = true;
+            // 
+            // buttonYVariable
+            // 
+            this.buttonYVariable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonYVariable.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonYVariable.Location = new System.Drawing.Point(606, 254);
+            this.buttonYVariable.Name = "buttonYVariable";
+            this.buttonYVariable.Size = new System.Drawing.Size(39, 39);
+            this.buttonYVariable.TabIndex = 40;
+            this.buttonYVariable.UseVisualStyleBackColor = true;
+            // 
+            // buttonEquals
+            // 
+            this.buttonEquals.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEquals.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEquals.Location = new System.Drawing.Point(479, 344);
+            this.buttonEquals.Name = "buttonEquals";
+            this.buttonEquals.Size = new System.Drawing.Size(76, 39);
+            this.buttonEquals.TabIndex = 41;
+            this.buttonEquals.UseVisualStyleBackColor = true;
+            // 
+            // expressionDisplay
+            // 
+            this.expressionDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.expressionDisplay.BackColor = System.Drawing.Color.White;
+            this.expressionDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.expressionDisplay.DisplayScale = 3;
+            this.expressionDisplay.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expressionDisplay.Location = new System.Drawing.Point(12, 12);
+            this.expressionDisplay.MoeinMode = false;
+            this.expressionDisplay.Name = "expressionDisplay";
+            this.expressionDisplay.Size = new System.Drawing.Size(633, 191);
+            this.expressionDisplay.TabIndex = 0;
+            // 
+            // buttonCustomVariable
+            // 
+            this.buttonCustomVariable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCustomVariable.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCustomVariable.Location = new System.Drawing.Point(606, 299);
+            this.buttonCustomVariable.Name = "buttonCustomVariable";
+            this.buttonCustomVariable.Size = new System.Drawing.Size(39, 39);
+            this.buttonCustomVariable.TabIndex = 42;
+            this.buttonCustomVariable.Text = "Var";
+            this.buttonCustomVariable.UseVisualStyleBackColor = true;
+            // 
             // ExpressionEditor
             // 
             this.AcceptButton = this.buttonDone;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 395);
+            this.Controls.Add(this.buttonCustomVariable);
             this.Controls.Add(this.buttonEquals);
-            this.Controls.Add(this.buttonVerticalVariable);
-            this.Controls.Add(this.buttonHorizontalVariable);
+            this.Controls.Add(this.buttonYVariable);
+            this.Controls.Add(this.buttonXVariable);
             this.Controls.Add(this.buttonTabs);
             this.Controls.Add(this.buttonDone);
             this.Controls.Add(this.buttonAdd);
@@ -653,7 +666,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InputWindow_FormClosing);
             this.Load += new System.EventHandler(this.InputWindow_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputWindow_KeyDown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputWindow_KeyPress);
             this.buttonTabs.ResumeLayout(false);
             this.tabPageStandard.ResumeLayout(false);
             this.tabPageTrig.ResumeLayout(false);
@@ -702,8 +714,8 @@
         private System.Windows.Forms.TabControl buttonTabs;
         private System.Windows.Forms.TabPage tabPageStandard;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.Button buttonHorizontalVariable;
-        private System.Windows.Forms.Button buttonVerticalVariable;
+        private System.Windows.Forms.Button buttonXVariable;
+        private System.Windows.Forms.Button buttonYVariable;
         private System.Windows.Forms.Button buttonEquals;
         private System.Windows.Forms.TabPage tabPageTrig;
         private System.Windows.Forms.Button buttonArctan;
@@ -712,5 +724,6 @@
         private System.Windows.Forms.Button buttonTan;
         private System.Windows.Forms.Button buttonCos;
         private System.Windows.Forms.Button buttonSin;
+        private System.Windows.Forms.Button buttonCustomVariable;
     }
 }

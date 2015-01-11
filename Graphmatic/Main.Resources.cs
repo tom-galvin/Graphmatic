@@ -398,9 +398,7 @@ namespace Graphmatic
 
             if (equationName != null)
             {
-                Equation equation = new Equation(
-                    Properties.Settings.Default.DefaultVariable2,
-                    Properties.Settings.Default.DefaultVariable1)
+                Equation equation = new Equation()
                 {
                     Name = equationName
                 };

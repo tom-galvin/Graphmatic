@@ -30,10 +30,13 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageDefaults = new System.Windows.Forms.TabPage();
+            this.numericBackupInterval = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxBackup = new System.Windows.Forms.CheckBox();
+            this.labelBackupPath = new System.Windows.Forms.Label();
+            this.textBoxBackupPath = new System.Windows.Forms.TextBox();
             this.textBoxDefaultDataSetVariables = new System.Windows.Forms.TextBox();
             this.labelDefaultDataSetVariables = new System.Windows.Forms.Label();
             this.textBoxDefaultVaryingVariable = new System.Windows.Forms.TextBox();
-            this.labelDefaultVaryingVariable = new System.Windows.Forms.Label();
             this.textBoxDefaultPlottedVariable = new System.Windows.Forms.TextBox();
             this.labelDefaultPlottedVariable = new System.Windows.Forms.Label();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
@@ -41,10 +44,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.textBoxBackupPath = new System.Windows.Forms.TextBox();
-            this.labelBackupPath = new System.Windows.Forms.Label();
-            this.checkBoxBackup = new System.Windows.Forms.CheckBox();
-            this.numericBackupInterval = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.colorChooserDefaultGraphColor = new Graphmatic.ColorChooser();
             this.colorChooserDefaultPageColor = new Graphmatic.ColorChooser();
             this.tabControl.SuspendLayout();
             this.tabPageDefaults.SuspendLayout();
@@ -60,11 +61,13 @@
             this.tabControl.Location = new System.Drawing.Point(12, 22);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(419, 170);
+            this.tabControl.Size = new System.Drawing.Size(419, 178);
             this.tabControl.TabIndex = 2;
             // 
             // tabPageDefaults
             // 
+            this.tabPageDefaults.Controls.Add(this.colorChooserDefaultGraphColor);
+            this.tabPageDefaults.Controls.Add(this.label1);
             this.tabPageDefaults.Controls.Add(this.numericBackupInterval);
             this.tabPageDefaults.Controls.Add(this.checkBoxBackup);
             this.tabPageDefaults.Controls.Add(this.labelBackupPath);
@@ -72,7 +75,6 @@
             this.tabPageDefaults.Controls.Add(this.textBoxDefaultDataSetVariables);
             this.tabPageDefaults.Controls.Add(this.labelDefaultDataSetVariables);
             this.tabPageDefaults.Controls.Add(this.textBoxDefaultVaryingVariable);
-            this.tabPageDefaults.Controls.Add(this.labelDefaultVaryingVariable);
             this.tabPageDefaults.Controls.Add(this.textBoxDefaultPlottedVariable);
             this.tabPageDefaults.Controls.Add(this.labelDefaultPlottedVariable);
             this.tabPageDefaults.Controls.Add(this.textBoxUserName);
@@ -82,14 +84,62 @@
             this.tabPageDefaults.Location = new System.Drawing.Point(4, 24);
             this.tabPageDefaults.Name = "tabPageDefaults";
             this.tabPageDefaults.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDefaults.Size = new System.Drawing.Size(411, 142);
+            this.tabPageDefaults.Size = new System.Drawing.Size(411, 150);
             this.tabPageDefaults.TabIndex = 0;
             this.tabPageDefaults.Text = "Defaults";
             this.tabPageDefaults.UseVisualStyleBackColor = true;
             // 
+            // numericBackupInterval
+            // 
+            this.numericBackupInterval.Location = new System.Drawing.Point(179, 122);
+            this.numericBackupInterval.Maximum = new decimal(new int[] {
+            7200,
+            0,
+            0,
+            0});
+            this.numericBackupInterval.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericBackupInterval.Name = "numericBackupInterval";
+            this.numericBackupInterval.Size = new System.Drawing.Size(226, 23);
+            this.numericBackupInterval.TabIndex = 14;
+            this.numericBackupInterval.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // checkBoxBackup
+            // 
+            this.checkBoxBackup.AutoSize = true;
+            this.checkBoxBackup.Location = new System.Drawing.Point(9, 123);
+            this.checkBoxBackup.Name = "checkBoxBackup";
+            this.checkBoxBackup.Size = new System.Drawing.Size(164, 19);
+            this.checkBoxBackup.TabIndex = 12;
+            this.checkBoxBackup.Text = "Backup interval (seconds):";
+            this.checkBoxBackup.UseVisualStyleBackColor = true;
+            // 
+            // labelBackupPath
+            // 
+            this.labelBackupPath.AutoSize = true;
+            this.labelBackupPath.Location = new System.Drawing.Point(71, 96);
+            this.labelBackupPath.Name = "labelBackupPath";
+            this.labelBackupPath.Size = new System.Drawing.Size(76, 15);
+            this.labelBackupPath.TabIndex = 11;
+            this.labelBackupPath.Text = "Backup path:";
+            // 
+            // textBoxBackupPath
+            // 
+            this.textBoxBackupPath.Location = new System.Drawing.Point(153, 93);
+            this.textBoxBackupPath.Name = "textBoxBackupPath";
+            this.textBoxBackupPath.Size = new System.Drawing.Size(252, 23);
+            this.textBoxBackupPath.TabIndex = 10;
+            // 
             // textBoxDefaultDataSetVariables
             // 
-            this.textBoxDefaultDataSetVariables.Location = new System.Drawing.Point(153, 59);
+            this.textBoxDefaultDataSetVariables.Location = new System.Drawing.Point(153, 64);
             this.textBoxDefaultDataSetVariables.Name = "textBoxDefaultDataSetVariables";
             this.textBoxDefaultDataSetVariables.Size = new System.Drawing.Size(252, 23);
             this.textBoxDefaultDataSetVariables.TabIndex = 9;
@@ -97,7 +147,7 @@
             // labelDefaultDataSetVariables
             // 
             this.labelDefaultDataSetVariables.AutoSize = true;
-            this.labelDefaultDataSetVariables.Location = new System.Drawing.Point(6, 62);
+            this.labelDefaultDataSetVariables.Location = new System.Drawing.Point(6, 67);
             this.labelDefaultDataSetVariables.Name = "labelDefaultDataSetVariables";
             this.labelDefaultDataSetVariables.Size = new System.Drawing.Size(141, 15);
             this.labelDefaultDataSetVariables.TabIndex = 8;
@@ -105,23 +155,14 @@
             // 
             // textBoxDefaultVaryingVariable
             // 
-            this.textBoxDefaultVaryingVariable.Location = new System.Drawing.Point(359, 30);
+            this.textBoxDefaultVaryingVariable.Location = new System.Drawing.Point(359, 6);
             this.textBoxDefaultVaryingVariable.Name = "textBoxDefaultVaryingVariable";
             this.textBoxDefaultVaryingVariable.Size = new System.Drawing.Size(46, 23);
             this.textBoxDefaultVaryingVariable.TabIndex = 7;
             // 
-            // labelDefaultVaryingVariable
-            // 
-            this.labelDefaultVaryingVariable.AutoSize = true;
-            this.labelDefaultVaryingVariable.Location = new System.Drawing.Point(205, 33);
-            this.labelDefaultVaryingVariable.Name = "labelDefaultVaryingVariable";
-            this.labelDefaultVaryingVariable.Size = new System.Drawing.Size(148, 15);
-            this.labelDefaultVaryingVariable.TabIndex = 6;
-            this.labelDefaultVaryingVariable.Text = "Default horizontal variable:";
-            // 
             // textBoxDefaultPlottedVariable
             // 
-            this.textBoxDefaultPlottedVariable.Location = new System.Drawing.Point(359, 6);
+            this.textBoxDefaultPlottedVariable.Location = new System.Drawing.Point(307, 6);
             this.textBoxDefaultPlottedVariable.Name = "textBoxDefaultPlottedVariable";
             this.textBoxDefaultPlottedVariable.Size = new System.Drawing.Size(46, 23);
             this.textBoxDefaultPlottedVariable.TabIndex = 5;
@@ -129,15 +170,15 @@
             // labelDefaultPlottedVariable
             // 
             this.labelDefaultPlottedVariable.AutoSize = true;
-            this.labelDefaultPlottedVariable.Location = new System.Drawing.Point(220, 9);
+            this.labelDefaultPlottedVariable.Location = new System.Drawing.Point(205, 9);
             this.labelDefaultPlottedVariable.Name = "labelDefaultPlottedVariable";
-            this.labelDefaultPlottedVariable.Size = new System.Drawing.Size(133, 15);
+            this.labelDefaultPlottedVariable.Size = new System.Drawing.Size(97, 15);
             this.labelDefaultPlottedVariable.TabIndex = 4;
-            this.labelDefaultPlottedVariable.Text = "Default vertical variable:";
+            this.labelDefaultPlottedVariable.Text = "Default variables:";
             // 
             // textBoxUserName
             // 
-            this.textBoxUserName.Location = new System.Drawing.Point(74, 30);
+            this.textBoxUserName.Location = new System.Drawing.Point(280, 35);
             this.textBoxUserName.Name = "textBoxUserName";
             this.textBoxUserName.Size = new System.Drawing.Size(125, 23);
             this.textBoxUserName.TabIndex = 3;
@@ -145,7 +186,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 33);
+            this.label3.Location = new System.Drawing.Point(211, 38);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 15);
             this.label3.TabIndex = 2;
@@ -183,53 +224,22 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // textBoxBackupPath
+            // label1
             // 
-            this.textBoxBackupPath.Location = new System.Drawing.Point(153, 88);
-            this.textBoxBackupPath.Name = "textBoxBackupPath";
-            this.textBoxBackupPath.Size = new System.Drawing.Size(252, 23);
-            this.textBoxBackupPath.TabIndex = 10;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 15);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Default feature colour:";
             // 
-            // labelBackupPath
+            // colorChooserDefaultGraphColor
             // 
-            this.labelBackupPath.AutoSize = true;
-            this.labelBackupPath.Location = new System.Drawing.Point(71, 91);
-            this.labelBackupPath.Name = "labelBackupPath";
-            this.labelBackupPath.Size = new System.Drawing.Size(76, 15);
-            this.labelBackupPath.TabIndex = 11;
-            this.labelBackupPath.Text = "Backup path:";
-            // 
-            // checkBoxBackup
-            // 
-            this.checkBoxBackup.AutoSize = true;
-            this.checkBoxBackup.Location = new System.Drawing.Point(9, 118);
-            this.checkBoxBackup.Name = "checkBoxBackup";
-            this.checkBoxBackup.Size = new System.Drawing.Size(164, 19);
-            this.checkBoxBackup.TabIndex = 12;
-            this.checkBoxBackup.Text = "Backup interval (seconds):";
-            this.checkBoxBackup.UseVisualStyleBackColor = true;
-            // 
-            // numericBackupInterval
-            // 
-            this.numericBackupInterval.Location = new System.Drawing.Point(179, 117);
-            this.numericBackupInterval.Maximum = new decimal(new int[] {
-            7200,
-            0,
-            0,
-            0});
-            this.numericBackupInterval.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericBackupInterval.Name = "numericBackupInterval";
-            this.numericBackupInterval.Size = new System.Drawing.Size(226, 23);
-            this.numericBackupInterval.TabIndex = 14;
-            this.numericBackupInterval.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.colorChooserDefaultGraphColor.Color = System.Drawing.Color.Empty;
+            this.colorChooserDefaultGraphColor.Location = new System.Drawing.Point(133, 38);
+            this.colorChooserDefaultGraphColor.Name = "colorChooserDefaultGraphColor";
+            this.colorChooserDefaultGraphColor.Size = new System.Drawing.Size(73, 15);
+            this.colorChooserDefaultGraphColor.TabIndex = 16;
             // 
             // colorChooserDefaultPageColor
             // 
@@ -245,7 +255,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(443, 204);
+            this.ClientSize = new System.Drawing.Size(443, 212);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.tabControl);
@@ -281,12 +291,13 @@
         private System.Windows.Forms.Label labelDefaultPlottedVariable;
         private System.Windows.Forms.TextBox textBoxDefaultPlottedVariable;
         private System.Windows.Forms.TextBox textBoxDefaultVaryingVariable;
-        private System.Windows.Forms.Label labelDefaultVaryingVariable;
         private System.Windows.Forms.TextBox textBoxDefaultDataSetVariables;
         private System.Windows.Forms.Label labelDefaultDataSetVariables;
         private System.Windows.Forms.Label labelBackupPath;
         private System.Windows.Forms.TextBox textBoxBackupPath;
         private System.Windows.Forms.CheckBox checkBoxBackup;
         private System.Windows.Forms.NumericUpDown numericBackupInterval;
+        private ColorChooser colorChooserDefaultGraphColor;
+        private System.Windows.Forms.Label label1;
     }
 }

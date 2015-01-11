@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Windows.Forms;
 
@@ -17,15 +18,22 @@ namespace Graphmatic
             protected set;
         }
 
-        public CreateVariableDialog()
-            : this('?')
+        public bool OneKey
+        {
+            get;
+            protected set;
+        }
+
+        public CreateVariableDialog(bool oneKey = false)
+            : this('?', oneKey)
         {
         }
 
-        public CreateVariableDialog(char defaultChar)
+        public CreateVariableDialog(char defaultChar, bool oneKey = false)
         {
             InitializeComponent();
             textBoxVariableName.Text = defaultChar.ToString();
+            OneKey = oneKey;
         }
 
         private void textBoxVariableName_KeyPress(object sender, KeyPressEventArgs e)
@@ -34,6 +42,16 @@ namespace Graphmatic
             {
                 EnteredChar = e.KeyChar;
                 textBoxVariableName.Text = e.KeyChar.ToString();
+
+                if (OneKey)
+                {
+                    DialogResult = System.Windows.Forms.DialogResult.OK;
+                    Close();
+                }
+            }
+            else
+            {
+                SystemSounds.Beep.Play();
             }
         }
 

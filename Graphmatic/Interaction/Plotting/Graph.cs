@@ -18,16 +18,16 @@ namespace Graphmatic.Interaction.Plotting
             protected set;
         }
 
-        protected GraphAxis Axes
+        public GraphAxis Axes
         {
             get;
-            set;
+            protected set;
         }
 
-        protected GraphKey Key
+        public GraphKey Key
         {
             get;
-            set;
+            protected set;
         }
 
         protected Color AxisColor
@@ -78,11 +78,11 @@ namespace Graphmatic.Interaction.Plotting
             Key = new GraphKey();
             Resources.Add(Axes, new PlottableParameters()
             {
-                PlotColor = Color.Black
+                PlotColor = Properties.Settings.Default.DefaultGraphFeatureColor
             });
             Resources.Add(Key, new PlottableParameters()
             {
-                PlotColor = Color.Black
+                PlotColor = Properties.Settings.Default.DefaultGraphFeatureColor
             });
         }
 

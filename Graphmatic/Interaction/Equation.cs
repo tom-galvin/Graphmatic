@@ -25,18 +25,6 @@ namespace Graphmatic.Interaction
             set;
         }
 
-        public char VerticalVariable
-        {
-            get;
-            set;
-        }
-
-        public char HorizontalVariable
-        {
-            get;
-            set;
-        }
-
         public override string Type
         {
             get
@@ -45,16 +33,14 @@ namespace Graphmatic.Interaction
             }
         }
 
-        public Equation(char vertical, char horizontal)
-            : this(vertical, horizontal, new Expression(null))
+        public Equation()
+            : this(new Expression(null))
         {
         }
 
-        public Equation(char vertical, char horizontal, Expression expression)
+        public Equation(Expression expression)
             : base()
         {
-            VerticalVariable = vertical;
-            HorizontalVariable = horizontal;
             Expression = expression;
             if(Expression.Count == 0)
                 ParseTree = new ConstantParseTreeNode(0);
@@ -65,8 +51,6 @@ namespace Graphmatic.Interaction
         public Equation(XElement xml)
             : base(xml)
         {
-            VerticalVariable = Char.Parse(xml.Element("Vertical").Value);
-            HorizontalVariable = Char.Parse(xml.Element("Horizontal").Value);
             Expression = new Expression(null, xml.Element("Expression").Elements());
             ParseTree = Expression.Parse(true);
         }
@@ -88,9 +72,7 @@ namespace Graphmatic.Interaction
             XElement baseElement = base.ToXml();
             baseElement.Name = "Equation";
             baseElement.Add(
-                new XElement("Expression", Expression.ToXml()),
-                new XElement("Vertical", VerticalVariable),
-                new XElement("Horizontal", HorizontalVariable));
+                new XElement("Expression", Expression.ToXml()));
             return baseElement;
         }
     }

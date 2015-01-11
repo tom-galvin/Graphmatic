@@ -22,7 +22,7 @@ namespace Graphmatic
         }
 
         public EquationEditor()
-            : this(new Equation('y', 'x'))
+            : this(new Equation())
         {
         }
 
@@ -40,8 +40,6 @@ namespace Graphmatic
             InitializeComponent();
             Equation = equation;
             expressionDisplay.Expression = Equation.Expression;
-            textBoxPlotted.Text = Equation.VerticalVariable.ToString();
-            textBoxVarying.Text = Equation.HorizontalVariable.ToString();
             RefreshDisplay();
         }
 
@@ -82,18 +80,6 @@ namespace Graphmatic
                 }
                 e.Failure = true;
             }
-        }
-
-        private void textBoxPlotted_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            textBoxPlotted.Text = e.KeyChar.ToString();
-            Equation.VerticalVariable = e.KeyChar;
-        }
-
-        private void textBoxVarying_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            textBoxVarying.Text = e.KeyChar.ToString();
-            Equation.HorizontalVariable = e.KeyChar;
         }
 
         private void EquationEditor_Load(object sender, EventArgs e)

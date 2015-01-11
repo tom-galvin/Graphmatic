@@ -72,18 +72,9 @@ namespace Graphmatic
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
             expressionDisplay.ExpressionCursor.Moved += ExpressionCursor_Moved;
 
-            toolTip.SetToolTip(buttonHorizontalVariable, ConvertCharToTooltip(Equation.HorizontalVariable));
-            toolTip.SetToolTip(buttonVerticalVariable, ConvertCharToTooltip(Equation.VerticalVariable));
-
-            buttonHorizontalVariable.Image = FontHelperExtensionMethods.GetCharacterImage(Equation.HorizontalVariable, false, 2);
-            buttonVerticalVariable.Image = FontHelperExtensionMethods.GetCharacterImage(Equation.VerticalVariable, false, 2);
+            buttonXVariable.Image = FontHelperExtensionMethods.GetCharacterImage('x', false, 2);
+            buttonYVariable.Image = FontHelperExtensionMethods.GetCharacterImage('y', false, 2);
             buttonEquals.Image = FontHelperExtensionMethods.GetCharacterImage('=', false, 2);
-        }
-
-        public string ConvertCharToTooltip(char c)
-        {
-            char displayChar = Char.ToUpperInvariant(c);
-            return displayChar != c ? displayChar.ToString() : "Shift-" + displayChar.ToString();
         }
 
         private void InitializeButtons()
@@ -175,15 +166,34 @@ namespace Graphmatic
             CreateExpressionButton(buttonSymbolicExp, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Exp10), "Ctrl-E", Keys.E, Keys.Control);
 
             #endregion
-            CreateExpressionButton(buttonHorizontalVariable, expression => new VariableToken(expression, Equation.HorizontalVariable));
-            CreateExpressionButton(buttonVerticalVariable, expression => new VariableToken(expression, Equation.VerticalVariable));
+            CreateExpressionButton(buttonXVariable, expression => new VariableToken(expression, 'x'), "X", Keys.X);
+            CreateExpressionButton(buttonYVariable, expression => new VariableToken(expression, 'y'), "Y", Keys.Y);
+            CreateExpressionButton(buttonCustomVariable, expression =>
+            {
+                CreateVariableDialog dialog = new CreateVariableDialog(true);
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    return new VariableToken(expression, dialog.EnteredChar);
+                }
+                else
+                {
+                    return null;
+                }
+            }, "Hash", Keys.Oem7);
             CreateExpressionButton(buttonEquals, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Equals), "Equals", Keys.Oemplus);
         }
 
-        private void CreateExpressionButton(Button button, Func<Expression, Token> token, string label = "", Keys shortcutKey = Keys.None, Keys modifierKey = Keys.None)
+        private void CreateExpressionButton(Button button, Func<Expression, Token> tokenFactory, string label = "", Keys shortcutKey = Keys.None, Keys modifierKey = Keys.None)
         {
+
             button.Click += (sender, e) =>
-                    expressionDisplay.ExpressionCursor.Insert(token(expressionDisplay.ExpressionCursor.Expression));
+            {
+                var token = tokenFactory(expressionDisplay.ExpressionCursor.Expression);
+                if (token != null)
+                {
+                    expressionDisplay.ExpressionCursor.Insert(token);
+                }
+            };
 
             if (shortcutKey != Keys.None)
             {
@@ -265,10 +275,17 @@ namespace Graphmatic
             if (e.KeyCode == Keys.Back)
             {
                 buttonDelete.PerformClick();
+                e.Handled = e.SuppressKeyPress = true;
             }
             else if (e.KeyCode == Keys.D0 && e.Modifiers == Keys.Shift)
             {
                 buttonRight.PerformClick();
+                e.Handled = e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                DialogResult = System.Windows.Forms.DialogResult.Cancel;
+                Close();
             }
             else
             {
@@ -279,22 +296,13 @@ namespace Graphmatic
                     {
                         (control.Value as Button).PerformClick();
                     }
-                    e.Handled = true;
+                    e.Handled = e.SuppressKeyPress = true;
                 }
                 else
                 {
                 }
                 // MessageBox.Show(String.Format("Key: {0}\r\nModifier: {1}", e.KeyCode.ToString(), e.Modifiers.ToString()));
             }
-        }
-
-        // KeyPress needed to detect variable being pressed
-        private void InputWindow_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == Equation.HorizontalVariable)
-                buttonHorizontalVariable.PerformClick();
-            else if (e.KeyChar == Equation.VerticalVariable)
-                buttonVerticalVariable.PerformClick();
         }
 
         private void InputWindow_FormClosing(object sender, FormClosingEventArgs e)

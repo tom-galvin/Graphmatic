@@ -39,6 +39,10 @@ namespace Graphmatic
             colorChooserDefaultPageColor.ColorChanged += (sender, e) =>
                 Settings.Default.DefaultPageColor = colorChooserDefaultPageColor.Color;
 
+            colorChooserDefaultGraphColor.Color = Settings.Default.DefaultGraphFeatureColor;
+            colorChooserDefaultGraphColor.ColorChanged += (sender, e) =>
+                Settings.Default.DefaultGraphFeatureColor = colorChooserDefaultGraphColor.Color;
+
             textBoxUserName.Text = Settings.Default.Username;
             textBoxUserName.TextChanged += (sender, e) =>
                 Settings.Default.Username = textBoxUserName.Text;

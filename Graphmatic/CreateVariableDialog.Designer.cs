@@ -72,7 +72,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "New";
+            this.Text = "Variable";
             this.ResumeLayout(false);
             this.PerformLayout();
 

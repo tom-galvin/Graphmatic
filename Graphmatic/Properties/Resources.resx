@@ -185,7 +185,7 @@
     <value>..\Resources\documents.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AboutBoxMessage" xml:space="preserve">
-    <value>In development (dev. milestone 1.)
+    <value>In development (dev. milestone 2.)
 Available on Github: http://github.com/Quackmatic/Graphmatic
 Originally developed for the AQA A2 Computing coursework.</value>
   </data>
@@ -205,7 +205,7 @@ Originally developed for the AQA A2 Computing coursework.</value>
     <value>..\resources\calcbuttons\bracket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="VersionString" xml:space="preserve">
-    <value>Indev (MS1)</value>
+    <value>Indev (MS2)</value>
   </data>
   <data name="FolderOpen16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder-open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

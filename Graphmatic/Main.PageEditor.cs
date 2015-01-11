@@ -155,6 +155,19 @@ namespace Graphmatic
                             pageDisplay.Refresh();
                         }
                     }),
+                new ToolStripMenuItem("Feature color...", null, delegate(object sender, EventArgs e)
+                    {
+                        ColorDialog dialog = new ColorDialog()
+                        {
+                            Color = CurrentPage.Graph[CurrentPage.Graph.Axes].PlotColor
+                        };
+                        if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            CurrentPage.Graph[CurrentPage.Graph.Axes].PlotColor =
+                                CurrentPage.Graph[CurrentPage.Graph.Key].PlotColor = dialog.Color;
+                            pageDisplay.Refresh();
+                        }
+                    }),
             };
             contextMenuStripPageEditor.Items.Clear();
             contextMenuStripPageEditor.Items.AddRange(PlottableEditingMenu);
@@ -186,9 +199,7 @@ namespace Graphmatic
 
         private void toolStripButtonPlotEquation_Click(object sender, EventArgs e)
         {
-            Equation equation = new Equation(
-                Properties.Settings.Default.DefaultVariable2,
-                Properties.Settings.Default.DefaultVariable1)
+            Equation equation = new Equation()
                 {
                     Name = CreateResourceName(String.Format("{0}/Equation", CurrentPage.Name))
                 };

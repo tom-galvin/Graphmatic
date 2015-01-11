@@ -31,13 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.textBoxPlotted = new System.Windows.Forms.TextBox();
-            this.labelPlotted = new System.Windows.Forms.Label();
-            this.labelVarying = new System.Windows.Forms.Label();
-            this.textBoxVarying = new System.Windows.Forms.TextBox();
             this.labelDescription = new System.Windows.Forms.Label();
-            this.expressionDisplay = new Graphmatic.ExpressionDisplay();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.expressionDisplay = new Graphmatic.ExpressionDisplay();
             this.SuspendLayout();
             // 
             // buttonEdit
@@ -63,60 +59,17 @@
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // textBoxPlotted
-            // 
-            this.textBoxPlotted.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxPlotted.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxPlotted.Location = new System.Drawing.Point(112, 169);
-            this.textBoxPlotted.Name = "textBoxPlotted";
-            this.textBoxPlotted.ReadOnly = true;
-            this.textBoxPlotted.Size = new System.Drawing.Size(27, 23);
-            this.textBoxPlotted.TabIndex = 3;
-            this.textBoxPlotted.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxPlotted.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPlotted_KeyPress);
-            // 
-            // labelPlotted
-            // 
-            this.labelPlotted.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelPlotted.AutoSize = true;
-            this.labelPlotted.Location = new System.Drawing.Point(20, 173);
-            this.labelPlotted.Name = "labelPlotted";
-            this.labelPlotted.Size = new System.Drawing.Size(86, 15);
-            this.labelPlotted.TabIndex = 4;
-            this.labelPlotted.Text = "V. axis variable:";
-            // 
-            // labelVarying
-            // 
-            this.labelVarying.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelVarying.AutoSize = true;
-            this.labelVarying.Location = new System.Drawing.Point(18, 201);
-            this.labelVarying.Name = "labelVarying";
-            this.labelVarying.Size = new System.Drawing.Size(88, 15);
-            this.labelVarying.TabIndex = 5;
-            this.labelVarying.Text = "H. axis variable:";
-            // 
-            // textBoxVarying
-            // 
-            this.textBoxVarying.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxVarying.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxVarying.Location = new System.Drawing.Point(112, 198);
-            this.textBoxVarying.Name = "textBoxVarying";
-            this.textBoxVarying.ReadOnly = true;
-            this.textBoxVarying.Size = new System.Drawing.Size(27, 23);
-            this.textBoxVarying.TabIndex = 6;
-            this.textBoxVarying.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxVarying.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxVarying_KeyPress);
-            // 
             // labelDescription
             // 
             this.labelDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelDescription.Location = new System.Drawing.Point(145, 175);
+            this.labelDescription.Location = new System.Drawing.Point(12, 175);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(199, 49);
+            this.labelDescription.Size = new System.Drawing.Size(332, 49);
             this.labelDescription.TabIndex = 7;
-            this.labelDescription.Text = "The two variables are the names of the value plotted on the vertical and horizont" +
-    "al axes respectively.";
+            this.labelDescription.Text = "To edit the equation, press Edit. To add variables other than y and x in the edit" +
+    "or window, press the Var button (or # on your keyboard) and type a variable lett" +
+    "er name.";
             // 
             // expressionDisplay
             // 
@@ -143,10 +96,6 @@
             this.CancelButton = this.buttonOK;
             this.ClientSize = new System.Drawing.Size(437, 233);
             this.Controls.Add(this.labelDescription);
-            this.Controls.Add(this.textBoxVarying);
-            this.Controls.Add(this.labelVarying);
-            this.Controls.Add(this.labelPlotted);
-            this.Controls.Add(this.textBoxPlotted);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.expressionDisplay);
@@ -162,7 +111,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EquationEditor_FormClosing);
             this.Load += new System.EventHandler(this.EquationEditor_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -171,10 +119,6 @@
         private ExpressionDisplay expressionDisplay;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.TextBox textBoxPlotted;
-        private System.Windows.Forms.Label labelPlotted;
-        private System.Windows.Forms.Label labelVarying;
-        private System.Windows.Forms.TextBox textBoxVarying;
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.ToolTip toolTip;
     }

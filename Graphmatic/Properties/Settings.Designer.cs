@@ -139,5 +139,17 @@ namespace Graphmatic.Properties {
                 this["RestoreLastResource"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color DefaultGraphFeatureColor {
+            get {
+                return ((global::System.Drawing.Color)(this["DefaultGraphFeatureColor"]));
+            }
+            set {
+                this["DefaultGraphFeatureColor"] = value;
+            }
+        }
     }
 }
