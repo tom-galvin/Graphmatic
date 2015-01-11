@@ -11,7 +11,7 @@ This is my coursework for the AQA Computing A2 coursework. Features do (or will)
 |Entering of data sets|Implementation complete|
 |Plotting those data sets in graphical form, alongside equations|Feature complete|
 |Performing statistical calculations on those data sets|Not started|
-|Annotating both graphs and data sets, for demonstrations on an Interactive Whiteboard|Not started|
+|Annotating both graphs and data sets, for demonstrations on an Interactive Whiteboard|Active Development|
 |Extensive bug testing|Not started|
 
 There are 6 stages:
