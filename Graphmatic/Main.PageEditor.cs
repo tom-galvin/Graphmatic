@@ -38,9 +38,61 @@ namespace Graphmatic
                                                      Color.DarkSlateGray
                                                  };
 
-        private void InitializeResourceDragDrop()
+        /// <summary>
+        /// The currently-active tool being used to edit the page.
+        /// </summary>
+        private PageTool CurrentPageTool;
+
+        /// <summary>
+        /// All tool strip items used to activate tools in the page editor.
+        /// </summary>
+        private List<ToolStripItem> ToolButtons;
+
+        /// <summary>
+        /// Whether the user is currently clicking and dragging in the page display or not.
+        /// </summary>
+        private bool IsDragging = false;
+
+        /// <summary>
+        /// The starting point of the dragging action in the page display.
+        /// </summary>
+        private Point MouseStart;
+
+        private void InitializePageDisplay()
         {
             pageDisplay.AllowDrop = true;
+            ToolButtons = new List<ToolStripItem>();
+
+            RegisterTool(toolStripButtonPan, PageTool.Pan);
+            RegisterTool(toolStripButtonSquareSelect, PageTool.Select);
+            RegisterTool(pencilToolStripMenuItem, PageTool.Pencil);
+            RegisterTool(eraserToolStripMenuItem, PageTool.Eraser);
+            RegisterTool(highlightToolStripMenuItem, PageTool.Highlighter);
+        }
+
+        private void RegisterTool(ToolStripItem item, PageTool toolType)
+        {
+            ToolButtons.Add(item);
+            if (item is ToolStripButton)
+                (item as ToolStripButton).CheckOnClick = true;
+            if (item is ToolStripMenuItem)
+                (item as ToolStripMenuItem).CheckOnClick = true;
+            item.Click += (sender, e) =>
+            {
+                ToolButtons.ForEach(button =>
+                {
+                    if (button is ToolStripButton)
+                        (button as ToolStripButton).Checked = false;
+                    if (button is ToolStripMenuItem)
+                        (button as ToolStripMenuItem).Checked = false;
+                });
+                toolStripStatusLabelEditor.Text = toolType.ToString();
+                CurrentPageTool = toolType;
+                if (item is ToolStripButton)
+                    (item as ToolStripButton).Checked = true;
+                if (item is ToolStripMenuItem)
+                    (item as ToolStripMenuItem).Checked = true;
+            };
         }
 
         private void OpenPageEditor(Page page)
@@ -53,6 +105,9 @@ namespace Graphmatic
             }
             CurrentPage = page;
             CurrentPage.Graph.Update += Graph_Update;
+            toolStripComboBoxZoom.Text = String.Format(
+                "{0}%",
+                0.05 / CurrentPage.Graph.Parameters.HorizontalPixelScale * 100.0);
             RenderPage();
         }
 
@@ -78,7 +133,12 @@ namespace Graphmatic
                 Graphics g = e.Graphics;
                 Brush backgroundBrush = new SolidBrush(CurrentPage.BackgroundColor);
                 g.FillRectangle(backgroundBrush, IsFormResizing ? e.ClipRectangle : pageDisplay.ClientRectangle);
-                CurrentPage.Graph.Draw(g, pageDisplay.ClientSize, !IsFormResizing);
+                PlotResolution resolution = PlotResolution.View;
+                if (IsDragging)
+                    resolution = PlotResolution.Edit;
+                if (IsFormResizing)
+                    resolution = PlotResolution.Resize;
+                CurrentPage.Graph.Draw(g, pageDisplay.ClientSize, resolution);
                 pageDisplay.ResumeLayout(false);
             }
         }
@@ -97,7 +157,7 @@ namespace Graphmatic
                         null,
                         new ToolStripMenuItem[] {
                             new ToolStripMenuItem("&Remove",
-                                Properties.Resources.Delete,
+                                Properties.Resources.TokenDelete,
                                 delegate(object sender, EventArgs e)
                                 {
                                     CurrentPage.Graph.Remove(r as IPlottable);
@@ -124,10 +184,10 @@ namespace Graphmatic
             {
                 (resources.Length > 0 ?
                     new ToolStripMenuItem(
-                        String.Format("&Edit {0} items", resources.Length), Properties.Resources.pencil,
+                        String.Format("&Edit {0} items", resources.Length), Properties.Resources.AnnotateDraw16,
                         resources) :
                     new ToolStripMenuItem(
-                        String.Format("No items to &edit", resources.Length), Properties.Resources.pencil)
+                        String.Format("No items to &edit", resources.Length), Properties.Resources.AnnotateDraw16)
                     {
                         Enabled = false
                     }
@@ -274,6 +334,92 @@ namespace Graphmatic
             {
                 MessageBox.Show("This data cannot be added to the graph.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void toolStripButtonPreviousPage_Click(object sender, EventArgs e)
+        {
+            int pageIndex = CurrentDocument.PageOrder.IndexOf(CurrentPage);
+            if (pageIndex != 0)
+            {
+                OpenResourceEditor(CurrentDocument.PageOrder[pageIndex - 1]);
+            }
+        }
+
+        private void toolStripButtonNextPage_Click(object sender, EventArgs e)
+        {
+            int pageIndex = CurrentDocument.PageOrder.IndexOf(CurrentPage);
+            if (pageIndex != CurrentDocument.PageOrder.Count - 1)
+            {
+                OpenResourceEditor(CurrentDocument.PageOrder[pageIndex + 1]);
+            }
+        }
+
+        private void toolStripButtonAddPage_Click(object sender, EventArgs e)
+        {
+            Page newPage = new Page();
+            AddResource(newPage);
+            OpenResourceEditor(newPage);
+        }
+
+        private void toolStripComboBoxZoom_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string text = toolStripComboBoxZoom.Text;
+                if (text.EndsWith("%"))
+                    text = text.Substring(0, text.Length - 1);
+                double zoomLevel = 0.05 / (Double.Parse(text)
+                    / 100.0);
+                CurrentPage.Graph.Parameters.HorizontalPixelScale =
+                    CurrentPage.Graph.Parameters.VerticalPixelScale =
+                    zoomLevel;
+                double zoomFactor = Math.Pow(2, Math.Floor(Math.Log(zoomLevel / 0.05, 2)));
+                CurrentPage.Graph.Axes.GridSize = zoomFactor;
+                pageDisplay.Refresh();
+                NotifyResourceModified(CurrentPage);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid zoom level.", "Zoom", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private double startPageH, startPageV;
+        private void pageDisplay_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (IsDragging)
+            {
+                if (CurrentPageTool == PageTool.Pan)
+                {
+                    double offsetX = e.X - MouseStart.X;
+                    double offsetY = e.Y - MouseStart.Y;
+
+                    offsetX *= CurrentPage.Graph.Parameters.HorizontalPixelScale;
+                    offsetY *= CurrentPage.Graph.Parameters.VerticalPixelScale;
+
+                    CurrentPage.Graph.Parameters.CenterHorizontal = startPageH - offsetX;
+                    CurrentPage.Graph.Parameters.CenterVertical = startPageV + offsetY;
+                }
+                pageDisplay.Refresh();
+            }
+        }
+
+        private void pageDisplay_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (CurrentPageTool == PageTool.Pan)
+            {
+                startPageH = CurrentPage.Graph.Parameters.CenterHorizontal;
+                startPageV = CurrentPage.Graph.Parameters.CenterVertical;
+            }
+            MouseStart = new Point(e.X, e.Y);
+            IsDragging = true;
+        }
+
+        private void pageDisplay_MouseUp(object sender, MouseEventArgs e)
+        {
+            IsDragging = false;
+            pageDisplay.Refresh();
+            NotifyResourceModified(CurrentPage);
         }
     }
 }

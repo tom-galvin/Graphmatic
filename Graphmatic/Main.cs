@@ -65,7 +65,7 @@ namespace Graphmatic
             InitializeComponent();
             InitializeEditors();
             InitializeBackupTimer();
-            InitializeResourceDragDrop();
+            InitializePageDisplay();
         }
 
         public void InitializeBackupTimer()
@@ -184,6 +184,11 @@ namespace Graphmatic
         private void Main_ResizeBegin(object sender, EventArgs e)
         {
             IsFormResizing = true;
+        }
+
+        private void toolStripStatusLabelBugReport_Click(object sender, EventArgs e)
+        {
+            Process.Start(Properties.Resources.GithubRepositoryUrl);
         }
     }
 }

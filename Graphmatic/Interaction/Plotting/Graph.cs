@@ -173,7 +173,7 @@ namespace Graphmatic.Interaction.Plotting
             Resources.Clear();
         }
 
-        public void Draw(Graphics g, Size size, bool renderContent = true)
+        public void Draw(Graphics g, Size size, PlotResolution resolution)
         {
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
@@ -182,56 +182,49 @@ namespace Graphmatic.Interaction.Plotting
             float errorX = 5, errorY = 0;
             Font errorFont = new Font(SystemFonts.MessageBoxFont.FontFamily, 20f, FontStyle.Bold);
             Brush errorBrush = Brushes.Red;
-            if (renderContent)
+            foreach (KeyValuePair<IPlottable, PlottableParameters> plottable in Resources)
             {
-                foreach (KeyValuePair<IPlottable, PlottableParameters> plottable in Resources)
+                string plottableName =
+                    plottable.Key is Resource ?
+                    (plottable.Key as Resource).Name :
+                    plottable.GetType().Name;
+                string error = null;
+
+                if (plottable.Key.CanPlot(Parameters.HorizontalAxis, Parameters.VerticalAxis))
                 {
-                    string plottableName =
-                        plottable.Key is Resource ?
-                        (plottable.Key as Resource).Name :
-                        plottable.GetType().Name;
-                    string error = null;
-
-                    if (plottable.Key.CanPlot(Parameters.HorizontalAxis, Parameters.VerticalAxis))
+                    try
                     {
-                        try
-                        {
-                            plottable.Key.PlotOnto(this, g, size, plottable.Value, Parameters);
-                        }
-                        catch (Exception ex)
-                        {
-
-                            error = String.Format(
-                                "Could not plot \"{0}\": {1} ({2})",
-                                plottableName,
-                                ex.Message,
-                                ex.GetType().Name);
-                        }
+                        plottable.Key.PlotOnto(this, g, size, plottable.Value, Parameters, resolution);
                     }
-                    else
+                    catch (Exception ex)
                     {
+
                         error = String.Format(
-                            "Could not plot \"{0}\": it does not contain variables {1} and {2}.",
+                            "Could not plot \"{0}\": {1} ({2})",
                             plottableName,
-                            Parameters.HorizontalAxis,
-                            Parameters.VerticalAxis);
-                    }
-
-                    if (error != null)
-                    {
-                        SizeF errorSize = g.MeasureString(error, errorFont, size.Width);
-                        g.DrawString(error, errorFont, errorBrush, new RectangleF(
-                            errorX,
-                            errorY,
-                            size.Width - errorY,
-                            size.Height - errorX));
-                        errorY += 5 + errorSize.Height;
+                            ex.Message,
+                            ex.GetType().Name);
                     }
                 }
-            }
-            else
-            {
-                Axes.PlotOnto(this, g, size, Resources[Axes], Parameters);
+                else
+                {
+                    error = String.Format(
+                        "Could not plot \"{0}\": it does not contain variables {1} and {2}.",
+                        plottableName,
+                        Parameters.HorizontalAxis,
+                        Parameters.VerticalAxis);
+                }
+
+                if (error != null)
+                {
+                    SizeF errorSize = g.MeasureString(error, errorFont, size.Width);
+                    g.DrawString(error, errorFont, errorBrush, new RectangleF(
+                        errorX,
+                        errorY,
+                        size.Width - errorY,
+                        size.Height - errorX));
+                    errorY += 5 + errorSize.Height;
+                }
             }
         }
 

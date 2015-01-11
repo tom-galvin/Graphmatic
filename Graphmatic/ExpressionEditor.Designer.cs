@@ -109,7 +109,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDelete.Image = global::Graphmatic.Properties.Resources.Delete;
+            this.buttonDelete.Image = global::Graphmatic.Properties.Resources.TokenDelete;
             this.buttonDelete.Location = new System.Drawing.Point(508, 156);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(39, 39);

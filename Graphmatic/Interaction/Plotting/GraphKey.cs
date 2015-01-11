@@ -19,7 +19,7 @@ namespace Graphmatic.Interaction.Plotting
 
         }
 
-        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams)
+        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, PlotResolution resolution)
         {
             Font font = SystemFonts.DefaultFont;
             Brush brush = new SolidBrush(plotParams.PlotColor);

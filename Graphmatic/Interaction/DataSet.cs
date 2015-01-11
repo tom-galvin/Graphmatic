@@ -243,8 +243,9 @@ namespace Graphmatic.Interaction
 
         public const float DataPointPenWidth = 2f;
         public const int DataPointCrossSize = 3;
-        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams)
+        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, PlotResolution resolution)
         {
+            if (resolution == PlotResolution.Resize) return;
             Pen dataPointPen = new Pen(plotParams.PlotColor, DataPointPenWidth);
 
             int horizontalVariableIndex = IndexOfVariable(graph.Parameters.HorizontalAxis),

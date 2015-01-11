@@ -33,7 +33,7 @@ namespace Graphmatic.Interaction.Plotting
             MajorInterval = Double.Parse(xml.Element("MajorInterval").Value);
         }
 
-        public void PlotOnto(Graph graph, Graphics g, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams)
+        public void PlotOnto(Graph graph, Graphics g, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, PlotResolution resolution)
         {
             int axisX, axisY;
             graph.ToImageSpace(graphSize, graphParams, 0, 0, out axisX, out axisY);
@@ -80,7 +80,7 @@ namespace Graphmatic.Interaction.Plotting
                 if (major)
                 {
                     double horizontal = graphParams.HorizontalPixelScale * (value - graphSize.Width / 2) + graphParams.CenterHorizontal;
-                    g.DrawString(horizontal.ToString(), valueFont, valueBrush, (int)value, (int)axisY);
+                    g.DrawString(horizontal.ToString("0.####"), valueFont, valueBrush, (int)value, (int)axisY);
                 }
                 value += incrementX; index++;
             }
@@ -94,7 +94,7 @@ namespace Graphmatic.Interaction.Plotting
                 if (major)
                 {
                     double horizontal = graphParams.HorizontalPixelScale * (value - graphSize.Width / 2) + graphParams.CenterHorizontal;
-                    g.DrawString(horizontal.ToString(), valueFont, valueBrush, (int)value, (int)axisY);
+                    g.DrawString(horizontal.ToString("0.####"), valueFont, valueBrush, (int)value, (int)axisY);
                 }
                 value -= incrementX; index++;
             }
@@ -108,7 +108,7 @@ namespace Graphmatic.Interaction.Plotting
                 if (major)
                 {
                     double vertical = graphParams.VerticalPixelScale * -(value - graphSize.Height / 2) + graphParams.CenterVertical;
-                    g.DrawString(vertical.ToString(), valueFont, valueBrush, (int)axisX, (int)value);
+                    g.DrawString(vertical.ToString("0.####"), valueFont, valueBrush, (int)axisX, (int)value);
                 }
                 value += incrementY; index++;
             }
@@ -122,7 +122,7 @@ namespace Graphmatic.Interaction.Plotting
                 if (major)
                 {
                     double vertical = graphParams.VerticalPixelScale * -(value - graphSize.Height / 2) + graphParams.CenterVertical;
-                    g.DrawString(vertical.ToString(), valueFont, valueBrush, (int)axisX, (int)value);
+                    g.DrawString(vertical.ToString("0.####"), valueFont, valueBrush, (int)axisX, (int)value);
                 }
                 value -= incrementY; index++;
             }

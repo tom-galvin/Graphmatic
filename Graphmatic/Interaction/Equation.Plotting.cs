@@ -13,8 +13,9 @@ namespace Graphmatic.Interaction
         public const float EquationPenWidth = 2f;
         public const int EquationResolution = 3;
 
-        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters parameters)
+        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters parameters, PlotResolution resolution)
         {
+            if (resolution == PlotResolution.Resize) return;
             BinaryParseTreeNode parseTreeRoot = ParseTree as BinaryParseTreeNode;
             Pen graphPen = new Pen(plotParams.PlotColor);
             if (parseTreeRoot.Left is VariableParseTreeNode &&
@@ -27,7 +28,8 @@ namespace Graphmatic.Interaction
                     graphPen,
                     parameters,
                     (parseTreeRoot.Left as VariableParseTreeNode).Variable,
-                    parseTreeRoot.Right);
+                    parseTreeRoot.Right,
+                    resolution);
             }
             else if (parseTreeRoot.Right is VariableParseTreeNode &&
                 !parseTreeRoot.Left.ContainsVariable((parseTreeRoot.Right as VariableParseTreeNode).Variable))
@@ -39,11 +41,12 @@ namespace Graphmatic.Interaction
                     graphPen,
                     parameters,
                     (parseTreeRoot.Right as VariableParseTreeNode).Variable,
-                    parseTreeRoot.Left);
+                    parseTreeRoot.Left,
+                    resolution);
             }
             else
             {
-                PlotImplicit(graph, graphics, graphSize, graphPen, parameters);
+                PlotImplicit(graph, graphics, graphSize, graphPen, parameters, resolution);
             }
         }
 
@@ -52,12 +55,16 @@ namespace Graphmatic.Interaction
             return (int)(a / (a - b) * (double)scale);
         }
 
-        private void PlotImplicit(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters plotParams)
+        private void PlotImplicit(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters plotParams, PlotResolution resolution)
         {
+            int gridResolution = EquationResolution;
+            if (resolution == PlotResolution.Resize) gridResolution *= 10;
+            if (resolution == PlotResolution.Edit) gridResolution *= 4;
+
             Dictionary<char, double> vars = new Dictionary<char, double>();
 
-            int gridWidth = graphSize.Width / EquationResolution,
-                gridHeight = graphSize.Height / EquationResolution;
+            int gridWidth = graphSize.Width / gridResolution,
+                gridHeight = graphSize.Height / gridResolution;
             double[,] values = new double[
                 gridWidth + 1,
                 gridHeight + 1];
@@ -66,8 +73,8 @@ namespace Graphmatic.Interaction
             {
                 for (int j = 0; j < gridHeight + 1; j++)
                 {
-                    double horizontal = plotParams.HorizontalPixelScale * ((i * EquationResolution) - graphSize.Width / 2) + plotParams.CenterHorizontal,
-                           vertical = plotParams.VerticalPixelScale * -((j * EquationResolution) - graphSize.Height / 2) + plotParams.CenterVertical;
+                    double horizontal = plotParams.HorizontalPixelScale * ((i * gridResolution) - graphSize.Width / 2) + plotParams.CenterHorizontal,
+                           vertical = plotParams.VerticalPixelScale * -((j * gridResolution) - graphSize.Height / 2) + plotParams.CenterVertical;
                     vars[plotParams.HorizontalAxis] = horizontal;
                     vars[plotParams.VerticalAxis] = vertical;
                     values[i, j] = ParseTree.Evaluate(vars);
@@ -92,19 +99,20 @@ namespace Graphmatic.Interaction
                             i * EquationResolution,
                             j * EquationResolution,
                             (i + 1) * EquationResolution,
-                            (j + 1) * EquationResolution); */ // we don't need the red hash anymore
+                            (j + 1) * EquationResolution); */
+                        // we don't need the red hash anymore
                         continue;
                     }
                     bool ab = ((av > 0) ^ (bv > 0)),
                             bd = ((bv > 0) ^ (dv > 0)),
                             ac = ((av > 0) ^ (cv > 0)),
                             cd = ((cv > 0) ^ (dv > 0));
-                    int x = i * EquationResolution,
-                        y = j * EquationResolution;
-                    Point abp = new Point(x + IntLerp(EquationResolution, av, bv), y),
-                            bdp = new Point(x + EquationResolution, y + IntLerp(EquationResolution, bv, dv)),
-                            acp = new Point(x, y + IntLerp(EquationResolution, av, cv)),
-                            cdp = new Point(x + IntLerp(EquationResolution, cv, dv), y + EquationResolution);
+                    int x = i * gridResolution,
+                        y = j * gridResolution;
+                    Point abp = new Point(x + IntLerp(gridResolution, av, bv), y),
+                            bdp = new Point(x + gridResolution, y + IntLerp(gridResolution, bv, dv)),
+                            acp = new Point(x, y + IntLerp(gridResolution, av, cv)),
+                            cdp = new Point(x + IntLerp(gridResolution, cv, dv), y + gridResolution);
                     if (ab && bd && ac && cd) { }
                     else if (!ab && !bd && !ac && !cd) { }
                     else if (ac && cd)
@@ -123,28 +131,31 @@ namespace Graphmatic.Interaction
             }
         }
 
-        private void PlotExplicit(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters graphParams, char explicitVariable, ParseTreeNode node)
+        private void PlotExplicit(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters graphParams, char explicitVariable, ParseTreeNode node, PlotResolution resolution)
         {
             if (explicitVariable == graphParams.HorizontalAxis)
             {
-                PlotExplicitVertical(graph, graphics, graphSize, graphPen, graphParams, graphParams.VerticalAxis, node); // x=...
+                PlotExplicitVertical(graph, graphics, graphSize, graphPen, graphParams, graphParams.VerticalAxis, node, resolution); // x=...
             }
             else if (explicitVariable == graphParams.VerticalAxis)
             {
-                PlotExplicitHorizontal(graph, graphics, graphSize, graphPen, graphParams, graphParams.HorizontalAxis, node); // y=...
+                PlotExplicitHorizontal(graph, graphics, graphSize, graphPen, graphParams, graphParams.HorizontalAxis, node, resolution); // y=...
             }
             else
             {
                 // actually plotting implicitly in relation to a constant (eg. xy=a)
-                PlotImplicit(graph, graphics, graphSize, graphPen, graphParams);
+                PlotImplicit(graph, graphics, graphSize, graphPen, graphParams, resolution);
             }
         }
 
-        private void PlotExplicitHorizontal(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters plotParams, char explicitVariable, ParseTreeNode node)
+        private void PlotExplicitHorizontal(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters plotParams, char explicitVariable, ParseTreeNode node, PlotResolution resolution)
         {
             Dictionary<char, double> vars = new Dictionary<char, double>();
             int previousX = -1, previousY = -1;
-            for (float i = 0; i < graphSize.Width; i += 0.1f)
+            float interval = 0.1f;
+            if (resolution == PlotResolution.Resize) interval *= 100f;
+            if (resolution == PlotResolution.Edit) interval *= 40f;
+            for (float i = 0; i < graphSize.Width; i += interval)
             {
                 double horizontal = plotParams.HorizontalPixelScale * (i - graphSize.Width / 2) + plotParams.CenterHorizontal;
                 vars[explicitVariable] = horizontal;
@@ -179,15 +190,18 @@ namespace Graphmatic.Interaction
             }
         }
 
-        private void PlotExplicitVertical(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters plotParams, char explicitVariable, ParseTreeNode node)
+        private void PlotExplicitVertical(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters plotParams, char explicitVariable, ParseTreeNode node, PlotResolution resolution)
         {
             Dictionary<char, double> vars = new Dictionary<char, double>();
             int previousX = -1, previousY = -1;
-            for (float i = 0; i < graphSize.Width; i += 0.1f)
+            float interval = 0.1f;
+            if (resolution == PlotResolution.Resize) interval *= 100f;
+            if (resolution == PlotResolution.Edit) interval *= 40f;
+            for (float i = 0; i < graphSize.Width; i += interval)
             {
                 double vertical = plotParams.VerticalPixelScale * -(i - graphSize.Height / 2) + plotParams.CenterVertical;
                 vars[explicitVariable] = vertical;
-                  double horizontal = node.Evaluate(vars);
+                double horizontal = node.Evaluate(vars);
 
                 int x, y;
                 graph.ToImageSpace(graphSize, plotParams, horizontal, vertical, out x, out y);
@@ -220,7 +234,8 @@ namespace Graphmatic.Interaction
 
         public bool CanPlot(char variable1, char variable2)
         {
-            if (ParseTree == null){
+            if (ParseTree == null)
+            {
                 Parse();
             }
             return ParseTree.ContainsVariable(variable1) &&

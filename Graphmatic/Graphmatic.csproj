@@ -139,6 +139,7 @@
     <Compile Include="Interaction\Plotting\Graph.cs" />
     <Compile Include="Interaction\Plotting\GraphParameters.cs" />
     <Compile Include="Interaction\Plotting\PlotExtensionMethods.cs" />
+    <Compile Include="Interaction\Plotting\PlotResolution.cs" />
     <Compile Include="Interaction\Plotting\PlottableParameters.cs" />
     <Compile Include="Interaction\Resource.cs" />
     <Compile Include="Interaction\Page.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="PageOrderEditor.Designer.cs">
       <DependentUpon>PageOrderEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="PageTool.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -271,6 +273,8 @@
     <None Include="Resources\HtmlPage32.png" />
     <None Include="Resources\HtmlPage16.png" />
     <None Include="Resources\blue-documents-globe.png" />
+    <None Include="Resources\cursor.png" />
+    <None Include="Resources\arrow-move.png" />
     <Content Include="Resources\Image16.png" />
     <Content Include="Resources\Image32.png" />
     <Content Include="Resources\Images16.png" />
