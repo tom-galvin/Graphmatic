@@ -445,58 +445,61 @@ namespace Graphmatic
 
         private void pageDisplay_MouseUp(object sender, MouseEventArgs e)
         {
-            if (CurrentPageTool == PageTool.Select)
+            if (IsDragging)
             {
-                if (!IsManipulatingSelected)
+                if (CurrentPageTool == PageTool.Select)
                 {
-                    if (e.Button != System.Windows.Forms.MouseButtons.Middle || SelectedAnnotations == null)
-                        SelectedAnnotations = new List<Annotation>();
+                    if (!IsManipulatingSelected)
+                    {
+                        if (e.Button != System.Windows.Forms.MouseButtons.Middle || SelectedAnnotations == null)
+                            SelectedAnnotations = new List<Annotation>();
 
-                    if (IsSelecting)
-                    {
-                        // If we've selected a bunch of annotations, add them all to the
-                        // current selection
-                        SelectedAnnotations.AddRange(
-                            CurrentPage.Annotations
-                            .Where(a => a.InSelection(
-                                CurrentPage,
-                                pageDisplay.ClientSize,
-                                CurrentPage.Graph.Parameters,
-                                SelectionBox)));
-                    }
-                    else
-                    {
-                        // If we've not made a selection box, the user has selected either 0 or 1 items
-                        // attempt to find the one the user has selected - if it doesn't exist, then the
-                        // user is trying to deselect stuff (ie. clicking away from the selection), so
-                        // clear the selection
-                        var possible = CurrentPage.Annotations
-                            .Select(a => new Tuple<Annotation, int>(a,
-                                a.ScreenDistance(
+                        if (IsSelecting)
+                        {
+                            // If we've selected a bunch of annotations, add them all to the
+                            // current selection
+                            SelectedAnnotations.AddRange(
+                                CurrentPage.Annotations
+                                .Where(a => a.InSelection(
                                     CurrentPage,
                                     pageDisplay.ClientSize,
                                     CurrentPage.Graph.Parameters,
-                                    SelectionBox.Location)))
-                                    .Where(t => t.Item2 <= 0)
-                            .OrderBy(t => t.Item2);
-                        if (possible.Count() > 0)
-                        {
-                            SelectedAnnotations.Add(possible.First().Item1);
+                                    SelectionBox)));
                         }
                         else
                         {
-                            SelectedAnnotations = null;
+                            // If we've not made a selection box, the user has selected either 0 or 1 items
+                            // attempt to find the one the user has selected - if it doesn't exist, then the
+                            // user is trying to deselect stuff (ie. clicking away from the selection), so
+                            // clear the selection
+                            var possible = CurrentPage.Annotations
+                                .Select(a => new Tuple<Annotation, int>(a,
+                                    a.ScreenDistance(
+                                        CurrentPage,
+                                        pageDisplay.ClientSize,
+                                        CurrentPage.Graph.Parameters,
+                                        SelectionBox.Location)))
+                                        .Where(t => t.Item2 <= 0)
+                                .OrderBy(t => t.Item2);
+                            if (possible.Count() > 0)
+                            {
+                                SelectedAnnotations.Add(possible.First().Item1);
+                            }
+                            else
+                            {
+                                SelectedAnnotations = null;
+                            }
                         }
+                        IsSelecting = false;
                     }
-                    IsSelecting = false;
+                    IsManipulatingSelected = false;
                 }
-                IsManipulatingSelected = false;
+                // Reset the state
+                IsDragging = false;
+                LastOffsetX = LastOffsetY = 0;
+                pageDisplay.Refresh();
+                NotifyResourceModified(CurrentPage);
             }
-            // Reset the state
-            IsDragging = false;
-            LastOffsetX = LastOffsetY = 0;
-            pageDisplay.Refresh();
-            NotifyResourceModified(CurrentPage);
         }
         #endregion
 
@@ -653,6 +656,10 @@ namespace Graphmatic
                     MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
                 {
                     CurrentPage.Annotations.Clear();
+                    if (SelectedAnnotations != null)
+                    {
+                        SelectedAnnotations = null;
+                    }
                     pageDisplay.Refresh();
                     NotifyResourceModified(CurrentPage);
                 }

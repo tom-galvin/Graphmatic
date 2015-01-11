@@ -856,7 +856,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(575, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(576, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
