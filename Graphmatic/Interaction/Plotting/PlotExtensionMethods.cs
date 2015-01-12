@@ -45,10 +45,10 @@ namespace Graphmatic.Interaction.Plotting
             blue = Math.Pow(blue, power);
 
             return Color.FromArgb(
+                color.A,
                 ((int)(red * 255.0)).Clamp(0, 255),
                 ((int)(green * 255.0)).Clamp(0, 255),
-                ((int)(blue * 255.00)).Clamp(0, 255),
-                color.A);
+                ((int)(blue * 255.00)).Clamp(0, 255));
         }
 
         /// <summary>

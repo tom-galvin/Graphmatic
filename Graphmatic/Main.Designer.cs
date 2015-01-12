@@ -45,6 +45,13 @@ namespace Graphmatic
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pencilToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.highlighterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eraserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,6 +107,16 @@ namespace Graphmatic
             this.toolStripButtonIncreasePenSize = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDecreasePenSize = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabelPenSize = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSplitButtonColorAnnotation = new System.Windows.Forms.ToolStripSplitButton();
+            this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purpleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.pickcolorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButtonErase = new System.Windows.Forms.ToolStripDropDownButton();
             this.pencilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,7 +125,6 @@ namespace Graphmatic
             this.eraserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eraseAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonTextAnnotation = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSplitButtonColorAnnotation = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownEditGraph = new System.Windows.Forms.ToolStripDropDownButton();
             this.contextMenuStripPageEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -265,23 +281,83 @@ namespace Graphmatic
             this.resourcesToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Resources16;
             this.resourcesToolStripMenuItem.Name = "resourcesToolStripMenuItem";
             this.resourcesToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.resourcesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resourcesToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.resourcesToolStripMenuItem.Text = "&Resources";
             this.resourcesToolStripMenuItem.Click += new System.EventHandler(this.resourcesToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectToolStripMenuItem,
+            this.pencilToolStripMenuItem1,
+            this.highlighterToolStripMenuItem,
+            this.eraserToolStripMenuItem1,
+            this.textToolStripMenuItem,
+            this.panToolStripMenuItem,
+            this.toolStripMenuItem7,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
+            // selectToolStripMenuItem
+            // 
+            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
+            this.selectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
+            this.selectToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.selectToolStripMenuItem.Text = "Sele&ct";
+            // 
+            // pencilToolStripMenuItem1
+            // 
+            this.pencilToolStripMenuItem1.Image = global::Graphmatic.Properties.Resources.AnnotateDraw16;
+            this.pencilToolStripMenuItem1.Name = "pencilToolStripMenuItem1";
+            this.pencilToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
+            this.pencilToolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
+            this.pencilToolStripMenuItem1.Text = "&Pencil";
+            // 
+            // highlighterToolStripMenuItem
+            // 
+            this.highlighterToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.AnnotateHighlight16;
+            this.highlighterToolStripMenuItem.Name = "highlighterToolStripMenuItem";
+            this.highlighterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.H)));
+            this.highlighterToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.highlighterToolStripMenuItem.Text = "&Highlighter";
+            // 
+            // eraserToolStripMenuItem1
+            // 
+            this.eraserToolStripMenuItem1.Image = global::Graphmatic.Properties.Resources.AnnotateErase16;
+            this.eraserToolStripMenuItem1.Name = "eraserToolStripMenuItem1";
+            this.eraserToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
+            this.eraserToolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
+            this.eraserToolStripMenuItem1.Text = "&Eraser";
+            // 
+            // textToolStripMenuItem
+            // 
+            this.textToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.AnnotateText16;
+            this.textToolStripMenuItem.Name = "textToolStripMenuItem";
+            this.textToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T)));
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.textToolStripMenuItem.Text = "&Text";
+            this.textToolStripMenuItem.Visible = false;
+            // 
+            // panToolStripMenuItem
+            // 
+            this.panToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.ArrowMove16;
+            this.panToolStripMenuItem.Name = "panToolStripMenuItem";
+            this.panToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
+            this.panToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.panToolStripMenuItem.Text = "Pa&n";
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(170, 6);
+            // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Settings16;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.optionsToolStripMenuItem.Text = "&Settings...";
             this.optionsToolStripMenuItem.ToolTipText = "Edit settings relating to the functioning of the program";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
@@ -297,7 +373,7 @@ namespace Graphmatic
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -539,7 +615,7 @@ namespace Graphmatic
             this.toolStripToggleHtmlPages.CheckOnClick = true;
             this.toolStripToggleHtmlPages.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripToggleHtmlPages.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripToggleHtmlPages.Image = global::Graphmatic.Properties.Resources.HtmlPages;
+            this.toolStripToggleHtmlPages.Image = global::Graphmatic.Properties.Resources.HtmlPages16;
             this.toolStripToggleHtmlPages.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripToggleHtmlPages.Name = "toolStripToggleHtmlPages";
             this.toolStripToggleHtmlPages.Size = new System.Drawing.Size(23, 22);
@@ -836,11 +912,14 @@ namespace Graphmatic
             this.toolStripButtonIncreasePenSize,
             this.toolStripButtonDecreasePenSize,
             this.toolStripLabelPenSize,
+            this.toolStripSplitButtonColorAnnotation,
             this.toolStripSeparator1,
             this.toolStripDropDownButtonErase,
             this.toolStripDropDownButtonDraw,
             this.toolStripButtonTextAnnotation,
-            this.toolStripSplitButtonColorAnnotation,
+            this.toolStripSeparator3,
+            this.toolStripButtonSquareSelect,
+            this.toolStripButtonPan,
             this.toolStripSeparator5,
             this.toolStripDropDownEditGraph,
             this.toolStripButtonPlotDataSet,
@@ -849,14 +928,11 @@ namespace Graphmatic
             this.toolStripButtonPreviousPage,
             this.toolStripButtonNextPage,
             this.toolStripButtonAddPage,
-            this.toolStripSeparator3,
-            this.toolStripButtonSquareSelect,
-            this.toolStripButtonPan,
             this.toolStripComboBoxZoom});
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(575, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(576, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -868,6 +944,7 @@ namespace Graphmatic
             this.toolStripButtonIncreasePenSize.Name = "toolStripButtonIncreasePenSize";
             this.toolStripButtonIncreasePenSize.Size = new System.Drawing.Size(23, 28);
             this.toolStripButtonIncreasePenSize.ToolTipText = "Increase Size";
+            this.toolStripButtonIncreasePenSize.Click += new System.EventHandler(this.toolStripButtonIncreasePenSize_Click);
             // 
             // toolStripButtonDecreasePenSize
             // 
@@ -878,14 +955,100 @@ namespace Graphmatic
             this.toolStripButtonDecreasePenSize.Name = "toolStripButtonDecreasePenSize";
             this.toolStripButtonDecreasePenSize.Size = new System.Drawing.Size(23, 28);
             this.toolStripButtonDecreasePenSize.ToolTipText = "Decrease Size";
+            this.toolStripButtonDecreasePenSize.Click += new System.EventHandler(this.toolStripButtonDecreasePenSize_Click);
             // 
             // toolStripLabelPenSize
             // 
             this.toolStripLabelPenSize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripLabelPenSize.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripLabelPenSize.Name = "toolStripLabelPenSize";
             this.toolStripLabelPenSize.Size = new System.Drawing.Size(0, 28);
             this.toolStripLabelPenSize.Text = "Pen Size:";
             this.toolStripLabelPenSize.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            // 
+            // toolStripSplitButtonColorAnnotation
+            // 
+            this.toolStripSplitButtonColorAnnotation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButtonColorAnnotation.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.blackToolStripMenuItem,
+            this.redToolStripMenuItem,
+            this.orangeToolStripMenuItem,
+            this.greenToolStripMenuItem,
+            this.tealToolStripMenuItem,
+            this.blueToolStripMenuItem,
+            this.purpleToolStripMenuItem,
+            this.toolStripMenuItem6,
+            this.pickcolorToolStripMenuItem});
+            this.toolStripSplitButtonColorAnnotation.Image = global::Graphmatic.Properties.Resources.Color24;
+            this.toolStripSplitButtonColorAnnotation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButtonColorAnnotation.Name = "toolStripSplitButtonColorAnnotation";
+            this.toolStripSplitButtonColorAnnotation.Size = new System.Drawing.Size(40, 28);
+            this.toolStripSplitButtonColorAnnotation.Text = "toolStripSplitButton1";
+            this.toolStripSplitButtonColorAnnotation.ToolTipText = "Change annotation color";
+            this.toolStripSplitButtonColorAnnotation.ButtonClick += new System.EventHandler(this.toolStripSplitButtonColorAnnotation_ButtonClick);
+            // 
+            // blackToolStripMenuItem
+            // 
+            this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
+            this.blackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blackToolStripMenuItem.Text = "&Black";
+            this.blackToolStripMenuItem.Click += new System.EventHandler(this.blackToolStripMenuItem_Click);
+            // 
+            // redToolStripMenuItem
+            // 
+            this.redToolStripMenuItem.Name = "redToolStripMenuItem";
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.redToolStripMenuItem.Text = "&Red";
+            this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
+            // 
+            // orangeToolStripMenuItem
+            // 
+            this.orangeToolStripMenuItem.Name = "orangeToolStripMenuItem";
+            this.orangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.orangeToolStripMenuItem.Text = "&Orange";
+            this.orangeToolStripMenuItem.Click += new System.EventHandler(this.orangeToolStripMenuItem_Click);
+            // 
+            // greenToolStripMenuItem
+            // 
+            this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.greenToolStripMenuItem.Text = "&Green";
+            this.greenToolStripMenuItem.Click += new System.EventHandler(this.greenToolStripMenuItem_Click);
+            // 
+            // tealToolStripMenuItem
+            // 
+            this.tealToolStripMenuItem.Name = "tealToolStripMenuItem";
+            this.tealToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tealToolStripMenuItem.Text = "&Teal";
+            this.tealToolStripMenuItem.Click += new System.EventHandler(this.tealToolStripMenuItem_Click);
+            // 
+            // blueToolStripMenuItem
+            // 
+            this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blueToolStripMenuItem.Text = "B&lue";
+            this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
+            // 
+            // purpleToolStripMenuItem
+            // 
+            this.purpleToolStripMenuItem.Name = "purpleToolStripMenuItem";
+            this.purpleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.purpleToolStripMenuItem.Text = "&Purple";
+            this.purpleToolStripMenuItem.Click += new System.EventHandler(this.purpleToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 6);
+            // 
+            // pickcolorToolStripMenuItem
+            // 
+            this.pickcolorToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.ColorPick16;
+            this.pickcolorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pickcolorToolStripMenuItem.Name = "pickcolorToolStripMenuItem";
+            this.pickcolorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pickcolorToolStripMenuItem.Text = "Pick &color...";
+            this.pickcolorToolStripMenuItem.Click += new System.EventHandler(this.pickcolorToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -961,16 +1124,7 @@ namespace Graphmatic
             this.toolStripButtonTextAnnotation.Name = "toolStripButtonTextAnnotation";
             this.toolStripButtonTextAnnotation.Size = new System.Drawing.Size(28, 28);
             this.toolStripButtonTextAnnotation.ToolTipText = "Add text";
-            // 
-            // toolStripSplitButtonColorAnnotation
-            // 
-            this.toolStripSplitButtonColorAnnotation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButtonColorAnnotation.Image = global::Graphmatic.Properties.Resources.Color24;
-            this.toolStripSplitButtonColorAnnotation.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButtonColorAnnotation.Name = "toolStripSplitButtonColorAnnotation";
-            this.toolStripSplitButtonColorAnnotation.Size = new System.Drawing.Size(40, 28);
-            this.toolStripSplitButtonColorAnnotation.Text = "toolStripSplitButton1";
-            this.toolStripSplitButtonColorAnnotation.ToolTipText = "Change annotation color";
+            this.toolStripButtonTextAnnotation.Visible = false;
             // 
             // toolStripSeparator5
             // 
@@ -1066,7 +1220,7 @@ namespace Graphmatic
             this.toolStripButtonSquareSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSquareSelect.Name = "toolStripButtonSquareSelect";
             this.toolStripButtonSquareSelect.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButtonSquareSelect.ToolTipText = "Select objects with a rectangle";
+            this.toolStripButtonSquareSelect.ToolTipText = resources.GetString("toolStripButtonSquareSelect.ToolTipText");
             // 
             // toolStripButtonPan
             // 
@@ -1278,6 +1432,22 @@ namespace Graphmatic
         private ToolStripStatusLabel toolStripStatusLabelBugReport;
         private ToolStripStatusLabel toolStripStatusLabelEditor;
         private ToolStripComboBox toolStripComboBoxZoom;
+        private ToolStripMenuItem blackToolStripMenuItem;
+        private ToolStripMenuItem redToolStripMenuItem;
+        private ToolStripMenuItem orangeToolStripMenuItem;
+        private ToolStripMenuItem greenToolStripMenuItem;
+        private ToolStripMenuItem tealToolStripMenuItem;
+        private ToolStripMenuItem blueToolStripMenuItem;
+        private ToolStripMenuItem purpleToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem6;
+        private ToolStripMenuItem pickcolorToolStripMenuItem;
+        private ToolStripMenuItem selectToolStripMenuItem;
+        private ToolStripMenuItem pencilToolStripMenuItem1;
+        private ToolStripMenuItem highlighterToolStripMenuItem;
+        private ToolStripMenuItem eraserToolStripMenuItem1;
+        private ToolStripMenuItem textToolStripMenuItem;
+        private ToolStripMenuItem panToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem7;
     }
 }
 

@@ -72,41 +72,77 @@ namespace Graphmatic.Interaction
 
         public Document(XElement xml)
         {
-            if(xml.Name != "Document")
+            if (xml.Name != "Document")
                 throw new IOException("This file is not a Graphmatic document; it has the wrong root tag name.");
-            if(xml.Attribute("Format") == null)
+            if (xml.Attribute("Format") == null)
                 throw new IOException("This file is an invalid Graphmatic document; it has no format attribute.");
 
             int formatVersion = Int32.Parse(xml.Attribute("Format").Value);
-            if(formatVersion > 1)
+            if (formatVersion > 1)
                 throw new IOException("This file is for a newer version of Graphmatic. " +
-                    "Try opening this file in "+ xml.Attribute("Version").Value + " or newer.");
+                    "Try opening this file in " + xml.Attribute("Version").Value + " or newer.");
+            
             Resources = new Dictionary<Guid, Resource>();
 
             Author = xml.Attribute("Author").Value;
             OriginalVersion = xml.Attribute("OriginalVersion").Value;
-            CreationDate = DateTime.Parse(xml.Attribute("CreationDate").Value);
-            Guid = Guid.Parse(xml.Attribute("ID").Value);
-
-            var resourcesElements = xml.Element("Resources").Elements();
-            foreach (XElement resourceElement in resourcesElements)
+            try
             {
-                Resource resource = ResourceSerializationExtensionMethods.FromXml(resourceElement);
-                Resources.Add(resource.Guid, resource);
-            }
+                CreationDate = DateTime.Parse(xml.Attribute("CreationDate").Value);
 
-            PageOrder = new List<Page>();
-            var pageOrder = xml.Element("PageOrder").Elements("Reference");
-            foreach (XElement pageElement in pageOrder)
+                Guid = Guid.Parse(xml.Attribute("ID").Value);
+
+                var resourcesElements = xml.Element("Resources").Elements();
+                foreach (XElement resourceElement in resourcesElements)
+                {
+                    Resource resource = ResourceSerializationExtensionMethods.FromXml(resourceElement);
+                    Resources.Add(resource.Guid, resource);
+                }
+
+                PageOrder = new List<Page>();
+                var pageOrder = xml.Element("PageOrder").Elements("Reference");
+                foreach (XElement pageElement in pageOrder)
+                {
+                    var page = FromGuid(Guid.Parse(pageElement.Attribute("ID").Value)) as Page;
+                    PageOrder.Add(page);
+                }
+
+                if (xml.Element("CurrentResource") != null)
+                    CurrentResource = FromGuid(Guid.Parse(xml.Element("CurrentResource").Value));
+
+                UpdateReferences(this);
+            }
+            catch (Exception ex)
             {
-                var page = FromGuid(Guid.Parse(pageElement.Attribute("ID").Value)) as Page;
-                PageOrder.Add(page);
+                if (OriginalVersion !=
+                    Properties.Resources.VersionString)
+                {
+                    throw new IOException(String.Format(
+                        "The file was made in another Graphmatic version \"{0}\" (you are running version \"{1}\"). Try " +
+                        "opening the file in Graphmatic \"{0}\", or alternatively, ask the initial author of the " +
+                        "file ({2}) for an updated version of the document.\r\n\r\nIf this is urgent, try reporting the " +
+                        "issue to the creator of the program. Provide a screenshot of this dialog with the report.\r\n\r\n" +
+                        "{3}: {4}\r\n{5}",
+                        OriginalVersion,
+                        Properties.Resources.VersionString,
+                        Author,
+                        ex.GetType().Name,
+                        ex.Message,
+                        ex.StackTrace));
+                }
+                else
+                {
+                    throw new IOException(String.Format(
+                            "Ask the initial author of the file ({0}) for an updated " +
+                            "version of the document.\r\n\r\nIf this is urgent, try reporting the " +
+                            "issue to the creator of the program. Provide a screenshot of this dialog with the report.\r\n\r\n" +
+                            "{1}: {2}\r\n{3}",
+                            Author,
+                            ex.GetType().Name,
+                            ex.Message,
+                            ex.StackTrace));
+                }
             }
-
-            if (xml.Element("CurrentResource") != null)
-                CurrentResource = FromGuid(Guid.Parse(xml.Element("CurrentResource").Value));
-
-            UpdateReferences(this);
         }
 
         public Resource this[Guid guid]

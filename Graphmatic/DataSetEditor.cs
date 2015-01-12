@@ -126,7 +126,9 @@ namespace Graphmatic
                 if (allNull) continue;
                 for (int i = 0; i < DataSet.Variables.Length; i++)
                 {
-                    if (row.Cells[i].Value == null || row.Cells[i].Value == "")
+                    if (row.Cells[i].Value == null || 
+                        (row.Cells[i].Value is string && (string)row.Cells[i].Value == "") ||
+                        (row.Cells[i].Value is double && (double)row.Cells[i].Value == 0.0))
                     {
                         MessageBox.Show("This cell is empty. Please put a value in it or remove the row.", "Save Changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         dataGridView.ClearSelection();

@@ -48,6 +48,7 @@ namespace Graphmatic.Interaction
             {
                 PlotImplicit(graph, graphics, graphSize, graphPen, parameters, resolution);
             }
+            graphPen.Dispose();
         }
 
         private int IntLerp(int scale, double a, double b)

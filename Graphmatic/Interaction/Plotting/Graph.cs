@@ -175,9 +175,17 @@ namespace Graphmatic.Interaction.Plotting
 
         public void Draw(Graphics g, Size size, PlotResolution resolution)
         {
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
+            if (resolution == PlotResolution.View && false)
+            {
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            }
+            else
+            {
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
+                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed;
+            }
 
             float errorX = 5, errorY = 0;
             Font errorFont = new Font(SystemFonts.MessageBoxFont.FontFamily, 20f, FontStyle.Bold);
@@ -226,6 +234,8 @@ namespace Graphmatic.Interaction.Plotting
                     errorY += 5 + errorSize.Height;
                 }
             }
+            errorFont.Dispose();
+            errorBrush.Dispose();
         }
 
         public void ToImageSpace(Size graphSize, GraphParameters parameters, double horizontal, double vertical, out int x, out int y)

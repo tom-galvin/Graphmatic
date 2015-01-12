@@ -47,6 +47,7 @@ namespace Graphmatic.Interaction.Plotting
                         graphics.DrawLine(resourcePen,
                             new PointF(resourceX - DataSet.DataPointCrossSize - 5, currentY + DataSet.DataPointCrossSize + size.Height / 2),
                             new PointF(resourceX + DataSet.DataPointCrossSize - 5, currentY - DataSet.DataPointCrossSize + size.Height / 2));
+                        resourcePen.Dispose();
                     }
                     else if (resource is Equation)
                     {
@@ -54,9 +55,13 @@ namespace Graphmatic.Interaction.Plotting
                         graphics.DrawLine(resourcePen,
                             new PointF(resourceX - 2, currentY + size.Height / 2),
                             new PointF(resourceX - 15, currentY + size.Height / 2));
+                        resourcePen.Dispose();
                     }
                 }
             }
+
+            font.Dispose();
+            brush.Dispose();
         }
 
         public XElement ToXml()

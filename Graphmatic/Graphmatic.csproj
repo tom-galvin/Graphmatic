@@ -279,6 +279,8 @@
     <None Include="Resources\cursor.png" />
     <None Include="Resources\arrow-move.png" />
     <None Include="Resources\document-excel-table.png" />
+    <None Include="Resources\color-swatch.png" />
+    <None Include="Resources\edit.png" />
     <Content Include="Resources\Image16.png" />
     <Content Include="Resources\Image32.png" />
     <Content Include="Resources\Images16.png" />

@@ -57,10 +57,10 @@ namespace Graphmatic.Interaction.Annotations
         public virtual XElement ToXml()
         {
             return new XElement("Annotation",
-                new XElement("X", X),
-                new XElement("Y", Y),
-                new XElement("Width", Width),
-                new XElement("Height", Height),
+                new XElement("X", X.ToString("0.####")),
+                new XElement("Y", Y.ToString("0.####")),
+                new XElement("Width", Width.ToString("0.####")),
+                new XElement("Height", Height.ToString("0.####")),
                 new XElement("Color", Color.ToXmlString()));
         }
 
@@ -68,19 +68,19 @@ namespace Graphmatic.Interaction.Annotations
         {
             int x1, y1, x2, y2;
 
-            page.Graph.ToImageSpace(graphSize, graphParams, X, Y, out x1, out y1);
-            page.Graph.ToImageSpace(graphSize, graphParams, X + Width, Y + Height, out x2, out y2);
-            return new Rectangle(x1, y1, x2 - x1, y1 - y2);
+            page.Graph.ToImageSpace(graphSize, graphParams, X, Y, out x1, out y2);
+            page.Graph.ToImageSpace(graphSize, graphParams, X + Width, Y + Height, out x2, out y1);
+            return new Rectangle(x1, y1, x2 - x1, y2 - y1);
         }
 
-        public virtual void DrawOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
+        public virtual void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
             Brush annotationBrush = new SolidBrush(Color);
             graphics.FillRectangle(annotationBrush, screenRectangle);
         }
 
-        public virtual void SelectDrawOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
+        public virtual void DrawSelectionIndicatorOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
             Pen selectBoxPen = new Pen(Color.Red, 2f);
@@ -88,13 +88,13 @@ namespace Graphmatic.Interaction.Annotations
             graphics.DrawRectangle(selectBoxPen, screenRectangle);
         }
 
-        public bool InSelection(Page page, Size graphSize, GraphParameters graphParams, Rectangle screenSelection)
+        public virtual bool IsAnnotationInSelection(Page page, Size graphSize, GraphParameters graphParams, Rectangle screenSelection)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
             return screenRectangle.IntersectsWith(screenSelection);
         }
 
-        public int ScreenDistance(Page page, Size graphSize, GraphParameters graphParams, Point screenSelection)
+        public virtual int DistanceToPointOnScreen(Page page, Size graphSize, GraphParameters graphParams, Point screenSelection)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
             int distFromBottom = screenSelection.Y - screenRectangle.Bottom;

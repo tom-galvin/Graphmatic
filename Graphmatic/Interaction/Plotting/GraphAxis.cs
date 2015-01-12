@@ -53,6 +53,7 @@ namespace Graphmatic.Interaction.Plotting
             {
                 g.DrawLine(axisPen, axisX, 0, axisX, graphSize.Height);
             }
+            axisPen.Dispose();
         }
 
         private void PlotGridLinesOnto(Graphics g, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, int axisX, int axisY)
@@ -61,7 +62,7 @@ namespace Graphmatic.Interaction.Plotting
             Pen minorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.333));
 
             Font valueFont = SystemFonts.DefaultFont;
-            Font axisFont = new Font(SystemFonts.MessageBoxFont.FontFamily, 15f, FontStyle.Italic);
+            Font axisFont = valueFont;
             Brush valueBrush = majorPen.Brush;
 
             double incrementX = GridSize / graphParams.HorizontalPixelScale,
@@ -126,6 +127,12 @@ namespace Graphmatic.Interaction.Plotting
                 }
                 value -= incrementY; index++;
             }
+
+            majorPen.Dispose();
+            minorPen.Dispose();
+            axisFont.Dispose();
+            valueFont.Dispose();
+            valueBrush.Dispose();
         }
 
         public XElement ToXml()

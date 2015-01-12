@@ -48,7 +48,8 @@ namespace Graphmatic.Interaction
         /// </summary>
         private static Dictionary<string, AnnotationDeserializationFactory> AnnotationDeserializers = new Dictionary<string, AnnotationDeserializationFactory>
         {
-            { "Annotation", xml => new Annotation(xml) }
+            { "Annotation", xml => new Annotation(xml) },
+            { "Drawing", xml => new Drawing(xml) }
         };
 
         /// <summary>
