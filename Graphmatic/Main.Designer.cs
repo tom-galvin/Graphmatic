@@ -265,7 +265,7 @@ namespace Graphmatic
             this.resourcesToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Resources16;
             this.resourcesToolStripMenuItem.Name = "resourcesToolStripMenuItem";
             this.resourcesToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.resourcesToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.resourcesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resourcesToolStripMenuItem.Text = "&Resources";
             this.resourcesToolStripMenuItem.Click += new System.EventHandler(this.resourcesToolStripMenuItem_Click);
             // 
@@ -281,7 +281,7 @@ namespace Graphmatic
             // 
             this.optionsToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Settings16;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.optionsToolStripMenuItem.Text = "&Settings...";
             this.optionsToolStripMenuItem.ToolTipText = "Edit settings relating to the functioning of the program";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
@@ -856,7 +856,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(576, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(575, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -1110,6 +1110,7 @@ namespace Graphmatic
             this.pageDisplay.GiveFeedback += new System.Windows.Forms.GiveFeedbackEventHandler(this.pageDisplay_GiveFeedback);
             this.pageDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.pageDisplay_Paint);
             this.pageDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pageDisplay_MouseDown);
+            this.pageDisplay.MouseEnter += new System.EventHandler(this.pageDisplay_MouseEnter);
             this.pageDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pageDisplay_MouseMove);
             this.pageDisplay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pageDisplay_MouseUp);
             this.pageDisplay.Resize += new System.EventHandler(this.pageDisplay_Resize);

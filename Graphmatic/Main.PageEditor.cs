@@ -25,7 +25,7 @@ namespace Graphmatic
         /// <summary>
         /// The menu items used to edit IPlottable resources on a graph page.
         /// </summary>
-        private ToolStripMenuItem[] PlottableEditingMenu;
+        private ToolStripMenuItem[] GraphEditMenu;
 
         /// <summary>
         /// The default colors used for new plottable items added to a page.
@@ -83,6 +83,9 @@ namespace Graphmatic
             RegisterTool(eraserToolStripMenuItem, PageTool.Eraser);
             RegisterTool(highlightToolStripMenuItem, PageTool.Highlighter);
 
+            toolStripComboBoxZoom.ComboBox.MouseWheel += toolStripComboBoxZoom_MouseWheel;
+            pageDisplay.MouseWheel += pageDisplay_MouseWheel;
+
             toolStripButtonSquareSelect.PerformClick();
         }
 
@@ -133,9 +136,7 @@ namespace Graphmatic
             CurrentPage = page;
             CurrentPage.Graph.Update += Graph_Update;
             // update the zoom level
-            toolStripComboBoxZoom.Text = String.Format(
-                "{0}%",
-                0.05 / CurrentPage.Graph.Parameters.HorizontalPixelScale * 100.0);
+            UpdateZoomComboBox();
             pageDisplay.Refresh();
 
             // TODO remove testing code
@@ -149,10 +150,63 @@ namespace Graphmatic
             });
         }
 
+        /// <summary>
+        /// Gets or sets the zoom level (ie. inverse pixel scale) of the current page.
+        /// <para/>
+        /// This is relative to 1, where 1 is equivalent to 100%.
+        /// </summary>
+        public double ZoomLevel
+        {
+            get
+            {
+                return 0.05 / CurrentPage.Graph.Parameters.HorizontalPixelScale;
+            }
+            set
+            {
+                double zoomLevel = 0.05 / value;
+                CurrentPage.Graph.Parameters.HorizontalPixelScale =
+                     CurrentPage.Graph.Parameters.VerticalPixelScale =
+                     zoomLevel;
+                double zoomFactor = Math.Pow(2, Math.Floor(Math.Log(zoomLevel / 0.05, 2)));
+                CurrentPage.Graph.Axes.GridSize = zoomFactor;
+                UpdateZoomComboBox();
+                pageDisplay.Refresh();
+                NotifyResourceModified(CurrentPage);
+            }
+        }
+
+        /// <summary>
+        /// Updates the content of the zoom combo box (on the page editor toolbar) to reflect the
+        /// current page's zoom level.
+        /// </summary>
+        private void UpdateZoomComboBox()
+        {
+            toolStripComboBoxZoom.Text = String.Format(
+                "{0:0.##}%",
+                ZoomLevel * 100.0);
+        }
+
+        /// <summary>
+        /// Clamps a double to a given range (inclusive).
+        /// </summary>
+        /// <param name="val">The value to clamp.</param>
+        /// <param name="min">The lower bound of the allowable range.</param>
+        /// <param name="max">The upper bound of the allowable range.</param>
+        /// <returns>The clamped value.</returns>
+        double DoubleClamp(double val, double min, double max)
+        {
+            if (max < min)
+                throw new InvalidOperationException("The maximum value of a range must be greater than " +
+                    "the minimum value!");
+            if (val < min) val = min;
+            if (val > max) val = max;
+            return val;
+        }
+
         void Graph_Update(object sender, EventArgs e)
         {
             pageDisplay.Refresh();
-            RegeneratePlottableEditingMenu();
+            RegenerateGraphEditMenu();
         }
 
         // Page display drawing procedure...
@@ -208,58 +262,18 @@ namespace Graphmatic
             }
         }
 
+
+
         /// <summary>
         /// Regenerates the menu for editing the page and any plottable resources on it.
         /// </summary>
-        private void RegeneratePlottableEditingMenu()
+        private void RegenerateGraphEditMenu()
         {
-            var resources =
-                CurrentPage.Graph
-                    // the user should only edit Resources
-                    .OfType<Resource>()
-                    .Select(r => new ToolStripMenuItem(r.Name,
-                        // For each resource...
-                        null,
-                        new ToolStripMenuItem[] {
-                            // Add the Remove option
-                            new ToolStripMenuItem("&Remove",
-                                Properties.Resources.TokenDelete,
-                                delegate(object sender, EventArgs e)
-                                {
-                                    CurrentPage.Graph.Remove(r as IPlottable);
-                                    pageDisplay.Refresh();
-                                })
-                                {
-                                    ShortcutKeys = Keys.Delete
-                                },
-                            // Add the Color option
-                            new ToolStripMenuItem("&Color...", null, delegate(object sender, EventArgs e)
-                                {
-                                    var parameters = CurrentPage.Graph[r as IPlottable];
-                                    ColorDialog dialog = new ColorDialog()
-                                    {
-                                        Color = parameters.PlotColor
-                                    };
-                                    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                                    {
-                                        parameters.PlotColor = dialog.Color;
-                                        NotifyResourceModified(CurrentPage);
-                                    }
-                                })
-                        })).ToArray();
-            PlottableEditingMenu = new ToolStripMenuItem[]
+            GraphEditMenu = new ToolStripMenuItem[]
             {
                 // Add the edit item, or the warning if there are no items to edit
-                (resources.Length > 0 ?
-                    new ToolStripMenuItem(
-                        String.Format("&Edit {0} items", resources.Length), Properties.Resources.AnnotateDraw16,
-                        resources) :
-                    new ToolStripMenuItem(
-                        String.Format("No items to &edit", resources.Length), Properties.Resources.AnnotateDraw16)
-                    {
-                        Enabled = false
-                    }
-                ),
+                RegeneratePlottableEditMenu(),
+                RegenerateAnnotationMenu(),
                 // Add the horizontal variable chooser
                 new ToolStripMenuItem("&Horizontal variable...", null, delegate(object sender, EventArgs e)
                     {
@@ -309,7 +323,115 @@ namespace Graphmatic
                     }),
             };
             contextMenuStripPageEditor.Items.Clear();
-            contextMenuStripPageEditor.Items.AddRange(PlottableEditingMenu);
+            contextMenuStripPageEditor.Items.AddRange(GraphEditMenu);
+        }
+
+        /// <summary>
+        /// Generate the menu for editing plottable menus.
+        /// </summary>
+        /// <returns>Returns a menu for editing plottable menus.</returns>
+        private ToolStripMenuItem RegeneratePlottableEditMenu()
+        {
+            var resources =
+                CurrentPage.Graph
+                // the user should only edit Resources
+                    .OfType<Resource>()
+                    .Select(r => new ToolStripMenuItem(r.Name,
+                        // For each resource...
+                        null,
+                        new ToolStripMenuItem[] {
+                            // Add the Remove option
+                            new ToolStripMenuItem("&Remove",
+                                Properties.Resources.TokenDelete,
+                                delegate(object sender, EventArgs e)
+                                {
+                                    CurrentPage.Graph.Remove(r as IPlottable);
+                                    pageDisplay.Refresh();
+                                })
+                                {
+                                    ShortcutKeys = Keys.Delete
+                                },
+                            // Add the Color option
+                            new ToolStripMenuItem("&Color...", null, delegate(object sender, EventArgs e)
+                                {
+                                    var parameters = CurrentPage.Graph[r as IPlottable];
+                                    ColorDialog dialog = new ColorDialog()
+                                    {
+                                        Color = parameters.PlotColor
+                                    };
+                                    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                                    {
+                                        parameters.PlotColor = dialog.Color;
+                                        NotifyResourceModified(CurrentPage);
+                                    }
+                                })
+                        })).ToArray();
+
+            if (resources.Length > 0)
+            {
+                return new ToolStripMenuItem(
+                    String.Format("&Edit {0} items", resources.Length),
+                    Properties.Resources.Resources16,
+                    resources);
+            }
+            else
+            {
+                return new ToolStripMenuItem(
+                      String.Format("No items to &edit", resources.Length),
+                      Properties.Resources.Resources16)
+                  {
+                      Enabled = false
+                  };
+            }
+        }
+
+        private ToolStripMenuItem[] RegenerateAnnotationEditMenu()
+        {
+            List<ToolStripMenuItem> items = new List<ToolStripMenuItem>();
+            items.Add(new ToolStripMenuItem(
+                "&Unselect",
+                null,
+                delegate(object sender, EventArgs e)
+                {
+                    SelectedAnnotations = null;
+                    pageDisplay.Refresh();
+                    RegenerateGraphEditMenu();
+                }));
+            items.Add(new ToolStripMenuItem(
+                "&Delete",
+                Properties.Resources.AnnotationRemove16,
+                delegate(object sender, EventArgs e)
+                {
+                    foreach (Annotation annotation in SelectedAnnotations)
+                    {
+                        CurrentPage.Annotations.Remove(annotation);
+                    }
+                    SelectedAnnotations = null;
+                    pageDisplay.Refresh();
+                    RegenerateGraphEditMenu();
+                },
+                Keys.Delete));
+            return items.ToArray();
+        }
+
+        private ToolStripMenuItem RegenerateAnnotationMenu()
+        {
+            if (SelectedAnnotations == null || SelectedAnnotations.Count == 0)
+            {
+                return new ToolStripMenuItem(
+                    "No annotation to edit",
+                    Properties.Resources.Annotations16)
+                    {
+                        Enabled = false
+                    };
+            }
+            else
+            {
+                return new ToolStripMenuItem(
+                    "Annotation",
+                    Properties.Resources.Annotations16,
+                    RegenerateAnnotationEditMenu());
+            }
         }
 
         /// <summary>
@@ -331,7 +453,7 @@ namespace Graphmatic
         /// <summary>
         /// The vertical page offset at the start of selection.
         /// </summary>
-        private double  StartingPageVertOffset;
+        private double StartingPageVertOffset;
         /// <summary>
         /// The last mouse offset, at the previous firing of the pageDisplay_mouseMove event.
         /// </summary>
@@ -403,7 +525,7 @@ namespace Graphmatic
         /// a height of 3 that is shifted up 3 places.
         private Rectangle CreateDirectionalInvariantRectangle(int x, int y, int width, int height)
         {
-            int 
+            int
                 rx = Math.Min(x, x + width), ry = Math.Min(y, y + height),
                 rw = Math.Max(x, x + width) - rx, rh = Math.Max(y, y + height) - ry;
             return new Rectangle(rx, ry, rw, rh);
@@ -417,7 +539,7 @@ namespace Graphmatic
                 // If we've already selected some items, and the cursor clicks somewhere within
                 // one of those items, we assume the user is trying to move those items
                 var selection = SelectedAnnotations
-                    .Select(a => new Tuple<Annotation, int>(a, 
+                    .Select(a => new Tuple<Annotation, int>(a,
                         a.ScreenDistance(CurrentPage, pageDisplay.ClientSize, CurrentPage.Graph.Parameters, MouseStart)))
                     .Where(t => t.Item2 <= 0);
                 if (selection.Count() > 0)
@@ -509,6 +631,17 @@ namespace Graphmatic
             pageDisplay.Refresh();
         }
 
+        private void pageDisplay_MouseEnter(object sender, EventArgs e)
+        {
+            pageDisplay.Focus();
+        }
+
+        void pageDisplay_MouseWheel(object sender, MouseEventArgs e)
+        {
+            double power = 1.0 + 0.1 * (double)Math.Sign(e.Delta);
+            ZoomLevel = DoubleClamp(Math.Pow(ZoomLevel * 100.0, power) / 100.0, 0.025, 20.0);
+        }
+
         private void pageDisplay_DragOver(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(string)) &&
@@ -568,7 +701,7 @@ namespace Graphmatic
 
         private void toolStripDropDownEditGraph_MouseDown(object sender, MouseEventArgs e)
         {
-            RegeneratePlottableEditingMenu();
+            RegenerateGraphEditMenu();
         }
 
         private void toolStripButtonPlotDataSet_Click(object sender, EventArgs e)
@@ -630,20 +763,17 @@ namespace Graphmatic
                 string text = toolStripComboBoxZoom.Text;
                 if (text.EndsWith("%"))
                     text = text.Substring(0, text.Length - 1);
-                double zoomLevel = 0.05 / (Double.Parse(text)
-                    / 100.0);
-                CurrentPage.Graph.Parameters.HorizontalPixelScale =
-                    CurrentPage.Graph.Parameters.VerticalPixelScale =
-                    zoomLevel;
-                double zoomFactor = Math.Pow(2, Math.Floor(Math.Log(zoomLevel / 0.05, 2)));
-                CurrentPage.Graph.Axes.GridSize = zoomFactor;
-                pageDisplay.Refresh();
-                NotifyResourceModified(CurrentPage);
+                ZoomLevel = Double.Parse(text) / 100;
             }
             catch (FormatException)
             {
                 MessageBox.Show("Invalid zoom level.", "Zoom", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public void toolStripComboBoxZoom_MouseWheel(object sender, MouseEventArgs e)
+        {
+            (e as HandledMouseEventArgs).Handled = true;
         }
 
         private void eraseAllToolStripMenuItem_Click(object sender, EventArgs e)
