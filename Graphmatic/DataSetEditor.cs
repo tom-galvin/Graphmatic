@@ -126,7 +126,7 @@ namespace Graphmatic
                 if (allNull) continue;
                 for (int i = 0; i < DataSet.Variables.Length; i++)
                 {
-                    if (row.Cells[i].Value == null)
+                    if (row.Cells[i].Value == null || row.Cells[i].Value == "")
                     {
                         MessageBox.Show("This cell is empty. Please put a value in it or remove the row.", "Save Changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         dataGridView.ClearSelection();
@@ -183,6 +183,66 @@ namespace Graphmatic
         private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             DataChanged = true;
+        }
+
+        private void buttonExcelCopy_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsText())
+            {
+                string[][] clipData = Clipboard
+                    .GetText()
+                    .Split(new string[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => s.Split(new char[] {'\t'}, StringSplitOptions.RemoveEmptyEntries))
+                    .ToArray();
+                if (clipData.Length > 0)
+                {
+                    int arrayLength = clipData[0].Length;
+                    for (int i = 1; i < clipData.Length; i++)
+                    {
+                        if (clipData[i].Length != arrayLength)
+                        {
+                            MessageBox.Show("All rows in the copied data must have the same length. " +
+                                "Make sure you have no merged cells, and that you are selecting a square region.",
+                                "Paste from Excel",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                            return;
+                        }
+                    } try
+                    {
+                        double[][] doubleData = clipData
+                            .Select(da =>
+                                da.Select(d =>
+                                    Double.Parse(d)).ToArray()
+                                )
+                            .ToArray();
+
+                        foreach (double[] row in doubleData)
+                        {
+                            DataSet.Add(row);
+                        }
+
+                        DataChanged = true;
+                        RefreshDataList();
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Some data is not in a numeric format. " +
+                        "Make sure that your data does not contain text or any formatted data.",
+                        "Paste from Excel",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("The clipboard must contain text data from Microsoft Excel.",
+                    "Paste from Excel",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

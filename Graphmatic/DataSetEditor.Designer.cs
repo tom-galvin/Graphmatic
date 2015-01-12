@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSetEditor));
             this.buttonOK = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonEditVariables = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonExcelCopy = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,7 +44,7 @@
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.Location = new System.Drawing.Point(316, 298);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.Size = new System.Drawing.Size(75, 24);
             this.buttonOK.TabIndex = 1;
             this.buttonOK.Text = "&OK";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -67,7 +70,7 @@
             this.buttonEditVariables.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonEditVariables.Location = new System.Drawing.Point(154, 298);
             this.buttonEditVariables.Name = "buttonEditVariables";
-            this.buttonEditVariables.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditVariables.Size = new System.Drawing.Size(75, 24);
             this.buttonEditVariables.TabIndex = 3;
             this.buttonEditVariables.Text = "&Variables...";
             this.buttonEditVariables.UseVisualStyleBackColor = true;
@@ -78,17 +81,31 @@
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.Location = new System.Drawing.Point(235, 298);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.Size = new System.Drawing.Size(75, 24);
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonExcelCopy
+            // 
+            this.buttonExcelCopy.Image = global::Graphmatic.Properties.Resources.Excel16;
+            this.buttonExcelCopy.Location = new System.Drawing.Point(12, 298);
+            this.buttonExcelCopy.Name = "buttonExcelCopy";
+            this.buttonExcelCopy.Size = new System.Drawing.Size(136, 24);
+            this.buttonExcelCopy.TabIndex = 4;
+            this.buttonExcelCopy.Text = "Paste from Excel";
+            this.buttonExcelCopy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip.SetToolTip(this.buttonExcelCopy, "Select some data on Microsoft Excel, Copy it, and then click this button.");
+            this.buttonExcelCopy.UseVisualStyleBackColor = true;
+            this.buttonExcelCopy.Click += new System.EventHandler(this.buttonExcelCopy_Click);
             // 
             // DataSetEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(403, 333);
+            this.Controls.Add(this.buttonExcelCopy);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonEditVariables);
             this.Controls.Add(this.dataGridView);
@@ -110,6 +127,8 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonEditVariables;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonExcelCopy;
+        private System.Windows.Forms.ToolTip toolTip;
 
     }
 }
