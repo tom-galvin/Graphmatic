@@ -68,7 +68,7 @@ namespace Graphmatic
             else if (resource is Equation)
                 item.ImageIndex = 1;
             else if (resource is DataSet)
-                item.ImageIndex = 4;
+                item.ImageIndex = 2;
             else
                 item.ImageIndex = 3;
 

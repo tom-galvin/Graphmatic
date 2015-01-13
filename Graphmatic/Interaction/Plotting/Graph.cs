@@ -235,7 +235,6 @@ namespace Graphmatic.Interaction.Plotting
                 }
             }
             errorFont.Dispose();
-            errorBrush.Dispose();
         }
 
         public void ToImageSpace(Size graphSize, GraphParameters parameters, double horizontal, double vertical, out int x, out int y)

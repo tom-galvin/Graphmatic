@@ -189,6 +189,7 @@ namespace Graphmatic
                 CheckBackupDocument();
 
                 DocumentPath = path;
+                OpenResourceEditor(CurrentDocument.PageOrder.Last()); // opens last page in document
                 DocumentModified = false;
                 if (CurrentDocument.CurrentResource != null &&
                     Properties.Settings.Default.RestoreLastResource)
