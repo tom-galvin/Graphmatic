@@ -70,6 +70,11 @@ namespace Graphmatic
         private Point MouseStart;
 
         /// <summary>
+        /// The current point of the dragging action in the page display.
+        /// </summary>
+        private Point MouseLocation;
+
+        /// <summary>
         /// The color of the pen to draw with.
         /// </summary>
         private Color PenColor = Color.Black;
@@ -283,9 +288,21 @@ namespace Graphmatic
 
                 selectionPen.Dispose();
             }
+            if (CurrentPageTool == PageTool.Eraser && IsDragging)
+            {
+                // draw a circle showing the boundaries of the eraser tool's radius
+                Pen eraserPen = new Pen(CurrentPage.Graph[CurrentPage.Graph.Axes].PlotColor);
+                g.DrawEllipse(eraserPen,
+                    MouseLocation.X - (int)(PenWidth),
+                    MouseLocation.Y - (int)(PenWidth),
+                    (int)(PenWidth * 2),
+                    (int)(PenWidth * 2));
+                eraserPen.Dispose();
+            }
 
             if (CurrentlyDrawnPath != null && CurrentlyDrawnPath.Count > 1)
             {
+                // show a preview of the currently-drawn pen line
                 Pen drawPen = new Pen(PenColor, PenWidth);
                 drawPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
                 g.DrawLines(drawPen, CurrentlyDrawnPath.ToArray());
@@ -523,6 +540,7 @@ namespace Graphmatic
         private List<Point> CurrentlyDrawnPath;
         private void pageDisplay_MouseMove(object sender, MouseEventArgs e)
         {
+            MouseLocation = new Point(e.X, e.Y);
             if (IsDragging)
             {
                 double offsetX = e.X - MouseStart.X;
@@ -582,7 +600,7 @@ namespace Graphmatic
         {
             var toErase = CurrentPage.Annotations
                 .OfType<Drawing>()
-                .Where(a => a.DistanceToPointOnScreen(CurrentPage, pageDisplay.ClientSize, CurrentPage.Graph.Parameters, MouseStart) <= (int)(PenWidth))
+                .Where(a => a.DistanceToPointOnScreen(CurrentPage, pageDisplay.ClientSize, CurrentPage.Graph.Parameters, MouseLocation) <= (int)(PenWidth))
                 .ToArray();
             foreach (var annotation in toErase)
             {
@@ -660,6 +678,7 @@ namespace Graphmatic
         private void pageDisplay_MouseDown(object sender, MouseEventArgs e)
         {
             MouseStart = new Point(e.X, e.Y);
+            MouseLocation = MouseStart; 
             if (SelectedAnnotations != null)
             {
                 // If we've already selected some items, and the cursor clicks somewhere within
@@ -686,7 +705,7 @@ namespace Graphmatic
                     // initialize the variable containing the path drawn
                     CurrentlyDrawnPath = new List<Point>();
                     // and add the starting location to it
-                    CurrentlyDrawnPath.Add(new Point(e.X, e.Y));
+                    CurrentlyDrawnPath.Add(MouseLocation);
                 }
                 else if (CurrentPageTool == PageTool.Select)
                 {
