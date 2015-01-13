@@ -636,9 +636,9 @@ namespace Graphmatic
             // panelPageEditor
             // 
             this.panelPageEditor.Controls.Add(this.toolStripContainerPageEditor);
-            this.panelPageEditor.Location = new System.Drawing.Point(62, 160);
+            this.panelPageEditor.Location = new System.Drawing.Point(43, 45);
             this.panelPageEditor.Name = "panelPageEditor";
-            this.panelPageEditor.Size = new System.Drawing.Size(579, 280);
+            this.panelPageEditor.Size = new System.Drawing.Size(598, 395);
             this.panelPageEditor.TabIndex = 0;
             // 
             // toolStripContainerPageEditor
@@ -651,13 +651,13 @@ namespace Graphmatic
             // toolStripContainerPageEditor.ContentPanel
             // 
             this.toolStripContainerPageEditor.ContentPanel.Controls.Add(this.pageDisplay);
-            this.toolStripContainerPageEditor.ContentPanel.Size = new System.Drawing.Size(579, 224);
+            this.toolStripContainerPageEditor.ContentPanel.Size = new System.Drawing.Size(598, 339);
             this.toolStripContainerPageEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainerPageEditor.LeftToolStripPanelVisible = false;
             this.toolStripContainerPageEditor.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainerPageEditor.Name = "toolStripContainerPageEditor";
             this.toolStripContainerPageEditor.RightToolStripPanelVisible = false;
-            this.toolStripContainerPageEditor.Size = new System.Drawing.Size(579, 280);
+            this.toolStripContainerPageEditor.Size = new System.Drawing.Size(598, 395);
             this.toolStripContainerPageEditor.TabIndex = 4;
             this.toolStripContainerPageEditor.Text = "toolStripContainer1";
             // 
@@ -690,7 +690,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(547, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(501, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -1003,7 +1003,7 @@ namespace Graphmatic
             "400%",
             "800%"});
             this.toolStripComboBoxZoom.Name = "toolStripComboBoxZoom";
-            this.toolStripComboBoxZoom.Size = new System.Drawing.Size(121, 31);
+            this.toolStripComboBoxZoom.Size = new System.Drawing.Size(75, 31);
             this.toolStripComboBoxZoom.Text = "100%";
             this.toolStripComboBoxZoom.ToolTipText = "Change the zoom level for this page";
             this.toolStripComboBoxZoom.TextChanged += new System.EventHandler(this.toolStripComboBoxZoom_TextChanged);
@@ -1014,7 +1014,7 @@ namespace Graphmatic
             this.pageDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageDisplay.Location = new System.Drawing.Point(0, 0);
             this.pageDisplay.Name = "pageDisplay";
-            this.pageDisplay.Size = new System.Drawing.Size(579, 224);
+            this.pageDisplay.Size = new System.Drawing.Size(598, 339);
             this.pageDisplay.TabIndex = 0;
             this.pageDisplay.TabStop = false;
             this.pageDisplay.DragDrop += new System.Windows.Forms.DragEventHandler(this.pageDisplay_DragDrop);

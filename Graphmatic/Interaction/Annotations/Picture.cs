@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic.Interaction.Annotations
 {
@@ -35,6 +36,11 @@ namespace Graphmatic.Interaction.Annotations
             string base64ImageData = Convert.ToBase64String(ImageData.ToByteArray());
             baseElement.Add(new XElement("ImageData", base64ImageData));
             return baseElement;
+        }
+
+        public override void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
+        {
+            graphics.DrawImage(ImageData, GetScreenRectangle(page, graphSize, graphParams));
         }
     }
 }

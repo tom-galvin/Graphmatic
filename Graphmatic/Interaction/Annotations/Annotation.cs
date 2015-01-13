@@ -64,7 +64,7 @@ namespace Graphmatic.Interaction.Annotations
                 new XElement("Color", Color.ToXmlString()));
         }
 
-        private Rectangle GetScreenRectangle(Page page, Size graphSize, GraphParameters graphParams)
+        protected Rectangle GetScreenRectangle(Page page, Size graphSize, GraphParameters graphParams)
         {
             int x1, y1, x2, y2;
 
@@ -73,19 +73,39 @@ namespace Graphmatic.Interaction.Annotations
             return new Rectangle(x1, y1, x2 - x1, y2 - y1);
         }
 
+        public bool IsPointInResizeNode(Page page, Size graphSize, GraphParameters graphParams, Point point)
+        {
+            Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
+            int manhattanDistance =
+                Math.Abs(screenRectangle.X + screenRectangle.Width - point.X) +
+                Math.Abs(screenRectangle.Y - point.Y);
+            return manhattanDistance < 9;
+        }
+
         public virtual void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
             Brush annotationBrush = new SolidBrush(Color);
             graphics.FillRectangle(annotationBrush, screenRectangle);
+            annotationBrush.Dispose();
         }
 
         public virtual void DrawSelectionIndicatorOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
             Pen selectBoxPen = new Pen(Color.Red, 2f);
+            Brush resizeNotchBrush = Brushes.Yellow;
             selectBoxPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
             graphics.DrawRectangle(selectBoxPen, screenRectangle);
+            graphics.FillEllipse(resizeNotchBrush,
+                screenRectangle.X + screenRectangle.Width - 4,
+                screenRectangle.Y  - 4,
+                9, 9);
+            graphics.DrawEllipse(selectBoxPen,
+                screenRectangle.X + screenRectangle.Width - 4,
+                screenRectangle.Y - 4,
+                9, 9);
+            selectBoxPen.Dispose();
         }
 
         public virtual bool IsAnnotationInSelection(Page page, Size graphSize, GraphParameters graphParams, Rectangle screenSelection)
@@ -96,6 +116,9 @@ namespace Graphmatic.Interaction.Annotations
 
         public virtual int DistanceToPointOnScreen(Page page, Size graphSize, GraphParameters graphParams, Point screenSelection)
         {
+            // if selection is in resize node, it's ALWAYS in the boundaries of the selection
+            if (IsPointInResizeNode(page, graphSize, graphParams, screenSelection)) return -1;
+
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
             int distFromBottom = screenSelection.Y - screenRectangle.Bottom;
             int distFromTop = screenRectangle.Top - screenSelection.Y;

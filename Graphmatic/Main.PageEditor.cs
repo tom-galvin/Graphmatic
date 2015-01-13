@@ -75,6 +75,11 @@ namespace Graphmatic
         private Point MouseLocation;
 
         /// <summary>
+        /// Whether the user is currently resizing an element on the page or not.
+        /// </summary>
+        private bool IsResizing = false;
+
+        /// <summary>
         /// The color of the pen to draw with.
         /// </summary>
         private Color PenColor = Color.Black;
@@ -631,19 +636,22 @@ namespace Graphmatic
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                foreach (Annotation annotation in SelectedAnnotations)
+                if (IsResizing)
                 {
-                    annotation.X += (offsetX - LastOffsetX) * CurrentPage.Graph.Parameters.HorizontalPixelScale;
-                    annotation.Y -= (offsetY - LastOffsetY) * CurrentPage.Graph.Parameters.VerticalPixelScale;
+                    if (SelectedAnnotations.Count == 1)
+                    {
+                        Annotation annotation = SelectedAnnotations[0];
+                        annotation.Width += CurrentPage.Graph.Parameters.HorizontalPixelScale * (offsetX - LastOffsetX);
+                        annotation.Height += CurrentPage.Graph.Parameters.VerticalPixelScale * -(offsetY - LastOffsetY);
+                    }
                 }
-            }
-            else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
-            {
-                if (SelectedAnnotations.Count == 1)
+                else
                 {
-                    Annotation annotation = SelectedAnnotations[0];
-                    annotation.Width += CurrentPage.Graph.Parameters.HorizontalPixelScale * (offsetX - LastOffsetX);
-                    annotation.Height += CurrentPage.Graph.Parameters.VerticalPixelScale * -(offsetY - LastOffsetY);
+                    foreach (Annotation annotation in SelectedAnnotations)
+                    {
+                        annotation.X += (offsetX - LastOffsetX) * CurrentPage.Graph.Parameters.HorizontalPixelScale;
+                        annotation.Y -= (offsetY - LastOffsetY) * CurrentPage.Graph.Parameters.VerticalPixelScale;
+                    }
                 }
             }
         }
@@ -667,12 +675,24 @@ namespace Graphmatic
         /// <para/>
         /// For example, creating a Rectangle with a height of -3 will return a Rectangle with
         /// a height of 3 that is shifted up 3 places.
+        /// </summary>
         private Rectangle CreateDirectionalInvariantRectangle(int x, int y, int width, int height)
         {
             int
                 rx = Math.Min(x, x + width), ry = Math.Min(y, y + height),
                 rw = Math.Max(x, x + width) - rx, rh = Math.Max(y, y + height) - ry;
             return new Rectangle(rx, ry, rw, rh);
+        }
+
+        /// <summary>
+        /// Create a Rectangle using metrics that are independent of direction from an existing direction-dependent rectangle.
+        /// <para/>
+        /// For example, creating a Rectangle with a height of -3 will return a Rectangle with
+        /// a height of 3 that is shifted up 3 places.
+        /// </summary>
+        private Rectangle CreateDirectionalInvariantRectangle(Rectangle r)
+        {
+            return CreateDirectionalInvariantRectangle(r.X, r.Y, r.Width, r.Height);
         }
 
         private void pageDisplay_MouseDown(object sender, MouseEventArgs e)
@@ -684,12 +704,20 @@ namespace Graphmatic
                 // If we've already selected some items, and the cursor clicks somewhere within
                 // one of those items, we assume the user is trying to move those items
                 var selection = SelectedAnnotations
-                    .Select(a => new Tuple<Annotation, int>(a,
-                        a.DistanceToPointOnScreen(CurrentPage, pageDisplay.ClientSize, CurrentPage.Graph.Parameters, MouseStart)))
-                    .Where(t => t.Item2 <= 4);
-                if (selection.Count() > 0)
+                    .Where(a => a.DistanceToPointOnScreen(CurrentPage, pageDisplay.ClientSize, CurrentPage.Graph.Parameters, MouseStart) <= 4);
+                int count = selection.Count();
+                if (count > 0)
                 {
                     IsManipulatingSelected = true;
+
+                    if (count == 1)
+                    {
+                        var resourceToResize = selection.First();
+                        if (resourceToResize.IsPointInResizeNode(CurrentPage, pageDisplay.ClientSize, CurrentPage.Graph.Parameters, MouseLocation))
+                        {
+                            IsResizing = true;
+                        }
+                    }
                 }
             }
             if (!IsManipulatingSelected)
@@ -735,6 +763,25 @@ namespace Graphmatic
                         HandleSelectionZone(e);
                         IsSelecting = false;
                     }
+                    else if (IsResizing)
+                    {
+                        var resizedResource = SelectedAnnotations[0];
+
+                        // if the resource now has negative width or height after resizing,
+                        // correct it by restoring the correct signs
+                        if (resizedResource.Width < 0)
+                        {
+                            resizedResource.X -= resizedResource.Width = -resizedResource.Width;
+                            if (resizedResource is Drawing)
+                                (resizedResource as Drawing).FlipHorizontal();
+                        }
+                        if (resizedResource.Height < 0)
+                        {
+                            resizedResource.Y -= resizedResource.Height = -resizedResource.Height;
+                            if (resizedResource is Drawing)
+                                (resizedResource as Drawing).FlipVertical();
+                        }
+                    }
                     IsManipulatingSelected = false;
                 }
                 else if (CurrentlyDrawnPath != null)
@@ -743,6 +790,7 @@ namespace Graphmatic
                 }
                 // Reset the state
                 IsDragging = false;
+                IsResizing = false;
                 LastOffsetX = LastOffsetY = 0;
                 pageDisplay.Refresh();
                 NotifyResourceModified(CurrentPage);
@@ -829,6 +877,9 @@ namespace Graphmatic
                     SelectedAnnotations = null;
                 }
             }
+
+            if (SelectedAnnotations != null && SelectedAnnotations.Count == 0)
+                SelectedAnnotations = null;
         }
         #endregion
 

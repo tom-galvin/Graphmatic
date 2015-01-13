@@ -114,6 +114,7 @@ namespace Graphmatic.Interaction.Annotations
                     (int)(Thickness * 1.3),
                     (int)(Thickness * 1.3));
             }
+            base.DrawSelectionIndicatorOnto(page, graphics, graphSize, graphParams, resolution);
         }
 
         public override void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
@@ -137,6 +138,9 @@ namespace Graphmatic.Interaction.Annotations
 
         public override int DistanceToPointOnScreen(Page page, Size graphSize, GraphParameters graphParams, Point screenSelection)
         {
+            // if selection is in resize node, it's ALWAYS in the boundaries of the selection
+            if (IsPointInResizeNode(page, graphSize, graphParams, screenSelection)) return -1;
+
             var graphSpaceSelection = ToGraphSpace(screenSelection, graphSize, graphParams);
             double minimumSquareDistance = Double.PositiveInfinity;
             for (int i = 0; i < Points.Length; i++)
@@ -170,6 +174,22 @@ namespace Graphmatic.Interaction.Annotations
             double y = -((double)(p.Y - graphSize.Height / 2) * parameters.VerticalPixelScale) + parameters.CenterVertical;
 
             return new Tuple<double,double>(x, y);
+        }
+
+        public void FlipHorizontal()
+        {
+            for (int i = 0; i < Points.Length; i++)
+            {
+                Points[i] = new Tuple<double, double>(1 - Points[i].Item1, Points[i].Item2);
+            }
+        }
+
+        public void FlipVertical()
+        {
+            for (int i = 0; i < Points.Length; i++)
+            {
+                Points[i] = new Tuple<double, double>(Points[i].Item1, 1 - Points[i].Item2);
+            }
         }
     }
 
