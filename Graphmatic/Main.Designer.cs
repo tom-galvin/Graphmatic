@@ -691,7 +691,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(568, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(507, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -840,7 +840,7 @@ namespace Graphmatic
             this.highlightToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.AnnotateHighlight16;
             this.highlightToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.highlightToolStripMenuItem.Name = "highlightToolStripMenuItem";
-            this.highlightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.highlightToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.highlightToolStripMenuItem.Text = "&Highlight";
             this.highlightToolStripMenuItem.ToolTipText = "Draw in highlight annotations";
             // 
@@ -849,7 +849,7 @@ namespace Graphmatic
             this.pencilToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.AnnotateDraw16;
             this.pencilToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pencilToolStripMenuItem.Name = "pencilToolStripMenuItem";
-            this.pencilToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pencilToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.pencilToolStripMenuItem.Text = "&Pencil";
             this.pencilToolStripMenuItem.ToolTipText = "Draw in a pencil line annotation";
             // 

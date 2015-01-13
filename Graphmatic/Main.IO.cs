@@ -242,6 +242,7 @@ namespace Graphmatic
         {
             if (!CheckDocument()) return;
             CurrentDocument = new Document();
+            AddPage();
             DocumentPath = null;
             DocumentModified = false;
         }

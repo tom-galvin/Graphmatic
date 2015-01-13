@@ -295,6 +295,19 @@ namespace Graphmatic
             return parameters;
         }
 
+        /// <summary>
+        /// Creates a page, adds it to the end of the document's pagination list, and opens it.
+        /// </summary>
+        private void AddPage()
+        {
+            Page newPage = new Page()
+            {
+                Name = CreateResourceName("Page")
+            };
+            AddResource(newPage);
+            OpenResourceEditor(newPage);
+        }
+
         #region Drawing stuff
         // Page display drawing procedure...
         private void pageDisplay_Paint(object sender, PaintEventArgs e)
@@ -1085,12 +1098,7 @@ namespace Graphmatic
 
         private void toolStripButtonAddPage_Click(object sender, EventArgs e)
         {
-            Page newPage = new Page()
-            {
-                Name = CreateResourceName("Page")
-            };
-            AddResource(newPage);
-            OpenResourceEditor(newPage);
+            AddPage();
         }
 
         private void toolStripComboBoxZoom_TextChanged(object sender, EventArgs e)

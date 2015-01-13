@@ -122,9 +122,7 @@ namespace Graphmatic
 
         private void Main_Load(object sender, EventArgs e)
         {
-            CurrentDocument = new Document();
-            DocumentPath = null;
-            DocumentModified = false;
+            NewDocument();
 
             listViewResources_SelectedIndexChanged(sender, e);
             NewUserUsernameCheck();
@@ -188,7 +186,17 @@ namespace Graphmatic
 
         private void toolStripStatusLabelBugReport_Click(object sender, EventArgs e)
         {
-            Process.Start(Properties.Resources.GithubRepositoryUrl);
+            MessageBox.Show(
+                "For now, send me an email to report a bug or crash. " +
+                "Please provide information on the bug itself, what causes the bug, " +
+                "steps to reproduce the bug and any information that you can, including " +
+                "screenshots of relevant dialogs. Thanks!\r\n" +
+                String.Format("{0}97@{1}.com",
+                new string("nivlagt".Reverse().ToArray()),
+                new string("liamg".Reverse().ToArray())), // OTT email antispam
+                "Report a Bug",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }
