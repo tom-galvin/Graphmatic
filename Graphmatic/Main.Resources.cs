@@ -28,7 +28,6 @@ namespace Graphmatic
         {
             RegisterEditor<Equation>(OpenEquationEditor);
             RegisterEditor<DataSet>(OpenDataSetEditor);
-            RegisterEditor<Picture>(OpenPictureViewer);
             RegisterEditor<Page>(OpenPageEditor);
             RegisterEditor<HtmlPage>(OpenHtmlViewer);
 
@@ -74,8 +73,6 @@ namespace Graphmatic
             else if (resource is Equation)
                 item.ImageIndex = 1;
             else if (resource is DataSet)
-                item.ImageIndex = 2;
-            else if (resource is Picture)
                 item.ImageIndex = 4;
             else if (resource is HtmlPage)
                 item.ImageIndex = 5;
@@ -101,10 +98,6 @@ namespace Graphmatic
             else if (resource is DataSet)
             {
                 return toolStripToggleDataSets.Checked;
-            }
-            else if (resource is Picture)
-            {
-                return toolStripTogglePictures.Checked;
             }
             else if (resource is Page)
             {
@@ -454,14 +447,7 @@ namespace Graphmatic
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string fileName = GetResourceNameFromFileName(dialog.FileName);
-
-                Picture picture = new Picture(Image.FromFile(dialog.FileName))
-                {
-                    Name = fileName
-                };
-                AddResource(picture);
-                OpenResourceEditor(picture);
+                // TODO remove redundant code
             }
         }
 

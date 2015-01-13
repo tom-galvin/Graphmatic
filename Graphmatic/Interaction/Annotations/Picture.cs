@@ -1,27 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Graphmatic.Interaction
+namespace Graphmatic.Interaction.Annotations
 {
-    public class Picture : Resource
+    public class Picture : Annotation
     {
         public Image ImageData
         {
             get;
             protected set;
-        }
-
-        public override string Type
-        {
-            get
-            {
-                return "Picture";
-            }
         }
 
         public Picture(Image imageData)
@@ -44,13 +35,6 @@ namespace Graphmatic.Interaction
             string base64ImageData = Convert.ToBase64String(ImageData.ToByteArray());
             baseElement.Add(new XElement("ImageData", base64ImageData));
             return baseElement;
-        }
-
-        public override Image GetResourceIcon(bool large)
-        {
-            return large ?
-                Properties.Resources.Image32 :
-                Properties.Resources.Image16;
         }
     }
 }
