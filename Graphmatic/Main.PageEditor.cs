@@ -379,10 +379,7 @@ namespace Graphmatic
                                 {
                                     CurrentPage.Graph.Remove(r as IPlottable);
                                     pageDisplay.Refresh();
-                                })
-                                {
-                                    ShortcutKeys = Keys.Delete
-                                },
+                                }),
                             // Add the Color option
                             new ToolStripMenuItem("&Color...", null, delegate(object sender, EventArgs e)
                                 {
