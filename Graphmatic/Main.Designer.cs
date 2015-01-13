@@ -93,6 +93,7 @@ namespace Graphmatic
             this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -731,6 +732,7 @@ namespace Graphmatic
             this.blackToolStripMenuItem,
             this.redToolStripMenuItem,
             this.orangeToolStripMenuItem,
+            this.yellowToolStripMenuItem,
             this.greenToolStripMenuItem,
             this.tealToolStripMenuItem,
             this.blueToolStripMenuItem,
@@ -748,63 +750,70 @@ namespace Graphmatic
             // blackToolStripMenuItem
             // 
             this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
-            this.blackToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.blackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.blackToolStripMenuItem.Text = "&Black";
             this.blackToolStripMenuItem.Click += new System.EventHandler(this.blackToolStripMenuItem_Click);
             // 
             // redToolStripMenuItem
             // 
             this.redToolStripMenuItem.Name = "redToolStripMenuItem";
-            this.redToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.redToolStripMenuItem.Text = "&Red";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
             // 
             // orangeToolStripMenuItem
             // 
             this.orangeToolStripMenuItem.Name = "orangeToolStripMenuItem";
-            this.orangeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.orangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.orangeToolStripMenuItem.Text = "&Orange";
             this.orangeToolStripMenuItem.Click += new System.EventHandler(this.orangeToolStripMenuItem_Click);
+            // 
+            // yellowToolStripMenuItem
+            // 
+            this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
+            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yellowToolStripMenuItem.Text = "&Yellow";
+            this.yellowToolStripMenuItem.Click += new System.EventHandler(this.yellowToolStripMenuItem_Click);
             // 
             // greenToolStripMenuItem
             // 
             this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
-            this.greenToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.greenToolStripMenuItem.Text = "&Green";
             this.greenToolStripMenuItem.Click += new System.EventHandler(this.greenToolStripMenuItem_Click);
             // 
             // tealToolStripMenuItem
             // 
             this.tealToolStripMenuItem.Name = "tealToolStripMenuItem";
-            this.tealToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.tealToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tealToolStripMenuItem.Text = "&Teal";
             this.tealToolStripMenuItem.Click += new System.EventHandler(this.tealToolStripMenuItem_Click);
             // 
             // blueToolStripMenuItem
             // 
             this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
-            this.blueToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.blueToolStripMenuItem.Text = "B&lue";
             this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
             // 
             // purpleToolStripMenuItem
             // 
             this.purpleToolStripMenuItem.Name = "purpleToolStripMenuItem";
-            this.purpleToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.purpleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.purpleToolStripMenuItem.Text = "&Purple";
             this.purpleToolStripMenuItem.Click += new System.EventHandler(this.purpleToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(132, 6);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 6);
             // 
             // pickcolorToolStripMenuItem
             // 
             this.pickcolorToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.ColorPick16;
             this.pickcolorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pickcolorToolStripMenuItem.Name = "pickcolorToolStripMenuItem";
-            this.pickcolorToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.pickcolorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pickcolorToolStripMenuItem.Text = "Pick &color...";
             this.pickcolorToolStripMenuItem.Click += new System.EventHandler(this.pickcolorToolStripMenuItem_Click);
             // 
@@ -1171,6 +1180,7 @@ namespace Graphmatic
         private ToolStripMenuItem textToolStripMenuItem;
         private ToolStripMenuItem panToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem7;
+        private ToolStripMenuItem yellowToolStripMenuItem;
     }
 }
 

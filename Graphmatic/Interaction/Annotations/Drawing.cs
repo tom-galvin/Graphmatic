@@ -115,6 +115,7 @@ namespace Graphmatic.Interaction.Annotations
                     (int)(Thickness * 1.3));
             }
             base.DrawSelectionIndicatorOnto(page, graphics, graphSize, graphParams, resolution);
+            annotationBrush.Dispose();
         }
 
         public override void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
@@ -133,7 +134,13 @@ namespace Graphmatic.Interaction.Annotations
                 .ToArray();
             Pen annotationPen = new Pen(Color, Thickness);
             annotationPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+            if (Type == DrawingType.Highlight)
+                annotationPen.EndCap = annotationPen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
+            else
+                annotationPen.EndCap = annotationPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+
             graphics.DrawLines(annotationPen, screenPoints);
+            annotationPen.Dispose();
         }
 
         public override int DistanceToPointOnScreen(Page page, Size graphSize, GraphParameters graphParams, Point screenSelection)

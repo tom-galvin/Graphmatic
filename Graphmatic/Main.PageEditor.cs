@@ -254,7 +254,20 @@ namespace Graphmatic
                 // Draw the graph
                 CurrentPage.Graph.Draw(g, size, resolution);
 
-                DrawAnnotations(g, size, resolution);
+                if (CurrentPageTool == PageTool.Highlighter)
+                    // highlighter goes under other annotations, so draw the preview before the rest
+                {
+                    DrawCurrentPencilPath(g);
+                    DrawAnnotations(g, size, resolution);
+                }
+                else
+                    // otherwise, draw normally
+                {
+                    DrawAnnotations(g, size, resolution);
+                    DrawCurrentPencilPath(g);
+                }
+
+                DrawIndicators(g);
 
                 pageDisplay.ResumeLayout(false);
 
@@ -283,7 +296,16 @@ namespace Graphmatic
                     annotation.DrawSelectionIndicatorOnto(CurrentPage, g, size, CurrentPage.Graph.Parameters, resolution);
                 }
             }
+        }
 
+        /// <summary>
+        /// Draws indicators around any annotations that are selected (ie. the dots).
+        /// <para/>
+        /// Also draws the circle indicating the boundaries of the eraser.
+        /// </summary>
+        /// <param name="g">The graphics object to draw the stuff onto.</param>
+        private void DrawIndicators(Graphics g)
+        {
             // Draw the current selection (dragging) box
             if (CurrentPageTool == PageTool.Select && IsSelecting)
             {
@@ -304,7 +326,13 @@ namespace Graphmatic
                     (int)(PenWidth * 2));
                 eraserPen.Dispose();
             }
-
+        }
+        /// <summary>
+        /// Draws a preview of the currently-drawn pencil path.
+        /// </summary>
+        /// <param name="g">The graphics object to draw the path onto.</param>
+        private void DrawCurrentPencilPath(Graphics g)
+        {
             if (CurrentlyDrawnPath != null && CurrentlyDrawnPath.Count > 1)
             {
                 // show a preview of the currently-drawn pen line
@@ -802,33 +830,38 @@ namespace Graphmatic
         /// </summary>
         private void CreateDrawnAnnotation()
         {
-            if (CurrentlyDrawnPath.Count > 1)
+            if (CurrentlyDrawnPath.Count == 1)
             {
-                Drawing drawing = new Drawing(
-                    CurrentlyDrawnPath.ToArray(),
-                    pageDisplay.ClientSize,
-                    CurrentPage.Graph.Parameters,
-                    PenColor,
-                    PenWidth,
-                    CurrentPageTool == PageTool.Highlighter ?
-                        DrawingType.Highlight :
-                        DrawingType.Pencil);
+                var artificialPoint = CurrentlyDrawnPath[0];
+                CurrentlyDrawnPath.Clear();
 
-                // if we're using the highlighter tool, put the pen line behind other annotations
-                if (CurrentPageTool == PageTool.Pencil)
-                    CurrentPage.Annotations.Add(drawing);
-                else if (CurrentPageTool == PageTool.Highlighter)
-                    CurrentPage.Annotations.Insert(0, drawing);
+                // offset the 1st point a bit so the 'dot' is more
+                // evenly spaced under the cursor
+                artificialPoint.Y -= (int)(PenWidth / 2);
+                CurrentlyDrawnPath.Add(artificialPoint);
 
-                else
-                    MessageBox.Show("This shouldn't happen!", "Draw", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                artificialPoint.Y += (int)PenWidth; // value type so this doesn't change CurrentlyDrawnPath[0]
+                CurrentlyDrawnPath.Add(artificialPoint);
             }
+
+            Drawing drawing = new Drawing(
+                CurrentlyDrawnPath.ToArray(),
+                pageDisplay.ClientSize,
+                CurrentPage.Graph.Parameters,
+                PenColor,
+                PenWidth,
+                CurrentPageTool == PageTool.Highlighter ?
+                    DrawingType.Highlight :
+                    DrawingType.Pencil);
+
+            // if we're using the highlighter tool, put the pen line behind other annotations
+            if (CurrentPageTool == PageTool.Pencil)
+                CurrentPage.Annotations.Add(drawing);
+            else if (CurrentPageTool == PageTool.Highlighter)
+                CurrentPage.Annotations.Insert(0, drawing);
+
             else
-            {
-                // if the user tries to draw a line but doesn't move the cursor,
-                // the array of points describing the path will have a length of 1
-                // DrawLines needs at least 2, so only add a line with >2 points
-            }
+                MessageBox.Show("This shouldn't happen!", "Draw", MessageBoxButtons.OK, MessageBoxIcon.Information);
             CurrentlyDrawnPath = null;
         }
 
@@ -1087,6 +1120,12 @@ namespace Graphmatic
         private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PenColor = Color.Orange;
+            RegeneratePenPreviewImage();
+        }
+
+        private void yellowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PenColor = Color.Yellow;
             RegeneratePenPreviewImage();
         }
 
