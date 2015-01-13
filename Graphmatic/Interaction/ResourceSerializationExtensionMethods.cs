@@ -38,7 +38,6 @@ namespace Graphmatic.Interaction
             { "Page", xml => new Page(xml) },
             { "Equation", xml => new Equation(xml) },
             { "DataSet", xml => new DataSet(xml) },
-            { "HtmlPage", xml => new HtmlPage(xml) },
             { "Resource", xml => new Resource(xml) }
         };
 

@@ -134,7 +134,6 @@
     <Compile Include="Interaction\Document.cs" />
     <Compile Include="Interaction\Equation.cs" />
     <Compile Include="Interaction\Equation.Plotting.cs" />
-    <Compile Include="Interaction\HtmlPage.cs" />
     <Compile Include="Interaction\Plotting\GraphAxis.cs" />
     <Compile Include="Interaction\Plotting\GraphKey.cs" />
     <Compile Include="Interaction\Plotting\IPlottable.cs" />
@@ -159,9 +158,6 @@
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Main.HtmlViewer.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.PageEditor.cs">
       <SubType>Form</SubType>

@@ -29,11 +29,8 @@ namespace Graphmatic
             RegisterEditor<Equation>(OpenEquationEditor);
             RegisterEditor<DataSet>(OpenDataSetEditor);
             RegisterEditor<Page>(OpenPageEditor);
-            RegisterEditor<HtmlPage>(OpenHtmlViewer);
 
             panelPageEditor.Dock = DockStyle.Fill;
-            panelImageViewer.Dock = DockStyle.Fill;
-            panelHtmlViewer.Dock = DockStyle.Fill;
             CloseResourcePanels();
         }
 
@@ -52,8 +49,6 @@ namespace Graphmatic
         private void CloseResourcePanels()
         {
             panelPageEditor.Visible = panelPageEditor.Enabled = false;
-            panelImageViewer.Visible = panelImageViewer.Enabled = false;
-            panelHtmlViewer.Visible = panelHtmlViewer.Enabled = false;
         }
 
         private void RegisterEditor<T>(Action<T> editor) where T : Resource
@@ -74,8 +69,6 @@ namespace Graphmatic
                 item.ImageIndex = 1;
             else if (resource is DataSet)
                 item.ImageIndex = 4;
-            else if (resource is HtmlPage)
-                item.ImageIndex = 5;
             else
                 item.ImageIndex = 3;
 
@@ -102,10 +95,6 @@ namespace Graphmatic
             else if (resource is Page)
             {
                 return toolStripTogglePages.Checked;
-            }
-            else if (resource is HtmlPage)
-            {
-                return toolStripToggleHtmlPages.Checked;
             }
             else
             {
@@ -463,28 +452,6 @@ namespace Graphmatic
             editor.ShowDialog();
             RefreshResourceListView();
             DocumentModified = true;
-        }
-
-        private void webPageToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog()
-            {
-                Filter = "HTML files (*.html; *.htm)|*.html;*.htm|All files|*",
-                FilterIndex = 0,
-                Title = "Import HTML"
-            };
-
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                HtmlPage page = new HtmlPage(File.ReadAllText(dialog.FileName))
-                {
-                    Name = GetResourceNameFromFileName(dialog.FileName)
-                };
-
-                AddResource(page);
-                DocumentModified = true;
-                OpenResourceEditor(page);
-            }
         }
 
         private void listViewResources_ItemDrag(object sender, ItemDragEventArgs e)

@@ -76,21 +76,13 @@ namespace Graphmatic
             this.toolStripTogglePages = new System.Windows.Forms.ToolStripButton();
             this.toolStripToggleEquations = new System.Windows.Forms.ToolStripButton();
             this.toolStripToggleDataSets = new System.Windows.Forms.ToolStripButton();
-            this.toolStripToggleHtmlPages = new System.Windows.Forms.ToolStripButton();
             this.toolStripToggleHidden = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButtonAdd = new System.Windows.Forms.ToolStripDropDownButton();
             this.equationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.webPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonPageOrder = new System.Windows.Forms.ToolStripButton();
-            this.panelHtmlViewer = new System.Windows.Forms.Panel();
-            this.toolStripContainerHtmlViewer = new System.Windows.Forms.ToolStripContainer();
-            this.webBrowserHtmlViewer = new System.Windows.Forms.WebBrowser();
-            this.toolStripHtmlViewer = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonBack = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonForward = new System.Windows.Forms.ToolStripButton();
             this.panelPageEditor = new System.Windows.Forms.Panel();
             this.toolStripContainerPageEditor = new System.Windows.Forms.ToolStripContainer();
             this.toolStripPageEditor = new System.Windows.Forms.ToolStrip();
@@ -138,11 +130,6 @@ namespace Graphmatic
             this.splitContainer.SuspendLayout();
             this.contextMenuStripResources.SuspendLayout();
             this.toolStripResources.SuspendLayout();
-            this.panelHtmlViewer.SuspendLayout();
-            this.toolStripContainerHtmlViewer.ContentPanel.SuspendLayout();
-            this.toolStripContainerHtmlViewer.TopToolStripPanel.SuspendLayout();
-            this.toolStripContainerHtmlViewer.SuspendLayout();
-            this.toolStripHtmlViewer.SuspendLayout();
             this.panelPageEditor.SuspendLayout();
             this.toolStripContainerPageEditor.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainerPageEditor.ContentPanel.SuspendLayout();
@@ -265,7 +252,7 @@ namespace Graphmatic
             this.resourcesToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Resources16;
             this.resourcesToolStripMenuItem.Name = "resourcesToolStripMenuItem";
             this.resourcesToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.resourcesToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.resourcesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resourcesToolStripMenuItem.Text = "&Resources";
             this.resourcesToolStripMenuItem.Click += new System.EventHandler(this.resourcesToolStripMenuItem_Click);
             // 
@@ -407,7 +394,6 @@ namespace Graphmatic
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.panelHtmlViewer);
             this.splitContainer.Panel2.Controls.Add(this.panelPageEditor);
             this.splitContainer.Size = new System.Drawing.Size(1070, 561);
             this.splitContainer.SplitterDistance = 356;
@@ -528,7 +514,6 @@ namespace Graphmatic
             this.toolStripTogglePages,
             this.toolStripToggleEquations,
             this.toolStripToggleDataSets,
-            this.toolStripToggleHtmlPages,
             this.toolStripToggleHidden,
             this.toolStripSeparator6,
             this.toolStripDropDownButtonAdd,
@@ -578,19 +563,6 @@ namespace Graphmatic
             this.toolStripToggleDataSets.ToolTipText = "Toggle Data Sets";
             this.toolStripToggleDataSets.Click += new System.EventHandler(this.toolStripToggleDataSets_Click);
             // 
-            // toolStripToggleHtmlPages
-            // 
-            this.toolStripToggleHtmlPages.Checked = true;
-            this.toolStripToggleHtmlPages.CheckOnClick = true;
-            this.toolStripToggleHtmlPages.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripToggleHtmlPages.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripToggleHtmlPages.Image = global::Graphmatic.Properties.Resources.HtmlPages16;
-            this.toolStripToggleHtmlPages.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripToggleHtmlPages.Name = "toolStripToggleHtmlPages";
-            this.toolStripToggleHtmlPages.Size = new System.Drawing.Size(23, 22);
-            this.toolStripToggleHtmlPages.ToolTipText = "Toggle HTML Pages";
-            this.toolStripToggleHtmlPages.Click += new System.EventHandler(this.toolStripToggleHtmlPages_Click);
-            // 
             // toolStripToggleHidden
             // 
             this.toolStripToggleHidden.CheckOnClick = true;
@@ -613,8 +585,7 @@ namespace Graphmatic
             this.toolStripDropDownButtonAdd.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.equationToolStripMenuItem,
             this.dataSetToolStripMenuItem,
-            this.pageToolStripMenuItem,
-            this.webPageToolStripMenuItem});
+            this.pageToolStripMenuItem});
             this.toolStripDropDownButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButtonAdd.Image")));
             this.toolStripDropDownButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButtonAdd.Name = "toolStripDropDownButtonAdd";
@@ -651,13 +622,6 @@ namespace Graphmatic
             this.pageToolStripMenuItem.Text = "&Page...";
             this.pageToolStripMenuItem.Click += new System.EventHandler(this.pageToolStripMenuItem_Click);
             // 
-            // webPageToolStripMenuItem
-            // 
-            this.webPageToolStripMenuItem.Name = "webPageToolStripMenuItem";
-            this.webPageToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.webPageToolStripMenuItem.Text = "&HTML Page...";
-            this.webPageToolStripMenuItem.Click += new System.EventHandler(this.webPageToolStripMenuItem_Click);
-            // 
             // toolStripButtonPageOrder
             // 
             this.toolStripButtonPageOrder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -668,81 +632,6 @@ namespace Graphmatic
             this.toolStripButtonPageOrder.Text = "Page Order";
             this.toolStripButtonPageOrder.ToolTipText = "Edit the order of the pages in the document";
             this.toolStripButtonPageOrder.Click += new System.EventHandler(this.pageOrderToolStripMenuItem_Click);
-            // 
-            // panelHtmlViewer
-            // 
-            this.panelHtmlViewer.Controls.Add(this.toolStripContainerHtmlViewer);
-            this.panelHtmlViewer.Location = new System.Drawing.Point(414, 87);
-            this.panelHtmlViewer.Name = "panelHtmlViewer";
-            this.panelHtmlViewer.Size = new System.Drawing.Size(200, 100);
-            this.panelHtmlViewer.TabIndex = 2;
-            // 
-            // toolStripContainerHtmlViewer
-            // 
-            // 
-            // toolStripContainerHtmlViewer.ContentPanel
-            // 
-            this.toolStripContainerHtmlViewer.ContentPanel.Controls.Add(this.webBrowserHtmlViewer);
-            this.toolStripContainerHtmlViewer.ContentPanel.Size = new System.Drawing.Size(200, 100);
-            this.toolStripContainerHtmlViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainerHtmlViewer.LeftToolStripPanelVisible = false;
-            this.toolStripContainerHtmlViewer.Location = new System.Drawing.Point(0, 0);
-            this.toolStripContainerHtmlViewer.Name = "toolStripContainerHtmlViewer";
-            this.toolStripContainerHtmlViewer.RightToolStripPanelVisible = false;
-            this.toolStripContainerHtmlViewer.Size = new System.Drawing.Size(200, 100);
-            this.toolStripContainerHtmlViewer.TabIndex = 3;
-            this.toolStripContainerHtmlViewer.Text = "toolStripContainer1";
-            // 
-            // toolStripContainerHtmlViewer.TopToolStripPanel
-            // 
-            this.toolStripContainerHtmlViewer.TopToolStripPanel.Controls.Add(this.toolStripHtmlViewer);
-            // 
-            // webBrowserHtmlViewer
-            // 
-            this.webBrowserHtmlViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowserHtmlViewer.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowserHtmlViewer.Location = new System.Drawing.Point(0, 0);
-            this.webBrowserHtmlViewer.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowserHtmlViewer.Name = "webBrowserHtmlViewer";
-            this.webBrowserHtmlViewer.ScriptErrorsSuppressed = true;
-            this.webBrowserHtmlViewer.Size = new System.Drawing.Size(200, 100);
-            this.webBrowserHtmlViewer.TabIndex = 0;
-            this.webBrowserHtmlViewer.WebBrowserShortcutsEnabled = false;
-            this.webBrowserHtmlViewer.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowserHtmlViewer_Navigating);
-            // 
-            // toolStripHtmlViewer
-            // 
-            this.toolStripHtmlViewer.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStripHtmlViewer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonBack,
-            this.toolStripButtonForward});
-            this.toolStripHtmlViewer.Location = new System.Drawing.Point(83, 0);
-            this.toolStripHtmlViewer.Name = "toolStripHtmlViewer";
-            this.toolStripHtmlViewer.Size = new System.Drawing.Size(58, 25);
-            this.toolStripHtmlViewer.TabIndex = 0;
-            this.toolStripHtmlViewer.Visible = false;
-            // 
-            // toolStripButtonBack
-            // 
-            this.toolStripButtonBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonBack.Image = global::Graphmatic.Properties.Resources.NavBackward16;
-            this.toolStripButtonBack.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonBack.Name = "toolStripButtonBack";
-            this.toolStripButtonBack.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonBack.Text = "Back";
-            this.toolStripButtonBack.ToolTipText = "Go back";
-            this.toolStripButtonBack.Click += new System.EventHandler(this.toolStripButtonBack_Click);
-            // 
-            // toolStripButtonForward
-            // 
-            this.toolStripButtonForward.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonForward.Image = global::Graphmatic.Properties.Resources.NavForward16;
-            this.toolStripButtonForward.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonForward.Name = "toolStripButtonForward";
-            this.toolStripButtonForward.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonForward.Text = "Forward";
-            this.toolStripButtonForward.ToolTipText = "Go forward";
-            this.toolStripButtonForward.Click += new System.EventHandler(this.toolStripButtonForward_Click);
             // 
             // panelPageEditor
             // 
@@ -1175,14 +1064,6 @@ namespace Graphmatic
             this.contextMenuStripResources.ResumeLayout(false);
             this.toolStripResources.ResumeLayout(false);
             this.toolStripResources.PerformLayout();
-            this.panelHtmlViewer.ResumeLayout(false);
-            this.toolStripContainerHtmlViewer.ContentPanel.ResumeLayout(false);
-            this.toolStripContainerHtmlViewer.TopToolStripPanel.ResumeLayout(false);
-            this.toolStripContainerHtmlViewer.TopToolStripPanel.PerformLayout();
-            this.toolStripContainerHtmlViewer.ResumeLayout(false);
-            this.toolStripContainerHtmlViewer.PerformLayout();
-            this.toolStripHtmlViewer.ResumeLayout(false);
-            this.toolStripHtmlViewer.PerformLayout();
             this.panelPageEditor.ResumeLayout(false);
             this.toolStripContainerPageEditor.BottomToolStripPanel.ResumeLayout(false);
             this.toolStripContainerPageEditor.BottomToolStripPanel.PerformLayout();
@@ -1260,14 +1141,6 @@ namespace Graphmatic
         private ToolStripMenuItem pageOrderToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator6;
         private ToolStripButton toolStripButtonPageOrder;
-        private Panel panelHtmlViewer;
-        private ToolStripContainer toolStripContainerHtmlViewer;
-        private WebBrowser webBrowserHtmlViewer;
-        private ToolStrip toolStripHtmlViewer;
-        private ToolStripButton toolStripButtonBack;
-        private ToolStripButton toolStripButtonForward;
-        private ToolStripButton toolStripToggleHtmlPages;
-        private ToolStripMenuItem webPageToolStripMenuItem;
         private Timer timerBackup;
         private ToolStripDropDownButton toolStripDropDownEditGraph;
         private ContextMenuStrip contextMenuStripPageEditor;

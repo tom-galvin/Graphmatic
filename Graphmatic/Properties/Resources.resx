@@ -151,9 +151,6 @@
   <data name="ButtonLogN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\logn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="HtmlPages16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\blue-documents-globe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CustomSelect24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\toolbaricons\customselect24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -237,9 +234,6 @@ Originally developed for the AQA A2 Computing coursework.</value>
   <data name="ButtonLog10" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\log.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="HtmlPage32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\htmlpage32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Moein" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Moein.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -309,9 +303,6 @@ Originally developed for the AQA A2 Computing coursework.</value>
   <data name="Excel16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-excel-table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Image16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\image16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ArrowMove16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow-move.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -363,9 +354,6 @@ Originally developed for the AQA A2 Computing coursework.</value>
   <data name="Button9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\d9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Images16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\images16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="AnnotateErase16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\toolbaricons\annotateerase16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -387,9 +375,6 @@ Originally developed for the AQA A2 Computing coursework.</value>
   <data name="ButtonEquals" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\equals.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="HtmlPage16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\htmlpage16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Chart24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\toolbaricons\chart24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -407,9 +392,6 @@ Originally developed for the AQA A2 Computing coursework.</value>
   </data>
   <data name="ButtonDone" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\done.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Image32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\image32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AnnotateDraw24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\toolbaricons\annotatedraw24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
