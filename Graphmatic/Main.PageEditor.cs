@@ -304,8 +304,8 @@ namespace Graphmatic
             GraphEditMenu = new ToolStripMenuItem[]
             {
                 // Add the edit item, or the warning if there are no items to edit
-                RegeneratePlottableEditMenu(),
                 RegenerateAnnotationMenu(),
+                RegeneratePlottableEditMenu(),
                 // Add the horizontal variable chooser
                 new ToolStripMenuItem("&Horizontal variable...", null, delegate(object sender, EventArgs e)
                     {

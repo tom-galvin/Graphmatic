@@ -125,6 +125,9 @@ namespace Graphmatic
             this.eraserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eraseAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonTextAnnotation = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonPan = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownEditGraph = new System.Windows.Forms.ToolStripDropDownButton();
             this.contextMenuStripPageEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -134,9 +137,6 @@ namespace Graphmatic
             this.toolStripButtonPreviousPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNextPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAddPage = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonSquareSelect = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonPan = new System.Windows.Forms.ToolStripButton();
             this.toolStripComboBoxZoom = new System.Windows.Forms.ToolStripComboBox();
             this.pageDisplay = new System.Windows.Forms.PictureBox();
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
@@ -373,7 +373,7 @@ namespace Graphmatic
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -932,7 +932,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(576, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(547, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -990,63 +990,63 @@ namespace Graphmatic
             // blackToolStripMenuItem
             // 
             this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
-            this.blackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blackToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.blackToolStripMenuItem.Text = "&Black";
             this.blackToolStripMenuItem.Click += new System.EventHandler(this.blackToolStripMenuItem_Click);
             // 
             // redToolStripMenuItem
             // 
             this.redToolStripMenuItem.Name = "redToolStripMenuItem";
-            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.redToolStripMenuItem.Text = "&Red";
             this.redToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
             // 
             // orangeToolStripMenuItem
             // 
             this.orangeToolStripMenuItem.Name = "orangeToolStripMenuItem";
-            this.orangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.orangeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.orangeToolStripMenuItem.Text = "&Orange";
             this.orangeToolStripMenuItem.Click += new System.EventHandler(this.orangeToolStripMenuItem_Click);
             // 
             // greenToolStripMenuItem
             // 
             this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
-            this.greenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.greenToolStripMenuItem.Text = "&Green";
             this.greenToolStripMenuItem.Click += new System.EventHandler(this.greenToolStripMenuItem_Click);
             // 
             // tealToolStripMenuItem
             // 
             this.tealToolStripMenuItem.Name = "tealToolStripMenuItem";
-            this.tealToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tealToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.tealToolStripMenuItem.Text = "&Teal";
             this.tealToolStripMenuItem.Click += new System.EventHandler(this.tealToolStripMenuItem_Click);
             // 
             // blueToolStripMenuItem
             // 
             this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
-            this.blueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.blueToolStripMenuItem.Text = "B&lue";
             this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
             // 
             // purpleToolStripMenuItem
             // 
             this.purpleToolStripMenuItem.Name = "purpleToolStripMenuItem";
-            this.purpleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.purpleToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.purpleToolStripMenuItem.Text = "&Purple";
             this.purpleToolStripMenuItem.Click += new System.EventHandler(this.purpleToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(132, 6);
             // 
             // pickcolorToolStripMenuItem
             // 
             this.pickcolorToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.ColorPick16;
             this.pickcolorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pickcolorToolStripMenuItem.Name = "pickcolorToolStripMenuItem";
-            this.pickcolorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pickcolorToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.pickcolorToolStripMenuItem.Text = "Pick &color...";
             this.pickcolorToolStripMenuItem.Click += new System.EventHandler(this.pickcolorToolStripMenuItem_Click);
             // 
@@ -1125,6 +1125,30 @@ namespace Graphmatic
             this.toolStripButtonTextAnnotation.Size = new System.Drawing.Size(28, 28);
             this.toolStripButtonTextAnnotation.ToolTipText = "Add text";
             this.toolStripButtonTextAnnotation.Visible = false;
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripButtonSquareSelect
+            // 
+            this.toolStripButtonSquareSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSquareSelect.Image = global::Graphmatic.Properties.Resources.SquareSelect24;
+            this.toolStripButtonSquareSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSquareSelect.Name = "toolStripButtonSquareSelect";
+            this.toolStripButtonSquareSelect.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonSquareSelect.ToolTipText = resources.GetString("toolStripButtonSquareSelect.ToolTipText");
+            // 
+            // toolStripButtonPan
+            // 
+            this.toolStripButtonPan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPan.Image = global::Graphmatic.Properties.Resources.ArrowMove16;
+            this.toolStripButtonPan.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonPan.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPan.Name = "toolStripButtonPan";
+            this.toolStripButtonPan.Size = new System.Drawing.Size(23, 28);
+            this.toolStripButtonPan.ToolTipText = "Move the viewport around";
             // 
             // toolStripSeparator5
             // 
@@ -1207,30 +1231,6 @@ namespace Graphmatic
             this.toolStripButtonAddPage.Text = "toolStripButton1";
             this.toolStripButtonAddPage.ToolTipText = "Add a page after this one";
             this.toolStripButtonAddPage.Click += new System.EventHandler(this.toolStripButtonAddPage_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripButtonSquareSelect
-            // 
-            this.toolStripButtonSquareSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonSquareSelect.Image = global::Graphmatic.Properties.Resources.SquareSelect24;
-            this.toolStripButtonSquareSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSquareSelect.Name = "toolStripButtonSquareSelect";
-            this.toolStripButtonSquareSelect.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButtonSquareSelect.ToolTipText = resources.GetString("toolStripButtonSquareSelect.ToolTipText");
-            // 
-            // toolStripButtonPan
-            // 
-            this.toolStripButtonPan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonPan.Image = global::Graphmatic.Properties.Resources.ArrowMove16;
-            this.toolStripButtonPan.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonPan.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonPan.Name = "toolStripButtonPan";
-            this.toolStripButtonPan.Size = new System.Drawing.Size(23, 28);
-            this.toolStripButtonPan.ToolTipText = "Move the viewport around";
             // 
             // toolStripComboBoxZoom
             // 
