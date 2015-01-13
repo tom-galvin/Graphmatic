@@ -35,6 +35,7 @@ namespace Graphmatic
 
         private void InitializeSettings()
         {
+            // this repetition is unavoidable :(
             colorChooserDefaultPageColor.Color = Settings.Default.DefaultPageColor;
             colorChooserDefaultPageColor.ColorChanged += (sender, e) =>
                 Settings.Default.DefaultPageColor = colorChooserDefaultPageColor.Color;
@@ -42,6 +43,14 @@ namespace Graphmatic
             colorChooserDefaultGraphColor.Color = Settings.Default.DefaultGraphFeatureColor;
             colorChooserDefaultGraphColor.ColorChanged += (sender, e) =>
                 Settings.Default.DefaultGraphFeatureColor = colorChooserDefaultGraphColor.Color;
+
+            colorChooserDefaultPencilColor.Color = Settings.Default.DefaultPencilColor;
+            colorChooserDefaultPencilColor.ColorChanged += (sender, e) =>
+                Settings.Default.DefaultPencilColor = colorChooserDefaultPencilColor.Color;
+
+            colorChooserDefaultHighlightColor.Color = Settings.Default.DefaultHighlightColor;
+            colorChooserDefaultHighlightColor.ColorChanged += (sender, e) =>
+                Settings.Default.DefaultHighlightColor = colorChooserDefaultHighlightColor.Color;
 
             textBoxUserName.Text = Settings.Default.Username;
             textBoxUserName.TextChanged += (sender, e) =>
@@ -67,6 +76,14 @@ namespace Graphmatic
             numericBackupInterval.Value = (decimal)Settings.Default.BackupInterval;
             numericBackupInterval.ValueChanged += (sender, e) =>
                 Settings.Default.BackupInterval = (int)numericBackupInterval.Value;
+
+            numericDefaultPencilWidth.Value = (decimal)Settings.Default.DefaultPencilWidth;
+            numericDefaultPencilWidth.ValueChanged += (sender, e) =>
+                Settings.Default.DefaultPencilWidth = (float)numericDefaultPencilWidth.Value;
+
+            numericDefaultHighlightWidth.Value = (decimal)Settings.Default.DefaultHighlightWidth;
+            numericDefaultHighlightWidth.ValueChanged += (sender, e) =>
+                Settings.Default.DefaultHighlightWidth = (float)numericDefaultHighlightWidth.Value;
 
             checkBoxBackup.CheckedChanged += (sender, e) =>
             {

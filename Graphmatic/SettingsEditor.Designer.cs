@@ -41,15 +41,27 @@
             this.labelDefaultPlottedVariable = new System.Windows.Forms.Label();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.tabPageDisplay = new System.Windows.Forms.TabPage();
+            this.colorChooserDefaultGraphColor = new Graphmatic.ColorChooser();
+            this.labelDefaultFeatureColor = new System.Windows.Forms.Label();
+            this.colorChooserDefaultPageColor = new Graphmatic.ColorChooser();
+            this.labelDefaultPageColor = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.colorChooserDefaultGraphColor = new Graphmatic.ColorChooser();
-            this.colorChooserDefaultPageColor = new Graphmatic.ColorChooser();
+            this.colorChooserDefaultHighlightColor = new Graphmatic.ColorChooser();
+            this.labelDefaultHighlightColor = new System.Windows.Forms.Label();
+            this.colorChooserDefaultPencilColor = new Graphmatic.ColorChooser();
+            this.labelDefaultPencilColor = new System.Windows.Forms.Label();
+            this.numericDefaultPencilWidth = new System.Windows.Forms.NumericUpDown();
+            this.labelDefaultPencilWidth = new System.Windows.Forms.Label();
+            this.labelDefaultHighlightWidth = new System.Windows.Forms.Label();
+            this.numericDefaultHighlightWidth = new System.Windows.Forms.NumericUpDown();
             this.tabControl.SuspendLayout();
             this.tabPageDefaults.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericBackupInterval)).BeginInit();
+            this.tabPageDisplay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDefaultPencilWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDefaultHighlightWidth)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -58,16 +70,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabPageDefaults);
+            this.tabControl.Controls.Add(this.tabPageDisplay);
             this.tabControl.Location = new System.Drawing.Point(12, 22);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(419, 178);
-            this.tabControl.TabIndex = 2;
+            this.tabControl.TabIndex = 0;
             // 
             // tabPageDefaults
             // 
-            this.tabPageDefaults.Controls.Add(this.colorChooserDefaultGraphColor);
-            this.tabPageDefaults.Controls.Add(this.label1);
             this.tabPageDefaults.Controls.Add(this.numericBackupInterval);
             this.tabPageDefaults.Controls.Add(this.checkBoxBackup);
             this.tabPageDefaults.Controls.Add(this.labelBackupPath);
@@ -79,8 +90,6 @@
             this.tabPageDefaults.Controls.Add(this.labelDefaultPlottedVariable);
             this.tabPageDefaults.Controls.Add(this.textBoxUserName);
             this.tabPageDefaults.Controls.Add(this.label3);
-            this.tabPageDefaults.Controls.Add(this.colorChooserDefaultPageColor);
-            this.tabPageDefaults.Controls.Add(this.label2);
             this.tabPageDefaults.Location = new System.Drawing.Point(4, 24);
             this.tabPageDefaults.Name = "tabPageDefaults";
             this.tabPageDefaults.Padding = new System.Windows.Forms.Padding(3);
@@ -104,7 +113,7 @@
             0});
             this.numericBackupInterval.Name = "numericBackupInterval";
             this.numericBackupInterval.Size = new System.Drawing.Size(226, 23);
-            this.numericBackupInterval.TabIndex = 14;
+            this.numericBackupInterval.TabIndex = 9;
             this.numericBackupInterval.Value = new decimal(new int[] {
             1,
             0,
@@ -117,37 +126,37 @@
             this.checkBoxBackup.Location = new System.Drawing.Point(9, 123);
             this.checkBoxBackup.Name = "checkBoxBackup";
             this.checkBoxBackup.Size = new System.Drawing.Size(164, 19);
-            this.checkBoxBackup.TabIndex = 12;
+            this.checkBoxBackup.TabIndex = 8;
             this.checkBoxBackup.Text = "Backup interval (seconds):";
             this.checkBoxBackup.UseVisualStyleBackColor = true;
             // 
             // labelBackupPath
             // 
             this.labelBackupPath.AutoSize = true;
-            this.labelBackupPath.Location = new System.Drawing.Point(71, 96);
+            this.labelBackupPath.Location = new System.Drawing.Point(56, 96);
             this.labelBackupPath.Name = "labelBackupPath";
-            this.labelBackupPath.Size = new System.Drawing.Size(76, 15);
+            this.labelBackupPath.Size = new System.Drawing.Size(117, 15);
             this.labelBackupPath.TabIndex = 11;
-            this.labelBackupPath.Text = "Backup path:";
+            this.labelBackupPath.Text = "Default backup path:";
             // 
             // textBoxBackupPath
             // 
-            this.textBoxBackupPath.Location = new System.Drawing.Point(153, 93);
+            this.textBoxBackupPath.Location = new System.Drawing.Point(179, 93);
             this.textBoxBackupPath.Name = "textBoxBackupPath";
-            this.textBoxBackupPath.Size = new System.Drawing.Size(252, 23);
-            this.textBoxBackupPath.TabIndex = 10;
+            this.textBoxBackupPath.Size = new System.Drawing.Size(226, 23);
+            this.textBoxBackupPath.TabIndex = 7;
             // 
             // textBoxDefaultDataSetVariables
             // 
-            this.textBoxDefaultDataSetVariables.Location = new System.Drawing.Point(153, 64);
+            this.textBoxDefaultDataSetVariables.Location = new System.Drawing.Point(179, 64);
             this.textBoxDefaultDataSetVariables.Name = "textBoxDefaultDataSetVariables";
-            this.textBoxDefaultDataSetVariables.Size = new System.Drawing.Size(252, 23);
-            this.textBoxDefaultDataSetVariables.TabIndex = 9;
+            this.textBoxDefaultDataSetVariables.Size = new System.Drawing.Size(226, 23);
+            this.textBoxDefaultDataSetVariables.TabIndex = 6;
             // 
             // labelDefaultDataSetVariables
             // 
             this.labelDefaultDataSetVariables.AutoSize = true;
-            this.labelDefaultDataSetVariables.Location = new System.Drawing.Point(6, 67);
+            this.labelDefaultDataSetVariables.Location = new System.Drawing.Point(32, 67);
             this.labelDefaultDataSetVariables.Name = "labelDefaultDataSetVariables";
             this.labelDefaultDataSetVariables.Size = new System.Drawing.Size(141, 15);
             this.labelDefaultDataSetVariables.TabIndex = 8;
@@ -155,22 +164,22 @@
             // 
             // textBoxDefaultVaryingVariable
             // 
-            this.textBoxDefaultVaryingVariable.Location = new System.Drawing.Point(359, 6);
+            this.textBoxDefaultVaryingVariable.Location = new System.Drawing.Point(231, 35);
             this.textBoxDefaultVaryingVariable.Name = "textBoxDefaultVaryingVariable";
             this.textBoxDefaultVaryingVariable.Size = new System.Drawing.Size(46, 23);
-            this.textBoxDefaultVaryingVariable.TabIndex = 7;
+            this.textBoxDefaultVaryingVariable.TabIndex = 5;
             // 
             // textBoxDefaultPlottedVariable
             // 
-            this.textBoxDefaultPlottedVariable.Location = new System.Drawing.Point(307, 6);
+            this.textBoxDefaultPlottedVariable.Location = new System.Drawing.Point(179, 35);
             this.textBoxDefaultPlottedVariable.Name = "textBoxDefaultPlottedVariable";
             this.textBoxDefaultPlottedVariable.Size = new System.Drawing.Size(46, 23);
-            this.textBoxDefaultPlottedVariable.TabIndex = 5;
+            this.textBoxDefaultPlottedVariable.TabIndex = 4;
             // 
             // labelDefaultPlottedVariable
             // 
             this.labelDefaultPlottedVariable.AutoSize = true;
-            this.labelDefaultPlottedVariable.Location = new System.Drawing.Point(205, 9);
+            this.labelDefaultPlottedVariable.Location = new System.Drawing.Point(76, 38);
             this.labelDefaultPlottedVariable.Name = "labelDefaultPlottedVariable";
             this.labelDefaultPlottedVariable.Size = new System.Drawing.Size(97, 15);
             this.labelDefaultPlottedVariable.TabIndex = 4;
@@ -178,28 +187,75 @@
             // 
             // textBoxUserName
             // 
-            this.textBoxUserName.Location = new System.Drawing.Point(280, 35);
+            this.textBoxUserName.Location = new System.Drawing.Point(179, 6);
             this.textBoxUserName.Name = "textBoxUserName";
-            this.textBoxUserName.Size = new System.Drawing.Size(125, 23);
+            this.textBoxUserName.Size = new System.Drawing.Size(226, 23);
             this.textBoxUserName.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(211, 38);
+            this.label3.Location = new System.Drawing.Point(110, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 15);
             this.label3.TabIndex = 2;
             this.label3.Text = "Username:";
             // 
-            // label2
+            // tabPageDisplay
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Default page colour:";
+            this.tabPageDisplay.Controls.Add(this.labelDefaultHighlightWidth);
+            this.tabPageDisplay.Controls.Add(this.numericDefaultHighlightWidth);
+            this.tabPageDisplay.Controls.Add(this.labelDefaultPencilWidth);
+            this.tabPageDisplay.Controls.Add(this.numericDefaultPencilWidth);
+            this.tabPageDisplay.Controls.Add(this.colorChooserDefaultHighlightColor);
+            this.tabPageDisplay.Controls.Add(this.labelDefaultHighlightColor);
+            this.tabPageDisplay.Controls.Add(this.colorChooserDefaultPencilColor);
+            this.tabPageDisplay.Controls.Add(this.labelDefaultPencilColor);
+            this.tabPageDisplay.Controls.Add(this.colorChooserDefaultGraphColor);
+            this.tabPageDisplay.Controls.Add(this.labelDefaultFeatureColor);
+            this.tabPageDisplay.Controls.Add(this.colorChooserDefaultPageColor);
+            this.tabPageDisplay.Controls.Add(this.labelDefaultPageColor);
+            this.tabPageDisplay.Location = new System.Drawing.Point(4, 24);
+            this.tabPageDisplay.Name = "tabPageDisplay";
+            this.tabPageDisplay.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDisplay.Size = new System.Drawing.Size(411, 150);
+            this.tabPageDisplay.TabIndex = 1;
+            this.tabPageDisplay.Text = "Display";
+            this.tabPageDisplay.UseVisualStyleBackColor = true;
+            // 
+            // colorChooserDefaultGraphColor
+            // 
+            this.colorChooserDefaultGraphColor.Color = System.Drawing.Color.Empty;
+            this.colorChooserDefaultGraphColor.Location = new System.Drawing.Point(348, 8);
+            this.colorChooserDefaultGraphColor.Name = "colorChooserDefaultGraphColor";
+            this.colorChooserDefaultGraphColor.Size = new System.Drawing.Size(57, 17);
+            this.colorChooserDefaultGraphColor.TabIndex = 11;
+            // 
+            // labelDefaultFeatureColor
+            // 
+            this.labelDefaultFeatureColor.AutoSize = true;
+            this.labelDefaultFeatureColor.Location = new System.Drawing.Point(217, 8);
+            this.labelDefaultFeatureColor.Name = "labelDefaultFeatureColor";
+            this.labelDefaultFeatureColor.Size = new System.Drawing.Size(125, 15);
+            this.labelDefaultFeatureColor.TabIndex = 19;
+            this.labelDefaultFeatureColor.Text = "Default feature colour:";
+            // 
+            // colorChooserDefaultPageColor
+            // 
+            this.colorChooserDefaultPageColor.Color = System.Drawing.Color.Empty;
+            this.colorChooserDefaultPageColor.Location = new System.Drawing.Point(146, 8);
+            this.colorChooserDefaultPageColor.Name = "colorChooserDefaultPageColor";
+            this.colorChooserDefaultPageColor.Size = new System.Drawing.Size(57, 17);
+            this.colorChooserDefaultPageColor.TabIndex = 10;
+            // 
+            // labelDefaultPageColor
+            // 
+            this.labelDefaultPageColor.AutoSize = true;
+            this.labelDefaultPageColor.Location = new System.Drawing.Point(26, 8);
+            this.labelDefaultPageColor.Name = "labelDefaultPageColor";
+            this.labelDefaultPageColor.Size = new System.Drawing.Size(114, 15);
+            this.labelDefaultPageColor.TabIndex = 17;
+            this.labelDefaultPageColor.Text = "Default page colour:";
             // 
             // buttonOK
             // 
@@ -207,7 +263,7 @@
             this.buttonOK.Location = new System.Drawing.Point(352, 12);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 3;
+            this.buttonOK.TabIndex = 2;
             this.buttonOK.Text = "&OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -219,35 +275,106 @@
             this.buttonCancel.Location = new System.Drawing.Point(271, 12);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 4;
+            this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // label1
+            // colorChooserDefaultHighlightColor
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 15);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Default feature colour:";
+            this.colorChooserDefaultHighlightColor.Color = System.Drawing.Color.Empty;
+            this.colorChooserDefaultHighlightColor.Location = new System.Drawing.Point(348, 31);
+            this.colorChooserDefaultHighlightColor.Name = "colorChooserDefaultHighlightColor";
+            this.colorChooserDefaultHighlightColor.Size = new System.Drawing.Size(57, 17);
+            this.colorChooserDefaultHighlightColor.TabIndex = 14;
             // 
-            // colorChooserDefaultGraphColor
+            // labelDefaultHighlightColor
             // 
-            this.colorChooserDefaultGraphColor.Color = System.Drawing.Color.Empty;
-            this.colorChooserDefaultGraphColor.Location = new System.Drawing.Point(133, 38);
-            this.colorChooserDefaultGraphColor.Name = "colorChooserDefaultGraphColor";
-            this.colorChooserDefaultGraphColor.Size = new System.Drawing.Size(73, 15);
-            this.colorChooserDefaultGraphColor.TabIndex = 16;
+            this.labelDefaultHighlightColor.AutoSize = true;
+            this.labelDefaultHighlightColor.Location = new System.Drawing.Point(206, 33);
+            this.labelDefaultHighlightColor.Name = "labelDefaultHighlightColor";
+            this.labelDefaultHighlightColor.Size = new System.Drawing.Size(136, 15);
+            this.labelDefaultHighlightColor.TabIndex = 23;
+            this.labelDefaultHighlightColor.Text = "Default highlight colour:";
             // 
-            // colorChooserDefaultPageColor
+            // colorChooserDefaultPencilColor
             // 
-            this.colorChooserDefaultPageColor.Color = System.Drawing.Color.Empty;
-            this.colorChooserDefaultPageColor.Location = new System.Drawing.Point(126, 9);
-            this.colorChooserDefaultPageColor.Name = "colorChooserDefaultPageColor";
-            this.colorChooserDefaultPageColor.Size = new System.Drawing.Size(73, 15);
-            this.colorChooserDefaultPageColor.TabIndex = 1;
+            this.colorChooserDefaultPencilColor.Color = System.Drawing.Color.Empty;
+            this.colorChooserDefaultPencilColor.Location = new System.Drawing.Point(146, 31);
+            this.colorChooserDefaultPencilColor.Name = "colorChooserDefaultPencilColor";
+            this.colorChooserDefaultPencilColor.Size = new System.Drawing.Size(57, 17);
+            this.colorChooserDefaultPencilColor.TabIndex = 12;
+            // 
+            // labelDefaultPencilColor
+            // 
+            this.labelDefaultPencilColor.AutoSize = true;
+            this.labelDefaultPencilColor.Location = new System.Drawing.Point(20, 32);
+            this.labelDefaultPencilColor.Name = "labelDefaultPencilColor";
+            this.labelDefaultPencilColor.Size = new System.Drawing.Size(120, 15);
+            this.labelDefaultPencilColor.TabIndex = 21;
+            this.labelDefaultPencilColor.Text = "Default pencil colour:";
+            // 
+            // numericDefaultPencilWidth
+            // 
+            this.numericDefaultPencilWidth.Location = new System.Drawing.Point(146, 54);
+            this.numericDefaultPencilWidth.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.numericDefaultPencilWidth.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericDefaultPencilWidth.Name = "numericDefaultPencilWidth";
+            this.numericDefaultPencilWidth.Size = new System.Drawing.Size(57, 23);
+            this.numericDefaultPencilWidth.TabIndex = 13;
+            this.numericDefaultPencilWidth.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // labelDefaultPencilWidth
+            // 
+            this.labelDefaultPencilWidth.AutoSize = true;
+            this.labelDefaultPencilWidth.Location = new System.Drawing.Point(24, 56);
+            this.labelDefaultPencilWidth.Name = "labelDefaultPencilWidth";
+            this.labelDefaultPencilWidth.Size = new System.Drawing.Size(116, 15);
+            this.labelDefaultPencilWidth.TabIndex = 26;
+            this.labelDefaultPencilWidth.Text = "Default pencil width:";
+            // 
+            // labelDefaultHighlightWidth
+            // 
+            this.labelDefaultHighlightWidth.AutoSize = true;
+            this.labelDefaultHighlightWidth.Location = new System.Drawing.Point(210, 56);
+            this.labelDefaultHighlightWidth.Name = "labelDefaultHighlightWidth";
+            this.labelDefaultHighlightWidth.Size = new System.Drawing.Size(132, 15);
+            this.labelDefaultHighlightWidth.TabIndex = 28;
+            this.labelDefaultHighlightWidth.Text = "Default highlight width:";
+            // 
+            // numericDefaultHighlightWidth
+            // 
+            this.numericDefaultHighlightWidth.Location = new System.Drawing.Point(348, 54);
+            this.numericDefaultHighlightWidth.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.numericDefaultHighlightWidth.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericDefaultHighlightWidth.Name = "numericDefaultHighlightWidth";
+            this.numericDefaultHighlightWidth.Size = new System.Drawing.Size(57, 23);
+            this.numericDefaultHighlightWidth.TabIndex = 15;
+            this.numericDefaultHighlightWidth.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
             // 
             // SettingsEditor
             // 
@@ -274,6 +401,10 @@
             this.tabPageDefaults.ResumeLayout(false);
             this.tabPageDefaults.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericBackupInterval)).EndInit();
+            this.tabPageDisplay.ResumeLayout(false);
+            this.tabPageDisplay.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDefaultPencilWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDefaultHighlightWidth)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -282,10 +413,8 @@
 
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageDefaults;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
-        private ColorChooser colorChooserDefaultPageColor;
         private System.Windows.Forms.TextBox textBoxUserName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelDefaultPlottedVariable;
@@ -297,7 +426,18 @@
         private System.Windows.Forms.TextBox textBoxBackupPath;
         private System.Windows.Forms.CheckBox checkBoxBackup;
         private System.Windows.Forms.NumericUpDown numericBackupInterval;
+        private System.Windows.Forms.TabPage tabPageDisplay;
         private ColorChooser colorChooserDefaultGraphColor;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelDefaultFeatureColor;
+        private ColorChooser colorChooserDefaultPageColor;
+        private System.Windows.Forms.Label labelDefaultPageColor;
+        private System.Windows.Forms.Label labelDefaultPencilWidth;
+        private System.Windows.Forms.NumericUpDown numericDefaultPencilWidth;
+        private ColorChooser colorChooserDefaultHighlightColor;
+        private System.Windows.Forms.Label labelDefaultHighlightColor;
+        private ColorChooser colorChooserDefaultPencilColor;
+        private System.Windows.Forms.Label labelDefaultPencilColor;
+        private System.Windows.Forms.Label labelDefaultHighlightWidth;
+        private System.Windows.Forms.NumericUpDown numericDefaultHighlightWidth;
     }
 }

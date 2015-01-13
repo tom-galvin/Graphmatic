@@ -99,8 +99,8 @@ namespace Graphmatic
 
             RegisterTool(PageTool.Pan, toolStripButtonPan, panToolStripMenuItem);
             RegisterTool(PageTool.Select, toolStripButtonSquareSelect, selectToolStripMenuItem);
-            RegisterTool(PageTool.Pencil, pencilToolStripMenuItem, pencilToolStripMenuItem1);
-            RegisterTool(PageTool.Eraser, eraserToolStripMenuItem, eraserToolStripMenuItem1);
+            RegisterTool(PageTool.Pencil, pencilToolStripMenuItem, pencilToolStripMenuItem1, toolStripSplitButtonPencil);
+            RegisterTool(PageTool.Eraser, eraserToolStripMenuItem, eraserToolStripMenuItem1, toolStripSplitButtonErase);
             RegisterTool(PageTool.Highlighter, highlightToolStripMenuItem, highlightToolStripMenuItem);
 
             toolStripComboBoxZoom.ComboBox.MouseWheel += toolStripComboBoxZoom_MouseWheel;
@@ -111,6 +111,22 @@ namespace Graphmatic
             toolStripButtonSquareSelect.PerformClick();
         }
 
+        #region Tool stuff
+        /// <summary>
+        /// Regenerates the preview image of the currently selected pen.
+        /// </summary>
+        private void RegeneratePenPreviewImage()
+        {
+            Bitmap bitmap = new Bitmap((int)PenWidth + 1, (int)PenWidth + 1);
+            Graphics graphics = Graphics.FromImage(bitmap);
+            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            Brush brush = new SolidBrush(PenColor);
+            graphics.FillEllipse(brush, 0, 0, (int)PenWidth, (int)PenWidth);
+            toolStripLabelPenSize.Image = bitmap;
+            brush.Dispose();
+            graphics.Dispose();
+        }
+
         /// <summary>
         /// Register a page editor tool for this interface.
         /// </summary>
@@ -118,6 +134,11 @@ namespace Graphmatic
         /// <param name="items">The ToolStripItem(s) that will be used to activate this tool.</param>
         private void RegisterTool(PageTool toolType, params ToolStripItem[] items)
         {
+            // this function must accept 3 different types of button
+            // MenuItem: in a menu
+            // Button: on a toolbar, the normal type
+            // SplitButton: on a toolbar, the drop-down type
+            // the ugly-looking logic is to account for all 3
             foreach (ToolStripItem item in items)
             {
                 ToolButtons.Add(item);
@@ -125,30 +146,65 @@ namespace Graphmatic
                     (item as ToolStripButton).CheckOnClick = true;
                 if (item is ToolStripMenuItem)
                     (item as ToolStripMenuItem).CheckOnClick = true;
-                item.Click += (sender, e) =>
+                EventHandler evt = (sender, e) =>
                 {
                     SelectedAnnotations = null;
-                    ToolButtons.ForEach(button =>
-                    {
-                        if (button is ToolStripButton)
-                            (button as ToolStripButton).Checked = false;
-                        if (button is ToolStripMenuItem)
-                            (button as ToolStripMenuItem).Checked = false;
-                    });
+                    CheckSelectedTool(items);
                     SelectionBox = new Rectangle();
                     toolStripStatusLabelEditor.Text = toolType.ToString();
                     CurrentPageTool = toolType;
-                    foreach (ToolStripItem subItem in items)
-                    {
-                        if (subItem is ToolStripButton)
-                            (subItem as ToolStripButton).Checked = true;
-                        if (subItem is ToolStripMenuItem)
-                            (subItem as ToolStripMenuItem).Checked = true;
-                    }
+                    SetPenPresetAttributes(toolType);
                     pageDisplay.Refresh();
                 };
+                if (item is ToolStripSplitButton)
+                    (item as ToolStripSplitButton).ButtonClick += evt;
+                else
+                    item.Click += evt;
             }
         }
+
+        /// <summary>
+        /// Checks the tool buttons for the currently-selected tool, and deselects the rest.
+        /// </summary>
+        /// <param name="currentToolItems">The ToolStripItems corresponding to the current tool.</param>
+        private void CheckSelectedTool(ToolStripItem[] currentToolItems)
+        {
+            ToolButtons.ForEach(button =>
+            {
+                if (button is ToolStripButton)
+                    (button as ToolStripButton).Checked = false;
+                if (button is ToolStripMenuItem)
+                    (button as ToolStripMenuItem).Checked = false;
+            });
+            foreach (ToolStripItem subItem in currentToolItems)
+            {
+                if (subItem is ToolStripButton)
+                    (subItem as ToolStripButton).Checked = true;
+                if (subItem is ToolStripMenuItem)
+                    (subItem as ToolStripMenuItem).Checked = true;
+            }
+        }
+
+        /// <summary>
+        /// Sets the default color and width (from user settings) for the given tool.
+        /// </summary>
+        /// <param name="toolType">The tool to set the attributes according to.</param>
+        private void SetPenPresetAttributes(PageTool toolType)
+        {
+            if (toolType == PageTool.Pencil)
+            {
+                PenColor = Properties.Settings.Default.DefaultPencilColor;
+                PenWidth = Properties.Settings.Default.DefaultPencilWidth;
+                RegeneratePenPreviewImage();
+            }
+            else if (toolType == PageTool.Highlighter)
+            {
+                PenColor = Properties.Settings.Default.DefaultHighlightColor;
+                PenWidth = Properties.Settings.Default.DefaultHighlightWidth;
+                RegeneratePenPreviewImage();
+            }
+        }
+        #endregion
 
         /// <summary>
         /// Open the resource editor for Pages, and set it to edit the given page.
@@ -228,6 +284,18 @@ namespace Graphmatic
             RegenerateGraphEditMenu();
         }
 
+        /// <summary>
+        /// Create a new PlottableParameters object with default randomized values.
+        /// </summary>
+        /// <returns>A new PlottableParameters object.</returns>
+        private PlottableParameters CreateNewPlottableParameters()
+        {
+            PlottableParameters parameters = new PlottableParameters();
+            parameters.PlotColor = DefaultPlottableColors[Program.Random.Next(DefaultPlottableColors.Length)];
+            return parameters;
+        }
+
+        #region Drawing stuff
         // Page display drawing procedure...
         private void pageDisplay_Paint(object sender, PaintEventArgs e)
         {
@@ -255,13 +323,13 @@ namespace Graphmatic
                 CurrentPage.Graph.Draw(g, size, resolution);
 
                 if (CurrentPageTool == PageTool.Highlighter)
-                    // highlighter goes under other annotations, so draw the preview before the rest
+                // highlighter goes under other annotations, so draw the preview before the rest
                 {
                     DrawCurrentPencilPath(g);
                     DrawAnnotations(g, size, resolution);
                 }
                 else
-                    // otherwise, draw normally
+                // otherwise, draw normally
                 {
                     DrawAnnotations(g, size, resolution);
                     DrawCurrentPencilPath(g);
@@ -343,9 +411,8 @@ namespace Graphmatic
                 drawPen.Dispose();
             }
         }
-
-
-
+#endregion
+        #region Menu stuff
         /// <summary>
         /// Regenerates the menu for editing the page and any plottable resources on it.
         /// </summary>
@@ -518,30 +585,7 @@ namespace Graphmatic
                 Keys.Delete));
             return items.ToArray();
         }
-
-        /// <summary>
-        /// Create a new PlottableParameters object with default randomized values.
-        /// </summary>
-        /// <returns>A new PlottableParameters object.</returns>
-        private PlottableParameters CreateNewPlottableParameters()
-        {
-            PlottableParameters parameters = new PlottableParameters();
-            parameters.PlotColor = DefaultPlottableColors[Program.Random.Next(DefaultPlottableColors.Length)];
-            return parameters;
-        }
-
-        private void RegeneratePenPreviewImage()
-        {
-            Bitmap bitmap = new Bitmap((int)PenWidth + 1, (int)PenWidth + 1);
-            Graphics graphics = Graphics.FromImage(bitmap);
-            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            Brush brush = new SolidBrush(PenColor);
-            graphics.FillEllipse(brush, 0, 0, (int)PenWidth, (int)PenWidth);
-            toolStripLabelPenSize.Image = bitmap;
-            brush.Dispose();
-            graphics.Dispose();
-        }
-
+        #endregion
         #region Selection Handling
         /// <summary>
         /// The horizontal page offset at the start of selection.
@@ -726,7 +770,7 @@ namespace Graphmatic
         private void pageDisplay_MouseDown(object sender, MouseEventArgs e)
         {
             MouseStart = new Point(e.X, e.Y);
-            MouseLocation = MouseStart; 
+            MouseLocation = MouseStart;
             if (SelectedAnnotations != null)
             {
                 // If we've already selected some items, and the cursor clicks somewhere within
@@ -915,7 +959,6 @@ namespace Graphmatic
                 SelectedAnnotations = null;
         }
         #endregion
-
         #region WinForms handlers
         private void pageDisplay_Resize(object sender, EventArgs e)
         {
