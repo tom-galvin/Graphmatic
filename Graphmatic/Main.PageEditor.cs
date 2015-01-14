@@ -1046,6 +1046,52 @@ namespace Graphmatic
             }
         }
 
+        // used for adding an image from a file
+        private void fromfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog()
+            {
+                Filter = "Image files (*.png; *.jpg; *.jpe; *.jpeg; *.bmp; *.gif; *.tga; *.tif)|*.png;*.jpg;*.jpe;*.jpeg;*.bmp;*.gif;*.tga;*.tif|All files|*",
+                Title = "Import Image"
+            };
+
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Image image = Image.FromFile(dialog.FileName);
+                Picture picture = new Picture(image)
+                {
+                    Width = CurrentPage.Graph.Parameters.HorizontalPixelScale * image.Width,
+                    Height = CurrentPage.Graph.Parameters.VerticalPixelScale * image.Height
+                };
+                CurrentPage.Annotations.Add(picture);
+                NotifyResourceModified(CurrentPage);
+            }
+        }
+
+        // used for adding an image from the clipboard
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsImage())
+            {
+                Image image = Clipboard.GetImage();
+                Picture picture = new Picture(image)
+                {
+                    Width = CurrentPage.Graph.Parameters.HorizontalPixelScale * image.Width,
+                    Height = CurrentPage.Graph.Parameters.VerticalPixelScale * image.Height
+                };
+                CurrentPage.Annotations.Add(picture);
+                NotifyResourceModified(CurrentPage);
+            }
+            else
+            {
+                MessageBox.Show(
+                    "The current data on the clipboard is not an image.",
+                    "Paste Image",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
         private void toolStripDropDownEditGraph_MouseDown(object sender, MouseEventArgs e)
         {
             RegenerateGraphEditMenu();

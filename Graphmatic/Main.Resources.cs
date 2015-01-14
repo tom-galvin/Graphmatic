@@ -426,20 +426,6 @@ namespace Graphmatic
             }
         }
 
-        private void pictureToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog()
-            {
-                Filter = "Image files (*.png; *.jpg; *.jpe; *.jpeg; *.bmp; *.gif; *.tga; *.tif)|*.png;*.jpg;*.jpe;*.jpeg;*.bmp;*.gif;*.tga;*.tif|All files|*",
-                Title = "Import Image"
-            };
-
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                // TODO remove redundant code
-            }
-        }
-
         private void pageOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Resource resource = SelectedResource;

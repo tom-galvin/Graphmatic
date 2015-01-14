@@ -116,6 +116,9 @@ namespace Graphmatic
             this.contextMenuStripPageEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripButtonPlotDataSet = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPlotEquation = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButtonImage = new System.Windows.Forms.ToolStripDropDownButton();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fromfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonPreviousPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNextPage = new System.Windows.Forms.ToolStripButton();
@@ -683,6 +686,7 @@ namespace Graphmatic
             this.toolStripDropDownEditGraph,
             this.toolStripButtonPlotDataSet,
             this.toolStripButtonPlotEquation,
+            this.toolStripDropDownButtonImage,
             this.toolStripSeparator2,
             this.toolStripButtonPreviousPage,
             this.toolStripButtonNextPage,
@@ -691,7 +695,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(507, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(595, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -960,6 +964,37 @@ namespace Graphmatic
             this.toolStripButtonPlotEquation.ToolTipText = "Plot an equation on this graph";
             this.toolStripButtonPlotEquation.Click += new System.EventHandler(this.toolStripButtonPlotEquation_Click);
             // 
+            // toolStripDropDownButtonImage
+            // 
+            this.toolStripDropDownButtonImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButtonImage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pasteToolStripMenuItem,
+            this.fromfileToolStripMenuItem});
+            this.toolStripDropDownButtonImage.Image = global::Graphmatic.Properties.Resources.ImageImport16;
+            this.toolStripDropDownButtonImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButtonImage.Name = "toolStripDropDownButtonImage";
+            this.toolStripDropDownButtonImage.Size = new System.Drawing.Size(37, 28);
+            this.toolStripDropDownButtonImage.Text = "&Image";
+            this.toolStripDropDownButtonImage.ToolTipText = "Image manipulation";
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.ClipboardPaste16;
+            this.pasteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Text = "&Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            // 
+            // fromfileToolStripMenuItem
+            // 
+            this.fromfileToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Image16;
+            this.fromfileToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.fromfileToolStripMenuItem.Name = "fromfileToolStripMenuItem";
+            this.fromfileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fromfileToolStripMenuItem.Text = "From &file...";
+            this.fromfileToolStripMenuItem.Click += new System.EventHandler(this.fromfileToolStripMenuItem_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -1180,6 +1215,9 @@ namespace Graphmatic
         private ToolStripSplitButton toolStripSplitButtonErase;
         private ToolStripMenuItem eraseAllToolStripMenuItem;
         private ToolStripMenuItem eraserToolStripMenuItem;
+        private ToolStripDropDownButton toolStripDropDownButtonImage;
+        private ToolStripMenuItem pasteToolStripMenuItem;
+        private ToolStripMenuItem fromfileToolStripMenuItem;
     }
 }
 

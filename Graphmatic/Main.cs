@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Graphmatic.Expressions;
 using Graphmatic.Expressions.Parsing;
 using Graphmatic.Interaction.Plotting;
+using Graphmatic.Interaction.Annotations;
 
 namespace Graphmatic
 {

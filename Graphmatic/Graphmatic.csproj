@@ -274,6 +274,9 @@
     <None Include="Resources\document-excel-table.png" />
     <None Include="Resources\color-swatch.png" />
     <None Include="Resources\edit.png" />
+    <None Include="Resources\image-import.png" />
+    <None Include="Resources\clipboard-paste.png" />
+    <None Include="Resources\image.png" />
     <Content Include="Resources\Image16.png" />
     <Content Include="Resources\Image32.png" />
     <Content Include="Resources\Images16.png" />
