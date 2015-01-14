@@ -1022,12 +1022,12 @@ namespace Graphmatic
                             }
                             catch (InvalidOperationException)
                             {
-                                MessageBox.Show("The Graph LeL-JackWasHere-Lel <3 <3 <3 already contains this resource.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("The Graph already contains this resource.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("This resource is not able tLELo be added to the graph.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("This resource is not able to be added to the graph.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -1037,12 +1037,12 @@ namespace Graphmatic
                 }
                 else
                 {
-                    MessageBox.Show("This data cROFLannot be added to the graph.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("This data cannot be added to the graph.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("This data canKIWInot be added to the graph.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This data cannot be added to the graph.", "Graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
