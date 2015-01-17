@@ -17,38 +17,39 @@ namespace Graphmatic.Interaction
         {
             if (resolution == PlotResolution.Resize) return;
             BinaryParseTreeNode parseTreeRoot = ParseTree as BinaryParseTreeNode;
-            Pen graphPen = new Pen(plotParams.PlotColor);
-            if (parseTreeRoot.Left is VariableParseTreeNode &&
-                !parseTreeRoot.Right.ContainsVariable((parseTreeRoot.Left as VariableParseTreeNode).Variable))
+            using (Pen graphPen = new Pen(plotParams.PlotColor))
             {
-                PlotExplicit(
-                    graph,
-                    graphics,
-                    graphSize,
-                    graphPen,
-                    parameters,
-                    (parseTreeRoot.Left as VariableParseTreeNode).Variable,
-                    parseTreeRoot.Right,
-                    resolution);
+                if (parseTreeRoot.Left is VariableParseTreeNode &&
+                    !parseTreeRoot.Right.ContainsVariable((parseTreeRoot.Left as VariableParseTreeNode).Variable))
+                {
+                    PlotExplicit(
+                        graph,
+                        graphics,
+                        graphSize,
+                        graphPen,
+                        parameters,
+                        (parseTreeRoot.Left as VariableParseTreeNode).Variable,
+                        parseTreeRoot.Right,
+                        resolution);
+                }
+                else if (parseTreeRoot.Right is VariableParseTreeNode &&
+                    !parseTreeRoot.Left.ContainsVariable((parseTreeRoot.Right as VariableParseTreeNode).Variable))
+                {
+                    PlotExplicit(
+                        graph,
+                        graphics,
+                        graphSize,
+                        graphPen,
+                        parameters,
+                        (parseTreeRoot.Right as VariableParseTreeNode).Variable,
+                        parseTreeRoot.Left,
+                        resolution);
+                }
+                else
+                {
+                    PlotImplicit(graph, graphics, graphSize, graphPen, parameters, resolution);
+                }
             }
-            else if (parseTreeRoot.Right is VariableParseTreeNode &&
-                !parseTreeRoot.Left.ContainsVariable((parseTreeRoot.Right as VariableParseTreeNode).Variable))
-            {
-                PlotExplicit(
-                    graph,
-                    graphics,
-                    graphSize,
-                    graphPen,
-                    parameters,
-                    (parseTreeRoot.Right as VariableParseTreeNode).Variable,
-                    parseTreeRoot.Left,
-                    resolution);
-            }
-            else
-            {
-                PlotImplicit(graph, graphics, graphSize, graphPen, parameters, resolution);
-            }
-            graphPen.Dispose();
         }
 
         private int IntLerp(int scale, double a, double b)

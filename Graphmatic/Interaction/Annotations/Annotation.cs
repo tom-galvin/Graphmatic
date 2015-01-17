@@ -85,27 +85,29 @@ namespace Graphmatic.Interaction.Annotations
         public virtual void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
-            Brush annotationBrush = new SolidBrush(Color);
-            graphics.FillRectangle(annotationBrush, screenRectangle);
-            annotationBrush.Dispose();
+            using (Brush annotationBrush = new SolidBrush(Color))
+            {
+                graphics.FillRectangle(annotationBrush, screenRectangle);
+            }
         }
 
         public virtual void DrawSelectionIndicatorOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
-            Pen selectBoxPen = new Pen(Color.Red, 2f);
-            Brush resizeNotchBrush = Brushes.Yellow;
-            selectBoxPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            graphics.DrawRectangle(selectBoxPen, screenRectangle);
-            graphics.FillEllipse(resizeNotchBrush,
-                screenRectangle.X + screenRectangle.Width - 4,
-                screenRectangle.Y  - 4,
-                9, 9);
-            graphics.DrawEllipse(selectBoxPen,
-                screenRectangle.X + screenRectangle.Width - 4,
-                screenRectangle.Y - 4,
-                9, 9);
-            selectBoxPen.Dispose();
+            using (Pen selectBoxPen = new Pen(Color.Red, 2f))
+            {
+                Brush resizeNotchBrush = Brushes.Yellow;
+                selectBoxPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+                graphics.DrawRectangle(selectBoxPen, screenRectangle);
+                graphics.FillEllipse(resizeNotchBrush,
+                    screenRectangle.X + screenRectangle.Width - 4,
+                    screenRectangle.Y - 4,
+                    9, 9);
+                graphics.DrawEllipse(selectBoxPen,
+                    screenRectangle.X + screenRectangle.Width - 4,
+                    screenRectangle.Y - 4,
+                    9, 9);
+            }
         }
 
         public virtual bool IsAnnotationInSelection(Page page, Size graphSize, GraphParameters graphParams, Rectangle screenSelection)

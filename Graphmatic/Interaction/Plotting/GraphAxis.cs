@@ -44,95 +44,88 @@ namespace Graphmatic.Interaction.Plotting
 
         private void PlotAxesOnto(Graphics g, Size graphSize, PlottableParameters plotParams, int axisX, int axisY)
         {
-            Pen axisPen = new Pen(plotParams.PlotColor);
-            if (axisY >= 0 && axisY < graphSize.Height)
+            using (Pen axisPen = new Pen(plotParams.PlotColor))
             {
-                g.DrawLine(axisPen, 0, axisY, graphSize.Width, axisY);
+                if (axisY >= 0 && axisY < graphSize.Height)
+                {
+                    g.DrawLine(axisPen, 0, axisY, graphSize.Width, axisY);
+                }
+                if (axisX >= 0 && axisX < graphSize.Width)
+                {
+                    g.DrawLine(axisPen, axisX, 0, axisX, graphSize.Height);
+                }
             }
-            if (axisX >= 0 && axisX < graphSize.Width)
-            {
-                g.DrawLine(axisPen, axisX, 0, axisX, graphSize.Height);
-            }
-            axisPen.Dispose();
         }
 
         private void PlotGridLinesOnto(Graphics g, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, int axisX, int axisY)
         {
-            Pen majorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.5));
-            Pen minorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.333));
-
-            Font valueFont = SystemFonts.DefaultFont;
-            Font axisFont = valueFont;
-            Brush valueBrush = majorPen.Brush;
-
-            double incrementX = GridSize / graphParams.HorizontalPixelScale,
-                   incrementY = GridSize / graphParams.VerticalPixelScale;
-
-            g.DrawString(graphParams.VerticalAxis.ToString(), axisFont, valueBrush, (int)axisX, 2);
-            g.DrawString(graphParams.HorizontalAxis.ToString(), axisFont, valueBrush, (int)graphSize.Width - 16, (int)axisY);
-
-            double value = axisX;
-            int index = 0;
-            while (value < graphSize.Width)
+            using (Pen majorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.5)))
+            using (Pen minorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.333)))
+            using (Brush valueBrush = majorPen.Brush)
             {
-                bool major = index % MajorInterval == 0;
-                g.DrawLine(major ? majorPen : minorPen,
-                    (int)value, 0, (int)value, graphSize.Height);
-                if (major)
-                {
-                    double horizontal = graphParams.HorizontalPixelScale * (value - graphSize.Width / 2) + graphParams.CenterHorizontal;
-                    g.DrawString(horizontal.ToString("0.####"), valueFont, valueBrush, (int)value, (int)axisY);
-                }
-                value += incrementX; index++;
-            }
+                double incrementX = GridSize / graphParams.HorizontalPixelScale,
+                       incrementY = GridSize / graphParams.VerticalPixelScale;
 
-            value = axisX; index = 0;
-            while (value >= 0)
-            {
-                bool major = index % MajorInterval == 0;
-                g.DrawLine(major ? majorPen : minorPen,
-                    (int)value, 0, (int)value, graphSize.Height);
-                if (major)
-                {
-                    double horizontal = graphParams.HorizontalPixelScale * (value - graphSize.Width / 2) + graphParams.CenterHorizontal;
-                    g.DrawString(horizontal.ToString("0.####"), valueFont, valueBrush, (int)value, (int)axisY);
-                }
-                value -= incrementX; index++;
-            }
+                g.DrawString(graphParams.VerticalAxis.ToString(), SystemFonts.DefaultFont, valueBrush, (int)axisX, 2);
+                g.DrawString(graphParams.HorizontalAxis.ToString(), SystemFonts.DefaultFont, valueBrush, (int)graphSize.Width - 16, (int)axisY);
 
-            value = axisY; index = 0;
-            while (value < graphSize.Height)
-            {
-                bool major = index % MajorInterval == 0;
-                g.DrawLine(major ? majorPen : minorPen,
-                    0, (int)value, graphSize.Width, (int)value);
-                if (major)
+                double value = axisX;
+                int index = 0;
+                while (value < graphSize.Width)
                 {
-                    double vertical = graphParams.VerticalPixelScale * -(value - graphSize.Height / 2) + graphParams.CenterVertical;
-                    g.DrawString(vertical.ToString("0.####"), valueFont, valueBrush, (int)axisX, (int)value);
+                    bool major = index % MajorInterval == 0;
+                    g.DrawLine(major ? majorPen : minorPen,
+                        (int)value, 0, (int)value, graphSize.Height);
+                    if (major)
+                    {
+                        double horizontal = graphParams.HorizontalPixelScale * (value - graphSize.Width / 2) + graphParams.CenterHorizontal;
+                        g.DrawString(horizontal.ToString("0.####"), SystemFonts.DefaultFont, valueBrush, (int)value, (int)axisY);
+                    }
+                    value += incrementX; index++;
                 }
-                value += incrementY; index++;
-            }
 
-            value = axisY; index = 0;
-            while (value >= 0)
-            {
-                bool major = index % MajorInterval == 0;
-                g.DrawLine(major ? majorPen : minorPen,
-                    0, (int)value, graphSize.Width, (int)value);
-                if (major)
+                value = axisX; index = 0;
+                while (value >= 0)
                 {
-                    double vertical = graphParams.VerticalPixelScale * -(value - graphSize.Height / 2) + graphParams.CenterVertical;
-                    g.DrawString(vertical.ToString("0.####"), valueFont, valueBrush, (int)axisX, (int)value);
+                    bool major = index % MajorInterval == 0;
+                    g.DrawLine(major ? majorPen : minorPen,
+                        (int)value, 0, (int)value, graphSize.Height);
+                    if (major)
+                    {
+                        double horizontal = graphParams.HorizontalPixelScale * (value - graphSize.Width / 2) + graphParams.CenterHorizontal;
+                        g.DrawString(horizontal.ToString("0.####"), SystemFonts.DefaultFont, valueBrush, (int)value, (int)axisY);
+                    }
+                    value -= incrementX; index++;
                 }
-                value -= incrementY; index++;
-            }
 
-            majorPen.Dispose();
-            minorPen.Dispose();
-            axisFont.Dispose();
-            valueFont.Dispose();
-            valueBrush.Dispose();
+                value = axisY; index = 0;
+                while (value < graphSize.Height)
+                {
+                    bool major = index % MajorInterval == 0;
+                    g.DrawLine(major ? majorPen : minorPen,
+                        0, (int)value, graphSize.Width, (int)value);
+                    if (major)
+                    {
+                        double vertical = graphParams.VerticalPixelScale * -(value - graphSize.Height / 2) + graphParams.CenterVertical;
+                        g.DrawString(vertical.ToString("0.####"), SystemFonts.DefaultFont, valueBrush, (int)axisX, (int)value);
+                    }
+                    value += incrementY; index++;
+                }
+
+                value = axisY; index = 0;
+                while (value >= 0)
+                {
+                    bool major = index % MajorInterval == 0;
+                    g.DrawLine(major ? majorPen : minorPen,
+                        0, (int)value, graphSize.Width, (int)value);
+                    if (major)
+                    {
+                        double vertical = graphParams.VerticalPixelScale * -(value - graphSize.Height / 2) + graphParams.CenterVertical;
+                        g.DrawString(vertical.ToString("0.####"), SystemFonts.DefaultFont, valueBrush, (int)axisX, (int)value);
+                    }
+                    value -= incrementY; index++;
+                }
+            }
         }
 
         public XElement ToXml()

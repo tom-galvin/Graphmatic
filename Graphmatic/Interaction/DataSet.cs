@@ -246,7 +246,6 @@ namespace Graphmatic.Interaction
         public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, PlotResolution resolution)
         {
             if (resolution == PlotResolution.Resize) return;
-            Pen dataPointPen = new Pen(plotParams.PlotColor, DataPointPenWidth);
 
             int horizontalVariableIndex = IndexOfVariable(graph.Parameters.HorizontalAxis),
                 verticalVariableIndex = IndexOfVariable(graph.Parameters.VerticalAxis);
@@ -261,22 +260,24 @@ namespace Graphmatic.Interaction
                                     graph.Parameters.VerticalAxis.ToString() +
                                     " variable, as it does not contain such a variable.");
 
-            foreach (double[] row in Data)
+            using (Pen dataPointPen = new Pen(plotParams.PlotColor, DataPointPenWidth))
             {
-                double horizontal = row[horizontalVariableIndex],
-                       vertical = row[verticalVariableIndex];
 
-                int graphX, graphY;
-                graph.ToImageSpace(
-                    graphSize, graphParams,
-                    horizontal, vertical,
-                    out graphX, out graphY);
+                foreach (double[] row in Data)
+                {
+                    double horizontal = row[horizontalVariableIndex],
+                           vertical = row[verticalVariableIndex];
 
-                graphics.DrawLine(dataPointPen, graphX - DataPointCrossSize, graphY - DataPointCrossSize, graphX + DataPointCrossSize, graphY + DataPointCrossSize);
-                graphics.DrawLine(dataPointPen, graphX - DataPointCrossSize, graphY + DataPointCrossSize, graphX + DataPointCrossSize, graphY - DataPointCrossSize);
+                    int graphX, graphY;
+                    graph.ToImageSpace(
+                        graphSize, graphParams,
+                        horizontal, vertical,
+                        out graphX, out graphY);
+
+                    graphics.DrawLine(dataPointPen, graphX - DataPointCrossSize, graphY - DataPointCrossSize, graphX + DataPointCrossSize, graphY + DataPointCrossSize);
+                    graphics.DrawLine(dataPointPen, graphX - DataPointCrossSize, graphY + DataPointCrossSize, graphX + DataPointCrossSize, graphY - DataPointCrossSize);
+                }
             }
-
-            dataPointPen.Dispose();
         }
 
 

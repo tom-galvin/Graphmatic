@@ -105,17 +105,19 @@ namespace Graphmatic.Interaction.Annotations
                     return new Point(x, y);
                 })
                 .ToArray();
-            Brush annotationBrush = new SolidBrush(Color.Red);
-            foreach (var screenPoint in screenPoints)
+
+            using (Brush annotationBrush = new SolidBrush(Color.Red))
             {
-                graphics.FillEllipse(annotationBrush,
-                    screenPoint.X - (int)(Thickness * 0.65),
-                    screenPoint.Y - (int)(Thickness * 0.65),
-                    (int)(Thickness * 1.3),
-                    (int)(Thickness * 1.3));
+                foreach (var screenPoint in screenPoints)
+                {
+                    graphics.FillEllipse(annotationBrush,
+                        screenPoint.X - (int)(Thickness * 0.65),
+                        screenPoint.Y - (int)(Thickness * 0.65),
+                        (int)(Thickness * 1.3),
+                        (int)(Thickness * 1.3));
+                }
+                base.DrawSelectionIndicatorOnto(page, graphics, graphSize, graphParams, resolution);
             }
-            base.DrawSelectionIndicatorOnto(page, graphics, graphSize, graphParams, resolution);
-            annotationBrush.Dispose();
         }
 
         public override void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
@@ -132,15 +134,17 @@ namespace Graphmatic.Interaction.Annotations
                     return new Point(x, y);
                 })
                 .ToArray();
-            Pen annotationPen = new Pen(Color, Thickness);
-            annotationPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-            if (Type == DrawingType.Highlight)
-                annotationPen.EndCap = annotationPen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
-            else
-                annotationPen.EndCap = annotationPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
 
-            graphics.DrawLines(annotationPen, screenPoints);
-            annotationPen.Dispose();
+            using (Pen annotationPen = new Pen(Color, Thickness))
+            {
+                annotationPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+                if (Type == DrawingType.Highlight)
+                    annotationPen.EndCap = annotationPen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
+                else
+                    annotationPen.EndCap = annotationPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+
+                graphics.DrawLines(annotationPen, screenPoints);
+            }
         }
 
         public override int DistanceToPointOnScreen(Page page, Size graphSize, GraphParameters graphParams, Point screenSelection)

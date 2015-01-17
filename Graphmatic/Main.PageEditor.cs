@@ -118,13 +118,14 @@ namespace Graphmatic
         private void RegeneratePenPreviewImage()
         {
             Bitmap bitmap = new Bitmap((int)PenWidth + 1, (int)PenWidth + 1);
-            Graphics graphics = Graphics.FromImage(bitmap);
-            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            Brush brush = new SolidBrush(PenColor);
-            graphics.FillEllipse(brush, 0, 0, (int)PenWidth, (int)PenWidth);
-            toolStripLabelPenSize.Image = bitmap;
-            brush.Dispose();
-            graphics.Dispose();
+
+            using(Graphics graphics = Graphics.FromImage(bitmap))
+            using (Brush brush = new SolidBrush(PenColor))
+            {
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                graphics.FillEllipse(brush, 0, 0, (int)PenWidth, (int)PenWidth);
+                toolStripLabelPenSize.Image = bitmap;
+            }
         }
 
         /// <summary>
@@ -319,40 +320,40 @@ namespace Graphmatic
 
                 // Get some drawing equipment
                 Graphics g = e.Graphics;
-                Brush backgroundBrush = new SolidBrush(CurrentPage.BackgroundColor);
-                Size size = pageDisplay.ClientSize;
-
-                // Draw background color in
-                g.FillRectangle(backgroundBrush, IsFormResizing ? e.ClipRectangle : pageDisplay.ClientRectangle);
-
-                // Get the appropriate drawing resolution
-                PlotResolution resolution = PlotResolution.View;
-                if (IsDragging)
-                    resolution = PlotResolution.Edit;
-                if (IsFormResizing)
-                    resolution = PlotResolution.Resize;
-
-                // Draw the graph
-                CurrentPage.Graph.Draw(g, size, resolution);
-
-                if (CurrentPageTool == PageTool.Highlighter)
-                // highlighter goes under other annotations, so draw the preview before the rest
+                using (Brush backgroundBrush = new SolidBrush(CurrentPage.BackgroundColor))
                 {
-                    DrawCurrentPencilPath(g);
-                    DrawAnnotations(g, size, resolution);
+                    Size size = pageDisplay.ClientSize;
+
+                    // Draw background color in
+                    g.FillRectangle(backgroundBrush, IsFormResizing ? e.ClipRectangle : pageDisplay.ClientRectangle);
+
+                    // Get the appropriate drawing resolution
+                    PlotResolution resolution = PlotResolution.View;
+                    if (IsDragging)
+                        resolution = PlotResolution.Edit;
+                    if (IsFormResizing)
+                        resolution = PlotResolution.Resize;
+
+                    // Draw the graph
+                    CurrentPage.Graph.Draw(g, size, resolution);
+
+                    if (CurrentPageTool == PageTool.Highlighter)
+                    // highlighter goes under other annotations, so draw the preview before the rest
+                    {
+                        DrawCurrentPencilPath(g);
+                        DrawAnnotations(g, size, resolution);
+                    }
+                    else
+                    // otherwise, draw normally
+                    {
+                        DrawAnnotations(g, size, resolution);
+                        DrawCurrentPencilPath(g);
+                    }
+
+                    DrawIndicators(g);
+
+                    pageDisplay.ResumeLayout(false);
                 }
-                else
-                // otherwise, draw normally
-                {
-                    DrawAnnotations(g, size, resolution);
-                    DrawCurrentPencilPath(g);
-                }
-
-                DrawIndicators(g);
-
-                pageDisplay.ResumeLayout(false);
-
-                backgroundBrush.Dispose();
             }
         }
 
@@ -390,22 +391,23 @@ namespace Graphmatic
             // Draw the current selection (dragging) box
             if (CurrentPageTool == PageTool.Select && IsSelecting)
             {
-                Pen selectionPen = new Pen(Color.Blue, 2f);
-                selectionPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-                g.DrawRectangle(selectionPen, SelectionBox);
-
-                selectionPen.Dispose();
+                using (Pen selectionPen = new Pen(Color.Blue, 2f))
+                {
+                    selectionPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+                    g.DrawRectangle(selectionPen, SelectionBox);
+                }
             }
             if (CurrentPageTool == PageTool.Eraser && IsDragging)
             {
                 // draw a circle showing the boundaries of the eraser tool's radius
-                Pen eraserPen = new Pen(CurrentPage.Graph[CurrentPage.Graph.Axes].PlotColor);
-                g.DrawEllipse(eraserPen,
-                    MouseLocation.X - (int)(PenWidth),
-                    MouseLocation.Y - (int)(PenWidth),
-                    (int)(PenWidth * 2),
-                    (int)(PenWidth * 2));
-                eraserPen.Dispose();
+                using (Pen eraserPen = new Pen(CurrentPage.Graph[CurrentPage.Graph.Axes].PlotColor))
+                {
+                    g.DrawEllipse(eraserPen,
+                        MouseLocation.X - (int)(PenWidth),
+                        MouseLocation.Y - (int)(PenWidth),
+                        (int)(PenWidth * 2),
+                        (int)(PenWidth * 2));
+                }
             }
         }
         /// <summary>
@@ -417,11 +419,11 @@ namespace Graphmatic
             if (CurrentlyDrawnPath != null && CurrentlyDrawnPath.Count > 1)
             {
                 // show a preview of the currently-drawn pen line
-                Pen drawPen = new Pen(PenColor, PenWidth);
-                drawPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-                g.DrawLines(drawPen, CurrentlyDrawnPath.ToArray());
-
-                drawPen.Dispose();
+                using (Pen drawPen = new Pen(PenColor, PenWidth))
+                {
+                    drawPen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+                    g.DrawLines(drawPen, CurrentlyDrawnPath.ToArray());
+                }
             }
         }
 #endregion

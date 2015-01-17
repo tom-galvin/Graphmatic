@@ -188,53 +188,53 @@ namespace Graphmatic.Interaction.Plotting
             }
 
             float errorX = 5, errorY = 0;
-            Font errorFont = new Font(SystemFonts.MessageBoxFont.FontFamily, 20f, FontStyle.Bold);
-            Brush errorBrush = Brushes.Red;
-            foreach (KeyValuePair<IPlottable, PlottableParameters> plottable in Resources)
+            using (Font errorFont = new Font(SystemFonts.MessageBoxFont.FontFamily, 20f, FontStyle.Bold))
             {
-                string plottableName =
-                    plottable.Key is Resource ?
-                    (plottable.Key as Resource).Name :
-                    plottable.GetType().Name;
-                string error = null;
-
-                if (plottable.Key.CanPlot(Parameters.HorizontalAxis, Parameters.VerticalAxis))
+                foreach (KeyValuePair<IPlottable, PlottableParameters> plottable in Resources)
                 {
-                    try
-                    {
-                        plottable.Key.PlotOnto(this, g, size, plottable.Value, Parameters, resolution);
-                    }
-                    catch (Exception ex)
-                    {
+                    string plottableName =
+                        plottable.Key is Resource ?
+                        (plottable.Key as Resource).Name :
+                        plottable.GetType().Name;
+                    string error = null;
 
+                    if (plottable.Key.CanPlot(Parameters.HorizontalAxis, Parameters.VerticalAxis))
+                    {
+                        try
+                        {
+                            plottable.Key.PlotOnto(this, g, size, plottable.Value, Parameters, resolution);
+                        }
+                        catch (Exception ex)
+                        {
+
+                            error = String.Format(
+                                "Could not plot \"{0}\": {1} ({2})",
+                                plottableName,
+                                ex.Message,
+                                ex.GetType().Name);
+                        }
+                    }
+                    else
+                    {
                         error = String.Format(
-                            "Could not plot \"{0}\": {1} ({2})",
+                            "Could not plot \"{0}\": it does not contain variables {1} and {2}.",
                             plottableName,
-                            ex.Message,
-                            ex.GetType().Name);
+                            Parameters.HorizontalAxis,
+                            Parameters.VerticalAxis);
                     }
-                }
-                else
-                {
-                    error = String.Format(
-                        "Could not plot \"{0}\": it does not contain variables {1} and {2}.",
-                        plottableName,
-                        Parameters.HorizontalAxis,
-                        Parameters.VerticalAxis);
-                }
 
-                if (error != null)
-                {
-                    SizeF errorSize = g.MeasureString(error, errorFont, size.Width);
-                    g.DrawString(error, errorFont, errorBrush, new RectangleF(
-                        errorX,
-                        errorY,
-                        size.Width - errorY,
-                        size.Height - errorX));
-                    errorY += 5 + errorSize.Height;
+                    if (error != null)
+                    {
+                        SizeF errorSize = g.MeasureString(error, errorFont, size.Width);
+                        g.DrawString(error, errorFont, Brushes.Red, new RectangleF(
+                            errorX,
+                            errorY,
+                            size.Width - errorY,
+                            size.Height - errorX));
+                        errorY += 5 + errorSize.Height;
+                    }
                 }
             }
-            errorFont.Dispose();
         }
 
         public void ToImageSpace(Size graphSize, GraphParameters parameters, double horizontal, double vertical, out int x, out int y)

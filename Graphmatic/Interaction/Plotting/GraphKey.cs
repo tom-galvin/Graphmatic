@@ -21,47 +21,46 @@ namespace Graphmatic.Interaction.Plotting
 
         public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, PlotResolution resolution)
         {
-            Font font = SystemFonts.DefaultFont;
-            Brush brush = new SolidBrush(plotParams.PlotColor);
-
-            float currentY = graphSize.Height;
-            int offset = 5;
-            foreach (IPlottable plot in graph.Reverse())
+            using (Font font = SystemFonts.DefaultFont)
+            using (Brush brush = new SolidBrush(plotParams.PlotColor))
             {
-                if (plot is Resource)
+                float currentY = graphSize.Height;
+                int offset = 5;
+                foreach (IPlottable plot in graph.Reverse())
                 {
-                    PlottableParameters parameters = graph[plot];
-                    var resource = plot as Resource;
-                    string name = resource.Name;
-                    var size = graphics.MeasureString(name, font);
-                    currentY -= size.Height + offset;
-                    float resourceX = graphSize.Width - offset - size.Width;
-                    graphics.DrawString(name, font, brush, resourceX, currentY);
+                    if (plot is Resource)
+                    {
+                        PlottableParameters parameters = graph[plot];
+                        var resource = plot as Resource;
+                        string name = resource.Name;
+                        var size = graphics.MeasureString(name, font);
+                        currentY -= size.Height + offset;
+                        float resourceX = graphSize.Width - offset - size.Width;
+                        graphics.DrawString(name, font, brush, resourceX, currentY);
 
-                    if (resource is DataSet)
-                    {
-                        Pen resourcePen = new Pen(parameters.PlotColor, DataSet.DataPointPenWidth);
-                        graphics.DrawLine(resourcePen,
-                            new PointF(resourceX - DataSet.DataPointCrossSize - 5, currentY - DataSet.DataPointCrossSize + size.Height / 2),
-                            new PointF(resourceX + DataSet.DataPointCrossSize - 5, currentY + DataSet.DataPointCrossSize + size.Height / 2));
-                        graphics.DrawLine(resourcePen,
-                            new PointF(resourceX - DataSet.DataPointCrossSize - 5, currentY + DataSet.DataPointCrossSize + size.Height / 2),
-                            new PointF(resourceX + DataSet.DataPointCrossSize - 5, currentY - DataSet.DataPointCrossSize + size.Height / 2));
-                        resourcePen.Dispose();
-                    }
-                    else if (resource is Equation)
-                    {
-                        Pen resourcePen = new Pen(parameters.PlotColor, Equation.EquationPenWidth);
-                        graphics.DrawLine(resourcePen,
-                            new PointF(resourceX - 2, currentY + size.Height / 2),
-                            new PointF(resourceX - 15, currentY + size.Height / 2));
-                        resourcePen.Dispose();
+                        using (Pen resourcePen = new Pen(parameters.PlotColor))
+                        {
+                            if (resource is DataSet)
+                            {
+                                resourcePen.Width = DataSet.DataPointPenWidth;
+                                graphics.DrawLine(resourcePen,
+                                    new PointF(resourceX - DataSet.DataPointCrossSize - 5, currentY - DataSet.DataPointCrossSize + size.Height / 2),
+                                    new PointF(resourceX + DataSet.DataPointCrossSize - 5, currentY + DataSet.DataPointCrossSize + size.Height / 2));
+                                graphics.DrawLine(resourcePen,
+                                    new PointF(resourceX - DataSet.DataPointCrossSize - 5, currentY + DataSet.DataPointCrossSize + size.Height / 2),
+                                    new PointF(resourceX + DataSet.DataPointCrossSize - 5, currentY - DataSet.DataPointCrossSize + size.Height / 2));
+                            }
+                            else if (resource is Equation)
+                            {
+                                resourcePen.Width = Equation.EquationPenWidth;
+                                graphics.DrawLine(resourcePen,
+                                    new PointF(resourceX - 2, currentY + size.Height / 2),
+                                    new PointF(resourceX - 15, currentY + size.Height / 2));
+                            }
+                        }
                     }
                 }
             }
-
-            font.Dispose();
-            brush.Dispose();
         }
 
         public XElement ToXml()
