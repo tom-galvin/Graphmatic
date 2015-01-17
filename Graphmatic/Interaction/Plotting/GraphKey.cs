@@ -21,7 +21,6 @@ namespace Graphmatic.Interaction.Plotting
 
         public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, PlotResolution resolution)
         {
-            using (Font font = SystemFonts.DefaultFont)
             using (Brush brush = new SolidBrush(plotParams.PlotColor))
             {
                 float currentY = graphSize.Height;
@@ -33,10 +32,10 @@ namespace Graphmatic.Interaction.Plotting
                         PlottableParameters parameters = graph[plot];
                         var resource = plot as Resource;
                         string name = resource.Name;
-                        var size = graphics.MeasureString(name, font);
+                        var size = graphics.MeasureString(name, SystemFonts.DefaultFont);
                         currentY -= size.Height + offset;
                         float resourceX = graphSize.Width - offset - size.Width;
-                        graphics.DrawString(name, font, brush, resourceX, currentY);
+                        graphics.DrawString(name, SystemFonts.DefaultFont, brush, resourceX, currentY);
 
                         using (Pen resourcePen = new Pen(parameters.PlotColor))
                         {
