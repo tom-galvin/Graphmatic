@@ -936,7 +936,6 @@ namespace Graphmatic
             // contextMenuStripPageEditor
             // 
             this.contextMenuStripPageEditor.Name = "contextMenuStripPageEditor";
-            this.contextMenuStripPageEditor.OwnerItem = this.toolStripDropDownEditGraph;
             this.contextMenuStripPageEditor.Size = new System.Drawing.Size(61, 4);
             // 
             // toolStripButtonPlotDataSet

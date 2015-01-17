@@ -21,16 +21,34 @@ namespace Graphmatic.Interaction.Plotting
             set;
         }
 
+        public GraphAxisType HorizontalType
+        {
+            get;
+            set;
+        }
+
+        public GraphAxisType VerticalType
+        {
+            get;
+            set;
+        }
+
         public GraphAxis(double gridSize, int majorInterval)
         {
             GridSize = gridSize;
             MajorInterval = majorInterval;
+
+            HorizontalType = GraphAxisType.Radians;
+            VerticalType = GraphAxisType.Radians;
         }
 
         public GraphAxis(XElement xml)
         {
             GridSize = Double.Parse(xml.Element("GridSize").Value);
             MajorInterval = Double.Parse(xml.Element("MajorInterval").Value);
+
+            HorizontalType = (GraphAxisType)Enum.Parse(typeof(GraphAxisType), xml.Element("HorizontalType").Value);
+            VerticalType = (GraphAxisType)Enum.Parse(typeof(GraphAxisType), xml.Element("VerticalType").Value);
         }
 
         public void PlotOnto(Graph graph, Graphics g, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, PlotResolution resolution)
@@ -69,8 +87,15 @@ namespace Graphmatic.Interaction.Plotting
                 g.DrawString(graphParams.VerticalAxis.ToString(), SystemFonts.DefaultFont, valueBrush, (int)axisX, 2);
                 g.DrawString(graphParams.HorizontalAxis.ToString(), SystemFonts.DefaultFont, valueBrush, (int)graphSize.Width - 16, (int)axisY);
 
+                string horizontalAxisSuffix = HorizontalType.AxisTypeExtension();
+                string verticalAxisSuffix = VerticalType.AxisTypeExtension();
+
+                double horizontalAxisScale = GridSize * HorizontalType.AxisTypeScale();
+                double verticalAxisScale = GridSize * VerticalType.AxisTypeScale();
+
                 double value = axisX;
                 int index = 0;
+                // plot horizontal grid lines from the origin to the right of the page
                 while (value < graphSize.Width)
                 {
                     bool major = index % MajorInterval == 0;
@@ -78,8 +103,10 @@ namespace Graphmatic.Interaction.Plotting
                     {
                         g.DrawLine(majorPen,
                             (int)value, 0, (int)value, graphSize.Height);
-                        double horizontal = graphParams.HorizontalPixelScale * index;
-                        g.DrawString(horizontal.ToString("0.####"), SystemFonts.DefaultFont, valueBrush, (int)value, (int)axisY);
+                        g.DrawString(
+                            String.Format("{0:0.####}{1}", index * horizontalAxisScale, horizontalAxisSuffix),
+                            SystemFonts.DefaultFont,
+                            valueBrush, (int)value, (int)axisY);
                     }
                     else
                     {
@@ -90,6 +117,7 @@ namespace Graphmatic.Interaction.Plotting
                 }
 
                 value = axisX; index = 0;
+                // plot hoz grid from origin to left of page
                 while (value >= 0)
                 {
                     bool major = index % MajorInterval == 0;
@@ -97,8 +125,11 @@ namespace Graphmatic.Interaction.Plotting
                     {
                         g.DrawLine(majorPen,
                             (int)value, 0, (int)value, graphSize.Height);
-                        double horizontal = graphParams.HorizontalPixelScale * -index;
-                        g.DrawString(horizontal.ToString("0.####"), SystemFonts.DefaultFont, valueBrush, (int)value, (int)axisY);
+                        g.DrawString(
+                            String.Format("{0:0.####}{1}", index * horizontalAxisScale, horizontalAxisSuffix),
+                            SystemFonts.DefaultFont,
+                            valueBrush,
+                            (int)value, (int)axisY);
                     }
                     else
                     {
@@ -109,6 +140,7 @@ namespace Graphmatic.Interaction.Plotting
                 }
 
                 value = axisY; index = 0;
+                // plot vertical grid lines from origin to bottom of page
                 while (value < graphSize.Height)
                 {
                     bool major = index % MajorInterval == 0;
@@ -116,8 +148,11 @@ namespace Graphmatic.Interaction.Plotting
                     {
                         g.DrawLine(majorPen,
                             0, (int)value, graphSize.Width, (int)value);
-                        double vertical = graphParams.VerticalPixelScale * -index;
-                        g.DrawString(vertical.ToString("0.####"), SystemFonts.DefaultFont, valueBrush, (int)axisX, (int)value);
+                        g.DrawString(
+                            String.Format("{0:0.####}{1}", index * verticalAxisScale, verticalAxisSuffix),
+                            SystemFonts.DefaultFont,
+                            valueBrush,
+                            (int)axisX, (int)value);
                     }
                     else
                     {
@@ -128,6 +163,7 @@ namespace Graphmatic.Interaction.Plotting
                 }
 
                 value = axisY; index = 0;
+                // plot vert grid from origin to top of page
                 while (value >= 0)
                 {
                     bool major = index % MajorInterval == 0;
@@ -136,7 +172,11 @@ namespace Graphmatic.Interaction.Plotting
                         g.DrawLine(majorPen,
                             0, (int)value, graphSize.Width, (int)value);
                         double vertical = graphParams.VerticalPixelScale * index;
-                        g.DrawString(vertical.ToString("0.####"), SystemFonts.DefaultFont, valueBrush, (int)axisX, (int)value);
+                        g.DrawString(
+                            String.Format("{0:0.####}{1}", index * verticalAxisScale, verticalAxisSuffix),
+                            SystemFonts.DefaultFont,
+                            valueBrush,
+                            (int)axisX, (int)value);
                     }
                     else
                     {
@@ -152,7 +192,9 @@ namespace Graphmatic.Interaction.Plotting
         {
             return new XElement("GraphAxis",
                 new XElement("GridSize", GridSize),
-                new XElement("MajorInterval", MajorInterval));
+                new XElement("MajorInterval", MajorInterval),
+                new XElement("HorizontalType", HorizontalType.ToString()),
+                new XElement("VerticalType", VerticalType.ToString()));
         }
 
         public void UpdateReferences(Document document)

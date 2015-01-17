@@ -65,5 +65,45 @@ namespace Graphmatic.Interaction.Plotting
                 color.G,
                 color.B);
         }
+
+        /// <summary>
+        /// Gets the graph label suffix for a given axis type.
+        /// <para/>
+        /// For example, degrees have a degree symbol (°) suffix, and radians have none.
+        /// </summary>
+        /// <param name="axisType">The graph axis type for which to return the suffix.</param>
+        /// <returns>The graph label suffix for a given axis type.</returns>
+        public static string AxisTypeExtension(this GraphAxisType axisType)
+        {
+            switch (axisType)
+            {
+                case GraphAxisType.Degrees:
+                    return "°";
+                case GraphAxisType.Grads:
+                    return "g";
+                default:
+                    return "";
+            }
+        }
+
+        /// <summary>
+        /// Gets the graph scale for a gixen axis type.
+        /// <para/>
+        /// For example, degrees are scaled by a factor of 180/pi, and radians are not scaled.
+        /// </summary>
+        /// <param name="axisType">The graph axis type for which to return the scale.</param>
+        /// <returns>The graph scale for a gixen axis type.</returns>
+        public static double AxisTypeScale(this GraphAxisType axisType)
+        {
+            switch (axisType)
+            {
+                case GraphAxisType.Degrees:
+                    return 180.0 / Math.PI;
+                case GraphAxisType.Grads:
+                    return 200.0 / Math.PI;
+                default:
+                    return 1.0;
+            }
+        }
     }
 }

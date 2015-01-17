@@ -119,7 +119,7 @@ namespace Graphmatic
         {
             Bitmap bitmap = new Bitmap((int)PenWidth + 1, (int)PenWidth + 1);
 
-            using(Graphics graphics = Graphics.FromImage(bitmap))
+            using (Graphics graphics = Graphics.FromImage(bitmap))
             using (Brush brush = new SolidBrush(PenColor))
             {
                 graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -426,7 +426,7 @@ namespace Graphmatic
                 }
             }
         }
-#endregion
+        #endregion
         #region Menu stuff
         /// <summary>
         /// Regenerates the menu for editing the page and any plottable resources on it.
@@ -448,6 +448,18 @@ namespace Graphmatic
                             NotifyResourceModified(CurrentPage);
                         }
                     }),
+                new ToolStripMenuItem("Horizontal Axis in Degrees", null, delegate(object sender, EventArgs e)
+                    {
+                        CurrentPage.Graph.Axes.HorizontalType =
+                            (sender as ToolStripMenuItem).Checked ?
+                            GraphAxisType.Degrees :
+                            GraphAxisType.Radians;
+                            pageDisplay.Refresh();
+                    })
+                {
+                    CheckOnClick = true,
+                    Checked = CurrentPage.Graph.Axes.HorizontalType == GraphAxisType.Degrees
+                },
                 // Add the vertical variable chooser
                 new ToolStripMenuItem("&Vertical variable...", null, delegate(object sender, EventArgs e)
                     {
@@ -458,6 +470,18 @@ namespace Graphmatic
                             NotifyResourceModified(CurrentPage);
                         }
                     }),
+                new ToolStripMenuItem("Vertical Axis in Degrees", null, delegate(object sender, EventArgs e)
+                    {
+                        CurrentPage.Graph.Axes.VerticalType =
+                            (sender as ToolStripMenuItem).Checked ?
+                            GraphAxisType.Degrees :
+                            GraphAxisType.Radians;
+                            pageDisplay.Refresh();
+                    })
+                {
+                    CheckOnClick = true,
+                    Checked = CurrentPage.Graph.Axes.VerticalType == GraphAxisType.Degrees
+                },
                 // Add the background color chooser
                 new ToolStripMenuItem("Background &color...", null, delegate(object sender, EventArgs e)
                     {

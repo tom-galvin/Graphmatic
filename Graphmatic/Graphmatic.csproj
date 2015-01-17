@@ -135,6 +135,7 @@
     <Compile Include="Interaction\Equation.cs" />
     <Compile Include="Interaction\Equation.Plotting.cs" />
     <Compile Include="Interaction\Plotting\GraphAxis.cs" />
+    <Compile Include="Interaction\Plotting\GraphAxisType.cs" />
     <Compile Include="Interaction\Plotting\GraphKey.cs" />
     <Compile Include="Interaction\Plotting\IPlottable.cs" />
     <Compile Include="Interaction\Plotting\Graph.cs" />
