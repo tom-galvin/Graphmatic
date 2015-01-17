@@ -36,13 +36,14 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonExcelCopy = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.labelInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(316, 298);
+            this.buttonOK.Location = new System.Drawing.Point(316, 303);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 24);
             this.buttonOK.TabIndex = 1;
@@ -55,12 +56,14 @@
             this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(379, 280);
+            this.dataGridView.Size = new System.Drawing.Size(379, 285);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
+            this.dataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView_CellValidating);
             this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
             this.dataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView_RowsAdded);
             this.dataGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView_RowsRemoved);
@@ -68,7 +71,7 @@
             // buttonEditVariables
             // 
             this.buttonEditVariables.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEditVariables.Location = new System.Drawing.Point(154, 298);
+            this.buttonEditVariables.Location = new System.Drawing.Point(154, 303);
             this.buttonEditVariables.Name = "buttonEditVariables";
             this.buttonEditVariables.Size = new System.Drawing.Size(75, 24);
             this.buttonEditVariables.TabIndex = 3;
@@ -79,7 +82,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(235, 298);
+            this.buttonCancel.Location = new System.Drawing.Point(235, 303);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 24);
             this.buttonCancel.TabIndex = 2;
@@ -89,8 +92,9 @@
             // 
             // buttonExcelCopy
             // 
+            this.buttonExcelCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonExcelCopy.Image = global::Graphmatic.Properties.Resources.Excel16;
-            this.buttonExcelCopy.Location = new System.Drawing.Point(12, 298);
+            this.buttonExcelCopy.Location = new System.Drawing.Point(12, 303);
             this.buttonExcelCopy.Name = "buttonExcelCopy";
             this.buttonExcelCopy.Size = new System.Drawing.Size(136, 24);
             this.buttonExcelCopy.TabIndex = 4;
@@ -100,11 +104,23 @@
             this.buttonExcelCopy.UseVisualStyleBackColor = true;
             this.buttonExcelCopy.Click += new System.EventHandler(this.buttonExcelCopy_Click);
             // 
+            // labelInfo
+            // 
+            this.labelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelInfo.Location = new System.Drawing.Point(12, 330);
+            this.labelInfo.Name = "labelInfo";
+            this.labelInfo.Size = new System.Drawing.Size(379, 57);
+            this.labelInfo.TabIndex = 5;
+            this.labelInfo.Text = "To remove a row, highlight the rows using the left side of the editor pane and pr" +
+    "ess the delete (Del) key.";
+            // 
             // DataSetEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 333);
+            this.ClientSize = new System.Drawing.Size(403, 396);
+            this.Controls.Add(this.labelInfo);
             this.Controls.Add(this.buttonExcelCopy);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonEditVariables);
@@ -129,6 +145,7 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonExcelCopy;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Label labelInfo;
 
     }
 }

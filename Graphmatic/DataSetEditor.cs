@@ -60,10 +60,14 @@ namespace Graphmatic
             dataGridView.Rows.Clear();
             foreach (double[] rowData in DataSet)
             {
-                int newRowIndex = dataGridView.Rows.Add();
-                DataGridViewRow row = dataGridView.Rows[newRowIndex];
+                object[] rowDataAsObjectArray = new object[rowData.Length];
+                rowData.CopyTo(rowDataAsObjectArray, 0);
+                int newRowIndex = dataGridView.Rows.Add(rowDataAsObjectArray);
+                /* DataGridViewRow row = dataGridView.Rows[newRowIndex];
                 for (int i = 0; i < row.Cells.Count; i++)
+                {
                     row.Cells[i].Value = rowData[i];
+                } */
             }
 
             dataGridView.ResumeLayout();
@@ -126,15 +130,15 @@ namespace Graphmatic
                 if (allNull) continue;
                 for (int i = 0; i < DataSet.Variables.Length; i++)
                 {
-                    if (row.Cells[i].Value == null || 
-                        (row.Cells[i].Value is string && (string)row.Cells[i].Value == "") ||
-                        (row.Cells[i].Value is double && (double)row.Cells[i].Value == 0.0))
+                    if (row.Cells[i].Value == null ||
+                        (row.Cells[i].Value is string && (string)row.Cells[i].Value == ""))
                     {
-                        MessageBox.Show("This cell is empty. Please put a value in it or remove the row.", "Save Changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         dataGridView.ClearSelection();
                         row.Cells[i].Selected = true;
+                        MessageBox.Show("This cell is empty. Please put a value in it or remove the row.", "Save Changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
+                    
                     rowData[i] = (double)row.Cells[i].Value;
                 }
                 rows.Add(rowData);
@@ -194,7 +198,7 @@ namespace Graphmatic
                 string[][] clipData = Clipboard
                     .GetText()
                     .Split(new string[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => s.Split(new char[] {'\t'}, StringSplitOptions.RemoveEmptyEntries))
+                    .Select(s => s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries))
                     .ToArray();
                 if (clipData.Length > 0)
                 {
@@ -244,6 +248,24 @@ namespace Graphmatic
                     "Paste from Excel",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
+        }
+
+        private void dataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            double temp;
+            if (e.FormattedValue is string)
+            {
+                string formattedValue = (string)e.FormattedValue;
+                if (formattedValue.Trim().Length == 0)
+                {
+                    dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = (double)0; // must be (Double) to avoid InvalidCastException with weird boxing later on
+                }
+                else if (!Double.TryParse(formattedValue, out temp))
+                {
+                    MessageBox.Show("The number entered is invalid.", "Format Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Cancel = true;
+                }
             }
         }
     }
