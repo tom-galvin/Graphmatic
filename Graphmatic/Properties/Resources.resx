@@ -328,7 +328,7 @@
   <data name="GithubRepositoryUrl" xml:space="preserve">
     <value>https://github.com/Quackmatic/Graphmatic</value>
   </data>
-  <data name="ImageImport16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="ImageImport24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ButtonCube" type="System.Resources.ResXFileRef, System.Windows.Forms">
