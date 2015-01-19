@@ -600,7 +600,7 @@ namespace Graphmatic
             // equationToolStripMenuItem
             // 
             this.equationToolStripMenuItem.Name = "equationToolStripMenuItem";
-            this.equationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.equationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.E)));
             this.equationToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.equationToolStripMenuItem.Text = "&Equation...";
@@ -610,7 +610,7 @@ namespace Graphmatic
             // dataSetToolStripMenuItem
             // 
             this.dataSetToolStripMenuItem.Name = "dataSetToolStripMenuItem";
-            this.dataSetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.dataSetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.D)));
             this.dataSetToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.dataSetToolStripMenuItem.Text = "&Data Set...";
@@ -620,7 +620,7 @@ namespace Graphmatic
             // pageToolStripMenuItem
             // 
             this.pageToolStripMenuItem.Name = "pageToolStripMenuItem";
-            this.pageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.pageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
             this.pageToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.pageToolStripMenuItem.Text = "&Page...";
@@ -695,7 +695,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(595, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(544, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -940,6 +940,7 @@ namespace Graphmatic
             // contextMenuStripPageEditor
             // 
             this.contextMenuStripPageEditor.Name = "contextMenuStripPageEditor";
+            this.contextMenuStripPageEditor.OwnerItem = this.toolStripDropDownEditGraph;
             this.contextMenuStripPageEditor.Size = new System.Drawing.Size(61, 4);
             // 
             // toolStripButtonPlotDataSet
@@ -964,33 +965,33 @@ namespace Graphmatic
             this.toolStripButtonPlotEquation.Click += new System.EventHandler(this.toolStripButtonPlotEquation_Click);
             // 
             // toolStripDropDownButtonImage
-            //
+            // 
             this.toolStripDropDownButtonImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButtonImage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-             this.pasteToolStripMenuItem,
-             this.fromfileToolStripMenuItem});
+            this.pasteToolStripMenuItem,
+            this.fromfileToolStripMenuItem});
             this.toolStripDropDownButtonImage.Image = global::Graphmatic.Properties.Resources.ImageImport24;
             this.toolStripDropDownButtonImage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButtonImage.Name = "toolStripDropDownButtonImage";
             this.toolStripDropDownButtonImage.Size = new System.Drawing.Size(37, 28);
             this.toolStripDropDownButtonImage.Text = "&Image";
             this.toolStripDropDownButtonImage.ToolTipText = "Image manipulation";
-            //
+            // 
             // pasteToolStripMenuItem
-            //
+            // 
             this.pasteToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.ClipboardPaste16;
             this.pasteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.pasteToolStripMenuItem.Text = "&Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
-            //
+            // 
             // fromfileToolStripMenuItem
-            //
+            // 
             this.fromfileToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Image16;
             this.fromfileToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.fromfileToolStripMenuItem.Name = "fromfileToolStripMenuItem";
-            this.fromfileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fromfileToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.fromfileToolStripMenuItem.Text = "From &file...";
             this.fromfileToolStripMenuItem.Click += new System.EventHandler(this.fromfileToolStripMenuItem_Click);
             // 

@@ -70,7 +70,7 @@ namespace Graphmatic.Interaction
             Guid = Guid.NewGuid();
         }
 
-        public Document(XElement xml)
+        private void InitializeAttributes(XElement xml)
         {
             if (xml.Name != "Document")
                 throw new IOException("This file is not a Graphmatic document; it has the wrong root tag name.");
@@ -81,17 +81,21 @@ namespace Graphmatic.Interaction
             if (formatVersion > 1)
                 throw new IOException("This file is for a newer version of Graphmatic. " +
                     "Try opening this file in " + xml.Attribute("Version").Value + " or newer.");
-            
+
             Resources = new Dictionary<Guid, Resource>();
 
             Author = xml.Attribute("Author").Value;
             OriginalVersion = xml.Attribute("OriginalVersion").Value;
+            CreationDate = DateTime.Parse(xml.Attribute("CreationDate").Value);
+            Guid = Guid.Parse(xml.Attribute("ID").Value);
+        }
+
+        public Document(XElement xml)
+        {
+            InitializeAttributes(xml);
+
             try
             {
-                CreationDate = DateTime.Parse(xml.Attribute("CreationDate").Value);
-
-                Guid = Guid.Parse(xml.Attribute("ID").Value);
-
                 var resourcesElements = xml.Element("Resources").Elements();
                 foreach (XElement resourceElement in resourcesElements)
                 {
@@ -103,12 +107,12 @@ namespace Graphmatic.Interaction
                 var pageOrder = xml.Element("PageOrder").Elements("Reference");
                 foreach (XElement pageElement in pageOrder)
                 {
-                    var page = FromGuid(Guid.Parse(pageElement.Attribute("ID").Value)) as Page;
+                    var page = this[Guid.Parse(pageElement.Attribute("ID").Value)] as Page;
                     PageOrder.Add(page);
                 }
 
                 if (xml.Element("CurrentResource") != null)
-                    CurrentResource = FromGuid(Guid.Parse(xml.Element("CurrentResource").Value));
+                    CurrentResource = this[Guid.Parse(xml.Element("CurrentResource").Value)];
 
                 UpdateReferences(this);
             }
@@ -210,11 +214,6 @@ namespace Graphmatic.Interaction
             XDocument document = XDocument.Load(stream);
             stream.Close();
             return new Document(document.Root);
-        }
-
-        public Resource FromGuid(Guid guid)
-        {
-            return Resources[guid];
         }
 
         public XElement ToXml()
