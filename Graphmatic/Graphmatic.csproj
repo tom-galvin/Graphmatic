@@ -278,6 +278,8 @@
     <None Include="Resources\image-import.png" />
     <None Include="Resources\clipboard-paste.png" />
     <None Include="Resources\image.png" />
+    <None Include="Resources\document-export-image.png" />
+    <None Include="Resources\document.png" />
     <Content Include="Resources\Image16.png" />
     <Content Include="Resources\Image32.png" />
     <Content Include="Resources\Images16.png" />
@@ -324,7 +326,6 @@
     <None Include="Resources\disk-return.png" />
     <None Include="Resources\documents.png" />
     <None Include="Resources\Equation16.png" />
-    <None Include="Resources\document.png" />
     <Content Include="Resources\Equation32.png" />
     <Content Include="Resources\page.png" />
     <Content Include="Resources\Graphmatic.ico" />

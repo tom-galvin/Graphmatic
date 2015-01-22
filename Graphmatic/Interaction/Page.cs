@@ -60,8 +60,8 @@ namespace Graphmatic.Interaction
         public override Image GetResourceIcon(bool large)
         {
             return large ?
-                Properties.Resources.Page :
-                Properties.Resources.Document16;
+                Properties.Resources.Page32 :
+                Properties.Resources.Page16;
         }
 
         public override XElement ToXml()

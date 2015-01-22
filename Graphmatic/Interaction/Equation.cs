@@ -42,10 +42,19 @@ namespace Graphmatic.Interaction
             : base()
         {
             Expression = expression;
-            if(Expression.Count == 0)
-                ParseTree = new ConstantParseTreeNode(0);
+            if (Expression.Count == 0)
+            {
+                // create a dummy parse tree equivalent to '0=1'
+                // meaning it won't be plotted but it won't throw any exceptions either
+                ParseTree =
+                    new BinaryParseTreeNode(Expression.EqualsEvaluator,
+                        new ConstantParseTreeNode(0),
+                        new ConstantParseTreeNode(1));
+            }
             else
+            {
                 ParseTree = Expression.Parse();
+            }
         }
 
         public Equation(XElement xml)

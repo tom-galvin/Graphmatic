@@ -69,6 +69,7 @@ namespace Graphmatic
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageListResources = new System.Windows.Forms.ImageList(this.components);
@@ -124,6 +125,7 @@ namespace Graphmatic
             this.toolStripButtonNextPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAddPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripComboBoxZoom = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripButtonPrintScreen = new System.Windows.Forms.ToolStripButton();
             this.pageDisplay = new System.Windows.Forms.PictureBox();
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
@@ -221,7 +223,7 @@ namespace Graphmatic
             // 
             // pageOrderToolStripMenuItem
             // 
-            this.pageOrderToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Documents16;
+            this.pageOrderToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Pages16;
             this.pageOrderToolStripMenuItem.Name = "pageOrderToolStripMenuItem";
             this.pageOrderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
             this.pageOrderToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
@@ -448,31 +450,32 @@ namespace Graphmatic
             this.toolStripMenuItem4,
             this.removeToolStripMenuItem,
             this.renameToolStripMenuItem,
+            this.duplicateToolStripMenuItem,
             this.toolStripMenuItem3,
             this.propertiesToolStripMenuItem});
             this.contextMenuStripResources.Name = "contextMenuStripResources";
-            this.contextMenuStripResources.Size = new System.Drawing.Size(142, 104);
+            this.contextMenuStripResources.Size = new System.Drawing.Size(146, 126);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.AnnotateDraw16;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.editToolStripMenuItem.Text = "&Edit...";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(138, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(142, 6);
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // removeToolStripMenuItem
             // 
-            this.removeToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Document16Remove;
+            this.removeToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.PageRemove16;
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             this.removeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.removeToolStripMenuItem.Text = "&Remove";
             this.removeToolStripMenuItem.ToolTipText = "Remove the resource from the document";
             this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
@@ -481,21 +484,29 @@ namespace Graphmatic
             // 
             this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
             this.renameToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.renameToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.renameToolStripMenuItem.Text = "Re&name";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.renameToolStripMenuItem.Text = "Re&name...";
             this.renameToolStripMenuItem.ToolTipText = "Rename the resource";
             this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
+            // 
+            // duplicateToolStripMenuItem
+            // 
+            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
+            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.duplicateToolStripMenuItem.Text = "&Duplicate...";
+            this.duplicateToolStripMenuItem.ToolTipText = "Create a copy of this resource in the Document";
+            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(138, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(142, 6);
             // 
             // propertiesToolStripMenuItem
             // 
             this.propertiesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("propertiesToolStripMenuItem.Image")));
             this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
-            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.propertiesToolStripMenuItem.Text = "&Properties...";
             this.propertiesToolStripMenuItem.ToolTipText = "See properties of the resource";
             this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propertiesToolStripMenuItem_Click);
@@ -534,7 +545,7 @@ namespace Graphmatic
             this.toolStripTogglePages.CheckOnClick = true;
             this.toolStripTogglePages.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripTogglePages.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripTogglePages.Image = global::Graphmatic.Properties.Resources.Documents16;
+            this.toolStripTogglePages.Image = global::Graphmatic.Properties.Resources.Pages16;
             this.toolStripTogglePages.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripTogglePages.Name = "toolStripTogglePages";
             this.toolStripTogglePages.Size = new System.Drawing.Size(23, 22);
@@ -687,6 +698,7 @@ namespace Graphmatic
             this.toolStripButtonPlotDataSet,
             this.toolStripButtonPlotEquation,
             this.toolStripDropDownButtonImage,
+            this.toolStripButtonPrintScreen,
             this.toolStripSeparator2,
             this.toolStripButtonPreviousPage,
             this.toolStripButtonNextPage,
@@ -695,7 +707,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(544, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(595, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -982,7 +994,8 @@ namespace Graphmatic
             this.pasteToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.ClipboardPaste16;
             this.pasteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.pasteToolStripMenuItem.Text = "&Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -991,7 +1004,7 @@ namespace Graphmatic
             this.fromfileToolStripMenuItem.Image = global::Graphmatic.Properties.Resources.Image16;
             this.fromfileToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.fromfileToolStripMenuItem.Name = "fromfileToolStripMenuItem";
-            this.fromfileToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.fromfileToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.fromfileToolStripMenuItem.Text = "From &file...";
             this.fromfileToolStripMenuItem.Click += new System.EventHandler(this.fromfileToolStripMenuItem_Click);
             // 
@@ -1046,10 +1059,21 @@ namespace Graphmatic
             "400%",
             "800%"});
             this.toolStripComboBoxZoom.Name = "toolStripComboBoxZoom";
-            this.toolStripComboBoxZoom.Size = new System.Drawing.Size(75, 31);
+            this.toolStripComboBoxZoom.Size = new System.Drawing.Size(75, 23);
             this.toolStripComboBoxZoom.Text = "100%";
             this.toolStripComboBoxZoom.ToolTipText = "Change the zoom level for this page";
             this.toolStripComboBoxZoom.TextChanged += new System.EventHandler(this.toolStripComboBoxZoom_TextChanged);
+            // 
+            // toolStripButtonPrintScreen
+            // 
+            this.toolStripButtonPrintScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPrintScreen.Image = global::Graphmatic.Properties.Resources.PageExportImage24;
+            this.toolStripButtonPrintScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPrintScreen.Name = "toolStripButtonPrintScreen";
+            this.toolStripButtonPrintScreen.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonPrintScreen.Text = "Copy Page Display";
+            this.toolStripButtonPrintScreen.ToolTipText = "Copies an image of the current page and transfers it to the system clipboard";
+            this.toolStripButtonPrintScreen.Click += new System.EventHandler(this.toolStripButtonPrintScreen_Click);
             // 
             // pageDisplay
             // 
@@ -1218,6 +1242,8 @@ namespace Graphmatic
         private ToolStripDropDownButton toolStripDropDownButtonImage;
         private ToolStripMenuItem pasteToolStripMenuItem;
         private ToolStripMenuItem fromfileToolStripMenuItem;
+        private ToolStripMenuItem duplicateToolStripMenuItem;
+        private ToolStripButton toolStripButtonPrintScreen;
     }
 }
 

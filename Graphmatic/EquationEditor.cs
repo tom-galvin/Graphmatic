@@ -90,7 +90,15 @@ namespace Graphmatic
 
         private void EquationEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // MessageBox.Show(e.CloseReason.ToString());
+            if(Equation.Expression == null ||
+                Equation.ParseTree == null)
+            {
+                MessageBox.Show("Please enter an expression in the editor window.",
+                    "Equation Editor",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Stop);
+                e.Cancel = true;
+            }
         }
 
         private void expressionDisplay_Load(object sender, EventArgs e)

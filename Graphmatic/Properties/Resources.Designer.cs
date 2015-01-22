@@ -690,36 +690,6 @@ namespace Graphmatic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Document16 {
-            get {
-                object obj = ResourceManager.GetObject("Document16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Document16Remove {
-            get {
-                object obj = ResourceManager.GetObject("Document16Remove", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Documents16 {
-            get {
-                object obj = ResourceManager.GetObject("Documents16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon Equation {
@@ -910,9 +880,49 @@ namespace Graphmatic.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Page {
+        public static System.Drawing.Bitmap Page16 {
             get {
-                object obj = ResourceManager.GetObject("Page", resourceCulture);
+                object obj = ResourceManager.GetObject("Page16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Page32 {
+            get {
+                object obj = ResourceManager.GetObject("Page32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap PageExportImage24 {
+            get {
+                object obj = ResourceManager.GetObject("PageExportImage24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap PageRemove16 {
+            get {
+                object obj = ResourceManager.GetObject("PageRemove16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Pages16 {
+            get {
+                object obj = ResourceManager.GetObject("Pages16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

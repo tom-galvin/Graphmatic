@@ -36,7 +36,6 @@ namespace Graphmatic
                                                      Color.Teal,
                                                      Color.Blue,
                                                      Color.Purple,
-                                                     Color.DarkSlateGray
                                                  };
 
         /// <summary>
@@ -243,7 +242,9 @@ namespace Graphmatic
                 CurrentPage.Graph.Parameters.HorizontalPixelScale =
                      CurrentPage.Graph.Parameters.VerticalPixelScale =
                      zoomLevel;
-                double zoomFactor = Math.Pow(2, Math.Floor(Math.Log(zoomLevel / 0.05, 2)));
+                double zoomFactor = Math.Pow(10, Math.Floor(Math.Log(zoomLevel / 0.05, 10)));
+                while (zoomLevel / zoomFactor > 0.15)
+                    zoomFactor *= 2;
                 CurrentPage.Graph.Axes.GridSize = zoomFactor;
                 UpdateZoomComboBox();
                 pageDisplay.Refresh();
@@ -318,43 +319,69 @@ namespace Graphmatic
             {
                 pageDisplay.SuspendLayout();
 
-                // Get some drawing equipment
-                Graphics g = e.Graphics;
-                using (Brush backgroundBrush = new SolidBrush(CurrentPage.BackgroundColor))
-                {
-                    Size size = pageDisplay.ClientSize;
+                DrawPage(e.Graphics, pageDisplay.ClientSize);
 
-                    // Draw background color in
-                    g.FillRectangle(backgroundBrush, IsFormResizing ? e.ClipRectangle : pageDisplay.ClientRectangle);
-
-                    // Get the appropriate drawing resolution
-                    PlotResolution resolution = PlotResolution.View;
-                    if (IsDragging)
-                        resolution = PlotResolution.Edit;
-                    if (IsFormResizing)
-                        resolution = PlotResolution.Resize;
-
-                    // Draw the graph
-                    CurrentPage.Graph.Draw(g, size, resolution);
-
-                    if (CurrentPageTool == PageTool.Highlighter)
-                    // highlighter goes under other annotations, so draw the preview before the rest
-                    {
-                        DrawCurrentPencilPath(g);
-                        DrawAnnotations(g, size, resolution);
-                    }
-                    else
-                    // otherwise, draw normally
-                    {
-                        DrawAnnotations(g, size, resolution);
-                        DrawCurrentPencilPath(g);
-                    }
-
-                    DrawIndicators(g);
-
-                    pageDisplay.ResumeLayout(false);
-                }
+                pageDisplay.ResumeLayout(false);
             }
+        }
+
+        /// <summary>
+        /// Draws the entire content of the page, with the given drawing surface and size.
+        /// <para/>
+        /// The page will be drawn starting at (0, 0).
+        /// </summary>
+        /// <param name="graphics">The drawing surface to use to draw the page.</param>
+        /// <param name="size">The size with which the page is to be drawn.</param>
+        private void DrawPage(Graphics graphics, Size size)
+        {
+            using (Brush backgroundBrush = new SolidBrush(CurrentPage.BackgroundColor))
+            {
+
+                // Draw background color in
+                graphics.FillRectangle(backgroundBrush, pageDisplay.ClientRectangle);
+
+                // Get the appropriate drawing resolution
+                PlotResolution resolution = PlotResolution.View;
+                if (IsDragging)
+                    resolution = PlotResolution.Edit;
+                if (IsFormResizing)
+                    resolution = PlotResolution.Resize;
+
+                // Draw the graph
+                CurrentPage.Graph.Draw(graphics, size, resolution);
+
+                if (CurrentPageTool == PageTool.Highlighter)
+                // highlighter goes under other annotations, so draw the preview before the rest
+                {
+                    DrawCurrentPencilPath(graphics);
+                    DrawAnnotations(graphics, size, resolution);
+                }
+                else
+                // otherwise, draw normally
+                {
+                    DrawAnnotations(graphics, size, resolution);
+                    DrawCurrentPencilPath(graphics);
+                }
+
+                DrawIndicators(graphics);
+            }
+        }
+
+        /// <summary>
+        /// Creates a preview image of the page, with the specified size.
+        /// <para/>
+        /// This just renders the page to an image rather than the page display.
+        /// </summary>
+        /// <param name="size">The size of the preview image to create.</param>
+        /// <returns>A preview image of the current page.</returns>
+        private Image CreatePagePreview(Size size)
+        {
+            Bitmap bitmap = new Bitmap(size.Width, size.Height);
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                DrawPage(graphics, size);
+            }
+            return bitmap;
         }
 
         /// <summary>
@@ -552,6 +579,7 @@ namespace Graphmatic
                                 })
                         })).ToArray();
 
+            // show contextual text if there are no editable items on the page
             if (resources.Length > 0)
             {
                 return new ToolStripMenuItem(
@@ -1210,6 +1238,14 @@ namespace Graphmatic
                     pageDisplay.Refresh();
                     NotifyResourceModified(CurrentPage);
                 }
+            }
+        }
+
+        private void toolStripButtonPrintScreen_Click(object sender, EventArgs e)
+        {
+            using (Image previewImage = CreatePagePreview(pageDisplay.ClientSize))
+            {
+                Clipboard.SetImage(previewImage);
             }
         }
 

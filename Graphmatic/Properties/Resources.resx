@@ -118,74 +118,73 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AnnotateDraw24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\annotatedraw24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LargeFont" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LargeFont.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ClipboardPaste16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\clipboard-paste.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Page" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Page32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\page.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Button4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\d4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Button6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\d6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Button2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\d2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TokenDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Button5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\d5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Button8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\d8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ButtonSqrt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\sqrt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NavForward16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\navigation-000-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Graph24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\graph24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtonDecimal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\decimal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AnnotationRemove16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zone--minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AnnotateEraseAll16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\annotateeraseall16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SquareSelect24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\squareselect24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Excel16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document-excel-table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtonAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Documents16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\documents.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Image16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ButtonLogN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\logn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Button5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\d5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ArrowMove16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-move.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonDecimal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\decimal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonDone" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\done.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CustomSelect24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\customselect24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotateEraseAll16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotateeraseall16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSet16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tables.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ButtonE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\e.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IncreaseSize16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\increasesize16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NavBackward16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\navigation-180-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="FontChars" xml:space="preserve">
     <value>0123456789.,:%)(!^£$@'"`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~*/+-=#&gt;&lt;¬|\; áéíóúÁÉÍÓÚ</value>
   </data>
-  <data name="ArrowRight24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\arrowright24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Pages16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\documents.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Color24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\color24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AboutBoxMessage" xml:space="preserve">
+    <value>In development (dev. milestone 2.)
+Available on Github: http://github.com/Quackmatic/Graphmatic
+Originally developed for the AQA A2 Computing coursework.</value>
   </data>
   <data name="SmallFont" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SmallFont.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,11 +192,11 @@
   <data name="ButtonRoot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\root.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TitleBarName" xml:space="preserve">
-    <value>Graphmatic {0}</value>
-  </data>
   <data name="ButtonPercent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\percent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Data24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\data24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ButtonBracket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\bracket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,14 +204,23 @@
   <data name="VersionString" xml:space="preserve">
     <value>Indev (MS2)</value>
   </data>
+  <data name="FolderOpen16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Color24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\color24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Settings16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\toolbaricons\settings16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AnnotateHighlight16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\annotationhighlight16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Annotations16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zones.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ButtonDivide" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\divide.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ButtonComma" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\comma.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonExp10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\exp10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ButtonLn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\ln.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -220,47 +228,38 @@
   <data name="Equation" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\equation.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ArrowLeft24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\arrowleft24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ButtonFraction" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\fraction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AddEquation24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddEquation24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Button0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\d0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DiskReturn16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\disk-return.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Moein" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Moein.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Chart24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\chart24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LeftArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\leftarrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Data16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\blue-document-binary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Button3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\d3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Button0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\d0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonLog10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\log.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Moein" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Moein.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Equation16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Equation16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ArrowRight24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\arrowright24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DiskReturn16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disk-return.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ButtonSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\square.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Button9" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\d9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Exit16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\door-open-in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataSet16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tables.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ArrowMove16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow-move.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AnnotateText24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotatetext24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ButtonMultiply" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\multiply.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -268,17 +267,17 @@
   <data name="ButtonAbs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\abs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Document16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\document.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ButtonReciprocate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\reciprocate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Button2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\d2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\d1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Button8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\d8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Excel16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-excel-table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Button4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\d4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ButtonExp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\exp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -286,17 +285,20 @@
   <data name="Graphmatic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\graphmatic.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Button7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\d7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ButtonSubtract" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\subtract.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Equation16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Equation16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddEquation24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddEquation24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LargeFont" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LargeFont.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AnnotateErase24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotateerase24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CustomSelect24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\customselect24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AnnotateText16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DialogFilter" xml:space="preserve">
     <value>Graphmatic document (*.gmd; *.xml)|*.gmd;*.xml|All files|*</value>
@@ -307,20 +309,23 @@
   <data name="SettingsIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\settingsicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GraphmaticDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\graphmaticdocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TitleBarName" xml:space="preserve">
+    <value>Graphmatic {0}</value>
   </data>
   <data name="ButtonPi" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\pi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SquareSelect24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\squareselect24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NavForward16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\navigation-000-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ButtonComma" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\comma.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AnnotateHighlight16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotationhighlight16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AnnotateErase24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\annotateerase24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AnnotateDraw16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotatedraw16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSet32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RightArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\rightarrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -328,90 +333,88 @@
   <data name="GithubRepositoryUrl" xml:space="preserve">
     <value>https://github.com/Quackmatic/Graphmatic</value>
   </data>
-  <data name="ImageImport24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ClipboardPaste16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clipboard-paste.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PageRemove16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document--minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Graph24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\graph24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ButtonCube" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\calcbuttons\cube.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Document16Remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document--minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Annotations16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\zones.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Resources16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\node.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ButtonExp10" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\exp10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Statistics24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\statistics24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AnnotateDraw16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\annotatedraw16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtonLog10" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\log.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Data32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\blue-document-data.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Properties" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\properties.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DecreaseSize16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\decreasesize16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FolderOpen16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder-open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DataSet32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AnnotateErase16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\annotateerase16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Data24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\data24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ColorPick16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\color-swatch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtonEquals" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\equals.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AnnotateText24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\toolbaricons\annotatetext24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\d1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Button7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\d7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AnnotateText16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AboutBoxMessage" xml:space="preserve">
-    <value>In development (dev. milestone 2.)
-Available on Github: http://github.com/Quackmatic/Graphmatic
-Originally developed for the AQA A2 Computing coursework.</value>
-  </data>
-  <data name="AllowedVariables" xml:space="preserve">
-    <value>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</value>
-  </data>
-  <data name="ButtonDone" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\calcbuttons\done.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Button3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\d3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Equation32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\equation32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Exit16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\door-open-in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ArrowLeft24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\arrowleft24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Image16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Button9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\d9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotateErase16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotateerase16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Properties" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\properties.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Data32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blue-document-data.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavBackward16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\navigation-180-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ColorPick16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\color-swatch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Button6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\d6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonEquals" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\equals.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Chart24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\chart24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonDivide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\calcbuttons\divide.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Statistics24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\statistics24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GraphmaticDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\graphmaticdocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AllowedVariables" xml:space="preserve">
+    <value>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</value>
+  </data>
+  <data name="ImageImport24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnotateDraw24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\annotatedraw24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DecreaseSize16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\decreasesize16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IncreaseSize16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\toolbaricons\increasesize16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeftArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\leftarrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PageExportImage24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-export-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Page16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

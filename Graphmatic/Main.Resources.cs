@@ -168,6 +168,14 @@ namespace Graphmatic
             }
         }
 
+        private Resource DuplicateResource(Resource resource, string newName)
+        {
+            Resource duplicate = resource.Duplicate(CurrentDocument);
+            duplicate.Name = newName;
+            AddResource(duplicate);
+            return duplicate;
+        }
+
         private void RemoveResource(Resource resource)
         {
             if (resource is Page)
@@ -319,6 +327,23 @@ namespace Graphmatic
             }
         }
 
+        private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Resource resource = SelectedResource;
+            if (resource != null)
+            {
+                string newResourceName = GetUserTextInput(
+                String.Format("Enter a name for the duplicate of {0}.", resource.Name),
+                "Duplicate",
+                String.Format("Copy of {0}", resource.Name),
+                resource.GetResourceIcon(true));
+                if (newResourceName != null)
+                {
+                    OpenResourceEditor(DuplicateResource(resource, newResourceName));
+                }
+            }
+        }
+
         private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Resource resource = SelectedResource;
@@ -336,6 +361,7 @@ namespace Graphmatic
         {
             bool somethingSelected = listViewResources.SelectedIndices.Count >= 1;
             renameToolStripMenuItem.Enabled =
+                duplicateToolStripMenuItem.Enabled = 
                 propertiesToolStripMenuItem.Enabled =
                 removeToolStripMenuItem.Enabled =
                 editToolStripMenuItem.Enabled = somethingSelected;
@@ -413,7 +439,7 @@ namespace Graphmatic
 
         private void pageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string pageName = GetUserTextInput("Enter a name for the new page.", "New Page", CreateResourceName("Page"), Properties.Resources.Page);
+            string pageName = GetUserTextInput("Enter a name for the new page.", "New Page", CreateResourceName("Page"), Properties.Resources.Page32);
 
             if (pageName != null)
             {

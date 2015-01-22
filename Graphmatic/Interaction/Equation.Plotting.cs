@@ -17,7 +17,10 @@ namespace Graphmatic.Interaction
         {
             if (resolution == PlotResolution.Resize) return;
             BinaryParseTreeNode parseTreeRoot = ParseTree as BinaryParseTreeNode;
-            using (Pen graphPen = new Pen(plotParams.PlotColor))
+
+            var originalSmoothingMode = graphics.SmoothingMode;
+            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            using (Pen graphPen = new Pen(plotParams.PlotColor, EquationPenWidth))
             {
                 if (parseTreeRoot.Left is VariableParseTreeNode &&
                     !parseTreeRoot.Right.ContainsVariable((parseTreeRoot.Left as VariableParseTreeNode).Variable))
@@ -50,6 +53,7 @@ namespace Graphmatic.Interaction
                     PlotImplicit(graph, graphics, graphSize, graphPen, parameters, resolution);
                 }
             }
+            graphics.SmoothingMode = originalSmoothingMode;
         }
 
         private int IntLerp(int scale, double a, double b)
@@ -240,8 +244,7 @@ namespace Graphmatic.Interaction
             {
                 Parse();
             }
-            return ParseTree.ContainsVariable(variable1) &&
-                ParseTree.ContainsVariable(variable2);
+            return ParseTree.CanPlotOverVariables(variable1, variable2);
         }
     }
 }

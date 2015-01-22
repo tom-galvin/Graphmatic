@@ -149,14 +149,17 @@ namespace Graphmatic
                 {
                     Expression.Size = SmallExpression ? DisplaySize.Small : DisplaySize.Large;
                     Expression.RecalculateDimensions(ExpressionCursor);
+                    // we want pixellated drawing so turn off interpolation
                     e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
 
+                    // paint to a bitmap first; this lets us center it in the window afterward
                     Bitmap expressionBitmap = new Bitmap(Expression.Width + 3, Expression.Height + 3);
                     ExpressionSize = expressionBitmap.Size;
                     Graphics expressionGraphics = Graphics.FromImage(expressionBitmap);
                     ExpressionCursor.Hotspots.Clear();
                     Expression.Paint(expressionGraphics, ExpressionCursor, 1, 1);
 
+                    // scale the pixels up the desired level
                     e.Graphics.ScaleTransform(_DisplayScale, _DisplayScale);
                     e.Graphics.DrawImage(expressionBitmap, (Width / _DisplayScale - expressionBitmap.Width) / 2, (Height / _DisplayScale - expressionBitmap.Height) / 2);
                 }
@@ -205,15 +208,42 @@ namespace Graphmatic
                 Point position = e.Location;
                 position.X = position.X / _DisplayScale - (Width / _DisplayScale - ExpressionSize.Width) / 2;
                 position.Y = position.Y / _DisplayScale - (Height / _DisplayScale - ExpressionSize.Height) / 2;
-                foreach (var keyValuePair in ExpressionCursor.Hotspots)
+
+                
+                if (position.X < 0)
                 {
-                    if (keyValuePair.Key.Contains(position))
+                    // user wants to go to the far left of the expression display
+                    ExpressionCursor.Expression = Expression;
+                    ExpressionCursor.Index = 0;
+                }
+                else if (position.X >= Expression.Width)
+                {
+                    // user wants to go to the far right of the expression display
+                    ExpressionCursor.Expression = Expression;
+                    ExpressionCursor.Index = Expression.Count;
+                }
+                else
+                {
+                    if (position.Y < 0 || position.Y >= Expression.Height)
                     {
-                        Point pointInHotspotClicked = new Point(
-                            position.X - keyValuePair.Key.X,
-                            position.Y - keyValuePair.Key.Y);
-                        keyValuePair.Value(pointInHotspotClicked, ExpressionCursor);
-                        break;
+                        // click is out of bounds of the expression, don't bother checking
+                        return;
+                    }
+
+                    // user clicked somewhere within the expression
+                    // iterate over the registered hotspots to find out which expression or token
+                    // was clicked
+
+                    foreach (var keyValuePair in ExpressionCursor.Hotspots)
+                    {
+                        if (keyValuePair.Key.Contains(position))
+                        {
+                            Point pointInHotspotClicked = new Point(
+                                position.X - keyValuePair.Key.X,
+                                position.Y - keyValuePair.Key.Y);
+                            keyValuePair.Value(pointInHotspotClicked, ExpressionCursor);
+                            break;
+                        }
                     }
                 }
             }
