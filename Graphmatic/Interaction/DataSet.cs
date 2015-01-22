@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction
 {
-    public class DataSet : Resource, IEnumerable<double[]>, IPlottable
+    public partial class DataSet : Resource, IEnumerable<double[]>, IPlottable
     {
         public char[] Variables
         {

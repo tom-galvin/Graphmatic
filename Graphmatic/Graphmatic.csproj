@@ -131,6 +131,7 @@
     <Compile Include="Interaction\Annotations\Drawing.cs" />
     <Compile Include="Interaction\Annotations\Picture.cs" />
     <Compile Include="Interaction\DataSet.cs" />
+    <Compile Include="Interaction\DataSet.Statistics.cs" />
     <Compile Include="Interaction\Document.cs" />
     <Compile Include="Interaction\Equation.cs" />
     <Compile Include="Interaction\Equation.Plotting.cs" />
@@ -195,6 +196,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatisticsExtensionMethods.cs" />
     <Compile Include="XmlExtensionMethods.cs" />
     <EmbeddedResource Include="ColorChooser.resx">
       <DependentUpon>ColorChooser.cs</DependentUpon>
