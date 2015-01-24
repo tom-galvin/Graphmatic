@@ -67,17 +67,21 @@ namespace Graphmatic
             SaveFileDialog saveFileDialog = CreateSaveFileDialog();
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                try
+                while (true) // this document gon get recovered, yo
                 {
-                    File.Move(backupPath, saveFileDialog.FileName);
-                }
-                catch (IOException ex)
-                {
-                    if (!FailedBackup)
+                    try
                     {
-                        MessageBox.Show("The backup document cannot be recovered.\r\n" +
-                            ex.Message, "Backup and Restore - " + ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        FailedBackup = true;
+                        File.Move(backupPath, saveFileDialog.FileName);
+                        break;
+                    }
+                    catch (IOException ex)
+                    {
+                        if (!FailedBackup)
+                        {
+                            MessageBox.Show("The document cannot be recovered to this location.\r\n" +
+                                ex.Message + "\r\nSave the recovered document to another location and try again.", "Backup and Restore - " + ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            FailedBackup = true;
+                        }
                     }
                 }
             }
@@ -88,7 +92,7 @@ namespace Graphmatic
             string backupPath = GetBackupPath();
             if (File.Exists(backupPath))
             {
-                DialogResult result = MessageBox.Show("It appears that the program ended unexpectedly before the document was closed. Do you want to recover the backup document?", "Backup and Restore", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("It appears that the program ended unexpectedly before the document was closed. Do you want to recover the backup document, and save it to another location?", "Backup and Restore", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
                     RecoverBackupDocument(backupPath);
