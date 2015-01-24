@@ -238,11 +238,7 @@ namespace Graphmatic
             if (e.FormattedValue is string)
             {
                 string formattedValue = (string)e.FormattedValue;
-                if (formattedValue.Trim().Length == 0)
-                {
-                    dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = (double)0; // must be (Double) to avoid InvalidCastException with weird boxing later on
-                }
-                else if (!Double.TryParse(formattedValue, out temp))
+                if (formattedValue.Trim().Length != 0 && !Double.TryParse(formattedValue, out temp))
                 {
                     MessageBox.Show("The number entered is invalid.", "Format Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     e.Cancel = true;
