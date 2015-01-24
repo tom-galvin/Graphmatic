@@ -117,7 +117,7 @@ namespace Graphmatic.Expressions.Tokens
         /// There shouldn't be any, so this method does nothing.
         /// </summary>
         /// <param name="document">The Document in which this element resides.</param>
-        public sealed void UpdateReferences(Document document)
+        public void UpdateReferences(Document document)
         {
         }
     }
