@@ -16,7 +16,7 @@ namespace Graphmatic.Expressions.Parsing
         /// </summary>
         /// <param name="variables">The variable values to use in calculation.</param>
         /// <returns>Returns the result of the evaluation.</returns>
-        public abstract double Evaluate(Dictionary<char, double> variables);
+        public abstract double Evaluate(VariableSet variables);
 
         /// <summary>
         /// Convert this parse tree node into a string representation of the syntax it represents.

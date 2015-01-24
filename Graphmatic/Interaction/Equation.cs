@@ -61,7 +61,7 @@ namespace Graphmatic.Interaction
             : base(xml)
         {
             Expression = new Expression(null, xml.Element("Expression").Elements());
-            ParseTree = Expression.Parse(true);
+            Parse();
         }
 
         public void Parse()

@@ -7,26 +7,28 @@ using System.Text;
 using System.Windows.Forms;
 using Graphmatic.Interaction;
 using Graphmatic.Interaction.Plotting;
+using Graphmatic.Interaction.Statistics;
 
 namespace Graphmatic
 {
+    /// <summary>
+    /// Represents a dialog box for visually editing the data contained with <c>Graphmatic.Interaction.DataSet</c> objects.
+    /// </summary>
     public partial class DataSetEditor : Form
     {
-        private bool _DataChanged;
-        public bool DataChanged
+        /// <summary>
+        /// Gets the data set currently being edited by this DataSetEditor.
+        /// </summary>
+        public DataSet DataSet
         {
-            get
-            {
-                return _DataChanged;
-            }
-            protected set
-            {
-                _DataChanged = value;
-                RefreshTitle();
-            }
+            get;
+            protected set;
         }
 
-        public DataSet DataSet
+        /// <summary>
+        /// Gets the document containing the data set referred to by the <c>DataSet</c> property.
+        /// </summary>
+        public Document Document
         {
             get;
             protected set;
@@ -37,14 +39,25 @@ namespace Graphmatic
             InitializeComponent();
         }
 
-        public DataSetEditor(DataSet dataSet)
+        /// <summary>
+        /// Initialize a new instance of the <c>DataSetEditor</c> form, with the specified data set and corresponding parent form.
+        /// </summary>
+        /// <param name="document">The parent document of the data set to edit.</param>
+        /// <param name="dataSet">The data set to edit.</param>
+        public DataSetEditor(Document document, DataSet dataSet)
             : this()
         {
+            Document = document;
             DataSet = dataSet;
             RefreshDataList();
-            DataChanged = false;
+            Text = String.Format("{0} - Data Set Editor",
+                 DataSet.Name);
         }
 
+        /// <summary>
+        /// Refresh the contents of the data list to reflect changes to the underlying <c>DataSet</c>.<para/>
+        /// Any unsaved changes will be erased.
+        /// </summary>
         private void RefreshDataList()
         {
             dataGridView.SuspendLayout(); // speed up
@@ -54,6 +67,7 @@ namespace Graphmatic
             {
                 dataGridView.Columns[i].Name = DataSet.Variables[i].ToString();
                 dataGridView.Columns[i].ValueType = typeof(double);
+                dataGridView.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
             }
 
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -73,29 +87,15 @@ namespace Graphmatic
             dataGridView.ResumeLayout();
         }
 
-        private void RefreshTitle()
-        {
-            Text = String.Format("{0}{1} - Data Set Editor",
-                DataSet.Name,
-                DataChanged ? "*" : "");
-        }
-
         private void buttonEditVariables_Click(object sender, EventArgs e)
         {
-            if (DataChanged)
+            if (SaveChanges())
             {
-                if (MessageBox.Show("Editing the variables will save any changed data beforehand.\r\n" +
-                    "Are you sure you want to do this?", "Edit Variables", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
-                    return;
-                SaveChanges();
-                DialogResult = System.Windows.Forms.DialogResult.None;
-            }
-            DataSetCreator creator = new DataSetCreator(DataSet);
-            if (creator.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-            {
-                RefreshDataList();
-                DataChanged = false;
-                DialogResult = System.Windows.Forms.DialogResult.None;
+                DataSetCreator creator = new DataSetCreator(DataSet);
+                if (creator.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    RefreshDataList();
+                }
             }
         }
 
@@ -112,6 +112,10 @@ namespace Graphmatic
             }
         }
 
+        /// <summary>
+        /// Saves changes made in the editor to the data set in memory.
+        /// </summary>
+        /// <returns>Returns true if validation and saving was successful; false otherwise.</returns>
         private bool SaveChanges()
         {
             List<double[]> rows = new List<double[]>();
@@ -138,43 +142,20 @@ namespace Graphmatic
                         MessageBox.Show("This cell is empty. Please put a value in it or remove the row.", "Save Changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
-                    
+
                     rowData[i] = (double)row.Cells[i].Value;
                 }
                 rows.Add(rowData);
             }
             DataSet.Set(rows);
             RefreshDataList();
-            DataChanged = false;
             return true;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            if (DataChanged)
-            {
-                if (MessageBox.Show(
-                    "You have unsaved changes to your data. Are you sure you want to cancel?",
-                    "Cancel",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
-                {
-                    DialogResult = System.Windows.Forms.DialogResult.None;
-                    return;
-                }
-            }
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Close();
-        }
-
-        private void dataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            DataChanged = true;
-        }
-
-        private void dataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            DataChanged = true;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -186,26 +167,22 @@ namespace Graphmatic
             }
         }
 
-        private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            DataChanged = true;
-        }
-
         private void buttonExcelCopy_Click(object sender, EventArgs e)
         {
             if (Clipboard.ContainsText())
             {
+                // turn Excel-format tab-separated values into an array of array of strings
                 string[][] clipData = Clipboard
                     .GetText()
                     .Split(new string[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(s => s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries))
                     .ToArray();
-                if (clipData.Length > 0)
+                if (clipData.Length > 0) // make sure the copied data isn't nonexistent...
                 {
                     int arrayLength = clipData[0].Length;
                     for (int i = 1; i < clipData.Length; i++)
                     {
-                        if (clipData[i].Length != arrayLength)
+                        if (clipData[i].Length != arrayLength) // validate the size of the data's records
                         {
                             MessageBox.Show("All rows in the copied data must have the same length. " +
                                 "Make sure you have no merged cells, and that you are selecting a square region.",
@@ -214,7 +191,9 @@ namespace Graphmatic
                                 MessageBoxIcon.Error);
                             return;
                         }
-                    } try
+                    }
+
+                    try // try to turn the strings in the data into doubles in the DataSet
                     {
                         double[][] doubleData = clipData
                             .Select(da =>
@@ -228,11 +207,11 @@ namespace Graphmatic
                             DataSet.Add(row);
                         }
 
-                        DataChanged = true;
-                        RefreshDataList();
+                        RefreshDataList(); // refresh with our new changes
                     }
                     catch (FormatException)
                     {
+                        // if the user tries to copy in some text from Excel, warn them
                         MessageBox.Show("Some data is not in a numeric format. " +
                         "Make sure that your data does not contain text or any formatted data.",
                         "Paste from Excel",
@@ -244,6 +223,7 @@ namespace Graphmatic
             }
             else
             {
+                // if we can't parse the data, assume that it's not from Excel
                 MessageBox.Show("The clipboard must contain text data from Microsoft Excel.",
                     "Paste from Excel",
                     MessageBoxButtons.OK,
@@ -251,6 +231,7 @@ namespace Graphmatic
             }
         }
 
+        // validate data entered into the DataGridView
         private void dataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             double temp;
@@ -268,5 +249,134 @@ namespace Graphmatic
                 }
             }
         }
+
+        private void buttonStats_Click(object sender, EventArgs e)
+        {
+            contextMenuStripStatistics.Show(MousePosition);
+        }
+
+        #region Statistical Functions
+        //This region contains the handlers for all of the statistical functions presented to the user
+
+        /// <summary>
+        /// Performs a single-variable reductive statistical function on a user-selected variable from the data set.<para/>
+        /// This operation takes one variable from each row and turns it into one number.
+        /// </summary>
+        /// <param name="name">The name of the statistical function as presented to the user.</param>
+        /// <param name="reductionFunction">
+        /// The reduction function to use.<para/>
+        /// This turns a list of numbers into one number through some transformation.
+        /// </param>
+        private void StatFunction(string name, Func<IEnumerable<double>, double> reductionFunction)
+        {
+            char[] variables = SelectVariableDialog.SelectVariables(name, DataSet.Variables, name + " of:");
+            if (variables != null && SaveChanges())
+            {
+                var data = DataSet.RowSelect(variables[0]);
+                double value = reductionFunction(data);
+                MessageBox.Show(name + ": " + value.ToString("0.#####"), "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        /// <summary>
+        /// Performs a double-variable reductive statistical function on a user-selected variable from the data set.<para/>
+        /// This operation takes two variables from each row and turns it into one number.
+        /// </summary>
+        /// <param name="name">The name of the statistical function as presented to the user.</param>
+        /// <param name="reductionFunction">
+        /// The reduction function to use.<para/>
+        /// This turns a list of pairs of numbers into one number through some transformation.
+        /// </param>
+        /// <param name="uniqueVariables">True if chosen variables must be unique; false otherwise.</param>
+        private void StatFunction(string name, Func<IEnumerable<Tuple<double, double>>, double> reductionFunction, bool uniqueVariables = false)
+        {
+            char[] variables = SelectVariableDialog.SelectVariables(name, DataSet.Variables, name + " of:", "and:");
+            if (variables[0] != variables[1])
+            {
+                if (variables != null && SaveChanges())
+                {
+                    var data = DataSet.RowSelect(variables[0], variables[1]);
+                    double value = reductionFunction(data);
+                    MessageBox.Show(name + ": " + value.ToString("0.#####"), "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("The chosen variables must not be the same.", "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void meanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StatFunction("Mean", ns => ns.Mean());
+        }
+
+        private void varianceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StatFunction("Variance", ns => ns.UnnormalizedVariance() / ns.Count());
+        }
+
+        private void covarianceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StatFunction("Covariance", ns => ns.UnnormalizedCovariance() / ns.Count(), true);
+        }
+
+        private void standarddeviationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StatFunction("Standard deviation", ns => Math.Sqrt(ns.UnnormalizedVariance() / ns.Count()));
+        }
+
+        private void sumToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StatFunction("Sum", ns => ns.Sum());
+        }
+
+        private void squaredSumToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StatFunction("Squared sum", ns => ns.Select(d => d * d).Sum());
+        }
+
+        private void productSumToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StatFunction("Product sum", ns => ns.Select(t => t.Item1 * t.Item2).Sum(), true);
+        }
+
+        private void pMCCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            char[] variables = SelectVariableDialog.SelectVariables("Product-moment correlation coefficient", DataSet.Variables, "PMCC of:", "with:");
+            if (variables[0] != variables[1])
+            {
+                if (variables != null && SaveChanges())
+                {
+                    double value = DataSet.Pmcc(variables[0], variables[1]);
+                    MessageBox.Show("Product-moment correlation coefficient: " + value.ToString("0.#####"), "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("The chosen variables must not be the same.", "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void createRegressionLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            char[] variables = SelectVariableDialog.SelectVariables("Regression line", DataSet.Variables, "Independent variable:", "Dependent variable:");
+            if (variables[0] != variables[1])
+            {
+                if (variables != null && SaveChanges())
+                {
+                    LinearCurve line = DataSet.FitLinear(variables[0], variables[1]);
+                    Document.Add(line.ToEquation());
+                    MessageBox.Show(
+                        "The regression line has been added to the Document.\r\n" + line.ToString(),
+                        "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("The chosen variables must not be the same.", "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
     }
 }

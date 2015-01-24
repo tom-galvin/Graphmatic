@@ -1158,7 +1158,7 @@ namespace Graphmatic
                 Name = CreateResourceName(String.Format("{0}/Data Set", CurrentPage.Name))
             };
             if (new DataSetCreator(dataSet).ShowDialog() != System.Windows.Forms.DialogResult.Cancel &&
-                new DataSetEditor(dataSet).ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
+                new DataSetEditor(CurrentDocument, dataSet).ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
             {
                 AddResource(dataSet);
                 CurrentPage.Graph.Add(dataSet, CreateNewPlottableParameters());

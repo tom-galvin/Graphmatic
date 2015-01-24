@@ -24,7 +24,7 @@ namespace Graphmatic
             foreach (double row in data)
             {
                 count += 1;
-                accumulator = row;
+                accumulator += row;
             }
 
             return accumulator / count;
@@ -43,7 +43,7 @@ namespace Graphmatic
             {
                 count += 1;
                 accumulator1 += row.Item1;
-                accumulator2 = row.Item2;
+                accumulator2 += row.Item2;
             }
 
             return new Tuple<double, double>(accumulator1 / count, accumulator2 / count);

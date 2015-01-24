@@ -56,7 +56,7 @@ namespace Graphmatic.Expressions.Parsing
         /// </summary>
         /// <param name="variables">The variable values to use in calculation.</param>
         /// <returns>Returns the result of the evaluation.</returns>
-        public override double Evaluate(Dictionary<char, double> variables)
+        public override double Evaluate(VariableSet variables)
         {
             double leftResult = Left.Evaluate(variables);
             double rightResult = Right.Evaluate(variables);

@@ -42,7 +42,7 @@ namespace Graphmatic
 
         private void OpenDataSetEditor(DataSet dataSet)
         {
-            new DataSetEditor(dataSet).ShowDialog();
+            new DataSetEditor(CurrentDocument, dataSet).ShowDialog();
             DocumentModified = true;
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using Graphmatic.Expressions;
 using Graphmatic.Expressions.Parsing;
 using Graphmatic.Interaction.Plotting;
 
@@ -16,6 +17,8 @@ namespace Graphmatic.Interaction
         public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters parameters, PlotResolution resolution)
         {
             if (resolution == PlotResolution.Resize) return;
+            if (ParseTree == null)
+                Parse();
             BinaryParseTreeNode parseTreeRoot = ParseTree as BinaryParseTreeNode;
 
             var originalSmoothingMode = graphics.SmoothingMode;
@@ -67,8 +70,7 @@ namespace Graphmatic.Interaction
             if (resolution == PlotResolution.Resize) gridResolution *= 10;
             if (resolution == PlotResolution.Edit) gridResolution *= 4;
 
-            Dictionary<char, double> vars = new Dictionary<char, double>();
-
+            VariableSet vars = new VariableSet();
             int gridWidth = graphSize.Width / gridResolution,
                 gridHeight = graphSize.Height / gridResolution;
             double[,] values = new double[
@@ -156,7 +158,7 @@ namespace Graphmatic.Interaction
 
         private void PlotExplicitHorizontal(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters plotParams, char explicitVariable, ParseTreeNode node, PlotResolution resolution)
         {
-            Dictionary<char, double> vars = new Dictionary<char, double>();
+            VariableSet vars = new VariableSet();
             int previousX = -1, previousY = -1;
             float interval = 0.1f;
             if (resolution == PlotResolution.Resize) interval *= 100f;
@@ -198,7 +200,7 @@ namespace Graphmatic.Interaction
 
         private void PlotExplicitVertical(Graph graph, Graphics graphics, Size graphSize, Pen graphPen, GraphParameters plotParams, char explicitVariable, ParseTreeNode node, PlotResolution resolution)
         {
-            Dictionary<char, double> vars = new Dictionary<char, double>();
+            VariableSet vars = new VariableSet();
             int previousX = -1, previousY = -1;
             float interval = 0.1f;
             if (resolution == PlotResolution.Resize) interval *= 100f;

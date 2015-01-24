@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Graphmatic.Interaction.Statistics;
 
 namespace Graphmatic.Interaction
 {
@@ -38,17 +39,17 @@ namespace Graphmatic.Interaction
             if (index2 == -1)
                 throw new IndexOutOfRangeException(String.Format("Variable {0} does not exist in the DataSet.", variable2));
 
-            return Data.Select(r => new Tuple<double, double>(r[variable1], r[variable2]));
+            return Data.Select(r => new Tuple<double, double>(r[index1], r[index2]));
         }
 
         /// <summary>
         /// Calculates the unnormalized variances for two variables in the data set.
         /// </summary>
         /// <param name="variable1">The first variable for which to calculate the unnormalized variance.</param>
-        /// <param name="variable2"></param>
-        /// <param name="s11"></param>
-        /// <param name="s22"></param>
-        /// <param name="s12"></param>
+        /// <param name="variable2">The second variable for which to calculate the unnormalized variance.</param>
+        /// <param name="s11">The unnormalized variance of variable 1.</param>
+        /// <param name="s22">The unnormalized variance of variable 2.</param>
+        /// <param name="s12">The unnormalized covariance of variables 1 and 2.</param>
         public void CalculateVariances(char variable1, char variable2, out double s11, out double s22, out double s12)
         {
             s11 = RowSelect(variable1).UnnormalizedVariance();
@@ -56,6 +57,12 @@ namespace Graphmatic.Interaction
             s12 = RowSelect(variable1, variable2).UnnormalizedCovariance();
         }
 
+        /// <summary>
+        /// Calculates the product-moment correlation coefficient for two variables in the data set.
+        /// </summary>
+        /// <param name="variable1">The first variable for which to calculate the PMCC.</param>
+        /// <param name="variable2">The second variable for which to calculate the PMCC.</param>
+        /// <returns>The PMCC of <c>variable1</c> and <c>variable2</c>.</returns>
         public double Pmcc(char variable1, char variable2)
         {
             double s11, s22, s12;
@@ -63,11 +70,22 @@ namespace Graphmatic.Interaction
             return s12 / Math.Sqrt(s11 * s22);
         }
 
-        public Equation LinearRegression(char variable1, char variable2)
+        /// <summary>
+        /// Creates a linear fit of two variables in this data set.
+        /// </summary>
+        /// <param name="independent">The variable to fit independently.</param>
+        /// <param name="dependent">The variable to fit as a function of the independent variable.</param>
+        /// <returns>Returns a <c>Graphmatic.Interaction.Statistics.LinearCurve</c> representing a linear fit of the given variables.</returns>
+        public LinearCurve FitLinear(char independent, char dependent)
         {
             double s11, s22, s12;
-            CalculateVariances(variable1, variable2, out s11, out s22, out s12);
-            double b = 
+            CalculateVariances(independent, dependent, out s11, out s22, out s12);
+            double
+                mean1 = RowSelect(independent).Mean(),
+                mean2 = RowSelect(dependent).Mean();
+            double b = s12 / s11;
+            double a = mean2 - mean1 * b; // mean(y)=a+b*mean(x) as the regression line goes through the mean of the two variables
+            return new LinearCurve(dependent, independent, a, b);
         }
     }
 }
