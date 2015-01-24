@@ -52,16 +52,16 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public ExpToken(Expression parent)
-            : base(parent)
+        public ExpToken()
+            : base()
         {
             Base = new Expression(this);
             Power = new Expression(this);
             Children = new Expression[] { Base, Power };
         }
 
-        public ExpToken(Expression parent, XElement xml)
-            : base(parent)
+        public ExpToken(XElement xml)
+            : base()
         {
             Base = new Expression(this, xml.Element("Base").Elements());
             Power = new Expression(this, xml.Element("Power").Elements());

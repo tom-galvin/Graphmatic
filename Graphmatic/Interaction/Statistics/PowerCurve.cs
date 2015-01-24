@@ -54,12 +54,12 @@ namespace Graphmatic.Interaction.Statistics
         public override Equation ToEquation()
         {
             Expression expression = new Expression(null);
-            expression.Add(new VariableToken(expression, DependentVariable));
-            expression.Add(new SymbolicToken(expression, SymbolicToken.SymbolicType.Equals));
-            expression.AddRange(ValueToTokenSequence(expression, Scale));
-            ExpToken exp = new ExpToken(expression);
-            exp.Base.Add(new VariableToken(exp.Base, IndependentVariable));
-            exp.Power.AddRange(ValueToTokenSequence(exp.Power, Power));
+            expression.Add(new VariableToken(DependentVariable));
+            expression.Add(new SymbolicToken(SymbolicToken.SymbolicType.Equals));
+            expression.AddRange(ValueToTokenSequence(Scale));
+            ExpToken exp = new ExpToken();
+            exp.Base.Add(new VariableToken(IndependentVariable));
+            exp.Power.AddRange(ValueToTokenSequence(Power));
             expression.Add(exp);
             Equation equation = new Equation(expression)
             {

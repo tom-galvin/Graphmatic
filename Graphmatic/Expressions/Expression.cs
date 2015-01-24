@@ -92,7 +92,53 @@ namespace Graphmatic.Expressions
             : this(parent)
         {
             AddRange(xml
-                .Select(x => TokenSerializationExtensionMethods.FromXml(this, x)));
+                .Select(x => TokenSerializationExtensionMethods.FromXml(x)));
+        }
+
+        /// <summary>
+        /// Adds a token to the given position in the Expression.
+        /// </summary>
+        /// <param name="index">The zero-based index at which <paramref name="token"/> should be inserted.</param>
+        /// <param name="token">The token to add to the Expression.</param>
+        public new void Insert(int index, Token token)
+        {
+            token.Parent = this;
+            base.Insert(index, token);
+        }
+
+        /// <summary>
+        /// Adds a token to the given position in the Expression.
+        /// </summary>
+        /// <param name="index">The zero-based index at which <paramref name="token"/> should be inserted.</param>
+        /// <param name="tokens">The tokens to add to the Expression.</param>
+        public new void InsertRange(int index, IEnumerable<Token> tokens)
+        {
+            foreach (Token token in tokens.Reverse()) // in reverse order, so they are correct after all are inserted at the same index
+            {
+                Insert(index, token);
+            }
+        }
+
+        /// <summary>
+        /// Adds a token to the end of the Expression.
+        /// </summary>
+        /// <param name="token">The token to add to the end of the Expression.</param>
+        public new void Add(Token token)
+        {
+            token.Parent = this;
+            base.Add(token);
+        }
+
+        /// <summary>
+        /// Adds an enumerable collection of tokens to the end of the Expression.
+        /// </summary>
+        /// <param name="tokens">The tokens to add to the end of the Expression.</param>
+        public new void AddRange(IEnumerable<Token> tokens)
+        {
+            foreach (Token token in tokens)
+            {
+                Add(token);
+            }
         }
 
         /// <summary>
@@ -145,14 +191,21 @@ namespace Graphmatic.Expressions
             }
         }
 
-        public void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y)
+        /// <summary>
+        /// Paints the current expression onto the given GDI+ drawing surface at the specified lodation.
+        /// </summary>
+        /// <param name="graphics">The GDI+ drawing surface to draw onto.</param>
+        /// <param name="expressionCursor">The expression cursor to draw inside the expression.</param>
+        /// <param name="x">The X co-ordinate of where to draw on <paramref name="graphics"/>.</param>
+        /// <param name="y">The y co-ordinate of where to draw on <paramref name="graphics"/>.</param>
+        public void Paint(Graphics graphics, ExpressionCursor expressionCursor, int x, int y)
         {
             if (Count == 0) // draw box if expression is empty
             {
                 if (expressionCursor.Expression == this && expressionCursor.Visible)
-                    g.FillRectangle(Brushes.Blue, x, y, Width, Height);
+                    graphics.FillRectangle(Brushes.Blue, x, y, Width, Height);
                 else
-                    g.DrawRectangle(Pens.Gray, x, y, Width - 1, Height - 1);
+                    graphics.DrawRectangle(Pens.Gray, x, y, Width - 1, Height - 1);
 
                 expressionCursor.CreateHotspot(new Rectangle(x, y, Width, Height),
                     (point, cursor) =>
@@ -165,7 +218,7 @@ namespace Graphmatic.Expressions
             {
                 if (expressionCursor.Visible && expressionCursor.Expression == this) // draw yellow background if selected by cursor
                 {
-                    g.FillRectangle(Brushes.Yellow, x, y, Width + 1, Height + 1);
+                    graphics.FillRectangle(Brushes.Yellow, x, y, Width + 1, Height + 1);
                 }
                 int tokenX = x;
                 int tokenBaselineOffset = this.Select(token => token.BaselineOffset).Aggregate((b1, b2) => Math.Max(b1, b2));
@@ -178,7 +231,7 @@ namespace Graphmatic.Expressions
                     {
                         Token token = this[i];
                         int tokenY = y + tokenBaselineOffset - token.BaselineOffset;
-                        token.Paint(g, expressionCursor, tokenX, tokenY);
+                        token.Paint(graphics, expressionCursor, tokenX, tokenY);
 
                         int hotspotTokenIndex = i, hotspotTokenWidth = token.Width; // we're making a closure, so create this variable so i doesn't change in the meantime
                         if (!(token is PromptToken)) // don't let the user select prompts
@@ -195,7 +248,7 @@ namespace Graphmatic.Expressions
 
                     if (expressionCursor.Visible && expressionCursor.Expression == this && expressionCursor.Index == i) // draw red line at cursor
                     {
-                        g.DrawLine(Pens.Blue,
+                        graphics.DrawLine(Pens.Blue,
                             cursorX,
                             y + tokenBaselineOffset,
                             cursorX,
@@ -205,16 +258,14 @@ namespace Graphmatic.Expressions
             }
         }
 
+        /// <summary>
+        /// Converts the content of this Expression to an enumerable sequence of XML elements.
+        /// </summary>
+        /// <returns>An enumerable sequence of XML elements containing this Expression's child tokens.</returns>
         public IEnumerable<XElement> ToXml()
         {
             foreach (Token token in this)
                 yield return token.ToXml();
-        }
-
-        public XElement ToXmlElement()
-        {
-            return new XElement("Expression",
-                ToXml());
         }
     }
 }

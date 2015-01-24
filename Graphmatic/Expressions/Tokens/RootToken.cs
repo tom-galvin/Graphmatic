@@ -40,16 +40,16 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public RootToken(Expression parent)
-            : base(parent)
+        public RootToken()
+            : base()
         {
             Base = new Expression(this);
             Power = new Expression(this);
             Children = new Expression[] { Power, Base };
         }
 
-        public RootToken(Expression parent, XElement xml)
-            : base(parent)
+        public RootToken(XElement xml)
+            : base()
         {
             Base = new Expression(this, xml.Element("Base").Elements());
             Power = new Expression(this, xml.Element("Power").Elements());

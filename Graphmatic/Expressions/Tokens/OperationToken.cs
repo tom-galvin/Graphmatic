@@ -41,14 +41,14 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public OperationToken(Expression parent, OperationType operation)
-            : base(parent)
+        public OperationToken(OperationType operation)
+            : base()
         {
             Operation = operation;
         }
 
-        public OperationToken(Expression parent, XElement xml)
-            : base(parent)
+        public OperationToken(XElement xml)
+            : base()
         {
             string operationName = xml.Attribute("Operation").Value;
             if (!Enum.TryParse<OperationType>(operationName, out _Operation))

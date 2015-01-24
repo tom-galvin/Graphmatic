@@ -42,14 +42,14 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public DigitToken(Expression parent, int value)
-            : base(parent)
+        public DigitToken(int value)
+            : base()
         {
             Value = value;
         }
 
-        public DigitToken(Expression parent, XElement xml)
-            : base(parent)
+        public DigitToken(XElement xml)
+            : base()
         {
             Value = Int32.Parse(xml.Attribute("Value").Value);
         }

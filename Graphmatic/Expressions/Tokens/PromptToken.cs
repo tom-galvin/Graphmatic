@@ -46,16 +46,16 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public PromptToken(Expression parent, string text, Expression child)
-            : base(parent)
+        public PromptToken(string text, Expression child)
+            : base()
         {
             Text = text;
             Content = child;
             Content.Parent = this;
         }
 
-        public PromptToken(Expression parent, string text)
-            : base(parent)
+        public PromptToken(string text)
+            : base()
         {
             Text = text;
             Content = new Expression(this);

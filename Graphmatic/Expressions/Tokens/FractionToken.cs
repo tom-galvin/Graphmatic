@@ -50,16 +50,16 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public FractionToken(Expression parent)
-            : base(parent)
+        public FractionToken()
+            : base()
         {
             Top = new Expression(this);
             Bottom = new Expression(this);
             Children = new Expression[] { Top, Bottom };
         }
 
-        public FractionToken(Expression parent, XElement xml)
-            : base(parent)
+        public FractionToken(XElement xml)
+            : base()
         {
             Top = new Expression(this, xml.Element("Top").Elements());
             Bottom = new Expression(this, xml.Element("Bottom").Elements());

@@ -25,8 +25,8 @@ namespace Graphmatic.Expressions.Tokens
             protected set;
         }
 
-        public SimpleToken(Expression parent)
-            : base(parent)
+        public SimpleToken()
+            : base()
         {
         }
 

@@ -81,9 +81,8 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public Token(Expression parent)
+        public Token()
         {
-            Parent = parent;
             Children = new Expression[] { };
         }
 

@@ -48,33 +48,32 @@ namespace Graphmatic.Interaction.Statistics
         /// <summary>
         /// Converts a numeric value to its equivalent tokens in a <c>Graphmatic.Expressions.Expression</c> object.
         /// </summary>
-        /// <param name="parent">The expression in which the tokens are to be in.</param>
         /// <param name="value">The double to convert to a sequence of tokens.</param>
         /// <returns>The sequence of tokens representing <paramref name="value"/>.</returns>
-        protected IEnumerable<Token> ValueToTokenSequence(Expression parent, double value)
+        protected IEnumerable<Token> ValueToTokenSequence(double value)
         {
             string doubleAsString = value.ToString(); // converting to a string, let .NET do the formatting for us
             foreach (char c in doubleAsString)
             {
                 if (Digits.IndexOf(c) != -1)
                 {
-                    yield return new DigitToken(parent, Digits.IndexOf(c));
+                    yield return new DigitToken(Digits.IndexOf(c));
                 }
                 else if (c == '.')
                 {
-                    yield return new SymbolicToken(parent, SymbolicToken.SymbolicType.DecimalPoint);
+                    yield return new SymbolicToken(SymbolicToken.SymbolicType.DecimalPoint);
                 }
                 else if (c == 'e' || c == 'E')
                 {
-                    yield return new SymbolicToken(parent, SymbolicToken.SymbolicType.Exp10);
+                    yield return new SymbolicToken(SymbolicToken.SymbolicType.Exp10);
                 }
                 else if (c == '+')
                 {
-                    yield return new OperationToken(parent, OperationToken.OperationType.Add);
+                    yield return new OperationToken(OperationToken.OperationType.Add);
                 }
                 else if (c == '-')
                 {
-                    yield return new OperationToken(parent, OperationToken.OperationType.Subtract);
+                    yield return new OperationToken(OperationToken.OperationType.Subtract);
                 }
                 else
                 {

@@ -31,14 +31,14 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public VariableToken(Expression parent, char symbol)
-            :base(parent)
+        public VariableToken(char symbol)
+            :base()
         {
             _Symbol = symbol;
         }
 
-        public VariableToken(Expression parent, XElement xml)
-            :base(parent)
+        public VariableToken(XElement xml)
+            :base()
         {
             string symbolString = xml.Attribute("Symbol").Value;
             if (symbolString.Length == 1)

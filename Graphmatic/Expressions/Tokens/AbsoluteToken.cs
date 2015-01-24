@@ -11,13 +11,13 @@ namespace Graphmatic.Expressions.Tokens
 {
     public class AbsoluteToken : FunctionToken, IParsable
     {
-        public AbsoluteToken(Expression parent)
-            : base(parent, "Abs")
+        public AbsoluteToken()
+            : base("Abs")
         {
         }
 
-        public AbsoluteToken(Expression parent, XElement xml)
-            : base(parent, xml)
+        public AbsoluteToken(XElement xml)
+            : base(xml)
         {
 
         }

@@ -39,14 +39,14 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public ConstantToken(Expression parent, ConstantType value)
-            : base(parent)
+        public ConstantToken(ConstantType value)
+            : base()
         {
             Value = value;
         }
 
-        public ConstantToken(Expression parent, XElement xml)
-            : base(parent)
+        public ConstantToken(XElement xml)
+            : base()
         {
             string constantName = xml.Attribute("Value").Value;
             if (!Enum.TryParse<ConstantType>(constantName, out _Value))

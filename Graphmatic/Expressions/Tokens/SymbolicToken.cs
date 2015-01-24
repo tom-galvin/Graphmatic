@@ -43,14 +43,14 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public SymbolicToken(Expression parent, SymbolicType type)
-            : base(parent)
+        public SymbolicToken(SymbolicType type)
+            : base()
         {
             Type = type;
         }
 
-        public SymbolicToken(Expression parent, XElement xml)
-            : base(parent)
+        public SymbolicToken(XElement xml)
+            : base()
         {
             string symbolicTypeName = xml.Attribute("Type").Value;
             if (!Enum.TryParse<SymbolicType>(symbolicTypeName, out _Type))

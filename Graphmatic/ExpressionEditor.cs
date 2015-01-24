@@ -80,115 +80,115 @@ namespace Graphmatic
         private void InitializeButtons()
         {
             #region Digits
-            CreateExpressionButton(button0, expression => new DigitToken(expression, 0), "0 key", Keys.D0);
-            CreateExpressionButton(button1, expression => new DigitToken(expression, 1), "1 key", Keys.D1);
-            CreateExpressionButton(button2, expression => new DigitToken(expression, 2), "2 key", Keys.D2);
-            CreateExpressionButton(button3, expression => new DigitToken(expression, 3), "3 key", Keys.D3);
-            CreateExpressionButton(button4, expression => new DigitToken(expression, 4), "4 key", Keys.D4);
-            CreateExpressionButton(button5, expression => new DigitToken(expression, 5), "5 key", Keys.D5);
-            CreateExpressionButton(button6, expression => new DigitToken(expression, 6), "6 key", Keys.D6);
-            CreateExpressionButton(button7, expression => new DigitToken(expression, 7), "7 key", Keys.D7);
-            CreateExpressionButton(button8, expression => new DigitToken(expression, 8), "8 key", Keys.D8);
-            CreateExpressionButton(button9, expression => new DigitToken(expression, 9), "9 key", Keys.D9);
-            CreateExpressionButton(buttonDecimalPoint, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.DecimalPoint), ". key", Keys.OemPeriod);
+            CreateExpressionButton(button0, () => new DigitToken(0), "0 key", Keys.D0);
+            CreateExpressionButton(button1, () => new DigitToken(1), "1 key", Keys.D1);
+            CreateExpressionButton(button2, () => new DigitToken(2), "2 key", Keys.D2);
+            CreateExpressionButton(button3, () => new DigitToken(3), "3 key", Keys.D3);
+            CreateExpressionButton(button4, () => new DigitToken(4), "4 key", Keys.D4);
+            CreateExpressionButton(button5, () => new DigitToken(5), "5 key", Keys.D5);
+            CreateExpressionButton(button6, () => new DigitToken(6), "6 key", Keys.D6);
+            CreateExpressionButton(button7, () => new DigitToken(7), "7 key", Keys.D7);
+            CreateExpressionButton(button8, () => new DigitToken(8), "8 key", Keys.D8);
+            CreateExpressionButton(button9, () => new DigitToken(9), "9 key", Keys.D9);
+            CreateExpressionButton(buttonDecimalPoint, () => new SymbolicToken(SymbolicToken.SymbolicType.DecimalPoint), ". key", Keys.OemPeriod);
             #endregion
             #region Basic Operations
-            CreateExpressionButton(buttonAdd, expression => new OperationToken(expression, OperationToken.OperationType.Add), "Plus Key", Keys.Oemplus, Keys.Shift);
-            CreateExpressionButton(buttonSubtract, expression => new OperationToken(expression, OperationToken.OperationType.Subtract), "Minus Key", Keys.OemMinus);
-            CreateExpressionButton(buttonMultiply, expression => new OperationToken(expression, OperationToken.OperationType.Multiply), "Shift-8 (*)", Keys.D8, Keys.Shift);
-            CreateExpressionButton(buttonDivide, expression => new OperationToken(expression, OperationToken.OperationType.Divide), "Backslash", Keys.Oem5);
+            CreateExpressionButton(buttonAdd, () => new OperationToken(OperationToken.OperationType.Add), "Plus Key", Keys.Oemplus, Keys.Shift);
+            CreateExpressionButton(buttonSubtract, () => new OperationToken(OperationToken.OperationType.Subtract), "Minus Key", Keys.OemMinus);
+            CreateExpressionButton(buttonMultiply, () => new OperationToken(OperationToken.OperationType.Multiply), "Shift-8 (*)", Keys.D8, Keys.Shift);
+            CreateExpressionButton(buttonDivide, () => new OperationToken(OperationToken.OperationType.Divide), "Backslash", Keys.Oem5);
             #endregion
             #region Roots
-            CreateExpressionButton(buttonRoot, expression => new RootToken(expression), "Ctrl-Shift-R", Keys.R, Keys.Control | Keys.Shift);
-            CreateExpressionButton(buttonSqrt, expression =>
+            CreateExpressionButton(buttonRoot, () => new RootToken(), "Ctrl-Shift-R", Keys.R, Keys.Control | Keys.Shift);
+            CreateExpressionButton(buttonSqrt, () =>
             {
-                var token = new RootToken(expression);
-                token.Power.Add(new DigitToken(token.Power, 2));
+                var token = new RootToken();
+                token.Power.Add(new DigitToken(2));
                 return token;
             }, "Ctrl-R", Keys.R, Keys.Control);
             #endregion
             #region Trig
-            CreateExpressionButton(buttonSin, expression => new FunctionToken(expression, "sin"));
-            CreateExpressionButton(buttonCos, expression => new FunctionToken(expression, "cos"));
-            CreateExpressionButton(buttonTan, expression => new FunctionToken(expression, "tan"));
-            CreateExpressionButton(buttonArcsin, expression => new FunctionToken(expression, "sin`"));
-            CreateExpressionButton(buttonArccos, expression => new FunctionToken(expression, "cos`"));
-            CreateExpressionButton(buttonArctan, expression => new FunctionToken(expression, "tan`"));
+            CreateExpressionButton(buttonSin, () => new FunctionToken("sin"));
+            CreateExpressionButton(buttonCos, () => new FunctionToken("cos"));
+            CreateExpressionButton(buttonTan, () => new FunctionToken("tan"));
+            CreateExpressionButton(buttonArcsin, () => new FunctionToken("sin`"));
+            CreateExpressionButton(buttonArccos, () => new FunctionToken("cos`"));
+            CreateExpressionButton(buttonArctan, () => new FunctionToken("tan`"));
             #endregion
             #region Logs
-            CreateExpressionButton(buttonLogN, expression => new LogToken(expression), "Ctrl-L", Keys.L, Keys.Control);
-            CreateExpressionButton(buttonLogE, expression =>
+            CreateExpressionButton(buttonLogN, () => new LogToken(), "Ctrl-L", Keys.L, Keys.Control);
+            CreateExpressionButton(buttonLogE, () =>
             {
-                var token = new LogToken(expression);
-                token.Base.Add(new ConstantToken(token.Base, ConstantToken.ConstantType.E));
+                var token = new LogToken();
+                token.Base.Add(new ConstantToken(ConstantToken.ConstantType.E));
                 return token;
             }, "Ctrl-Shift-L", Keys.L, Keys.Shift | Keys.Control);
-            CreateExpressionButton(buttonLog10, expression =>
+            CreateExpressionButton(buttonLog10, () =>
             {
-                var token = new LogToken(expression);
-                token.Base.Add(new DigitToken(token.Base, 1));
-                token.Base.Add(new DigitToken(token.Base, 0));
+                var token = new LogToken();
+                token.Base.Add(new DigitToken(1));
+                token.Base.Add(new DigitToken(0));
                 return token;
             });
             #endregion
             #region Exponents
-            CreateExpressionButton(buttonExp, expression => new ExpToken(expression), "Shift-6 (^)", Keys.D6, Keys.Shift);
-            CreateExpressionButton(buttonSquare, expression =>
+            CreateExpressionButton(buttonExp, () => new ExpToken(), "Shift-6 (^)", Keys.D6, Keys.Shift);
+            CreateExpressionButton(buttonSquare, () =>
             {
-                var token = new ExpToken(expression);
-                token.Power.Add(new DigitToken(token.Power, 2));
+                var token = new ExpToken();
+                token.Power.Add(new DigitToken(2));
                 return token;
             }, "Alt-2", Keys.D2, Keys.Alt);
-            CreateExpressionButton(buttonCube, expression =>
+            CreateExpressionButton(buttonCube, () =>
             {
-                var token = new ExpToken(expression);
-                token.Power.Add(new DigitToken(token.Power, 3));
+                var token = new ExpToken();
+                token.Power.Add(new DigitToken(3));
                 return token;
             }, "Alt-3", Keys.D3, Keys.Alt);
-            CreateExpressionButton(buttonReciprocate, expression =>
+            CreateExpressionButton(buttonReciprocate, () =>
             {
-                var token = new ExpToken(expression);
-                token.Power.Add(new OperationToken(token.Power, OperationToken.OperationType.Subtract));
-                token.Power.Add(new DigitToken(token.Power, 1));
+                var token = new ExpToken();
+                token.Power.Add(new OperationToken(OperationToken.OperationType.Subtract));
+                token.Power.Add(new DigitToken(1));
                 return token;
             }, "Alt-Minus", Keys.OemMinus, Keys.Alt);
             #endregion
             #region Constants
-            CreateExpressionButton(buttonPi, expression => new ConstantToken(expression, ConstantToken.ConstantType.Pi), "Alt-P", Keys.P, Keys.Alt);
-            CreateExpressionButton(buttonE, expression => new ConstantToken(expression, ConstantToken.ConstantType.E), "Alt-E", Keys.E, Keys.Alt);
+            CreateExpressionButton(buttonPi, () => new ConstantToken(ConstantToken.ConstantType.Pi), "Alt-P", Keys.P, Keys.Alt);
+            CreateExpressionButton(buttonE, () => new ConstantToken(ConstantToken.ConstantType.E), "Alt-E", Keys.E, Keys.Alt);
             #endregion
             #region Misc
-            CreateExpressionButton(buttonFraction, expression => new FractionToken(expression), "Forward-slash", Keys.OemQuestion);
-            CreateExpressionButton(buttonAbsolute, expression => new AbsoluteToken(expression), "|", Keys.Oem5, Keys.Shift);
-            CreateExpressionButton(buttonBracket, expression => new FunctionToken(expression, ""), "(", Keys.D9, Keys.Shift);
-            // CreateExpressionButton(buttonComma, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Comma), ",", Keys.Oemcomma);
-            CreateExpressionButton(buttonPercent, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Percent), "%", Keys.D5, Keys.Shift);
-            CreateExpressionButton(buttonSymbolicExp, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Exp10), "Ctrl-E", Keys.E, Keys.Control);
+            CreateExpressionButton(buttonFraction, () => new FractionToken(), "Forward-slash", Keys.OemQuestion);
+            CreateExpressionButton(buttonAbsolute, () => new AbsoluteToken(), "|", Keys.Oem5, Keys.Shift);
+            CreateExpressionButton(buttonBracket, () => new FunctionToken(""), "(", Keys.D9, Keys.Shift);
+            // CreateExpressionButton(buttonComma, () => new SymbolicToken(SymbolicToken.SymbolicType.Comma), ",", Keys.Oemcomma);
+            CreateExpressionButton(buttonPercent, () => new SymbolicToken(SymbolicToken.SymbolicType.Percent), "%", Keys.D5, Keys.Shift);
+            CreateExpressionButton(buttonSymbolicExp, () => new SymbolicToken(SymbolicToken.SymbolicType.Exp10), "Ctrl-E", Keys.E, Keys.Control);
 
             #endregion
-            CreateExpressionButton(buttonXVariable, expression => new VariableToken(expression, 'x'), "X", Keys.X);
-            CreateExpressionButton(buttonYVariable, expression => new VariableToken(expression, 'y'), "Y", Keys.Y);
-            CreateExpressionButton(buttonCustomVariable, expression =>
+            CreateExpressionButton(buttonXVariable, () => new VariableToken('x'), "X", Keys.X);
+            CreateExpressionButton(buttonYVariable, () => new VariableToken('y'), "Y", Keys.Y);
+            CreateExpressionButton(buttonCustomVariable, () =>
             {
                 char customVariable = EnterVariableDialog.EnterVariable();
                 if (customVariable != '\0')
                 {
-                    return new VariableToken(expression, customVariable);
+                    return new VariableToken(customVariable);
                 }
                 else
                 {
                     return null;
                 }
             }, "Hash", Keys.Oem7);
-            CreateExpressionButton(buttonEquals, expression => new SymbolicToken(expression, SymbolicToken.SymbolicType.Equals), "Equals", Keys.Oemplus);
+            CreateExpressionButton(buttonEquals, () => new SymbolicToken(SymbolicToken.SymbolicType.Equals), "Equals", Keys.Oemplus);
         }
 
-        private void CreateExpressionButton(Button button, Func<Expression, Token> tokenFactory, string label = "", Keys shortcutKey = Keys.None, Keys modifierKey = Keys.None)
+        private void CreateExpressionButton(Button button, Func<Token> tokenFactory, string label = "", Keys shortcutKey = Keys.None, Keys modifierKey = Keys.None)
         {
 
             button.Click += (sender, e) =>
             {
-                var token = tokenFactory(expressionDisplay.ExpressionCursor.Expression);
+                var token = tokenFactory();
                 if (token != null)
                 {
                     expressionDisplay.ExpressionCursor.Insert(token);

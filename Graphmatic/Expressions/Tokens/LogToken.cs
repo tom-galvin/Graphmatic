@@ -42,16 +42,16 @@ namespace Graphmatic.Expressions.Tokens
             }
         }
 
-        public LogToken(Expression parent)
-            : base(parent)
+        public LogToken()
+            : base()
         {
             Operand = new Expression(this);
             Base = new Expression(this);
             Children = new Expression[] { Base, Operand };
         }
 
-        public LogToken(Expression parent, XElement xml)
-            : base(parent)
+        public LogToken(XElement xml)
+            : base()
         {
             Operand = new Expression(this, xml.Element("Operand").Elements());
             Base = new Expression(this, xml.Element("Base").Elements());
