@@ -42,10 +42,9 @@ namespace Graphmatic
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateVariableDialog dialog = new CreateVariableDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            char newVariable = EnterVariableDialog.EnterVariable();
+            if (newVariable != '\0')
             {
-                char newVariable = dialog.EnteredChar;
                 int index = listBoxVariables.SelectedIndex != -1 ? listBoxVariables.SelectedIndex : DataSet.Variables.Length;
                 foreach (char existingVariable in listBoxVariables.Items)
                 {
@@ -121,12 +120,12 @@ namespace Graphmatic
             int selectedIndex = listBoxVariables.SelectedIndex;
             if (selectedIndex != -1)
             {
-                CreateVariableDialog dialog = new CreateVariableDialog(DataSet.Variables[selectedIndex]);
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                char newName = EnterVariableDialog.EnterVariable(DataSet.Variables[selectedIndex]);
+                if (newName != '\0')
                 {
-                    DataSet.Variables[selectedIndex] = dialog.EnteredChar;
+                    DataSet.Variables[selectedIndex] = newName;
                     listBoxVariables.Items.RemoveAt(selectedIndex);
-                    listBoxVariables.Items.Insert(selectedIndex, dialog.EnteredChar.ToString());
+                    listBoxVariables.Items.Insert(selectedIndex, newName.ToString());
                 }
             }
         }

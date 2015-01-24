@@ -316,7 +316,7 @@ namespace Graphmatic
             {
                 Image captionImage = resource.GetResourceIcon(true);
 
-                string newName = GetUserTextInput("Enter a new name for this resource.", "Rename", resource.Name, captionImage);
+                string newName = EnterTextDialog.EnterText("Enter a new name for this resource.", "Rename", resource.Name, captionImage);
                 if (newName != null)
                 {
                     resource.Name = newName;
@@ -332,7 +332,7 @@ namespace Graphmatic
             Resource resource = SelectedResource;
             if (resource != null)
             {
-                string newResourceName = GetUserTextInput(
+                string newResourceName = EnterTextDialog.EnterText(
                 String.Format("Enter a name for the duplicate of {0}.", resource.Name),
                 "Duplicate",
                 String.Format("Copy of {0}", resource.Name),
@@ -403,7 +403,7 @@ namespace Graphmatic
 
         private void equationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string equationName = GetUserTextInput("Enter a name for the new equation.", "New Equation", CreateResourceName("Equation"), Properties.Resources.Equation32);
+            string equationName = EnterTextDialog.EnterText("Enter a name for the new equation.", "New Equation", CreateResourceName("Equation"), Properties.Resources.Equation32);
 
             if (equationName != null)
             {
@@ -419,7 +419,7 @@ namespace Graphmatic
 
         private void dataSetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string dataSetName = GetUserTextInput("Enter a name for the new data set.", "New Data Set", CreateResourceName("Data Set"), Properties.Resources.DataSet32);
+            string dataSetName = EnterTextDialog.EnterText("Enter a name for the new data set.", "New Data Set", CreateResourceName("Data Set"), Properties.Resources.DataSet32);
 
             if (dataSetName != null)
             {
@@ -439,7 +439,7 @@ namespace Graphmatic
 
         private void pageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string pageName = GetUserTextInput("Enter a name for the new page.", "New Page", CreateResourceName("Page"), Properties.Resources.Page32);
+            string pageName = EnterTextDialog.EnterText("Enter a name for the new page.", "New Page", CreateResourceName("Page"), Properties.Resources.Page32);
 
             if (pageName != null)
             {

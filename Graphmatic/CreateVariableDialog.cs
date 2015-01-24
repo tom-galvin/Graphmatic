@@ -10,30 +10,54 @@ using System.Windows.Forms;
 
 namespace Graphmatic
 {
-    public partial class CreateVariableDialog : Form
+    /// <summary>
+    /// Represents a dialog used to enter a single-character variable name.
+    /// </summary>
+    public partial class EnterVariableDialog : Form
     {
+        /// <summary>
+        /// Gets the character entered by the user.
+        /// </summary>
         public char EnteredChar
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets whether this dialog requires a single key-press before the dialog closes.<para/>
+        /// If this is true, then once the user enters a variable name, the dialog closes immediately.
+        /// </summary>
         public bool OneKey
         {
             get;
             protected set;
         }
 
-        public CreateVariableDialog(bool oneKey = false)
-            : this('?', oneKey)
-        {
-        }
-
-        public CreateVariableDialog(char defaultChar, bool oneKey = false)
+        private EnterVariableDialog(char defaultChar, bool oneKey)
         {
             InitializeComponent();
             textBoxVariableName.Text = defaultChar.ToString();
             OneKey = oneKey;
+        }
+
+        /// <summary>
+        /// Prompts the user to enter a variable name.
+        /// </summary>
+        /// <param name="oneKey">Whether the dialog only requires a single key-press of input before automatically closing.</param>
+        /// <param name="defaultChar">The default character displayed to the user in the dialog window.</param>
+        /// <returns>Returns the character entered by the user. If the user cancels the interaction, the null character ('\0') is returned.</returns>
+        public static char EnterVariable(char defaultChar = '?', bool oneKey = true)
+        {
+            EnterVariableDialog dialog = new EnterVariableDialog(defaultChar, oneKey);
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                return dialog.EnteredChar;
+            }
+            else
+            {
+                return '\0';
+            }
         }
 
         private void textBoxVariableName_KeyPress(object sender, KeyPressEventArgs e)

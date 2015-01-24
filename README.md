@@ -10,7 +10,7 @@ This is my coursework for the AQA Computing A2 coursework. Features do (or will)
 |Plotting those equations in graphical form|Feature complete|
 |Entering of data sets|Feature complete|
 |Plotting those data sets in graphical form, alongside equations|Feature complete|
-|Performing statistical calculations on those data sets|Not started|
+|Performing statistical calculations on those data sets|Implementation complete|
 |Annotating both graphs and data sets, for demonstrations on an Interactive Whiteboard|Feature complete|
 |Extensive bug testing|Not started|
 

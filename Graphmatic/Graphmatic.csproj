@@ -204,7 +204,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatisticsExtensionMethods.cs" />
-    <Compile Include="XmlExtensionMethods.cs" />
     <EmbeddedResource Include="ColorChooser.resx">
       <DependentUpon>ColorChooser.cs</DependentUpon>
     </EmbeddedResource>

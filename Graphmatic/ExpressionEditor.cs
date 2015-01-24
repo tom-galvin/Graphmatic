@@ -170,10 +170,10 @@ namespace Graphmatic
             CreateExpressionButton(buttonYVariable, expression => new VariableToken(expression, 'y'), "Y", Keys.Y);
             CreateExpressionButton(buttonCustomVariable, expression =>
             {
-                CreateVariableDialog dialog = new CreateVariableDialog(true);
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                char customVariable = EnterVariableDialog.EnterVariable();
+                if (customVariable != '\0')
                 {
-                    return new VariableToken(expression, dialog.EnteredChar);
+                    return new VariableToken(expression, customVariable);
                 }
                 else
                 {

@@ -61,7 +61,7 @@ namespace Graphmatic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In development (dev. milestone 2.)
+        ///   Looks up a localized string similar to Currently in Alpha.
         ///Available on Github: http://github.com/Quackmatic/Graphmatic
         ///Originally developed for the AQA A2 Computing coursework..
         /// </summary>
@@ -1037,7 +1037,7 @@ namespace Graphmatic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Indev (MS2).
+        ///   Looks up a localized string similar to Alpha.
         /// </summary>
         public static string VersionString {
             get {

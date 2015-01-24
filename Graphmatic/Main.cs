@@ -97,19 +97,6 @@ namespace Graphmatic
             }
         }
 
-        private string GetUserTextInput(string prompt, string title, string defaultValue = "", Image captionImage = null)
-        {
-            EnterTextDialog dialog = new EnterTextDialog(title, prompt, defaultValue, captionImage);
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                return dialog.Value;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
         #region WinForms code
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
