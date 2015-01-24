@@ -13,9 +13,11 @@ namespace Graphmatic.Expressions
     public interface IParsable
     {
         /// <summary>
-        /// Returns a parse tree node that can be evaluated.
+        /// Parses this token into a <c>Graphmatic.Expressions.Parsing.ParseTreeToken</c> representing
+        /// the sequence of calculations needed to evaluate this expression.
         /// </summary>
-        /// <returns>A parse tree node that can be evaluated.</returns>
+        /// <returns>A <c>Graphmatic.Expressions.Parsing.ParseTreeToken</c> representing a syntax tree
+        /// for this token and any children.</returns>
         ParseTreeNode Parse();
     }
 }

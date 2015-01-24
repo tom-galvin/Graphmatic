@@ -8,34 +8,69 @@ using System.Threading.Tasks;
 
 namespace Graphmatic.Expressions
 {
+    /// <summary>
+    /// Exposes helper methods for the display of the calculation font.
+    /// </summary>
     public static class FontHelperExtensionMethods
     {
-        private static Rectangle[] largeChars;
-        private static Rectangle[] smallChars;
+        /// <summary>
+        /// The large character set.
+        /// </summary>
+        private static Rectangle[] LargeChars;
+        /// <summary>
+        /// The small character set.
+        /// </summary>
+        private static Rectangle[] SmallChars;
 
+        /// <summary>
+        /// Initializes the sizes of the character set bounding boxes in the font images.
+        /// </summary>
         static FontHelperExtensionMethods()
         {
-            largeChars = new Rectangle[100];
-            smallChars = new Rectangle[100];
+            LargeChars = new Rectangle[100];
+            SmallChars = new Rectangle[100];
             for (int i = 0; i < 100; i++)
             {
-                largeChars[i] = new Rectangle(1 + (i % 10) * 6, (i / 10) * 9, 5, 9);
-                smallChars[i] = new Rectangle(1 + (i % 10) * 6, (i / 10) * 6, 5, 6);
+                LargeChars[i] = new Rectangle(1 + (i % 10) * 6, (i / 10) * 9, 5, 9);
+                SmallChars[i] = new Rectangle(1 + (i % 10) * 6, (i / 10) * 6, 5, 6);
             }
         }
 
+        /// <summary>
+        /// Gets the rectangle (in the font image) of a given character determined by its <paramref name="index"/> in the character set.
+        /// </summary>
+        /// <param name="index">The character's index in the character set.</param>
+        /// <param name="small">Whether to get the small character set rectangle, or the large character set rectangle.</param>
+        /// <returns>Returns the bounding rectangle in the font image of the given character.</returns>
         public static Rectangle RectOf(int index, bool small)
         {
-            return small ? smallChars[index] : largeChars[index];
+            return small ? SmallChars[index] : LargeChars[index];
         }
 
+        /// <summary>
+        /// Gets the rectangle (in the font image) of a given character determined by its <paramref name="index"/> in the character set.
+        /// </summary>
+        /// <param name="c">The character to determine the rectangle of.</param>
+        /// <param name="small">Whether to get the small character set rectangle, or the large character set rectangle.</param>
+        /// <returns>Returns the bounding rectangle in the font image of the given character.</returns>
         public static Rectangle RectOf(char c, bool small)
         {
             return RectOf(Properties.Resources.FontChars.IndexOf(c), small);
         }
 
+        /// <summary>
+        /// Gets the image of a character in the character set.<para/>
+        /// This is not used for drawing of characters in the expression display as that would be
+        /// nastily inefficient. Instead this is just for the display of symbols on UI buttons.
+        /// </summary>
+        /// <param name="c">The character to get the image of.</param>
+        /// <param name="small">Whether to use the small or large character set.</param>
+        /// <param name="scale">The pixel scale of the image. This must be a value greater than 1, or an <c>ArgumentException</c> is thrown.</param>
+        /// <returns>Returns the image of <paramref name="c"/> in the <paramref name="small"/> or large character set,
+        /// with the given pixel <paramref name="scale"/>.</returns>
         public static Bitmap GetCharacterImage(char c, bool small, int scale)
         {
+            if (scale < 1) throw new ArgumentException("Character's pixel scale must not be less than one.");
             Rectangle sourceRect = RectOf(c, small);
             sourceRect.X -= 1;
             sourceRect.Width += 1;
@@ -57,14 +92,22 @@ namespace Graphmatic.Expressions
             return characterImage;
         }
 
-        public static void DrawPixelString(this Graphics g, string s, bool small, int x, int y)
+        /// <summary>
+        /// Writes a string to a given GDI drawing surface using the Graphmatic calculation font.
+        /// </summary>
+        /// <param name="graphics">The GDI+ drawing surface to draw onto.</param>
+        /// <param name="str">The string to draw.</param>
+        /// <param name="small">Whether to use the small or large character set.</param>
+        /// <param name="x">The X co-ordinate to draw to on <paramref name="graphics"/>.</param>
+        /// <param name="y">The Y co-ordinate to draw to on <paramref name="graphics"/>.</param>
+        public static void DrawExpressionString(this Graphics graphics, string str, bool small, int x, int y)
         {
             int currentX = x;
-            foreach (char c in s)
+            foreach (char c in str)
             {
                 Rectangle sourceRect = RectOf(c, small);
                 Rectangle destRect = new Rectangle(currentX, y, sourceRect.Width, sourceRect.Height);
-                g.DrawImage(small ? Properties.Resources.SmallFont : Properties.Resources.LargeFont, destRect, sourceRect, GraphicsUnit.Pixel);
+                graphics.DrawImage(small ? Properties.Resources.SmallFont : Properties.Resources.LargeFont, destRect, sourceRect, GraphicsUnit.Pixel);
                 currentX += destRect.Width + 1;
             }
         }

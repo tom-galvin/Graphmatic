@@ -8,6 +8,11 @@ using Graphmatic.Expressions.Tokens;
 
 namespace Graphmatic.Expressions
 {
+    /// <summary>
+    /// Provides helper methods for the expression engine, including for <c>Graphmatic.ExpressionCursor</c>.
+    /// These mainly concern the tree-like hierarchical relationship between tokens and their parent/child expressions, and the
+    /// navigation around an expression by a user with an I-beam cursor.
+    /// </summary>
     internal static class ExpressionEngineExtensionMethods
     {
         /// <summary>

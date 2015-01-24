@@ -46,13 +46,13 @@ namespace Graphmatic.Expressions
         }
 
         /// <summary>
-        /// Paint the component to the screen.
+        /// Paint this <c>IPaintable</c> onto the specified GDI+ drawing surface.
         /// </summary>
-        /// <param name="g">The <c>System.Drawing.Graphics</c> object to use to paint the component to the screen.</param>
-        /// <param name="expressionCursor">Cursor information to draw the cursor I-beam with.</param>
-        /// <param name="x">The X co-ordinate to paint at.</param>
-        /// <param name="y">The Y co-ordinate to paint at.</param>
-        void Paint(Graphics g, ExpressionCursor expressionCursor, int x, int y);
+        /// <param name="graphics">The GDI+ drawing surface to draw this object onto.</param>
+        /// <param name="expressionCursor">The expression cursor to draw inside the object.</param>
+        /// <param name="x">The X co-ordinate of where to draw on <paramref name="graphics"/>.</param>
+        /// <param name="y">The y co-ordinate of where to draw on <paramref name="graphics"/>.</param>
+        void Paint(Graphics graphics, ExpressionCursor expressionCursor, int x, int y);
 
         /// <summary>
         /// Recalculate the dimensions of the component in a recursive manner.
