@@ -202,21 +202,8 @@ namespace Graphmatic
             }
         }
 
-        private bool CheckMoein()
-        {
-            if (Result.Count != 6) return false;
-            string number = "131066";
-            for (int i = 0; i < 6; i++)
-            {
-                if (!(Result[i] is DigitToken)) return false;
-                if ((Result[i] as DigitToken).Value.ToString() != number[i].ToString()) return false;
-            }
-            return true;
-        }
-
         void ExpressionCursor_Moved(object sender, EventArgs e)
         {
-            expressionDisplay.MoeinMode = CheckMoein();
             expressionDisplay.Invalidate();
         }
 

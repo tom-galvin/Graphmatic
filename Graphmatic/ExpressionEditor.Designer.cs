@@ -606,7 +606,6 @@
             this.expressionDisplay.DisplayScale = 3;
             this.expressionDisplay.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expressionDisplay.Location = new System.Drawing.Point(12, 12);
-            this.expressionDisplay.MoeinMode = false;
             this.expressionDisplay.Name = "expressionDisplay";
             this.expressionDisplay.Size = new System.Drawing.Size(633, 191);
             this.expressionDisplay.TabIndex = 0;

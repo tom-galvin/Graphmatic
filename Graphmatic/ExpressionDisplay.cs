@@ -16,16 +16,6 @@ namespace Graphmatic
     /// </summary>
     public partial class ExpressionDisplay : UserControl
     {
-        /// <summary>
-        /// Gets or sets if Moein mode is enabled or not.
-        /// </summary>
-        [Description("Changes whether Moein mode is enabled or not.")]
-        public bool MoeinMode
-        {
-            get;
-            set;
-        }
-
         private bool _Edit;
         /// <summary>
         /// Gets or sets if the expression display is in editing mode or not.
@@ -145,28 +135,21 @@ namespace Graphmatic
         {
             try
             {
-                if (!MoeinMode)
-                {
-                    Expression.Size = SmallExpression ? DisplaySize.Small : DisplaySize.Large;
-                    Expression.RecalculateDimensions(ExpressionCursor);
-                    // we want pixellated drawing so turn off interpolation
-                    e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                Expression.Size = SmallExpression ? DisplaySize.Small : DisplaySize.Large;
+                Expression.RecalculateDimensions(ExpressionCursor);
+                // we want pixellated drawing so turn off interpolation
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
 
-                    // paint to a bitmap first; this lets us center it in the window afterward
-                    Bitmap expressionBitmap = new Bitmap(Expression.Width + 3, Expression.Height + 3);
-                    ExpressionSize = expressionBitmap.Size;
-                    Graphics expressionGraphics = Graphics.FromImage(expressionBitmap);
-                    ExpressionCursor.Hotspots.Clear();
-                    Expression.Paint(expressionGraphics, ExpressionCursor, 1, 1);
+                // paint to a bitmap first; this lets us center it in the window afterward
+                Bitmap expressionBitmap = new Bitmap(Expression.Width + 3, Expression.Height + 3);
+                ExpressionSize = expressionBitmap.Size;
+                Graphics expressionGraphics = Graphics.FromImage(expressionBitmap);
+                ExpressionCursor.Hotspots.Clear();
+                Expression.Paint(expressionGraphics, ExpressionCursor, 1, 1);
 
-                    // scale the pixels up the desired level
-                    e.Graphics.ScaleTransform(_DisplayScale, _DisplayScale);
-                    e.Graphics.DrawImage(expressionBitmap, (Width / _DisplayScale - expressionBitmap.Width) / 2, (Height / _DisplayScale - expressionBitmap.Height) / 2);
-                }
-                else
-                {
-                    e.Graphics.DrawImageUnscaled(Properties.Resources.Moein, 0, 0, Width, Height);
-                }
+                // scale the pixels up the desired level
+                e.Graphics.ScaleTransform(_DisplayScale, _DisplayScale);
+                e.Graphics.DrawImage(expressionBitmap, (Width / _DisplayScale - expressionBitmap.Width) / 2, (Height / _DisplayScale - expressionBitmap.Height) / 2);
             }
             catch (Exception)
             {
