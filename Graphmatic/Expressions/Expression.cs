@@ -92,7 +92,7 @@ namespace Graphmatic.Expressions
             : this(parent)
         {
             AddRange(xml
-                .Select(x => TokenSerializationExtensionMethods.FromXml(x)));
+                .Select(x => x.Deserialize<Token>(SerializationExtensionMethods.TokenName)));
         }
 
         /// <summary>

@@ -14,6 +14,10 @@ namespace Graphmatic.Interaction.Plotting
 
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Plotting.GraphKey</c> class from serialized XML data.
+        /// </summary>
+        /// <param name="xml">The XML data to use for deserializing this Resource.</param>
         public GraphKey(XElement element)
         {
 

@@ -124,7 +124,6 @@
     <Compile Include="Expressions\Tokens\ExpToken.cs" />
     <Compile Include="Expressions\Tokens\DigitToken.cs" />
     <Compile Include="Expressions\Tokens\Token.cs" />
-    <Compile Include="Expressions\Tokens\TokenSerializationExtensionMethods.cs" />
     <Compile Include="Expressions\Tokens\VariableToken.cs" />
     <Compile Include="Expressions\VariableSet.cs" />
     <Compile Include="ExpressionVerificationEventArgs.cs" />
@@ -195,6 +194,7 @@
     <Compile Include="SelectVariableDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SerializationExtensionMethods.cs" />
     <Compile Include="SettingsEditor.cs">
       <SubType>Form</SubType>
     </Compile>

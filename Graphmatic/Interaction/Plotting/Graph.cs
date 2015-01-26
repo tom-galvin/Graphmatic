@@ -95,6 +95,10 @@ namespace Graphmatic.Interaction.Plotting
             }
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Plotting.Graph</c> class from serialized XML data.
+        /// </summary>
+        /// <param name="xml">The XML data to use for deserializing this Resource.</param>
         public Graph(XElement xml)
         {
             UnresolvedResources = new Dictionary<Guid, PlottableParameters>();
@@ -107,25 +111,18 @@ namespace Graphmatic.Interaction.Plotting
                     .Where(x => x.Name != "PlottableParameters")
                     .First();
                 PlottableParameters parameters = new PlottableParameters(content.Element("PlottableParameters"));
-                if (plottable.Name == "GraphKey")
-                {
-                    GraphKey key = new GraphKey(plottable);
-                    Key = key;
-                    Resources.Add(key, parameters);
-                }
-                else if (plottable.Name == "GraphAxis")
-                {
-                    GraphAxis axes = new GraphAxis(plottable);
-                    Axes = axes;
-                    Resources.Add(axes, parameters);
-                }
-                else if (plottable.Name == "Reference")
+                if (plottable.Name == "Reference")
                 {
                     UnresolvedResources.Add(Guid.Parse(plottable.Attribute("ID").Value), parameters);
                 }
                 else
                 {
-                    throw new Exception("Unknown Graph content item " + plottable.Name + ".");
+                    IPlottable resource = plottable.Deserialize<IPlottable>(SerializationExtensionMethods.PlottableName);
+                    Resources.Add(resource, parameters);
+                    if (resource is GraphKey)
+                        Key = resource as GraphKey;
+                    else if (resource is GraphAxis)
+                        Axes = resource as GraphAxis;
                 }
             }
         }

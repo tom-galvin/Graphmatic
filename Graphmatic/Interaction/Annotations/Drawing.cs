@@ -63,6 +63,10 @@ namespace Graphmatic.Interaction.Annotations
             Type = type;
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Annotations.Drawing</c> class from serialized XML data.
+        /// </summary>
+        /// <param name="xml">The XML data to use for deserializing this Resource.</param>
         public Drawing(XElement xml)
             : base(xml)
         {

@@ -22,6 +22,10 @@ namespace Graphmatic.Interaction.Annotations
             ImageData = imageData;
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Annotations.Picture</c> class from serialized XML data.
+        /// </summary>
+        /// <param name="xml">The XML data to use for deserializing this Resource.</param>
         public Picture(XElement xml)
             : base(xml)
         {

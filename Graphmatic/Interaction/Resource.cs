@@ -8,44 +8,68 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction
 {
+    /// <summary>
+    /// Represents a resource in a Graphmatic document.
+    /// </summary>
     public class Resource : IXmlConvertible
     {
-        public virtual string Name
+        /// <summary>
+        /// Gets or sets the name of the resource in the document.
+        /// </summary>
+        public string Name
         {
             get;
             set;
         }
 
-        public virtual string Description
+        /// <summary>
+        /// Gets or sets the description of the resource.
+        /// </summary>
+        public string Description
         {
             get;
             set;
         }
 
-        public virtual string Author
+        /// <summary>
+        /// Gets or sets the name of the author of the resource.
+        /// </summary>
+        public string Author
         {
             get;
             set;
         }
 
-        public virtual DateTime CreationDate
+        /// <summary>
+        /// Gets or sets the date of creation of the resource.
+        /// </summary>
+        public DateTime CreationDate
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the uniquely-identifying GUID of the resource.
+        /// </summary>
         public Guid Guid
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets or sets whether this resource is hidden in the document resource view.
+        /// </summary>
         public bool Hidden
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets the string describing the type of the resource in the document.
+        /// </summary>
         public virtual string Type
         {
             get
@@ -54,12 +78,21 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Gets or sets whether this resource has been removed from its parent document.<para/>
+        /// This is used for resolving resource references to resources that have been removed from
+        /// the document but not from memory.
+        /// </summary>
         public bool Removed
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Resource</c> class with a default name, and initialize the attributes identifying
+        /// this resource in the file.
+        /// </summary>
         public Resource()
         {
             Removed = false;
@@ -93,6 +126,10 @@ namespace Graphmatic.Interaction
             Guid = Guid.NewGuid();
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Resource</c> class from serialized XML data.
+        /// </summary>
+        /// <param name="xml">The XML data to use for deserializing this Resource.</param>
         public Resource(XElement xml)
         {
             Removed = false;

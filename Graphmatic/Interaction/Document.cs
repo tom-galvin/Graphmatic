@@ -90,6 +90,10 @@ namespace Graphmatic.Interaction
             Guid = Guid.Parse(xml.Attribute("ID").Value);
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Document</c> class from serialized XML data.
+        /// </summary>
+        /// <param name="xml">The XML data to use for deserializing this Resource.</param>
         public Document(XElement xml)
         {
             InitializeAttributes(xml);
@@ -99,7 +103,7 @@ namespace Graphmatic.Interaction
                 var resourcesElements = xml.Element("Resources").Elements();
                 foreach (XElement resourceElement in resourcesElements)
                 {
-                    Resource resource = ResourceSerializationExtensionMethods.FromXml(resourceElement);
+                    Resource resource = resourceElement.Deserialize<Resource>(SerializationExtensionMethods.ResourceName);
                     Resources.Add(resource.Guid, resource);
                 }
 

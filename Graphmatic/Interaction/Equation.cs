@@ -57,6 +57,10 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Equation</c> class from serialized XML data.
+        /// </summary>
+        /// <param name="xml">The XML data to use for deserializing this Resource.</param>
         public Equation(XElement xml)
             : base(xml)
         {

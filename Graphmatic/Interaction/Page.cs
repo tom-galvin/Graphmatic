@@ -45,6 +45,10 @@ namespace Graphmatic.Interaction
             Annotations = new List<Annotation>();
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Page</c> class from serialized XML data.
+        /// </summary>
+        /// <param name="xml">The XML data to use for deserializing this Resource.</param>
         public Page(XElement xml)
             : base(xml)
         {
@@ -54,7 +58,7 @@ namespace Graphmatic.Interaction
                 xml
                 .Element("Annotations")
                 .Elements()
-                .Select(ResourceSerializationExtensionMethods.AnnotationFromXml));
+                .Select(x => x.Deserialize<Annotation>(SerializationExtensionMethods.AnnotationName)));
         }
 
         public override Image GetResourceIcon(bool large)

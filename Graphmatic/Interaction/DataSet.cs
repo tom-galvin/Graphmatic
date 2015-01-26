@@ -108,6 +108,10 @@ namespace Graphmatic.Interaction
             return newArray;
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.DataSet</c> class from serialized XML data.
+        /// </summary>
+        /// <param name="xml">The XML data to use for deserializing this Resource.</param>
         public DataSet(XElement xml)
             : base(xml)
         {
