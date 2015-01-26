@@ -103,10 +103,10 @@ namespace Graphmatic.Expressions
         /// <summary>
         /// Parses an atomic production.<para/>
         /// An atomic production takes the EBNF production:
-        /// <code>&lt;atomic&gt; := &lt;literal&gt; { &lt;token&gt; }</code><para/>
+        /// <code>&lt;atomic&gt; := &lt;literal&gt; { &lt;token&gt; } { &lt;exp&gt; }</code><para/>
         /// This means that, in an equation such as <c>y=4x√2</c> the three tokens '4', 'x' and '√2' are correctly broken
         /// down into three separate multiplications. This is so the algebraic multiplication short-hand of omitting the
-        /// cross symbol still works.
+        /// cross symbol still works. Lastly, this also parses any exponents.
         /// </summary>
         /// <param name="enumerator">An enumerator containing the current location in the Expression of the parser.</param>
         /// <returns>Returns a parse tree node representing this sub-expression in the order it should be evaluated.</returns>
@@ -132,14 +132,28 @@ namespace Graphmatic.Expressions
                 }
                 if (!enumerator.MoveNext()) break;
             }
-
+            while (enumerator.Current != null && enumerator.Current is ExpToken)
+            {
+                currentNode = new BinaryParseTreeNode(
+                    ExpEvaluator,
+                    currentNode,
+                    (enumerator.Current as ExpToken).Power.Parse());
+                if (!enumerator.MoveNext()) break;
+            }
             return currentNode;
         }
+
+
+        /// <summary>
+        /// An evaluator for the exponent (power) operator.
+        /// </summary>
+        public static readonly BinaryEvaluator ExpEvaluator = new BinaryEvaluator((powBase, powPower) => Math.Pow(powBase, powPower), "pow[{1}]({0})");
 
         /// <summary>
         /// An evaluator for negation, such as when an atomic value is negated with the unary - operator.
         /// </summary>
-        public static UnaryEvaluator NegationEvaluator = new UnaryEvaluator(x => -x, "-{0}");
+        public static readonly UnaryEvaluator NegationEvaluator = new UnaryEvaluator(x => -x, "-{0}");
+
         /// <summary>
         /// Parses unary operators, such as anything prefixed with + and -.<para/>
         /// This correctly swallows any additional operators so as to avoid any huge unnecessary chains of unary negation.

@@ -58,7 +58,7 @@ namespace Graphmatic.Interaction.Statistics
             expression.Add(new SymbolicToken(SymbolicToken.SymbolicType.Equals));
             expression.AddRange(ValueToTokenSequence(Scale));
             ExpToken exp = new ExpToken();
-            exp.Base.Add(new VariableToken(IndependentVariable));
+            expression.Add(new VariableToken(IndependentVariable));
             exp.Power.AddRange(ValueToTokenSequence(Power));
             expression.Add(exp);
             Equation equation = new Equation(expression)

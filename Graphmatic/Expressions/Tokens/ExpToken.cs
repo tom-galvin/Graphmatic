@@ -10,21 +10,13 @@ using Graphmatic.Expressions.Parsing;
 namespace Graphmatic.Expressions.Tokens
 {
     /// <summary>
-    /// Represents a token denoting an expression raised to the power of another expression.
+    /// Represents a token denoting a value raised to the power of another expression.<para/>
+    /// The <c>ExpToken</c> is unique in that its size can potentially be determined by the size of tokens
+    /// not directly contained within it. The height (and baseline offset) of an ExpToken is determined by
+    /// the nearest token to the left of this ExpToken that is not in itself an ExpToken.
     /// </summary>
-    public class ExpToken : Token, ICollectorToken, IParsable
+    public class ExpToken : Token
     {
-        /// <summary>
-        /// Gets the token collection type for this token collector.
-        /// </summary>
-        public CollectorTokenType CollectorType
-        {
-            get
-            {
-                return CollectorTokenType.Weak;
-            }
-        }
-
         /// <summary>
         /// Gets the vertical ascension of the token from the top of the container.
         /// </summary>
@@ -32,19 +24,42 @@ namespace Graphmatic.Expressions.Tokens
         {
             get
             {
-                return (Height - Base.Height) + (Base.Count == 0 ? 0 : Base
-                    .Select(token => token.BaselineOffset)
-                    .Aggregate((b1, b2) => Math.Max(b1, b2)));
+                Token operand = Operand;
+                if (operand != null)
+                    return Height - operand.Height + operand.BaselineOffset;
+                else
+                    return Height - (Size == DisplaySize.Large ? 9 : 6);
             }
         }
 
         /// <summary>
-        /// Gets the expression containing the base of the exponent operator.
+        /// The Token that this ExpToken will use for determining the display height. This is
+        /// not used for parsing, but rather for displaying the ExpToken visually, and as such
+        /// this Operand might not be the actual operand of the ExpToken, but rather just the
+        /// token used for determining the height of the ExpToken above the baseline.
         /// </summary>
-        public Expression Base
+        public Token Operand
         {
-            get;
-            protected set;
+            get
+            {
+                if (Parent != null)
+                {
+                    // finds the first token before this ExpToken that is not, itself, an ExpToken
+                    int index = this.IndexInParent();
+                    while (--index >= 0)
+                    {
+                        if (!(Parent[index] is ExpToken))
+                        {
+                            return Parent[index];
+                        }
+                    }
+                    return null;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         /// <summary>
@@ -63,7 +78,17 @@ namespace Graphmatic.Expressions.Tokens
         {
             get
             {
-                return Base;
+                // only move the cursor inside the power of the ExpToken when the power is empty...
+                // if you place a ^2 (squared) you want to skip right over it rather than editing
+                // the two
+                if (Power.Count == 0)
+                {
+                    return Power;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -73,9 +98,8 @@ namespace Graphmatic.Expressions.Tokens
         public ExpToken()
             : base()
         {
-            Base = new Expression(this);
             Power = new Expression(this);
-            Children = new Expression[] { Base, Power };
+            Children = new Expression[] { Power };
         }
 
         /// <summary>
@@ -85,9 +109,8 @@ namespace Graphmatic.Expressions.Tokens
         public ExpToken(XElement xml)
             : base()
         {
-            Base = new Expression(this, xml.Element("Base").Elements());
             Power = new Expression(this, xml.Element("Power").Elements());
-            Children = new Expression[] { Base, Power };
+            Children = new Expression[] { Power };
         }
 
         /// <summary>
@@ -97,7 +120,6 @@ namespace Graphmatic.Expressions.Tokens
         public override XElement ToXml()
         {
             return new XElement("Exp",
-                new XElement("Base", Base.ToXml()),
                 new XElement("Power", Power.ToXml()));
         }
         /// <summary>
@@ -109,8 +131,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <param name="y">The y co-ordinate of where to draw on <paramref name="graphics"/>.</param>
         public override void Paint(Graphics graphics, ExpressionCursor expressionCursor, int x, int y)
         {
-            Base.Paint(graphics, expressionCursor, x, y + Height - Base.Height);
-            Power.Paint(graphics, expressionCursor, x + Base.Width + 1, y);
+            Power.Paint(graphics, expressionCursor, x, y);
         }
 
         /// <summary>
@@ -121,28 +142,10 @@ namespace Graphmatic.Expressions.Tokens
         /// For example, moving the cursor into the base of a <c>log</c> token with current base <c>e</c> will expand the token from <c>ln(...)</c> to <c>log_e(...)</c>.</param>
         public override void RecalculateDimensions(ExpressionCursor expressionCursor)
         {
-            Base.Size = Size;
-            Base.RecalculateDimensions(expressionCursor);
             Power.Size = DisplaySize.Small;
             Power.RecalculateDimensions(expressionCursor);
-            Width = Base.Width + Power.Width + 1;
-            Height = Base.Height + Power.Height - (Size == DisplaySize.Small ? 0 : 3);
-        }
-
-        /// <summary>
-        /// An evaluator for the exponent (power) operator.
-        /// </summary>
-        public static readonly BinaryEvaluator Evaluator = new BinaryEvaluator((powBase, powPower) => Math.Pow(powBase, powPower), "pow[{1}]({0})");
-
-        /// <summary>
-        /// Parses this token into a <c>Graphmatic.Expressions.Parsing.ParseTreeToken</c> representing
-        /// the sequence of calculations needed to evaluate this expression.
-        /// </summary>
-        /// <returns>A <c>Graphmatic.Expressions.Parsing.ParseTreeToken</c> representing a syntax tree
-        /// for this token and any children.</returns>
-        public ParseTreeNode Parse()
-        {
-            return new BinaryParseTreeNode(Evaluator, Base.Parse(), Power.Parse());
+            Width = Power.Width;
+            Height = (Operand == null ? 9 : Operand.Height) + Power.Height - (Size == DisplaySize.Small ? 0 : 3);
         }
     }
 }

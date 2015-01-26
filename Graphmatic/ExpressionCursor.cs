@@ -295,7 +295,7 @@ namespace Graphmatic
             Expression defaultExpression = token.DefaultChild;
             if (defaultExpression == null) // if the token has no default child expression...
             {
-                Right(); // skip over the token
+                Index += 1; // skip over the token
             }
             else // otherwise...
             {
