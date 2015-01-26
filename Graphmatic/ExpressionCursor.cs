@@ -232,7 +232,21 @@ namespace Graphmatic
                 if (Expression.Parent != null && Expression.Parent.Parent != null) // if the parent expression, and the parent expression's parent token exist...
                 {
                     Token tokenToDelete = Expression.Parent;
-                    if (tokenToDelete.Empty()) // if token to delete is empty...
+                    if (Expression == tokenToDelete.DefaultChild || // if this expression is the default child of the token containing it...
+                        (Expression.Count == 0 && tokenToDelete is ExpToken && Expression == (tokenToDelete as ExpToken).Power)) // or we're in the power of an ExpToken which is empty...
+                    {
+                        // flatten the token out
+                        Expression = tokenToDelete.Parent;
+                        Index = tokenToDelete.Flatten();
+                        return true;
+                    }
+                    else
+                    {
+                        // move to the left
+                        Left();
+                        return false;
+                    }
+                    /* if (tokenToDelete.Empty()) // if token to delete is empty...
                     {
                         int currentExpressionParentIndexInParentParent = Expression.Parent.IndexInParent();
                         Expression = Expression.Parent.Parent;
@@ -245,7 +259,7 @@ namespace Graphmatic
                     {
                         Left();
                         return false;
-                    }
+                    } */
                 }
                 else
                 {
