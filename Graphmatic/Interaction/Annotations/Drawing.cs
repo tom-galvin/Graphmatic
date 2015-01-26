@@ -28,6 +28,15 @@ namespace Graphmatic.Interaction.Annotations
             set;
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Annotations.Drawing</c> class with the specified drawing data.
+        /// </summary>
+        /// <param name="color">The color of the drawn annotation.</param>
+        /// <param name="graphSize">The size of the graph on the screen, for turning screen-space data to graph space data.</param>
+        /// <param name="parameters">The parameters of the graph plotting, for turning screen-space data to graph space data.</param>
+        /// <param name="screenPoints">The points on the screen describing the drawn annotation.</param>
+        /// <param name="thickness">The thickness of the drawn annotation.</param>
+        /// <param name="type">The pen type of the drawn annotation.</param>
         public Drawing(Point[] screenPoints, Size graphSize, GraphParameters parameters, Color color, float thickness, DrawingType type)
         {
             Points = screenPoints
@@ -82,6 +91,10 @@ namespace Graphmatic.Interaction.Annotations
             Type = (DrawingType)Enum.Parse(typeof(DrawingType), xml.Attribute("Type").Value);
         }
 
+        /// <summary>
+        /// Converts this object to its equivalent serialized XML representation.
+        /// </summary>
+        /// <returns>The serialized representation of this Graphmatic object.</returns>
         public override XElement ToXml()
         {
             XElement baseElement = base.ToXml();

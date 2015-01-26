@@ -16,6 +16,10 @@ namespace Graphmatic.Interaction.Annotations
             protected set;
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Annotations.Picture</c> class with the specified image data.
+        /// </summary>
+        /// <param name="imageData">The image data that this annotation displays.</param>
         public Picture(Image imageData)
             : base()
         {
@@ -33,6 +37,10 @@ namespace Graphmatic.Interaction.Annotations
             ImageData = ResourceSerializationExtensionMethods.ImageToByteArray(Convert.FromBase64String(base64ImageData));
         }
 
+        /// <summary>
+        /// Converts this object to its equivalent serialized XML representation.
+        /// </summary>
+        /// <returns>The serialized representation of this Graphmatic object.</returns>
         public override XElement ToXml()
         {
             XElement baseElement = base.ToXml();

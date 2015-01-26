@@ -20,13 +20,17 @@ namespace Graphmatic
         XElement ToXml();
 
         /// <summary>
-        /// Resolves any resource references which need to be resolved after the document is loaded.
-        /// <para/>
-        /// For example, if a resource A references another resource B, but A is loaded before B, then
-        /// it cannot refer to it. The way around this is to resolve such issues after everything else
-        /// is loaded.
+        /// Updates any references to other resources in the document to point to the correct resource.<para/>
+        /// This method (and related method <c>Graphmatic.Interaction.Resource.ToResourceReference()</c>) are
+        /// needed because certain resources, such as the Page resource, can refer to other resources from within
+        /// them (for example if a Page contains a plotted DataSet). However, if the Page is deserialized before
+        /// the DataSet, then it will not have an object to refer to. Thus, the resource reference system is used,
+        /// whereby certain objects (such as the Page) keep track of which resources they need to refer to later on,
+        /// and only actually dereference the Resource references (via the resource's GUID) after all resources in
+        /// the document have been deserialized.
         /// </summary>
-        /// <param name="document">The Document in which this element resides.</param>
+        /// <param name="document">The parent document containing this resource, and any other resources that this
+        /// resource may point to.</param>
         void UpdateReferences(Document document);
     }
 }

@@ -40,6 +40,10 @@ namespace Graphmatic.Interaction
 
         private List<double[]> Data;
 
+        /// <summary>
+        /// Initialize a new instance of the <c>Graphmatic.Interaction.DataSet</c> class with the given variables.
+        /// </summary>
+        /// <param name="variableNames">The variables that each row (tuple/member) of this data set contains.</param>
         public DataSet(params char[] variableNames)
             : base()
         {
@@ -176,6 +180,12 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Gets the resource icon describing this resource type in the user interface.<para/>
+        /// This will return different icons if overriden by a derived type.
+        /// </summary>
+        /// <param name="large">Whether to return the large icon or not. Large icons are 32*32 and
+        /// small icons are 16*16.</param>
         public override Image GetResourceIcon(bool large)
         {
             return large ?
@@ -183,6 +193,10 @@ namespace Graphmatic.Interaction
                 Properties.Resources.DataSet16;
         }
 
+        /// <summary>
+        /// Converts this object to its equivalent serialized XML representation.
+        /// </summary>
+        /// <returns>The serialized representation of this Graphmatic object.</returns>
         public override XElement ToXml()
         {
             XElement baseElement = base.ToXml();

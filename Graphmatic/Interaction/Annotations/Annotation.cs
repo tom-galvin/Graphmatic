@@ -40,6 +40,9 @@ namespace Graphmatic.Interaction.Annotations
             set;
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Annotations.Annotation</c> class.
+        /// </summary>
         public Annotation()
         {
 
@@ -58,6 +61,10 @@ namespace Graphmatic.Interaction.Annotations
             Color = ResourceSerializationExtensionMethods.XmlStringToColor(xml.Element("Color").Value);
         }
 
+        /// <summary>
+        /// Converts this object to its equivalent serialized XML representation.
+        /// </summary>
+        /// <returns>The serialized representation of this Graphmatic object.</returns>
         public virtual XElement ToXml()
         {
             return new XElement("Annotation",

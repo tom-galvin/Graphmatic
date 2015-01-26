@@ -33,11 +33,18 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Equation</c> class with no tokens in it.
+        /// </summary>
         public Equation()
             : this(new Expression(null))
         {
         }
 
+        /// <summary>
+        /// Initialize a new instance of the <c>Graphmatic.Interaction.Equation</c> class from the given expression,
+        /// representing an equation that describes this <c>Graphmatic.Interaction.Equation</c>.
+        /// </summary>
         public Equation(Expression expression)
             : base()
         {
@@ -73,13 +80,23 @@ namespace Graphmatic.Interaction
             ParseTree = Expression.Parse(true);
         }
 
-        public override System.Drawing.Image GetResourceIcon(bool large)
+        /// <summary>
+        /// Gets the resource icon describing this resource type in the user interface.<para/>
+        /// This will return different icons if overriden by a derived type.
+        /// </summary>
+        /// <param name="large">Whether to return the large icon or not. Large icons are 32*32 and
+        /// small icons are 16*16.</param>
+        public override Image GetResourceIcon(bool large)
         {
             return large ?
                 Properties.Resources.Equation32 :
                 Properties.Resources.Equation16;
         }
 
+        /// <summary>
+        /// Converts this object to its equivalent serialized XML representation.
+        /// </summary>
+        /// <returns>The serialized representation of this Graphmatic object.</returns>
         public override XElement ToXml()
         {
             XElement baseElement = base.ToXml();

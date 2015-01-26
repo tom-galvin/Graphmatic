@@ -9,13 +9,16 @@ namespace Graphmatic.Interaction.Plotting
 {
     public class GraphKey : IPlottable, IXmlConvertible
     {
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Plotting.GraphKey</c> class.
+        /// </summary>
         public GraphKey()
         {
 
         }
 
         /// <summary>
-        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Plotting.GraphKey</c> class from serialized XML data.
+        /// Initialize a new instance of the <c>Graphmatic.Interaction.Plotting.GraphKey</c> class from serialized XML data.
         /// </summary>
         /// <param name="xml">The XML data to use for deserializing this Resource.</param>
         public GraphKey(XElement element)
@@ -66,11 +69,27 @@ namespace Graphmatic.Interaction.Plotting
             }
         }
 
+        /// <summary>
+        /// Converts this object to its equivalent serialized XML representation.
+        /// </summary>
+        /// <returns>The serialized representation of this Graphmatic object.</returns>
         public XElement ToXml()
         {
             return new XElement("GraphKey");
         }
 
+        /// <summary>
+        /// Updates any references to other resources in the document to point to the correct resource.<para/>
+        /// This method (and related method <c>Graphmatic.Interaction.Resource.ToResourceReference()</c>) are
+        /// needed because certain resources, such as the Page resource, can refer to other resources from within
+        /// them (for example if a Page contains a plotted DataSet). However, if the Page is deserialized before
+        /// the DataSet, then it will not have an object to refer to. Thus, the resource reference system is used,
+        /// whereby certain objects (such as the Page) keep track of which resources they need to refer to later on,
+        /// and only actually dereference the Resource references (via the resource's GUID) after all resources in
+        /// the document have been deserialized.
+        /// </summary>
+        /// <param name="document">The parent document containing this resource, and any other resources that this
+        /// resource may point to.</param>
         public void UpdateReferences(Document document)
         {
         }

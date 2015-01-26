@@ -64,12 +64,19 @@ namespace Graphmatic.Interaction.Plotting
 
         public event EventHandler Update;
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Plotting.Graph</c> class with a new <c>GraphParameters</c> parameter set.
+        /// </summary>
         public Graph()
             : this(new GraphParameters())
         {
 
         }
 
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Plotting.Graph</c> class with the given parameter set.
+        /// </summary>
+        /// <param name="graphParameters">The parameters to use for plotting the graph.</param>
         public Graph(GraphParameters graphParameters)
         {
             Parameters = graphParameters;
@@ -252,6 +259,10 @@ namespace Graphmatic.Interaction.Plotting
             return Resources.Keys.GetEnumerator() as IEnumerator<IPlottable>;
         }
 
+        /// <summary>
+        /// Converts this object to its equivalent serialized XML representation.
+        /// </summary>
+        /// <returns>The serialized representation of this Graphmatic object.</returns>
         public XElement ToXml()
         {
             return new XElement("Graph",
@@ -265,7 +276,18 @@ namespace Graphmatic.Interaction.Plotting
                             kvp.Key.ToXml())))));
         }
 
-
+        /// <summary>
+        /// Updates any references to other resources in the document to point to the correct resource.<para/>
+        /// This method (and related method <c>Graphmatic.Interaction.Resource.ToResourceReference()</c>) are
+        /// needed because certain resources, such as the Page resource, can refer to other resources from within
+        /// them (for example if a Page contains a plotted DataSet). However, if the Page is deserialized before
+        /// the DataSet, then it will not have an object to refer to. Thus, the resource reference system is used,
+        /// whereby certain objects (such as the Page) keep track of which resources they need to refer to later on,
+        /// and only actually dereference the Resource references (via the resource's GUID) after all resources in
+        /// the document have been deserialized.
+        /// </summary>
+        /// <param name="document">The parent document containing this resource, and any other resources that this
+        /// resource may point to.</param>
         public void UpdateReferences(Document document)
         {
             if (UnresolvedResources != null)
