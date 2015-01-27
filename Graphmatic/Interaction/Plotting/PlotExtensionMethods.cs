@@ -87,13 +87,13 @@ namespace Graphmatic.Interaction.Plotting
         }
 
         /// <summary>
-        /// Gets the graph scale for a gixen axis type.
+        /// Gets the graph label scale for a gixen axis type.
         /// <para/>
-        /// For example, degrees are scaled by a factor of 180/pi, and radians are not scaled.
+        /// For example, labels in degrees are scaled by a factor of 180/pi, and radians are not scaled.
         /// </summary>
         /// <param name="axisType">The graph axis type for which to return the scale.</param>
-        /// <returns>The graph scale for a gixen axis type.</returns>
-        public static double AxisTypeScale(this GraphAxisType axisType)
+        /// <returns>The graph label scale for a gixen axis type.</returns>
+        public static double AxisTypeLabelScale(this GraphAxisType axisType)
         {
             switch (axisType)
             {
@@ -101,6 +101,27 @@ namespace Graphmatic.Interaction.Plotting
                     return 180.0 / Math.PI;
                 case GraphAxisType.Grads:
                     return 200.0 / Math.PI;
+                default:
+                    return 1.0;
+            }
+        }
+
+        /// <summary>
+        /// Gets the graph grid scale for a gixen axis type.
+        /// <para/>
+        /// For example, degrees and grads are scaled by a factor of 2*pi/5 to make major intervals line
+        /// up with the full angle around a circle, and radians are left unscaled.
+        /// </summary>
+        /// <param name="axisType">The graph grid type for which to return the scale.</param>
+        /// <returns>The grid scale for a gixen axis type.</returns>
+        public static double AxisTypeGridScale(this GraphAxisType axisType)
+        {
+            switch (axisType)
+            {
+                case GraphAxisType.Degrees:
+                    return 2 * Math.PI / 5;
+                case GraphAxisType.Grads:
+                    return 2 * Math.PI / 5;
                 default:
                     return 1.0;
             }

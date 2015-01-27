@@ -90,8 +90,8 @@ namespace Graphmatic.Interaction.Plotting
             using (Pen minorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.333)))
             using (Brush valueBrush = majorPen.Brush)
             {
-                double incrementX = GridSize / graphParams.HorizontalPixelScale,
-                       incrementY = GridSize / graphParams.VerticalPixelScale;
+                double incrementX = HorizontalType.AxisTypeGridScale() * GridSize / graphParams.HorizontalPixelScale,
+                       incrementY = VerticalType.AxisTypeGridScale() * GridSize / graphParams.VerticalPixelScale;
 
                 g.DrawString(graphParams.VerticalAxis.ToString(), SystemFonts.DefaultFont, valueBrush, (int)axisX, 2);
                 g.DrawString(graphParams.HorizontalAxis.ToString(), SystemFonts.DefaultFont, valueBrush, (int)graphSize.Width - 16, (int)axisY);
@@ -99,8 +99,8 @@ namespace Graphmatic.Interaction.Plotting
                 string horizontalAxisSuffix = HorizontalType.AxisTypeExtension();
                 string verticalAxisSuffix = VerticalType.AxisTypeExtension();
 
-                double horizontalAxisScale = GridSize * HorizontalType.AxisTypeScale();
-                double verticalAxisScale = GridSize * VerticalType.AxisTypeScale();
+                double horizontalAxisScale = GridSize * HorizontalType.AxisTypeLabelScale() * HorizontalType.AxisTypeGridScale();
+                double verticalAxisScale = GridSize * VerticalType.AxisTypeLabelScale() * VerticalType.AxisTypeGridScale();
 
                 double value = axisX;
                 int index = 0;
