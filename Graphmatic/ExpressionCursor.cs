@@ -232,12 +232,11 @@ namespace Graphmatic
                 if (Expression.Parent != null && Expression.Parent.Parent != null) // if the parent expression, and the parent expression's parent token exist...
                 {
                     Token tokenToDelete = Expression.Parent;
-                    if (Expression == tokenToDelete.DefaultChild || // if this expression is the default child of the token containing it...
-                        (Expression.Count == 0 && tokenToDelete is ExpToken && Expression == (tokenToDelete as ExpToken).Power)) // or we're in the power of an ExpToken which is empty...
+                    if (Expression == tokenToDelete.DefaultChild) // if this expression is the default child of the token containing it...
                     {
                         // flatten the token out
                         Expression = tokenToDelete.Parent;
-                        Index = tokenToDelete.Flatten();
+                        Index = tokenToDelete.FlattenDefaultChild();
                         return true;
                     }
                     else
@@ -330,6 +329,9 @@ namespace Graphmatic
                     }
                     if (addedTokens > 0)
                     {
+                        // if we automatically collect tokens into the new token, we don't want to then move
+                        // the expression cursor into the pre-filled child expression, so find the next empty
+                        // child expression after the default child expression and move to that instead
                         if (defaultExpression.IndexInParent() != defaultExpression.Parent.Children.Length - 1)
                         {
                             Expression nextDefaultExpression = defaultExpression.Parent.Children[defaultExpression.IndexInParent() + 1];

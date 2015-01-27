@@ -98,6 +98,7 @@
     <Compile Include="Expressions\ExpressionEngineExtensionMethods.cs" />
     <Compile Include="Expressions\FontHelperExtensionMethods.cs" />
     <Compile Include="Expressions\IParsable.cs" />
+    <Compile Include="Expressions\ParserEnumerator.cs" />
     <Compile Include="Expressions\Parsing\BinaryEvaluator.cs" />
     <Compile Include="Expressions\Parsing\BinaryParseTreeNode.cs" />
     <Compile Include="Expressions\Parsing\ConstantParseTreeNode.cs" />

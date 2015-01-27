@@ -110,5 +110,37 @@ namespace Graphmatic.Expressions
                 throw new InvalidOperationException("Cannot flatten a token that has no parent.");
             }
         }
+
+        /// <summary>
+        /// Flattens a token's default child expression out into its parent and removes <paramref name="token"/>.
+        /// For example, flattening a <cRootToken</c> <c>"³√x"</c> would result in the token <c>x</c>
+        /// being added into the parent expression of the <c>RootToken</c>, with the <c>RootToken</c> (now redundant) being removed in the process.
+        /// Any tokens not in the default child expression of the <c>RootToken</c> are discarded.<para/>
+        /// Attempting to flatten a token that is not contained within a parent expression will result in an <c>InvalidOperationException</c> being thrown.
+        /// </summary>
+        /// <param name="token">The token to flatten out.</param>
+        /// <returns>Returns the location that the cursor should be placed in <paramref name="token"/>'s parent expression upon the
+        /// flattening of the token, or <c>-1</c> if this location could not be determined.</returns>
+        internal static int FlattenDefaultChild(this Token token)
+        {
+            if (token.Parent != null && token.Parent != null)
+            {
+                int startIndex = token.IndexInParent();
+                int cursorReturnIndex = -1;
+                Expression parent = token.Parent;
+                parent.RemoveAt(startIndex);
+
+                cursorReturnIndex = startIndex;
+                foreach (Token childToken in token.DefaultChild)
+                {
+                    parent.Insert(startIndex++, childToken);
+                }
+                return cursorReturnIndex;
+            }
+            else
+            {
+                throw new InvalidOperationException("Cannot flatten a token that has no parent.");
+            }
+        }
     }
 }

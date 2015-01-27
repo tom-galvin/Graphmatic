@@ -12,23 +12,22 @@ namespace Graphmatic.Expressions
     {
         /// <summary>
         /// Parses a literal numeric value. This will correctly accept decimal places and positive/negative exponents.<para/>
-        /// This works in a bit of a cheaty way, but it saves me some time. The entered literal is converted into a string representing
+        /// This works in a bit of a cheaty way, but it saves some code. The entered literal is converted into a string representing
         /// the value (turning the <c>*10^</c> operator into the character <c>e</c>) and then parsed using the .NET framework,
         /// leaving the conversion from token sequence to double up to Double.Parse.
         /// </summary>
         /// <param name="enumerator">An enumerator containing the current location in the Expression of the parser.</param>
         /// <returns>Returns a parse tree node representing this sub-expression in the order it should be evaluated.</returns>
-        protected ConstantParseTreeNode ParseLiteral(IEnumerator<Token> enumerator)
+        protected ConstantParseTreeNode ParseLiteral(ParserEnumerator enumerator)
         {
             StringBuilder builder = new StringBuilder();
             double scaleFactor = 1;
 
-            if (enumerator.Current is DigitToken) // integer component
+            if (enumerator.Check<DigitToken>()) // integer component
             {
-                while (enumerator.Current != null && enumerator.Current is DigitToken)
+                while (enumerator.Accept<DigitToken>())
                 {
                     builder.Append((enumerator.Current as DigitToken).Text);
-                    if (!enumerator.MoveNext()) break;
                 }
             }
             else
@@ -36,52 +35,37 @@ namespace Graphmatic.Expressions
                 throw new ParseException("Literal number must begin with a digit.", enumerator.Current);
             }
 
-            if (enumerator.Current is SymbolicToken && // decimal place
-                (enumerator.Current as SymbolicToken).Type == SymbolicToken.SymbolicType.DecimalPoint)
+            if (enumerator.Accept<SymbolicToken>(t => t.Type == SymbolicToken.SymbolicType.DecimalPoint)) // decimal place
             {
                 builder.Append('.');
-                if (enumerator.MoveNext())
+                if (enumerator.Check<DigitToken>()) // fractional component
                 {
-
-                    if (enumerator.Current is DigitToken) // fractional component
+                    while (enumerator.Accept<DigitToken>())
                     {
-                        while (enumerator.Current != null && enumerator.Current is DigitToken)
-                        {
-                            builder.Append((enumerator.Current as DigitToken).Text);
-                            if (!enumerator.MoveNext()) break;
-                        }
+                        builder.Append((enumerator.Current as DigitToken).Text);
                     }
-                    else
-                    {
-                        throw new ParseException("Decimal point in a literal number must be followed by a digit.", enumerator.Current);
-                    }
+                }
+                else
+                {
+                    throw new ParseException("Decimal point in a literal number must be followed by a digit.", enumerator.Current);
                 }
             }
 
-            if (enumerator.Current is SymbolicToken && // exponent
-                (enumerator.Current as SymbolicToken).Type == SymbolicToken.SymbolicType.Exp10)
+            if (enumerator.Accept<SymbolicToken>(t => t.Type == SymbolicToken.SymbolicType.Exp10)) // exponent
             {
                 builder.Append('e');
-                if (!enumerator.MoveNext())
-                    throw new ParseException("Expected exponent after exponent symbol.", enumerator.Current);
-                if (enumerator.Current is OperationToken) // symbol
-                {
-                    OperationToken.OperationType operation = (enumerator.Current as OperationToken).Operation;
-                    if (operation == OperationToken.OperationType.Add)
-                        builder.Append('+');
-                    else if (operation == OperationToken.OperationType.Subtract)
-                        builder.Append('-');
-                    else
-                        throw new ParseException("Invalid symbol here - must be a +, - or digit.", enumerator.Current);
-                    enumerator.MoveNext();
-                }
 
-                if (enumerator.Current is DigitToken) // exponent component
+                // optional sign after the '*10^' symbol
+                if (enumerator.Accept<OperationToken>(t => t.Operation == OperationToken.OperationType.Add))
+                    builder.Append('+');
+                if (enumerator.Accept<OperationToken>(t => t.Operation == OperationToken.OperationType.Subtract))
+                    builder.Append('-');
+
+                if (enumerator.Check<DigitToken>())
                 {
-                    while (enumerator.Current != null && enumerator.Current is DigitToken)
+                    while (enumerator.Accept<DigitToken>())
                     {
                         builder.Append((enumerator.Current as DigitToken).Text);
-                        if (!enumerator.MoveNext()) break;
                     }
                 }
                 else
@@ -90,11 +74,9 @@ namespace Graphmatic.Expressions
                 }
             }
 
-            if (enumerator.Current is SymbolicToken &&
-                (enumerator.Current as SymbolicToken).Type == SymbolicToken.SymbolicType.Percent) // divide by 100 when the percentage sign appears
+            if (enumerator.Accept<SymbolicToken>(t => t.Type == SymbolicToken.SymbolicType.Percent)) // divide by 100 when the percentage sign appears
             {
                 scaleFactor /= 100.0;
-                enumerator.MoveNext();
             }
 
             return new ConstantParseTreeNode(Double.Parse(builder.ToString()) * scaleFactor);
@@ -106,85 +88,96 @@ namespace Graphmatic.Expressions
         public static readonly BinaryEvaluator ExpEvaluator = new BinaryEvaluator((powBase, powPower) => Math.Pow(powBase, powPower), "pow[{1}]({0})");
 
         /// <summary>
-        /// Parses a variable number of <c>ExpToken</c>s, and raises <paramref name="exponentBase"/> to the according power. If there are no
-        /// more <c>ExpToken</c>s at the current position of the enumerator, this function returns <paramref name="exponentBase"/> unchanged.
+        /// Parses a series of <c>ExpToken</c>s, and returns the combined power.
+        /// This function takes advantage of the mathematical identity: <c>(a^b)^c=a^(b*c)</c>. Successive <c>ExpToken</c>s
+        /// have their powers multiplied together such to return a single power to which to raise the previous expression to.
         /// </summary>
-        /// <param name="exponentBase">The base of the exponentation.</param>
         /// <param name="enumerator">An enumerator containing the current location in the Expression of the parser.</param>
-        /// <returns>Returns <paramref name="exponentBase"/> raised to the correct power.</returns>
-        protected ParseTreeNode ParseExponent(ParseTreeNode exponentBase, IEnumerator<Token> enumerator)
+        /// <returns>Returns the power that the token preceding the parsed <c>ExpToken</c>s should be raised to.</returns>
+        protected ParseTreeNode ParseExponent(ParserEnumerator enumerator)
         {
-            if (exponentBase == null)
+            if (enumerator.Accept<ExpToken>())
             {
-                // we can't raise nothing to a power... throw an exception
-                throw new ParseException(
-                    "Cannot have a power without an operand. Try putting something to the left of the power index.",
-                    enumerator.Current);
+                ParseTreeNode exponentNode = (enumerator.Current as ExpToken).Power.Parse();
+                while (enumerator.Accept<ExpToken>())
+                {
+                    exponentNode = new BinaryParseTreeNode(
+                        MultiplyEvaluator,
+                        exponentNode,
+                        (enumerator.Current as ExpToken).Power.Parse());
+                }
+                return exponentNode;
             }
-            while (enumerator.Current != null && enumerator.Current is ExpToken)
+            else
             {
-                exponentBase = new BinaryParseTreeNode(
-                    ExpEvaluator,
-                    exponentBase,
-                    (enumerator.Current as ExpToken).Power.Parse());
-                if (!enumerator.MoveNext()) break;
+                return null;
             }
-            return exponentBase;
         }
 
         /// <summary>
         /// Parses an atomic production.<para/>
-        /// An atomic production takes the EBNF production:
-        /// <code>&lt;atomic&gt; := { ( &lt;literal&gt; | &lt;token&gt; ) { &lt;exp&gt; } }</code><para/>
+        /// An atomic production can be represented as EBNF like:
+        /// <code>&lt;atomic&gt; := [ &lt;literal&gt; ] { &lt;token&gt; { &lt;exp&gt; } }</code><para/>
         /// This means that, in an equation such as <c>y=4x√2</c> the three tokens '4', 'x' and '√2' are correctly broken
         /// down into three separate multiplications. This is so the algebraic multiplication short-hand of omitting the
         /// cross symbol still works. Lastly, this also parses any exponents.
         /// </summary>
         /// <param name="enumerator">An enumerator containing the current location in the Expression of the parser.</param>
         /// <returns>Returns a parse tree node representing this sub-expression in the order it should be evaluated.</returns>
-        protected ParseTreeNode ParseAtomic(IEnumerator<Token> enumerator)
+        protected ParseTreeNode ParseAtomic(ParserEnumerator enumerator)
         {
             ParseTreeNode currentNode = null;
-            if (enumerator.Current is DigitToken)
+            // parse the preceding literal, if there is one
+            if (enumerator.Check<DigitToken>())
             {
                 currentNode = ParseLiteral(enumerator);
-                currentNode = ParseExponent(currentNode, enumerator);
             }
-            while (enumerator.Current != null)
+            if (enumerator.Check<ExpToken>())
             {
-                ParseTreeNode currentSubNode = null;
-
-                // this represents the first repeating EBNF group;
-                // ie. a token that can be raised to a power
-                if (enumerator.Current is IParsable)
+                if (currentNode != null) // we can't exponentiate a non-existent literal
                 {
-                    currentSubNode = (enumerator.Current as IParsable).Parse();
-                    if (enumerator.MoveNext())
-                    {
-                        currentSubNode = ParseExponent(currentSubNode, enumerator);
-                    }
-                }
-                else if (enumerator.Current is DigitToken)
-                {
-                    currentNode = ParseLiteral(enumerator);
-                    currentNode = ParseExponent(currentNode, enumerator);
+                    currentNode = new BinaryParseTreeNode(
+                        ExpEvaluator,
+                        currentNode,
+                        ParseExponent(enumerator));
                 }
                 else
                 {
-                    break;
+                    throw new ParseException("Expected a valid token before an exponent.", enumerator.Current);
+                }
+            }
+
+            while (enumerator.Accept<Token>(t => t is IParsable))
+            {
+                // parse any other successive tokens
+                ParseTreeNode currentNodeSubtoken = (enumerator.Current as IParsable).Parse();
+
+                if (enumerator.Check<ExpToken>())
+                {
+                    currentNodeSubtoken = new BinaryParseTreeNode(
+                        ExpEvaluator,
+                        currentNodeSubtoken,
+                        ParseExponent(enumerator));
                 }
 
                 if (currentNode == null)
                 {
-                    currentNode = currentSubNode;
+                    // if the current node is null, create it
+                    currentNode = currentNodeSubtoken;
                 }
                 else
                 {
+                    // otherwise, multiply the existing current node with the new subnode
                     currentNode = new BinaryParseTreeNode(
                         MultiplyEvaluator,
                         currentNode,
-                        currentSubNode);
+                        currentNodeSubtoken);
                 }
+            }
+
+            if (currentNode == null)
+            {
+                throw new ParseException("Expected a valid token.", enumerator.Current);
             }
             return currentNode;
         }
@@ -201,27 +194,19 @@ namespace Graphmatic.Expressions
         /// </summary>
         /// <param name="enumerator">An enumerator containing the current location in the Expression of the parser.</param>
         /// <returns>Returns a parse tree node representing this sub-expression in the order it should be evaluated.</returns>
-        protected ParseTreeNode ParseUnary(IEnumerator<Token> enumerator)
+        protected ParseTreeNode ParseUnary(ParserEnumerator enumerator)
         {
             bool positive = true;
-            while (enumerator.Current != null && enumerator.Current is OperationToken)
+            while (enumerator.Accept<OperationToken>(t =>
+                t.Operation == OperationToken.OperationType.Add ||
+                t.Operation == OperationToken.OperationType.Subtract))
             {
                 OperationToken current = enumerator.Current as OperationToken;
 
-                if (current.Operation == OperationToken.OperationType.Add)
-                {
-                    // do nothing
-                }
-                else if (current.Operation == OperationToken.OperationType.Subtract)
+                if (current.Operation == OperationToken.OperationType.Subtract)
                 {
                     positive = !positive;
-                }
-                else
-                {
-                    break;
-                }
-                if (!enumerator.MoveNext())
-                    throw new ParseException("Unexpected end of expression.", enumerator.Current);
+                } // do nothing if the operation token is positive
             }
             if (positive)
                 return ParseAtomic(enumerator);
@@ -243,31 +228,25 @@ namespace Graphmatic.Expressions
         /// </summary>
         /// <param name="enumerator">An enumerator containing the current location in the Expression of the parser.</param>
         /// <returns>Returns a parse tree node representing this sub-expression in the order it should be evaluated.</returns>
-        protected ParseTreeNode ParseProduction(IEnumerator<Token> enumerator)
+        protected ParseTreeNode ParseProduction(ParserEnumerator enumerator)
         {
             ParseTreeNode currentNode = ParseUnary(enumerator);
-            while (enumerator.Current != null && enumerator.Current is OperationToken)
+            while (enumerator.Accept<OperationToken>(t =>
+                t.Operation == OperationToken.OperationType.Multiply ||
+                t.Operation == OperationToken.OperationType.Divide))
             {
                 OperationToken current = enumerator.Current as OperationToken;
 
                 if (current.Operation == OperationToken.OperationType.Multiply)
                 {
-                    if (!enumerator.MoveNext()) goto EndFast;
                     currentNode = new BinaryParseTreeNode(MultiplyEvaluator, currentNode, ParseUnary(enumerator));
                 }
                 else if (current.Operation == OperationToken.OperationType.Divide)
                 {
-                    if (!enumerator.MoveNext()) goto EndFast;
                     currentNode = new BinaryParseTreeNode(DivideEvaluator, currentNode, ParseUnary(enumerator));
-                }
-                else
-                {
-                    break;
                 }
             }
             return currentNode;
-        EndFast:
-            throw new ParseException("Unexpected end of expression.", enumerator.Current);
         }
 
         /* 'I believe that by presenting such a view I am not in fact disagreeing sharply
@@ -294,31 +273,25 @@ namespace Graphmatic.Expressions
         /// </summary>
         /// <param name="enumerator">An enumerator containing the current location in the Expression of the parser.</param>
         /// <returns>Returns a parse tree node representing this sub-expression in the order it should be evaluated.</returns>
-        protected ParseTreeNode ParseSummation(IEnumerator<Token> enumerator)
+        protected ParseTreeNode ParseSummation(ParserEnumerator enumerator)
         {
             ParseTreeNode currentNode = ParseProduction(enumerator);
-            while (enumerator.Current != null && enumerator.Current is OperationToken)
+            while (enumerator.Accept<OperationToken>(t =>
+                t.Operation == OperationToken.OperationType.Add ||
+                t.Operation == OperationToken.OperationType.Subtract))
             {
                 OperationToken current = enumerator.Current as OperationToken;
 
                 if (current.Operation == OperationToken.OperationType.Add)
                 {
-                    if (!enumerator.MoveNext()) goto EndFast;
                     currentNode = new BinaryParseTreeNode(AddEvaluator, currentNode, ParseProduction(enumerator));
                 }
                 else if (current.Operation == OperationToken.OperationType.Subtract)
                 {
-                    if (!enumerator.MoveNext()) goto EndFast;
                     currentNode = new BinaryParseTreeNode(SubtractEvaluator, currentNode, ParseProduction(enumerator));
-                }
-                else
-                {
-                    break;
                 }
             }
             return currentNode;
-        EndFast:
-            throw new ParseException("Unexpected end of expression.", enumerator.Current);
         }
 
         /// <summary>
@@ -326,21 +299,28 @@ namespace Graphmatic.Expressions
         /// Behind the scenes, this is just a subtraction.
         /// </summary>
         public static readonly BinaryEvaluator EqualsEvaluator = new BinaryEvaluator((l, r) => l - r, "{0}={1}");
-        protected ParseTreeNode ParseEquation(IEnumerator<Token> enumerator)
+
+        /// <summary>
+        /// Parses an equation production, handling the equals sign.
+        /// </summary>
+        /// <param name="enumerator">An enumerator containing the current location in the Expression of the parser.</param>
+        /// <returns>Returns a parse tree node representing this equation.<para/>
+        /// The equals (=) symbol is essentially equivalent to a subtraction (-) symbol with lower precedence, at least in
+        /// the context of evaluating the equation.</returns>
+        protected ParseTreeNode ParseEquation(ParserEnumerator enumerator)
         {
             ParseTreeNode leftNode = ParseSummation(enumerator), rightNode;
             SymbolicToken current = enumerator.Current as SymbolicToken;
-            if (current != null && current.Type == SymbolicToken.SymbolicType.Equals)
+            if (enumerator.Accept<SymbolicToken>(t => t.Type == SymbolicToken.SymbolicType.Equals))
             {
-                if (!enumerator.MoveNext())
-                    throw new ParseException("Unexpected end of equation.", enumerator.Current);
                 rightNode = ParseSummation(enumerator);
             }
             else
             {
-                throw new ParseException("Unexpected symbol in equation. Have you used an equals sign?", enumerator.Current);
+                throw new ParseException("Equals sign (=) expected in equation.", enumerator.Current);
             }
-            if (enumerator.MoveNext())
+
+            if (!enumerator.EndReached)
                 throw new ParseException("Unexpected symbol after equation.", enumerator.Current);
             if (leftNode == null || rightNode == null)
             {
@@ -358,21 +338,11 @@ namespace Graphmatic.Expressions
         /// for this token and any children.</returns>
         public ParseTreeNode Parse(bool equationParse)
         {
-            IEnumerator<Token> enumerator = ((IEnumerable<Token>)this).GetEnumerator();
-            enumerator.Reset();
-            if (enumerator.MoveNext())
-            {
-                ParseTreeNode tree = equationParse ?
+            ParserEnumerator enumerator = new ParserEnumerator(this);
+            ParseTreeNode tree = equationParse ?
                     ParseEquation(enumerator) :
                     ParseSummation(enumerator);
-                enumerator.Reset();
-
-                return tree;
-            }
-            else
-            {
-                return null;
-            }
+            return tree;
         }
 
         /// <summary>
