@@ -64,7 +64,7 @@ namespace Graphmatic.Expressions
                 builder.Append('e');
                 if (!enumerator.MoveNext())
                     throw new ParseException("Expected exponent after exponent symbol.", enumerator.Current);
-                if(enumerator.Current is OperationToken) // symbol
+                if (enumerator.Current is OperationToken) // symbol
                 {
                     OperationToken.OperationType operation = (enumerator.Current as OperationToken).Operation;
                     if (operation == OperationToken.OperationType.Add)
@@ -90,7 +90,7 @@ namespace Graphmatic.Expressions
                 }
             }
 
-            if(enumerator.Current is SymbolicToken &&
+            if (enumerator.Current is SymbolicToken &&
                 (enumerator.Current as SymbolicToken).Type == SymbolicToken.SymbolicType.Percent) // divide by 100 when the percentage sign appears
             {
                 scaleFactor /= 100.0;
@@ -101,9 +101,41 @@ namespace Graphmatic.Expressions
         }
 
         /// <summary>
+        /// An evaluator for the exponent (power) operator.
+        /// </summary>
+        public static readonly BinaryEvaluator ExpEvaluator = new BinaryEvaluator((powBase, powPower) => Math.Pow(powBase, powPower), "pow[{1}]({0})");
+
+        /// <summary>
+        /// Parses a variable number of <c>ExpToken</c>s, and raises <paramref name="exponentBase"/> to the according power. If there are no
+        /// more <c>ExpToken</c>s at the current position of the enumerator, this function returns <paramref name="exponentBase"/> unchanged.
+        /// </summary>
+        /// <param name="exponentBase">The base of the exponentation.</param>
+        /// <param name="enumerator">An enumerator containing the current location in the Expression of the parser.</param>
+        /// <returns>Returns <paramref name="exponentBase"/> raised to the correct power.</returns>
+        protected ParseTreeNode ParseExponent(ParseTreeNode exponentBase, IEnumerator<Token> enumerator)
+        {
+            if (exponentBase == null)
+            {
+                // we can't raise nothing to a power... throw an exception
+                throw new ParseException(
+                    "Cannot have a power without an operand. Try putting something to the left of the power index.",
+                    enumerator.Current);
+            }
+            while (enumerator.Current != null && enumerator.Current is ExpToken)
+            {
+                exponentBase = new BinaryParseTreeNode(
+                    ExpEvaluator,
+                    exponentBase,
+                    (enumerator.Current as ExpToken).Power.Parse());
+                if (!enumerator.MoveNext()) break;
+            }
+            return exponentBase;
+        }
+
+        /// <summary>
         /// Parses an atomic production.<para/>
         /// An atomic production takes the EBNF production:
-        /// <code>&lt;atomic&gt; := &lt;literal&gt; { &lt;token&gt; } { &lt;exp&gt; }</code><para/>
+        /// <code>&lt;atomic&gt; := { ( &lt;literal&gt; | &lt;token&gt; ) { &lt;exp&gt; } }</code><para/>
         /// This means that, in an equation such as <c>y=4x√2</c> the three tokens '4', 'x' and '√2' are correctly broken
         /// down into three separate multiplications. This is so the algebraic multiplication short-hand of omitting the
         /// cross symbol still works. Lastly, this also parses any exponents.
@@ -116,38 +148,46 @@ namespace Graphmatic.Expressions
             if (enumerator.Current is DigitToken)
             {
                 currentNode = ParseLiteral(enumerator);
+                currentNode = ParseExponent(currentNode, enumerator);
             }
-            while (enumerator.Current != null && enumerator.Current is IParsable)
+            while (enumerator.Current != null)
             {
+                ParseTreeNode currentSubNode = null;
+
+                // this represents the first repeating EBNF group;
+                // ie. a token that can be raised to a power
+                if (enumerator.Current is IParsable)
+                {
+                    currentSubNode = (enumerator.Current as IParsable).Parse();
+                    if (enumerator.MoveNext())
+                    {
+                        currentSubNode = ParseExponent(currentSubNode, enumerator);
+                    }
+                }
+                else if (enumerator.Current is DigitToken)
+                {
+                    currentNode = ParseLiteral(enumerator);
+                    currentNode = ParseExponent(currentNode, enumerator);
+                }
+                else
+                {
+                    break;
+                }
+
                 if (currentNode == null)
                 {
-                    currentNode = (enumerator.Current as IParsable).Parse();
+                    currentNode = currentSubNode;
                 }
                 else
                 {
                     currentNode = new BinaryParseTreeNode(
                         MultiplyEvaluator,
                         currentNode,
-                        (enumerator.Current as IParsable).Parse());
+                        currentSubNode);
                 }
-                if (!enumerator.MoveNext()) break;
-            }
-            while (enumerator.Current != null && enumerator.Current is ExpToken)
-            {
-                currentNode = new BinaryParseTreeNode(
-                    ExpEvaluator,
-                    currentNode,
-                    (enumerator.Current as ExpToken).Power.Parse());
-                if (!enumerator.MoveNext()) break;
             }
             return currentNode;
         }
-
-
-        /// <summary>
-        /// An evaluator for the exponent (power) operator.
-        /// </summary>
-        public static readonly BinaryEvaluator ExpEvaluator = new BinaryEvaluator((powBase, powPower) => Math.Pow(powBase, powPower), "pow[{1}]({0})");
 
         /// <summary>
         /// An evaluator for negation, such as when an atomic value is negated with the unary - operator.
@@ -300,11 +340,11 @@ namespace Graphmatic.Expressions
             {
                 throw new ParseException("Unexpected symbol in equation. Have you used an equals sign?", enumerator.Current);
             }
-            if(enumerator.MoveNext())
+            if (enumerator.MoveNext())
                 throw new ParseException("Unexpected symbol after equation.", enumerator.Current);
             if (leftNode == null || rightNode == null)
             {
-                throw new ParseException("Equation must have both a left-hand side and a right-hand side.", enumerator.Current);
+                throw new ParseException("Equation is incomplete.", enumerator.Current);
             }
             return new BinaryParseTreeNode(EqualsEvaluator, leftNode, rightNode);
         }
