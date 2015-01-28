@@ -117,7 +117,7 @@ namespace Graphmatic.Expressions
         /// <summary>
         /// Parses an atomic production.<para/>
         /// An atomic production can be represented as EBNF like:
-        /// <code>&lt;atomic&gt; := [ &lt;literal&gt; ] { &lt;token&gt; { &lt;exp&gt; } }</code><para/>
+        /// <code>&lt;atomic&gt; := [ &lt;literal&gt; ] { &lt;exp&gt; } { &lt;token&gt; { &lt;exp&gt; } }</code><para/>
         /// This means that, in an equation such as <c>y=4x√2</c> the three tokens '4', 'x' and '√2' are correctly broken
         /// down into three separate multiplications. This is so the algebraic multiplication short-hand of omitting the
         /// cross symbol still works. Lastly, this also parses any exponents.

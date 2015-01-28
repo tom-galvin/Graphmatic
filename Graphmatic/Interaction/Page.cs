@@ -10,8 +10,14 @@ using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic.Interaction
 {
+    /// <summary>
+    /// Represents a page in a Graphmatic document, onto which objects can be plotted, and annotations can be placed.
+    /// </summary>
     public class Page : Resource
     {
+        /// <summary>
+        /// Gets the string <c>"Type"</c>.
+        /// </summary>
         public override string Type
         {
             get
@@ -20,18 +26,27 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Gets or sets the background color of the page.
+        /// </summary>
         public Color BackgroundColor
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets the <c>Graphmatic.Interaction.Plotting.Graph</c> object to which objects on this page are plotted onto.
+        /// </summary>
         public Graph Graph
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets a list of all the annotations on this page.
+        /// </summary>
         public List<Annotation> Annotations
         {
             get;

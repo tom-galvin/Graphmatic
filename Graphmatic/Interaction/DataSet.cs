@@ -10,14 +10,23 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction
 {
+    /// <summary>
+    /// Represents a numerical data set in a document.
+    /// </summary>
     public partial class DataSet : Resource, IEnumerable<double[]>, IPlottable
     {
+        /// <summary>
+        /// Gets an array of the variables that each row (tuple) in this data set has.
+        /// </summary>
         public char[] Variables
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets the string <c>"Data Set"</c>.
+        /// </summary>
         public override string Type
         {
             get
@@ -26,6 +35,12 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Gets a row (tuple) from this data set with the given zero-based <paramref name="index"/>.<para/>
+        /// The row is returned as an array of doubles containing the variables given in the order contained in the <c>Variables</c> property.
+        /// </summary>
+        /// <param name="index">The index of the row to return.</param>
+        /// <returns>The row with the index given in <paramref name="index"/> as an array of doubles.</returns>
         public double[] this[int index]
         {
             get
@@ -38,6 +53,9 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// The actual list of data that this data set contains.
+        /// </summary>
         private List<double[]> Data;
 
         /// <summary>
@@ -53,6 +71,14 @@ namespace Graphmatic.Interaction
             Data = new List<double[]>();
         }
 
+        /// <summary>
+        /// Inserts <paramref name="value"/> into a resized clone of <paramref name="array"/> at the index given in
+        /// <paramref name="index"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the objects in <paramref name="array"/>.</typeparam>
+        /// <param name="array">The array to insert into.</param>
+        /// <param name="index">The index to insert at.</param>
+        /// <param name="value">The value to insert.</param>
         private T[] Insert<T>(T[] array, int index, T value)
         {
             T[] newArray = new T[array.Length + 1];
@@ -74,6 +100,12 @@ namespace Graphmatic.Interaction
             return newArray;
         }
 
+        /// <summary>
+        /// Removes the value at index <paramref name="index"/> from a shallow copy of <paramref name="array"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the objects in <paramref name="array"/>.</typeparam>
+        /// <param name="array">The array to remove from.</param>
+        /// <param name="index">The index to remove at.</param>
         private T[] Remove<T>(T[] array, int index)
         {
             T[] newArray = new T[array.Length - 1];
@@ -91,6 +123,13 @@ namespace Graphmatic.Interaction
             return newArray;
         }
 
+        /// <summary>
+        /// Swaps the values at <paramref name="index1"/> and <paramref name="index2"/> in a shallow copy of <paramref name="array"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the objects in <paramref name="array"/>.</typeparam>
+        /// <param name="array">The array to swap values in.</param>
+        /// <param name="index1">The indices at which to swap values.</param>
+        /// <param name="index2">The indices at which to swap values.</param>
         private T[] Swap<T>(T[] array, int index1, int index2)
         {
             T[] newArray = new T[array.Length];
@@ -261,6 +300,7 @@ namespace Graphmatic.Interaction
 
         public const float DataPointPenWidth = 2f;
         public const int DataPointCrossSize = 3;
+
         public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, PlotResolution resolution)
         {
             if (resolution == PlotResolution.Resize) return;
@@ -297,7 +337,6 @@ namespace Graphmatic.Interaction
                 }
             }
         }
-
 
         public bool CanPlot(char variable1, char variable2)
         {
