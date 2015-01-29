@@ -11,6 +11,7 @@ namespace Graphmatic.Interaction.Plotting
     /// Represents a visual graph onto which <c>Graphmatic.Interaction.Plotting.IPlottable</c> implementations
     /// can be plotted.
     /// </summary>
+    [GraphmaticObject]
     public class Graph : IEnumerable<IPlottable>, IXmlConvertible
     {
         /// <summary>
@@ -132,7 +133,7 @@ namespace Graphmatic.Interaction.Plotting
                 }
                 else
                 {
-                    IPlottable resource = plottable.Deserialize<IPlottable>(SerializationExtensionMethods.PlottableName);
+                    IPlottable resource = plottable.Deserialize<IPlottable>();
                     Resources.Add(resource, parameters);
                     if (resource is GraphKey)
                         Key = resource as GraphKey;

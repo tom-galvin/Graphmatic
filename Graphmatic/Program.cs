@@ -21,9 +21,13 @@ namespace Graphmatic
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            SerializationExtensionMethods.RegisterGraphmaticObjects();
+
             Main main = new Main();
             if (args.Length >= 1)
                 main.OpenDocument(args[0]);
+
             Application.Run(new Main());
         }
     }

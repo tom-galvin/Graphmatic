@@ -13,6 +13,7 @@ namespace Graphmatic.Interaction
     /// <summary>
     /// Represents a numerical data set in a document.
     /// </summary>
+    [GraphmaticObject]
     public partial class DataSet : Resource, IEnumerable<double[]>, IPlottable
     {
         /// <summary>

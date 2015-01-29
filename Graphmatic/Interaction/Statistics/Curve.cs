@@ -13,7 +13,7 @@ namespace Graphmatic.Interaction.Statistics
     public abstract class Curve
     {
         /// <summary>
-        /// A string containing Arabic digits, where each digit's index is equal to its value.
+        /// A string containing the digits 0 to 9, where each digit's index is equal to its value.
         /// </summary>
         private const string Digits = "0123456789";
 
@@ -25,6 +25,7 @@ namespace Graphmatic.Interaction.Statistics
             get;
             set;
         }
+
         /// <summary>
         /// Gets or sets the independent variable in this fitted curve.
         /// </summary>

@@ -12,6 +12,7 @@ namespace Graphmatic.Expressions.Tokens
     /// Represents a token showing some prompt in the ExpressionDisplay interface. This is not a member of an expression
     /// but rather just a prompt in the user interface.
     /// </summary>
+    [GraphmaticObject]
     public class PromptToken : Token
     {
         /// <summary>

@@ -15,6 +15,7 @@ namespace Graphmatic.Expressions.Tokens
     /// not directly contained within it. The height (and baseline offset) of an ExpToken is determined by
     /// the nearest token to the left of this ExpToken that is not in itself an ExpToken.
     /// </summary>
+    [GraphmaticObject]
     public class ExpToken : Token
     {
         /// <summary>
@@ -119,7 +120,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Exp",
+            return new XElement("ExpToken",
                 new XElement("Power", Power.ToXml()));
         }
         /// <summary>

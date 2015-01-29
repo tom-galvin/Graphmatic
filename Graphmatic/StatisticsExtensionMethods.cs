@@ -29,6 +29,7 @@ namespace Graphmatic
 
             return accumulator / count;
         }
+
         /// <summary>
         /// Calculates the double mean of a given enumerable set of data.
         /// </summary>

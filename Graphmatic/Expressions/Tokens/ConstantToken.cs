@@ -12,6 +12,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Represents a token whose value is a constant, such as pi or e.
     /// </summary>
+    [GraphmaticObject]
     public class ConstantToken : SimpleToken, IParsable
     {
         private ConstantType _Value;
@@ -78,7 +79,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Constant",
+            return new XElement("ConstantToken",
                 new XAttribute("Value", Value.ToString()));
         }
 

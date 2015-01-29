@@ -128,6 +128,7 @@
     <Compile Include="Expressions\Tokens\VariableToken.cs" />
     <Compile Include="Expressions\VariableSet.cs" />
     <Compile Include="ExpressionVerificationEventArgs.cs" />
+    <Compile Include="GraphmaticObjectAttribute.cs" />
     <Compile Include="Interaction\Annotations\Annotation.cs" />
     <Compile Include="Interaction\Annotations\Drawing.cs" />
     <Compile Include="Interaction\Annotations\Picture.cs" />

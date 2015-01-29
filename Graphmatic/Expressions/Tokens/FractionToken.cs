@@ -13,6 +13,7 @@ namespace Graphmatic.Expressions.Tokens
     /// Represents a token whose value is the division of one value by another, represented as a fraction rather than a simple division with the
     /// classic obelus symbol.
     /// </summary>
+    [GraphmaticObject]
     public class FractionToken : Token, ICollectorToken, IParsable
     {
         /// <summary>
@@ -95,7 +96,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Fraction",
+            return new XElement("FractionToken",
                 new XElement("Top", Top.ToXml()),
                 new XElement("Bottom", Bottom.ToXml()));
         }

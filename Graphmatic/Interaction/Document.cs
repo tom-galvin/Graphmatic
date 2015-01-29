@@ -13,6 +13,7 @@ namespace Graphmatic.Interaction
     /// <summary>
     /// Represents a document, which may contain many Graphmatic resources.
     /// </summary>
+    [GraphmaticObject]
     public class Document : IXmlConvertible, IEnumerable<Resource>
     {
         /// <summary>
@@ -142,7 +143,7 @@ namespace Graphmatic.Interaction
                 var resourcesElements = xml.Element("Resources").Elements();
                 foreach (XElement resourceElement in resourcesElements)
                 {
-                    Resource resource = resourceElement.Deserialize<Resource>(SerializationExtensionMethods.ResourceName);
+                    Resource resource = resourceElement.Deserialize<Resource>();
                     Resources.Add(resource.Guid, resource);
                 }
 

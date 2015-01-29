@@ -11,6 +11,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Represents the value of a variable in an expression.
     /// </summary>
+    [GraphmaticObject]
     public class VariableToken : SimpleToken, IParsable
     {
         /// <summary>
@@ -79,7 +80,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Variable",
+            return new XElement("VariableToken",
                 new XAttribute("Symbol", Symbol.ToString()));
         }
     }

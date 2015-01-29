@@ -14,6 +14,7 @@ namespace Graphmatic.Interaction
     /// <summary>
     /// Represents a plottable equation in a Graphmatic document.
     /// </summary>
+    [GraphmaticObject]
     public partial class Equation : Resource, IPlottable
     {
         /// <summary>

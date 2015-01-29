@@ -11,6 +11,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Represents a symbol (for example, punctuation) in a Graphmatic expression.
     /// </summary>
+    [GraphmaticObject]
     public class SymbolicToken : SimpleToken
     {
         private SymbolicType _Type;
@@ -81,7 +82,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Symbolic",
+            return new XElement("SymbolicToken",
                 new XAttribute("Type", _Type.ToString()));
         }
 

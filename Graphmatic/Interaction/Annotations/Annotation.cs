@@ -8,32 +8,53 @@ using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic.Interaction.Annotations
 {
+    /// <summary>
+    /// Represents an annotation on a Graphmatic page.
+    /// </summary>
+    [GraphmaticObject]
     public class Annotation : IXmlConvertible
     {
+        /// <summary>
+        /// Gets or sets the X co-ordinate of the annotation on the page, in graph space.
+        /// </summary>
         public double X
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the Y co-ordinate of the annotation on the page, in graph space.
+        /// </summary>
         public double Y
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the width of the annotation on the page, in graph space.
+        /// </summary>
         public double Width
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the height of the annotation on the page, in graph space.
+        /// </summary>
         public double Height
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the Color of the annotation on the page.<para/>
+        /// Whether this has an effect on the appearance of the specific annotation or not
+        /// depends on the implementation.
+        /// </summary>
         public Color Color
         {
             get;
@@ -75,6 +96,11 @@ namespace Graphmatic.Interaction.Annotations
                 new XElement("Color", Color.ToXmlString()));
         }
 
+        /// <summary>
+        /// Creates a Rectangle representing the area of this Annotation on the screen.
+        /// </summary>
+        /// <param name="page">The Page that this Annotation is on.</param>
+        /// <param name="graphSize">The size of the graph on the screen.</param>
         protected Rectangle GetScreenRectangle(Page page, Size graphSize)
         {
             int x1, y1, x2, y2;
@@ -84,6 +110,13 @@ namespace Graphmatic.Interaction.Annotations
             return new Rectangle(x1, y1, x2 - x1, y2 - y1);
         }
 
+        /// <summary>
+        /// Determines whether a point is inside the top-right yellow resizing node on the
+        /// visual display of the annotation or not.
+        /// </summary>
+        /// <param name="page">The Page that this Annotation is on.</param>
+        /// <param name="graphSize">The size of the graph on the screen.</param>
+        /// <param name="point">The point to check for proximity to the resizing node.</param>
         public bool IsPointInResizeNode(Page page, Size graphSize, Point point)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize);
@@ -93,6 +126,14 @@ namespace Graphmatic.Interaction.Annotations
             return manhattanDistance < 9;
         }
 
+        /// <summary>
+        /// Draws this Annotation onto <paramref name="page"/>.
+        /// </summary>
+        /// <param name="page">The Graph to plot this Annotation onto.</param>
+        /// <param name="graphics">The GDI+ drawing surface to use for plotting this Annotation.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the page's graph's parameters.</param>
+        /// <param name="resolution">The plotting resolution to use. This does not have an effect for data sets.</param>
         public virtual void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, PlotResolution resolution)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize);
@@ -102,6 +143,14 @@ namespace Graphmatic.Interaction.Annotations
             }
         }
 
+        /// <summary>
+        /// Draws the selection indicator around this Annotation onto <paramref name="page"/>.
+        /// </summary>
+        /// <param name="page">The Page to plot this Annotation onto.</param>
+        /// <param name="graphics">The GDI+ drawing surface to use for plotting this Annotation.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the page's graph's parameters.</param>
+        /// <param name="resolution">The plotting resolution to use. This does not have an effect for data sets.</param>
         public virtual void DrawSelectionIndicatorOnto(Page page, Graphics graphics, Size graphSize, PlotResolution resolution)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize);
@@ -121,12 +170,30 @@ namespace Graphmatic.Interaction.Annotations
             }
         }
 
+        /// <summary>
+        /// Determines whether this Annotation is inside the given selection rectangle. This is determined by
+        /// checking whether the display and selection rectangles intersect.
+        /// </summary>
+        /// <param name="page">The Page to plot this Annotation onto.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the page's graph's parameters.</param>
+        /// <param name="screenSelection">The selection rectangle to check.</param>
+        /// <returns>Returns true if this Annotation is inside the given selection rectangle; false otherwise.</returns>
         public virtual bool IsAnnotationInSelection(Page page, Size graphSize, Rectangle screenSelection)
         {
             Rectangle screenRectangle = GetScreenRectangle(page, graphSize);
             return screenRectangle.IntersectsWith(screenSelection);
         }
 
+        /// <summary>
+        /// Determines the distance from this Annotation to a given point on the screen.
+        /// This returns the closest distance from one of the edges of the screen rectangle.
+        /// </summary>
+        /// <param name="page">The Page to plot this Annotation onto.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the page's graph's parameters.</param>
+        /// <param name="screenSelection">The selection point to check.</param>
+        /// <returns>Returns the closest distance from one of the edges of the screen rectangle.</returns>
         public virtual int DistanceToPointOnScreen(Page page, Size graphSize, Point screenSelection)
         {
             // if selection is in resize node, it's ALWAYS in the boundaries of the selection

@@ -12,6 +12,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Represents a token whose value is the arbitrary-base logarithm of some other value.
     /// </summary>
+    [GraphmaticObject]
     public class LogToken : Token, IParsable
     {
         /// <summary>
@@ -86,7 +87,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Log",
+            return new XElement("LogToken",
                 new XElement("Base", Base.ToXml()),
                 new XElement("Operand", Operand.ToXml()));
         }

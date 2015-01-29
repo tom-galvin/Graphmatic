@@ -11,6 +11,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Represents a token whose value is a single digit.
     /// </summary>
+    [GraphmaticObject]
     public class DigitToken : SimpleToken
     {
         private int _Value;
@@ -79,7 +80,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Digit",
+            return new XElement("DigitToken",
                 new XAttribute("Value", Value.ToString()));
         }
     }

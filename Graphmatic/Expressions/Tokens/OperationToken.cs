@@ -11,6 +11,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Represents a token representing an elementary arithmetic operation.
     /// </summary>
+    [GraphmaticObject]
     public class OperationToken : SimpleToken
     {
         private OperationType _Operation;
@@ -43,7 +44,7 @@ namespace Graphmatic.Expressions.Tokens
                     case OperationType.Multiply:
                         return "*";
                     case OperationType.Divide:
-                        return "/";
+                        return "/"; // shown as an obelus in the display charset
                     default:
                         return "<unknown operation>";
                 }
@@ -82,7 +83,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Operation",
+            return new XElement("OperationToken",
                 new XAttribute("Operation", Operation.ToString()));
         }
 

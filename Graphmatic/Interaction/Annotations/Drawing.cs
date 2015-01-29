@@ -8,20 +8,33 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction.Annotations
 {
+    /// <summary>
+    /// Represents a drawn annotation on a Graphmatic page.
+    /// </summary>
+    [GraphmaticObject]
     public class Drawing : Annotation
     {
+        /// <summary>
+        /// Gets or sets a list containing the points describing the path of this drawn annotation.
+        /// </summary>
         public Tuple<double, double>[] Points
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the thickness of the drawn line.
+        /// </summary>
         public float Thickness
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the type of the drawn line.
+        /// </summary>
         public DrawingType Type
         {
             get;
@@ -109,6 +122,15 @@ namespace Graphmatic.Interaction.Annotations
             return baseElement;
         }
 
+        /// <summary>
+        /// Draws the selection indicator around this Drawing onto <paramref name="page"/>.<para/>
+        /// This draws red points on each point in this Drawing's path.
+        /// </summary>
+        /// <param name="page">The Page to plot this Annotation onto.</param>
+        /// <param name="graphics">The GDI+ drawing surface to use for plotting this Annotation.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the page's graph's parameters.</param>
+        /// <param name="resolution">The plotting resolution to use. This does not have an effect for data sets.</param>
         public override void DrawSelectionIndicatorOnto(Page page, Graphics graphics, Size graphSize, PlotResolution resolution)
         {
             Point[] screenPoints = Points
@@ -134,10 +156,19 @@ namespace Graphmatic.Interaction.Annotations
                         (int)(Thickness * 1.3),
                         (int)(Thickness * 1.3));
                 }
-                base.DrawSelectionIndicatorOnto(page, graphics, graphSize, resolution);
             }
+
+            base.DrawSelectionIndicatorOnto(page, graphics, graphSize, resolution);
         }
 
+        /// <summary>
+        /// Draws this Annotation onto <paramref name="page"/>.
+        /// </summary>
+        /// <param name="page">The Graph to plot this Annotation onto.</param>
+        /// <param name="graphics">The GDI+ drawing surface to use for plotting this Annotation.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the page's graph's parameters.</param>
+        /// <param name="resolution">The plotting resolution to use. This does not have an effect for data sets.</param>
         public override void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, PlotResolution resolution)
         {
             Point[] screenPoints = Points
@@ -165,6 +196,15 @@ namespace Graphmatic.Interaction.Annotations
             }
         }
 
+        /// <summary>
+        /// Determines the distance from this Drawing to the point <paramref name="screenSelection"/> on the screen.
+        /// This is done by finding the shortest Euclidean distance between the point and all of the points along the path.
+        /// </summary>
+        /// <param name="page">The Page to plot this Annotation onto.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the page's graph's parameters.</param>
+        /// <param name="screenSelection">The selection point to check.</param>
+        /// <returns>Returns the closest distance from one of the path points to <paramref name="screenSelection"/>.</returns>
         public override int DistanceToPointOnScreen(Page page, Size graphSize, Point screenSelection)
         {
             // if selection is in resize node, it's ALWAYS in the boundaries of the selection
@@ -185,6 +225,15 @@ namespace Graphmatic.Interaction.Annotations
             return distanceAsInteger;
         }
 
+        /// <summary>
+        /// Determines whether this Annotation is inside the given selection rectangle. This is determined by
+        /// checking whether any points along this Drawing's path are contained inside the selection rectangle.
+        /// </summary>
+        /// <param name="page">The Page to plot this Annotation onto.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the page's graph's parameters.</param>
+        /// <param name="screenSelection">The selection rectangle to check.</param>
+        /// <returns>Returns true if this Annotation is inside the given selection rectangle; false otherwise.</returns>
         public override bool IsAnnotationInSelection(Page page, Size graphSize, Rectangle screenSelection)
         {
             for (int i = 0; i < Points.Length; i++)
@@ -197,13 +246,25 @@ namespace Graphmatic.Interaction.Annotations
             return false;
         }
 
-        private Tuple<double, double> ToGraphSpace(Page page, Point p, Size graphSize)
+        /// <summary>
+        /// Converts a point on the screen to a point in graph space.
+        /// </summary>
+        /// <param name="page">The Page to plot this Annotation onto.</param>
+        /// <param name="point">The point in screen space to convert.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the page's graph's parameters.</param>
+        /// <returns>A tuple of two doubles, containing the X and Y co-ordinate of <paramref name="point"/> in graph space.</returns>
+        private Tuple<double, double> ToGraphSpace(Page page, Point point, Size graphSize)
         {
             double horizontal, vertical;
-            page.Graph.ToScreenSpace(graphSize, p.X, p.Y, out horizontal, out vertical);
+            page.Graph.ToScreenSpace(graphSize, point.X, point.Y, out horizontal, out vertical);
             return new Tuple<double,double>(horizontal, vertical);
         }
 
+        /// <summary>
+        /// Flips all of the points in this Drawing horizontally.
+        /// This is used for more intuitive behaviour when resizing the Annotation.
+        /// </summary>
         public void FlipHorizontal()
         {
             for (int i = 0; i < Points.Length; i++)
@@ -212,6 +273,10 @@ namespace Graphmatic.Interaction.Annotations
             }
         }
 
+        /// <summary>
+        /// Flips all of the points in this Drawing vertically.
+        /// This is used for more intuitive behaviour when resizing the Annotation.
+        /// </summary>
         public void FlipVertical()
         {
             for (int i = 0; i < Points.Length; i++)

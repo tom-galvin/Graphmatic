@@ -98,7 +98,7 @@ namespace Graphmatic.Interaction
             // the Page resource) will still link back to the original object.
 
             XElement serializedForm = resource.ToXml();
-            Resource duplicatedResource = serializedForm.Deserialize<Resource>(SerializationExtensionMethods.ResourceName);
+            Resource duplicatedResource = serializedForm.Deserialize<Resource>();
             duplicatedResource.UpdateReferences(parentDocument);
             duplicatedResource.InitializeIdentifyingAttributes();
             return duplicatedResource;

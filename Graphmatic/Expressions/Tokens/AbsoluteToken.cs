@@ -12,6 +12,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Represents a token whose value is the absolute (positive) value of some other expression.
     /// </summary>
+    [GraphmaticObject]
     public class AbsoluteToken : FunctionToken, IParsable
     {
         /// <summary>
@@ -38,7 +39,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Absolute",
+            return new XElement("AbsoluteToken",
                 new XElement("Operand", Operand.ToXml()));
         }
 

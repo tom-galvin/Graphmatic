@@ -11,6 +11,7 @@ namespace Graphmatic.Interaction
     /// <summary>
     /// Represents a resource in a Graphmatic document.
     /// </summary>
+    [GraphmaticObject]
     public class Resource : IXmlConvertible
     {
         /// <summary>

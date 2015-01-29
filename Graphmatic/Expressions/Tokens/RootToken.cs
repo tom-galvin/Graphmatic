@@ -12,6 +12,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Represents the nth root of some other value.
     /// </summary>
+    [GraphmaticObject]
     public class RootToken : Token, IParsable
     {
         /// <summary>
@@ -86,7 +87,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Root",
+            return new XElement("RootToken",
                 new XElement("Power", Power.ToXml()),
                 new XElement("Base", Base.ToXml()));
         }

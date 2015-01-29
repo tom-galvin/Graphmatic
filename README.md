@@ -24,3 +24,15 @@ There are 6 stages:
 |Implementation Complete|The main body of the feature is complete, but some utilities may be missing, or the user experience may not be fine tuned yet (eg. no keyboard shortcuts.)|
 |Feature Complete|The feature is complete, but has not been extensively bug-tested or tested by the user.|
 |Complete|The feature is solid, bug-free, user-tested, and works as expected and described. No more work is being done on the feature except to resolve any newly discovered bugs.|
+
+information
+-----------
+
+Bear in mind that this project was done with satisfying the mark scheme for the AQA Computing A2 coursework project rather than being a future-maintainable project.
+For this reason, some questionable decisions such as using WinForms and rolling my own serialization code had to be undertaken, in order to artificially inflate the
+complexity of the code base. I didn't like doing this, but the project still works as it is, so I won't go out of my way to port this to WPF any time soon, as good
+as that would be.
+
+The usage of WinForms also leads to the fact that there is a lot of code cruft to work with the older bits of the .NET framework, especially in the WinForms classes
+(such as in `Main.PageEditor.cs`). As I have said, this project was written to be on-time and functional so the code is not necessarily as clean as it would be had I
+wrote it as a personal project from the start.

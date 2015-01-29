@@ -8,8 +8,15 @@ using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic.Interaction.Annotations
 {
+    /// <summary>
+    /// Represents a pictorial annotation on a Page.
+    /// </summary>
+    [GraphmaticObject]
     public class Picture : Annotation
     {
+        /// <summary>
+        /// Gets the .NET <c>System.Drawing.Image</c> class representing the image to display.
+        /// </summary>
         public Image ImageData
         {
             get;
@@ -50,6 +57,14 @@ namespace Graphmatic.Interaction.Annotations
             return baseElement;
         }
 
+        /// <summary>
+        /// Draws this Annotation onto <paramref name="page"/>.
+        /// </summary>
+        /// <param name="page">The Graph to plot this Annotation onto.</param>
+        /// <param name="graphics">The GDI+ drawing surface to use for plotting this Annotation.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the page's graph's parameters.</param>
+        /// <param name="resolution">The plotting resolution to use. This does not have an effect for data sets.</param>
         public override void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, PlotResolution resolution)
         {
             graphics.DrawImage(ImageData, GetScreenRectangle(page, graphSize));

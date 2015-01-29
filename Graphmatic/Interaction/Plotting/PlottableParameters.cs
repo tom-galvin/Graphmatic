@@ -10,6 +10,7 @@ namespace Graphmatic.Interaction.Plotting
     /// <summary>
     /// Represents a set of parameters used to plot a <c>Graphmatic.Interaction.Plotting.IPlottable</c> to a <c>Graphmatic.Interaction.Plotting.Graph</c>.
     /// </summary>
+    [GraphmaticObject]
     public class PlottableParameters : IXmlConvertible
     {
         /// <summary>

@@ -12,6 +12,7 @@ namespace Graphmatic.Expressions.Tokens
     /// <summary>
     /// Represents a token whose value is obtained by applying a function to some other evaluated value.
     /// </summary>
+    [GraphmaticObject]
     public class FunctionToken : Token, IParsable
     {
         /// <summary>
@@ -99,7 +100,7 @@ namespace Graphmatic.Expressions.Tokens
         /// <returns>The serialized form of this Token.</returns>
         public override XElement ToXml()
         {
-            return new XElement("Function",
+            return new XElement("FunctionToken",
                 new XAttribute("Name", Text),
                 new XElement("Operand", Operand.ToXml()));
         }

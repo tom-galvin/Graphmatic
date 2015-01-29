@@ -12,6 +12,7 @@ namespace Graphmatic.Expressions
     /// <summary>
     /// Represents a mathematical expression, which can be composed of individual mathematical tokens and other sub-expressions, and be evaluated to form a graph.
     /// </summary>
+    [GraphmaticObject]
     public partial class Expression : List<Token>, IPaintable
     {
         /// <summary>
@@ -92,7 +93,7 @@ namespace Graphmatic.Expressions
             : this(parent)
         {
             AddRange(xml
-                .Select(x => x.Deserialize<Token>(SerializationExtensionMethods.TokenName)));
+                .Select(x => x.Deserialize<Token>()));
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ namespace Graphmatic.Interaction.Plotting
     /// <summary>
     /// Represents the axis pair on a graph.
     /// </summary>
+    [GraphmaticObject]
     public class GraphAxis : IPlottable, IXmlConvertible
     {
         /// <summary>

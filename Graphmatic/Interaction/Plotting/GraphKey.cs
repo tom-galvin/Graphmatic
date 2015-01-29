@@ -10,6 +10,7 @@ namespace Graphmatic.Interaction.Plotting
     /// <summary>
     /// Represents the key on a Graphmatic graph.
     /// </summary>
+    [GraphmaticObject]
     public class GraphKey : IPlottable, IXmlConvertible
     {
         /// <summary>

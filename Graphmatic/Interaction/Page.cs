@@ -13,6 +13,7 @@ namespace Graphmatic.Interaction
     /// <summary>
     /// Represents a page in a Graphmatic document, onto which objects can be plotted, and annotations can be placed.
     /// </summary>
+    [GraphmaticObject]
     public class Page : Resource
     {
         /// <summary>
@@ -76,7 +77,7 @@ namespace Graphmatic.Interaction
                 xml
                 .Element("Annotations")
                 .Elements()
-                .Select(x => x.Deserialize<Annotation>(SerializationExtensionMethods.AnnotationName)));
+                .Select(x => x.Deserialize<Annotation>()));
         }
 
         /// <summary>
