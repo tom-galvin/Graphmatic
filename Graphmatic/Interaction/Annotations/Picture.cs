@@ -50,9 +50,9 @@ namespace Graphmatic.Interaction.Annotations
             return baseElement;
         }
 
-        public override void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
+        public override void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, PlotResolution resolution)
         {
-            graphics.DrawImage(ImageData, GetScreenRectangle(page, graphSize, graphParams));
+            graphics.DrawImage(ImageData, GetScreenRectangle(page, graphSize));
         }
     }
 }

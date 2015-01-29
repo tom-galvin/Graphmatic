@@ -11,14 +11,23 @@ using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic.Interaction
 {
+    /// <summary>
+    /// Represents a plottable equation in a Graphmatic document.
+    /// </summary>
     public partial class Equation : Resource, IPlottable
     {
+        /// <summary>
+        /// Gets the <c>Graphmatic.Expressions.Expression representing this equation in an editable form.</c>
+        /// </summary>
         public Expression Expression
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets the parsed form of this expression that is better suited to repeated evaluation during the plotting process.
+        /// </summary>
         public ParseTreeNode ParseTree
         {
             get;
@@ -75,6 +84,9 @@ namespace Graphmatic.Interaction
             Parse();
         }
 
+        /// <summary>
+        /// Parses the Expression representing this Equation and stores the resulting parse tree into the <c>ParseTree</c> property.
+        /// </summary>
         public void Parse()
         {
             ParseTree = Expression.Parse(true);

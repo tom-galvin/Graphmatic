@@ -31,16 +31,17 @@ namespace Graphmatic.Interaction.Annotations
         /// <summary>
         /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Annotations.Drawing</c> class with the specified drawing data.
         /// </summary>
+        /// <param name="page">The page that this annotation will be on. This is used for correctly turning screen space drawing
+        /// data into graph space path data.</param>
         /// <param name="color">The color of the drawn annotation.</param>
         /// <param name="graphSize">The size of the graph on the screen, for turning screen-space data to graph space data.</param>
-        /// <param name="parameters">The parameters of the graph plotting, for turning screen-space data to graph space data.</param>
         /// <param name="screenPoints">The points on the screen describing the drawn annotation.</param>
         /// <param name="thickness">The thickness of the drawn annotation.</param>
         /// <param name="type">The pen type of the drawn annotation.</param>
-        public Drawing(Point[] screenPoints, Size graphSize, GraphParameters parameters, Color color, float thickness, DrawingType type)
+        public Drawing(Page page, Point[] screenPoints, Size graphSize, Color color, float thickness, DrawingType type)
         {
             Points = screenPoints
-                .Select(p => ToGraphSpace(p, graphSize, parameters))
+                .Select(p => ToGraphSpace(page, p, graphSize))
                 .ToArray();
 
             double
@@ -108,14 +109,14 @@ namespace Graphmatic.Interaction.Annotations
             return baseElement;
         }
 
-        public override void DrawSelectionIndicatorOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
+        public override void DrawSelectionIndicatorOnto(Page page, Graphics graphics, Size graphSize, PlotResolution resolution)
         {
             Point[] screenPoints = Points
                 .Select(p =>
                 {
                     int x, y;
                     page.Graph.ToImageSpace(
-                        graphSize, graphParams,
+                        graphSize,
                         p.Item1 * Width + X,
                         p.Item2 * Height + Y,
                         out x, out y);
@@ -133,18 +134,18 @@ namespace Graphmatic.Interaction.Annotations
                         (int)(Thickness * 1.3),
                         (int)(Thickness * 1.3));
                 }
-                base.DrawSelectionIndicatorOnto(page, graphics, graphSize, graphParams, resolution);
+                base.DrawSelectionIndicatorOnto(page, graphics, graphSize, resolution);
             }
         }
 
-        public override void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
+        public override void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, PlotResolution resolution)
         {
             Point[] screenPoints = Points
                 .Select(p =>
                 {
                     int x, y;
                     page.Graph.ToImageSpace(
-                        graphSize, graphParams,
+                        graphSize,
                         p.Item1 * Width + X,
                         p.Item2 * Height + Y,
                         out x, out y);
@@ -164,12 +165,12 @@ namespace Graphmatic.Interaction.Annotations
             }
         }
 
-        public override int DistanceToPointOnScreen(Page page, Size graphSize, GraphParameters graphParams, Point screenSelection)
+        public override int DistanceToPointOnScreen(Page page, Size graphSize, Point screenSelection)
         {
             // if selection is in resize node, it's ALWAYS in the boundaries of the selection
-            if (IsPointInResizeNode(page, graphSize, graphParams, screenSelection)) return -1;
+            if (IsPointInResizeNode(page, graphSize, screenSelection)) return -1;
 
-            var graphSpaceSelection = ToGraphSpace(screenSelection, graphSize, graphParams);
+            var graphSpaceSelection = ToGraphSpace(page, screenSelection, graphSize);
             double minimumSquareDistance = Double.PositiveInfinity;
             for (int i = 0; i < Points.Length; i++)
             {
@@ -184,24 +185,23 @@ namespace Graphmatic.Interaction.Annotations
             return distanceAsInteger;
         }
 
-        public override bool IsAnnotationInSelection(Page page, Size graphSize, GraphParameters graphParams, Rectangle screenSelection)
+        public override bool IsAnnotationInSelection(Page page, Size graphSize, Rectangle screenSelection)
         {
             for (int i = 0; i < Points.Length; i++)
             {
                 var point = Points[i];
                 int x, y;
-                page.Graph.ToImageSpace(graphSize, graphParams, X + point.Item1 * Width, Y + point.Item2 * Height, out x, out y);
+                page.Graph.ToImageSpace(graphSize, X + point.Item1 * Width, Y + point.Item2 * Height, out x, out y);
                 if (screenSelection.Contains(x, y)) return true;
             }
             return false;
         }
 
-        private Tuple<double, double> ToGraphSpace(Point p, Size graphSize, GraphParameters parameters)
+        private Tuple<double, double> ToGraphSpace(Page page, Point p, Size graphSize)
         {
-            double x = ((double)(p.X - graphSize.Width / 2) * parameters.HorizontalPixelScale) + parameters.CenterHorizontal;
-            double y = -((double)(p.Y - graphSize.Height / 2) * parameters.VerticalPixelScale) + parameters.CenterVertical;
-
-            return new Tuple<double,double>(x, y);
+            double horizontal, vertical;
+            page.Graph.ToScreenSpace(graphSize, p.X, p.Y, out horizontal, out vertical);
+            return new Tuple<double,double>(horizontal, vertical);
         }
 
         public void FlipHorizontal()

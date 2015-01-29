@@ -10,46 +10,77 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction
 {
+    /// <summary>
+    /// Represents a document, which may contain many Graphmatic resources.
+    /// </summary>
     public class Document : IXmlConvertible, IEnumerable<Resource>
     {
+        /// <summary>
+        /// The resources contained in this document, indexed by their GUIDs.
+        /// </summary>
         private Dictionary<Guid, Resource> Resources;
 
+        /// <summary>
+        /// Gets the author of this document.
+        /// This is set when the document is first created.
+        /// </summary>
         public string Author
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets the date and time at which this document was first created.
+        /// </summary>
         public DateTime CreationDate
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets the version string of the version of Graphmatic used to originally
+        /// create this document, used to aid in error diagnosis for the end user.
+        /// </summary>
         public string OriginalVersion
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets a list containing the order of pages in this document.
+        /// </summary>
         public List<Page> PageOrder
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets the ID of this document, used to uniquely identify the document (for
+        /// example in the loading and saving of backup files.)
+        /// </summary>
         public Guid Guid
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets the resource currently being edited by the user.
+        /// </summary>
         public Resource CurrentResource
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets the file name of the backup document to save, which is in the format
+        /// <code>&lt;GUID&gt;.gmd</code>
+        /// </summary>
         public string BackupFileName
         {
             get
@@ -73,6 +104,11 @@ namespace Graphmatic.Interaction
             Guid = Guid.NewGuid();
         }
 
+        /// <summary>
+        /// Initializes the descriptive attributes and properties of this document from the given XML data, or throwing
+        /// an <c>IOException</c> if the data contained in the XML is invalid.
+        /// </summary>
+        /// <param name="xml">The serialized XML data representing this document.</param>
         private void InitializeAttributes(XElement xml)
         {
             if (xml.Name != "Document")
@@ -156,18 +192,23 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Gets a resource contained within this document.
+        /// </summary>
+        /// <param name="guid">The GUID of the resource to get from the document.</param>
+        /// <returns>The resource with the GUID contained in <paramref name="guid"/>.</returns>
         public Resource this[Guid guid]
         {
             get
             {
                 return Resources[guid];
             }
-            set
-            {
-                Resources[guid] = value;
-            }
         }
 
+        /// <summary>
+        /// Adds a resource to this document.
+        /// </summary>
+        /// <param name="resource">The resource to add to the document.</param>
         public void Add(Resource resource)
         {
             Resources.Add(resource.Guid, resource);
@@ -177,25 +218,44 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Removes a resource from this document.
+        /// </summary>
+        /// <param name="guid">The GUID of the resource to remove.</param>
         public void Remove(Guid guid)
+        {
+            Remove(Resources[guid]);
+        }
+
+        /// <summary>
+        /// Removes a resource from this document.
+        /// </summary>
+        /// <param name="resource">The resource to remove.</param>
+        public void Remove(Resource resource)
         {
             foreach (Resource otherResource in Resources.Values)
             {
-                otherResource.ResourceModified(Resources[guid], ResourceModifyType.Remove);
+                otherResource.ResourceModified(resource, ResourceModifyType.Remove);
             }
-            Resources.Remove(guid);
+            Remove(resource.Guid);
         }
 
+        /// <summary>
+        /// Determines whether a resource exists in this document with the specified GUID.
+        /// </summary>
+        /// <param name="guid">The GUID to check for in this document.</param>
+        /// <returns>Returns true if a resource exists in this document with the GUID <paramref name="guid"/>;
+        /// false otherwise.</returns>
         public bool Contains(Guid guid)
         {
             return Resources.ContainsKey(guid);
         }
 
-        public void Remove(Resource resource)
-        {
-            Remove(resource.Guid);
-        }
-
+        /// <summary>
+        /// Saves this document to the file system at the given <paramref name="path"/>.
+        /// </summary>
+        /// <param name="path">The path to save the document to.</param>
+        /// <param name="compressed">Whether the document should be compressed with Gzip or not.</param>
         public void Save(string path, bool compressed)
         {
             Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write);
@@ -210,6 +270,12 @@ namespace Graphmatic.Interaction
             stream.Close();
         }
 
+        /// <summary>
+        /// Opens a document from the file system, optionally decompressing it in the process.
+        /// </summary>
+        /// <param name="path">The path to the file representing the document to be opened.</param>
+        /// <param name="compressed">Whether the file should be decompressed with Gzip or not.</param>
+        /// <returns>Returns the deserialized and loaded Document representing the file at <paramref name="path"/>.</returns>
         public static Document Open(string path, bool compressed)
         {
             Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
@@ -256,6 +322,12 @@ namespace Graphmatic.Interaction
             return ((IEnumerable)Resources.Values).GetEnumerator();
         }
 
+        /// <summary>
+        /// Adds a page to the list describing the order of pages in the document.
+        /// </summary>
+        /// <param name="page">The page to add.</param>
+        /// <param name="after">The page to add <paramref name="page"/> after, or <c>null</c> to add
+        /// the page to the end of the order.</param>
         public void AddPageToPageOrder(Page page, Page after = null)
         {
             if (PageOrder.IndexOf(page) == -1)
@@ -269,6 +341,10 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Removes a page from the list describing the order of pages in the document.
+        /// </summary>
+        /// <param name="page">The page to remove.</param>
         public void RemovePageFromPageOrder(Page page)
         {
             if (PageOrder.IndexOf(page) != -1)
@@ -281,6 +357,11 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Swaps the order of two pages in the list describing the order of pages in the document.
+        /// </summary>
+        /// <param name="page1">The pages to swap.</param>
+        /// <param name="page2">The pages to swap.</param>
         public void SwapPages(Page page1, Page page2)
         {
             int page1Index = PageOrder.IndexOf(page1),
@@ -319,6 +400,12 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Notify resources in the document that a modification has taken place. This allows certain resources
+        /// (such as pages) to update any respective user interfaces upon the event that a resource contained
+        /// within those resources is modified.
+        /// </summary>
+        /// <param name="resource">The resource which was modified.</param>
         public void NotifyResourceModified(Resource resource)
         {
             foreach (Resource otherResource in Resources.Values)

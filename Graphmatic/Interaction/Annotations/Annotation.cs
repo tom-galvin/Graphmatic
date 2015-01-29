@@ -75,42 +75,42 @@ namespace Graphmatic.Interaction.Annotations
                 new XElement("Color", Color.ToXmlString()));
         }
 
-        protected Rectangle GetScreenRectangle(Page page, Size graphSize, GraphParameters graphParams)
+        protected Rectangle GetScreenRectangle(Page page, Size graphSize)
         {
             int x1, y1, x2, y2;
 
-            page.Graph.ToImageSpace(graphSize, graphParams, X, Y, out x1, out y2);
-            page.Graph.ToImageSpace(graphSize, graphParams, X + Width, Y + Height, out x2, out y1);
+            page.Graph.ToImageSpace(graphSize, X, Y, out x1, out y2);
+            page.Graph.ToImageSpace(graphSize, X + Width, Y + Height, out x2, out y1);
             return new Rectangle(x1, y1, x2 - x1, y2 - y1);
         }
 
-        public bool IsPointInResizeNode(Page page, Size graphSize, GraphParameters graphParams, Point point)
+        public bool IsPointInResizeNode(Page page, Size graphSize, Point point)
         {
-            Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
+            Rectangle screenRectangle = GetScreenRectangle(page, graphSize);
             int manhattanDistance =
                 Math.Abs(screenRectangle.X + screenRectangle.Width - point.X) +
                 Math.Abs(screenRectangle.Y - point.Y);
             return manhattanDistance < 9;
         }
 
-        public virtual void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
+        public virtual void DrawAnnotationOnto(Page page, Graphics graphics, Size graphSize, PlotResolution resolution)
         {
-            Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
+            Rectangle screenRectangle = GetScreenRectangle(page, graphSize);
             using (Brush annotationBrush = new SolidBrush(Color))
             {
                 graphics.FillRectangle(annotationBrush, screenRectangle);
             }
         }
 
-        public virtual void DrawSelectionIndicatorOnto(Page page, Graphics graphics, Size graphSize, GraphParameters graphParams, PlotResolution resolution)
+        public virtual void DrawSelectionIndicatorOnto(Page page, Graphics graphics, Size graphSize, PlotResolution resolution)
         {
-            Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
+            Rectangle screenRectangle = GetScreenRectangle(page, graphSize);
             using (Pen selectBoxPen = new Pen(Color.Red, 2f))
             {
-                Brush resizeNotchBrush = Brushes.Yellow;
+                Brush resizeNodeBrush = Brushes.Yellow;
                 selectBoxPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
                 graphics.DrawRectangle(selectBoxPen, screenRectangle);
-                graphics.FillEllipse(resizeNotchBrush,
+                graphics.FillEllipse(resizeNodeBrush,
                     screenRectangle.X + screenRectangle.Width - 4,
                     screenRectangle.Y - 4,
                     9, 9);
@@ -121,18 +121,18 @@ namespace Graphmatic.Interaction.Annotations
             }
         }
 
-        public virtual bool IsAnnotationInSelection(Page page, Size graphSize, GraphParameters graphParams, Rectangle screenSelection)
+        public virtual bool IsAnnotationInSelection(Page page, Size graphSize, Rectangle screenSelection)
         {
-            Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
+            Rectangle screenRectangle = GetScreenRectangle(page, graphSize);
             return screenRectangle.IntersectsWith(screenSelection);
         }
 
-        public virtual int DistanceToPointOnScreen(Page page, Size graphSize, GraphParameters graphParams, Point screenSelection)
+        public virtual int DistanceToPointOnScreen(Page page, Size graphSize, Point screenSelection)
         {
             // if selection is in resize node, it's ALWAYS in the boundaries of the selection
-            if (IsPointInResizeNode(page, graphSize, graphParams, screenSelection)) return -1;
+            if (IsPointInResizeNode(page, graphSize, screenSelection)) return -1;
 
-            Rectangle screenRectangle = GetScreenRectangle(page, graphSize, graphParams);
+            Rectangle screenRectangle = GetScreenRectangle(page, graphSize);
             int distFromBottom = screenSelection.Y - screenRectangle.Bottom;
             int distFromTop = screenRectangle.Top - screenSelection.Y;
             int distFromLeft = screenRectangle.Left - screenSelection.X;

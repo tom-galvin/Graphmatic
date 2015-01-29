@@ -7,8 +7,14 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction.Plotting
 {
+    /// <summary>
+    /// Represents a set of parameters used to plot a <c>Graphmatic.Interaction.Plotting.IPlottable</c> to a <c>Graphmatic.Interaction.Plotting.Graph</c>.
+    /// </summary>
     public class PlottableParameters : IXmlConvertible
     {
+        /// <summary>
+        /// The color that this <c>IPlottable</c> will be plotted in on the screen.
+        /// </summary>
         public Color PlotColor
         {
             get;

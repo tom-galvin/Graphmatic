@@ -7,61 +7,69 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction.Plotting
 {
+    /// <summary>
+    /// Represents a visual graph onto which <c>Graphmatic.Interaction.Plotting.IPlottable</c> implementations
+    /// can be plotted.
+    /// </summary>
     public class Graph : IEnumerable<IPlottable>, IXmlConvertible
     {
+        /// <summary>
+        /// The resources plotted on this graph.
+        /// </summary>
         private Dictionary<IPlottable, PlottableParameters> Resources;
+
+        /// <summary>
+        /// Resources to be plotted on this graph that haven't yet been resolved
+        /// after deserialization.
+        /// </summary>
         private Dictionary<Guid, PlottableParameters> UnresolvedResources;
 
+        /// <summary>
+        /// Gets the parameter set used to plot this graph onto the screen.
+        /// </summary>
         public GraphParameters Parameters
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets the set of axes on the graph.
+        /// This is plotted as a resource like all other <c>IPlottable</c>s.
+        /// </summary>
         public GraphAxis Axes
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Gets the key on the graph.
+        /// This is plotted as a resource like all other <c>IPlottable</c>s.
+        /// </summary>
         public GraphKey Key
         {
             get;
             protected set;
         }
 
-        protected Color AxisColor
-        {
-            get
-            {
-                return Resources[Axes].PlotColor;
-            }
-            set
-            {
-                Resources[Axes].PlotColor = value;
-            }
-        }
-
-        protected Color KeyTextColor
-        {
-            get
-            {
-                return Resources[Key].PlotColor;
-            }
-            set
-            {
-                Resources[Key].PlotColor = value;
-            }
-        }
-
+        /// <summary>
+        /// Gets the <c>PlottableParameters</c> used to plot a resource contained within this graph.<para/>
+        /// This returns the value of <c>GetParameters(</c><paramref name="plottable"/><c>)</c>.
+        /// </summary>
+        /// <param name="plottable">The <c>IPlottable</c> for which to get the drawing parameters.</param>
         public PlottableParameters this[IPlottable plottable]
         {
             get
             {
-                return Resources[plottable];
+                return GetParameters(plottable);
             }
         }
 
+        /// <summary>
+        /// Fired whenever a resource is added, changed or removed from the Graph. Whether this event is fired
+        /// when a resource is changed depends on the specific implementation of that resource.
+        /// </summary>
         public event EventHandler Update;
 
         /// <summary>
@@ -134,6 +142,11 @@ namespace Graphmatic.Interaction.Plotting
             }
         }
 
+        /// <summary>
+        /// Adds a resource to this Graph with the given drawing parameters.
+        /// </summary>
+        /// <param name="plottable">The <c>IPlottable</c> to add to the graph.</param>
+        /// <param name="parameters">The parameters to use for plotting the object.</param>
         public void Add(IPlottable plottable, PlottableParameters parameters)
         {
             if (Resources.ContainsKey(plottable))
@@ -146,7 +159,11 @@ namespace Graphmatic.Interaction.Plotting
                 OnUpdate();
             }
         }
-
+        
+        /// <summary>
+        /// Initialize a new empty instance of the <c>Graphmatic.Interaction.Plotting.Graph</c> class with the given parameter set.
+        /// </summary>
+        /// <param name="graphParameters">The parameters to use for plotting the graph.</param>
         public PlottableParameters GetParameters(IPlottable plottable)
         {
             if (Resources.ContainsKey(plottable))
@@ -159,6 +176,10 @@ namespace Graphmatic.Interaction.Plotting
             }
         }
 
+        /// <summary>
+        /// Removes <paramref name="plottable"/> from this graph.
+        /// </summary>
+        /// <param name="plottable">The thing to remove from this graph.</param>
         public void Remove(IPlottable plottable)
         {
             if (Resources.ContainsKey(plottable))
@@ -172,24 +193,28 @@ namespace Graphmatic.Interaction.Plotting
             }
         }
 
+        /// <summary>
+        /// Removes all resources from the graph.
+        /// </summary>
         public void Clear()
         {
             Resources.Clear();
         }
 
+        /// <summary>
+        /// Draws this Graph onto the specified GDI+ drawing surface.
+        /// </summary>
+        /// <param name="g">The GDI+ drawing surface to draw onto.</param>
+        /// <param name="size">The size of the GDI+ drawing surface.</param>
+        /// <param name="resolution">The resolution to plot with. Coarser resolutions may allow
+        /// the graph to be plotted faster at the expense of visual accuracy, though this is
+        /// dependent on the implementations of the resources on the Graph.</param>
         public void Draw(Graphics g, Size size, PlotResolution resolution)
         {
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
-            if (resolution == PlotResolution.View && false)
-            {
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-            }
-            else
-            {
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
-                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed;
-            }
+            
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed;
 
             float errorX = 5, errorY = 0;
             using (Font errorFont = new Font(SystemFonts.MessageBoxFont.FontFamily, 20f, FontStyle.Bold))
@@ -206,7 +231,7 @@ namespace Graphmatic.Interaction.Plotting
                     {
                         try
                         {
-                            plottable.Key.PlotOnto(this, g, size, plottable.Value, Parameters, resolution);
+                            plottable.Key.PlotOnto(this, g, size, plottable.Value, resolution);
                         }
                         catch (Exception ex)
                         {
@@ -241,12 +266,34 @@ namespace Graphmatic.Interaction.Plotting
             }
         }
 
-        public void ToImageSpace(Size graphSize, GraphParameters parameters, double horizontal, double vertical, out int x, out int y)
+        /// <summary>
+        /// Converts a point in graph space to a location in screen (display) space.
+        /// </summary>
+        /// <param name="graphSize">The size of this graph on the screen.</param>
+        /// <param name="horizontal">The horizontal co-ordinate in screen space.</param>
+        /// <param name="vertical">The vertical co-ordinate in screen space.</param>
+        /// <param name="x">The variable in which to store the horizontal co-ordinate in graph space.</param>
+        /// <param name="y">The variable in which to store the vertical co-ordinate in graph space.</param>
+        public void ToImageSpace(Size graphSize, double horizontal, double vertical, out int x, out int y)
         {
             x = graphSize.Width / 2 +
-                (int)((horizontal - parameters.CenterHorizontal) / parameters.HorizontalPixelScale);
+                (int)((horizontal - Parameters.CenterHorizontal) / Parameters.HorizontalPixelScale);
             y = graphSize.Height / 2 -
-                (int)((vertical - parameters.CenterVertical) / parameters.VerticalPixelScale);
+                (int)((vertical - Parameters.CenterVertical) / Parameters.VerticalPixelScale);
+        }
+
+        /// <summary>
+        /// Converts a point in screen (display) space to a location in graph space.
+        /// </summary>
+        /// <param name="graphSize">The size of this graph on the screen.</param>
+        /// <param name="x">The horizontal co-ordinate in graph space.</param>
+        /// <param name="y">The vertical co-ordinate in graph space.</param>
+        /// <param name="horizontal">The variable in which to store the horizontal co-ordinate in screen space.</param>
+        /// <param name="vertical">The variable in which to store the vertical co-ordinate in screen space.</param>
+        public void ToScreenSpace(Size graphSize, int x, int y, out double horizontal, out double vertical)
+        {
+            horizontal = Parameters.HorizontalPixelScale * (x - graphSize.Width / 2) + Parameters.CenterHorizontal;
+            vertical = Parameters.VerticalPixelScale * -(y - graphSize.Height / 2) + Parameters.CenterVertical;
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -300,6 +347,12 @@ namespace Graphmatic.Interaction.Plotting
             }
         }
 
+        /// <summary>
+        /// Called when another resource in the Document containing this resource is modified.
+        /// This allows removed resource to also be removed from the Graph.
+        /// </summary>
+        /// <param name="resource">The other resource which was modified.</param>
+        /// <param name="type">The type of resource modification which took place.</param>
         public void ResourceModified(Resource resource, ResourceModifyType type)
         {
             if (resource is IPlottable)

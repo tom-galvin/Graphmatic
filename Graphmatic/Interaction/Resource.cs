@@ -182,6 +182,11 @@ namespace Graphmatic.Interaction
                 new XAttribute("ID", Guid));
         }
 
+        /// <summary>
+        /// Converts this Resource to an appropriate string representation.<para/>
+        /// In most cases, this just returns the Resource name.
+        /// </summary>
+        /// <returns>The name of this Resource.</returns>
         public override string ToString()
         {
             return Name;

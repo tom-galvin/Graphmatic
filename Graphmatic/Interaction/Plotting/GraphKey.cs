@@ -7,6 +7,9 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction.Plotting
 {
+    /// <summary>
+    /// Represents the key on a Graphmatic graph.
+    /// </summary>
     public class GraphKey : IPlottable, IXmlConvertible
     {
         /// <summary>
@@ -26,42 +29,54 @@ namespace Graphmatic.Interaction.Plotting
 
         }
 
-        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, PlotResolution resolution)
+        /// <summary>
+        /// Plots this IPlottable onto a given graph. The specific method of plotting will depend on the implementation of the
+        /// IPlottable.
+        /// </summary>
+        /// <param name="graph">The Graph to plot this IPlottable onto.</param>
+        /// <param name="graphics">The GDI+ drawing surface to use for plotting this IPlottable.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the graph's parameters.</param>
+        /// <param name="plotParams">The parameters used to plot this IPlottable.</param>
+        /// <param name="resolution">The plotting resolution to use. Using a coarser resolution may make the plotting
+        /// process faster, and is thus more suitable when the display is being resized or moved.</param>
+        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, PlotResolution resolution)
         {
             using (Brush brush = new SolidBrush(plotParams.PlotColor))
             {
                 float currentY = graphSize.Height;
                 int offset = 5;
+
                 foreach (IPlottable plot in graph.Reverse())
                 {
-                    if (plot is Resource)
+                    if (plot is Resource) // only plot Resources, so we don't plot the key on the key
                     {
                         PlottableParameters parameters = graph[plot];
-                        var resource = plot as Resource;
+                        Resource resource = plot as Resource;
                         string name = resource.Name;
-                        var size = graphics.MeasureString(name, SystemFonts.DefaultFont);
-                        currentY -= size.Height + offset;
-                        float resourceX = graphSize.Width - offset - size.Width;
+                        SizeF textSize = graphics.MeasureString(name, SystemFonts.DefaultFont);
+                        currentY -= textSize.Height + offset;
+                        float resourceX = graphSize.Width - offset - textSize.Width;
                         graphics.DrawString(name, SystemFonts.DefaultFont, brush, resourceX, currentY);
 
-                        using (Pen resourcePen = new Pen(parameters.PlotColor))
+                        using (Pen resourcePen = new Pen(parameters.PlotColor)) // plot in the color of the resource
                         {
                             if (resource is DataSet)
-                            {
+                            { // draw a cross for a data set
                                 resourcePen.Width = DataSet.DataPointPenWidth;
                                 graphics.DrawLine(resourcePen,
-                                    new PointF(resourceX - DataSet.DataPointCrossSize - 5, currentY - DataSet.DataPointCrossSize + size.Height / 2),
-                                    new PointF(resourceX + DataSet.DataPointCrossSize - 5, currentY + DataSet.DataPointCrossSize + size.Height / 2));
+                                    new PointF(resourceX - DataSet.DataPointCrossSize - 5, currentY - DataSet.DataPointCrossSize + textSize.Height / 2),
+                                    new PointF(resourceX + DataSet.DataPointCrossSize - 5, currentY + DataSet.DataPointCrossSize + textSize.Height / 2));
                                 graphics.DrawLine(resourcePen,
-                                    new PointF(resourceX - DataSet.DataPointCrossSize - 5, currentY + DataSet.DataPointCrossSize + size.Height / 2),
-                                    new PointF(resourceX + DataSet.DataPointCrossSize - 5, currentY - DataSet.DataPointCrossSize + size.Height / 2));
+                                    new PointF(resourceX - DataSet.DataPointCrossSize - 5, currentY + DataSet.DataPointCrossSize + textSize.Height / 2),
+                                    new PointF(resourceX + DataSet.DataPointCrossSize - 5, currentY - DataSet.DataPointCrossSize + textSize.Height / 2));
                             }
                             else if (resource is Equation)
-                            {
+                            { // draw a line for an equation
                                 resourcePen.Width = Equation.EquationPenWidth;
                                 graphics.DrawLine(resourcePen,
-                                    new PointF(resourceX - 2, currentY + size.Height / 2),
-                                    new PointF(resourceX - 15, currentY + size.Height / 2));
+                                    new PointF(resourceX - 2, currentY + textSize.Height / 2),
+                                    new PointF(resourceX - 15, currentY + textSize.Height / 2));
                             }
                         }
                     }
@@ -94,7 +109,10 @@ namespace Graphmatic.Interaction.Plotting
         {
         }
 
-
+        /// <summary>
+        /// Always returns true, as the key is not affected by the variables being plotted.
+        /// </summary>
+        /// <returns>Returns true.</returns>
         public bool CanPlot(char variable1, char variable2)
         {
             return true;

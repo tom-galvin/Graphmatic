@@ -6,38 +6,59 @@ using System.Xml.Linq;
 
 namespace Graphmatic.Interaction.Plotting
 {
+    /// <summary>
+    /// Represents a set of parameters used to plot a <c>Graphmatic.Interaction.Plotting.Graph</c> to a display.
+    /// </summary>
     public class GraphParameters : IXmlConvertible
     {
+        /// <summary>
+        /// Gets or sets the offset of the horizontal axis of the graph from the center of the screen in graph space.
+        /// </summary>
         public double CenterHorizontal
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the offset of the vertical axis of the graph from the center of the screen in graph space.
+        /// </summary>
         public double CenterVertical
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the horizontal interval each pixel represents in graph space.
+        /// </summary>
         public double HorizontalPixelScale
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the vertical interval each pixel represents in graph space.
+        /// </summary>
         public double VerticalPixelScale
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the variable plotted on the horizontal axis.
+        /// </summary>
         public char HorizontalAxis
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the variable plotted on the vertical axis.
+        /// </summary>
         public char VerticalAxis
         {
             get;

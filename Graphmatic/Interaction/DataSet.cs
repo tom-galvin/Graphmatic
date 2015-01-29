@@ -192,6 +192,12 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Adds a variable to this data set, and adjusts existing data points accordingly.
+        /// </summary>
+        /// <param name="index">The index in the order of variable to insert the new variable.</param>
+        /// <param name="variableName">The name of the variable to insert.</param>
+        /// <param name="defaultValue">The default value of the variable in existing data points.</param>
         public void AddVariable(int index, char variableName, double defaultValue)
         {
             Variables = Insert(Variables, index, variableName);
@@ -201,6 +207,11 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Removes a variable from the data set, removing its value from existing data points accordingly.
+        /// This operation is destructive, so be careful.
+        /// </summary>
+        /// <param name="index">The index of the variable to remove.</param>
         public void RemoveVariable(int index)
         {
             Variables = Remove(Variables, index);
@@ -210,6 +221,11 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Swaps the order of two variables in the data set, and adjusts existing data points accordingly.
+        /// </summary>
+        /// <param name="index1">The indices of the two variables to swap.</param>
+        /// <param name="index2">The indices of the two variables to swap.</param>
         public void SwapVariables(int index1, int index2)
         {
             Variables = Swap(Variables, index1, index2);
@@ -251,6 +267,10 @@ namespace Graphmatic.Interaction
             return baseElement;
         }
 
+        /// <summary>
+        /// Adds a data point to the data set.
+        /// </summary>
+        /// <param name="data">The data set to add, as an array of doubles.</param>
         public void Add(params double[] data)
         {
             if (data.Length != Variables.Length)
@@ -263,16 +283,30 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Removes a data point from the data set.
+        /// This operation is destructive, so be careful.
+        /// </summary>
+        /// <param name="index">The zero-based index in the data set of the data point to remove.</param>
         public void Remove(int index)
         {
             Data.RemoveAt(index);
         }
 
+        /// <summary>
+        /// Removes all data points from the data set.
+        /// This operation is destructive, so be careful.
+        /// </summary>
         public void Clear()
         {
             Data.Clear();
         }
 
+        /// <summary>
+        /// Sets the internal list containing all of the data points to a new list. This is used when the 
+        /// data set is edited by a Windows Forms control so that the data set can be updated more efficiently.
+        /// </summary>
+        /// <param name="data">The list containing the new data representing the data set in memory.</param>
         internal void Set(List<double[]> data)
         {
             Data = data;
@@ -288,6 +322,10 @@ namespace Graphmatic.Interaction
             return ((IEnumerable)Data).GetEnumerator();
         }
 
+        /// <summary>
+        /// Returns the zero-based index of a variable in the order of variables in this data set.
+        /// </summary>
+        /// <param name="variable">The variable for which to find the index.</param>
         private int IndexOfVariable(char variable)
         {
             for (int i = 0; i < Variables.Length; i++)
@@ -297,11 +335,27 @@ namespace Graphmatic.Interaction
             }
             return -1;
         }
-
+        
+        /// <summary>
+        /// The width of the crosses used to plot data sets onto a graph.
+        /// </summary>
         public const float DataPointPenWidth = 2f;
+
+        /// <summary>
+        /// The size of the strokes used to draw the crosses for plotting data sets on a graph.
+        /// </summary>
         public const int DataPointCrossSize = 3;
 
-        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, GraphParameters graphParams, PlotResolution resolution)
+        /// <summary>
+        /// Plots this DataSet onto <paramref name="graph"/>.
+        /// </summary>
+        /// <param name="graph">The Graph to plot this IPlottable onto.</param>
+        /// <param name="graphics">The GDI+ drawing surface to use for plotting this IPlottable.</param>
+        /// <param name="graphSize">The size of the Graph on the screen. This is a property of the display rather than the
+        /// graph and is thus not included in the graph's parameters.</param>
+        /// <param name="plotParams">The parameters used to plot this IPlottable.</param>
+        /// <param name="resolution">The plotting resolution to use. This does not have an effect for data sets.</param>
+        public void PlotOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, PlotResolution resolution)
         {
             if (resolution == PlotResolution.Resize) return;
 
@@ -328,7 +382,7 @@ namespace Graphmatic.Interaction
 
                     int graphX, graphY;
                     graph.ToImageSpace(
-                        graphSize, graphParams,
+                        graphSize,
                         horizontal, vertical,
                         out graphX, out graphY);
 
@@ -338,6 +392,14 @@ namespace Graphmatic.Interaction
             }
         }
 
+        /// <summary>
+        /// Determines whether this plottable object can be plotted using the specific given variables.
+        /// This returns true if both <paramref name="variable1"/> and <paramref name="variable2"/> exist in
+        /// the list of variables contained in this data set, which is done by calling <c>IndexOfVariable</c>.
+        /// </summary>
+        /// <param name="variable1">A variable plotted on an axis of a Graph.</param>
+        /// <param name="variable2">A variable plotted on an axis of a Graph.</param>
+        /// <returns>Returns whether this data set can be plotted over the given variables.</returns>
         public bool CanPlot(char variable1, char variable2)
         {
             return
