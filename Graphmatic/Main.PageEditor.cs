@@ -394,7 +394,7 @@ namespace Graphmatic
             // Draw annotations
             foreach (Annotation annotation in CurrentPage.Annotations)
             {
-                annotation.DrawAnnotationOnto(CurrentPage, g, size, CurrentPage.Graph.Parameters, resolution);
+                annotation.DrawAnnotationOnto(CurrentPage, g, size, resolution);
             }
 
             // Draw selection boxes around selected annotations, if any
@@ -402,7 +402,7 @@ namespace Graphmatic
             {
                 foreach (Annotation annotation in SelectedAnnotations)
                 {
-                    annotation.DrawSelectionIndicatorOnto(CurrentPage, g, size, CurrentPage.Graph.Parameters, resolution);
+                    annotation.DrawSelectionIndicatorOnto(CurrentPage, g, size, resolution);
                 }
             }
         }
@@ -744,7 +744,7 @@ namespace Graphmatic
         {
             var toErase = CurrentPage.Annotations
                 .OfType<Drawing>()
-                .Where(a => a.DistanceToPointOnScreen(CurrentPage, pageDisplay.ClientSize, CurrentPage.Graph.Parameters, MouseLocation) <= (int)(PenWidth))
+                .Where(a => a.DistanceToPointOnScreen(CurrentPage, pageDisplay.ClientSize, MouseLocation) <= (int)(PenWidth))
                 .ToArray();
             foreach (var annotation in toErase)
             {
@@ -843,7 +843,7 @@ namespace Graphmatic
                 // If we've already selected some items, and the cursor clicks somewhere within
                 // one of those items, we assume the user is trying to move those items
                 var selection = SelectedAnnotations
-                    .Where(a => a.DistanceToPointOnScreen(CurrentPage, pageDisplay.ClientSize, CurrentPage.Graph.Parameters, MouseStart) <= 4);
+                    .Where(a => a.DistanceToPointOnScreen(CurrentPage, pageDisplay.ClientSize, MouseStart) <= 4);
                 int count = selection.Count();
                 if (count > 0)
                 {
@@ -852,7 +852,7 @@ namespace Graphmatic
                     if (count == 1)
                     {
                         var resourceToResize = selection.First();
-                        if (resourceToResize.IsPointInResizeNode(CurrentPage, pageDisplay.ClientSize, CurrentPage.Graph.Parameters, MouseLocation))
+                        if (resourceToResize.IsPointInResizeNode(CurrentPage, pageDisplay.ClientSize, MouseLocation))
                         {
                             IsResizing = true;
                         }
@@ -956,9 +956,9 @@ namespace Graphmatic
             }
 
             Drawing drawing = new Drawing(
+                CurrentPage,
                 CurrentlyDrawnPath.ToArray(),
                 pageDisplay.ClientSize,
-                CurrentPage.Graph.Parameters,
                 PenColor,
                 PenWidth,
                 CurrentPageTool == PageTool.Highlighter ?
@@ -994,7 +994,6 @@ namespace Graphmatic
                     .Where(a => a.IsAnnotationInSelection(
                         CurrentPage,
                         pageDisplay.ClientSize,
-                        CurrentPage.Graph.Parameters,
                         SelectionBox)));
             }
             else
@@ -1008,7 +1007,6 @@ namespace Graphmatic
                         a.DistanceToPointOnScreen(
                             CurrentPage,
                             pageDisplay.ClientSize,
-                            CurrentPage.Graph.Parameters,
                             SelectionBox.Location)))
                     .Where(t => t.Item2 <= 4)
                     .OrderBy(t => t.Item2);
