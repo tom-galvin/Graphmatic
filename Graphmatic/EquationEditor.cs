@@ -13,19 +13,31 @@ using Graphmatic.Interaction.Plotting;
 
 namespace Graphmatic
 {
+    /// <summary>
+    /// Represents a form that is used for editing an Equation object.
+    /// </summary>
     public partial class EquationEditor : Form
     {
+        /// <summary>
+        /// Gets the equation that is to be edited.
+        /// </summary>
         public Equation Equation
         {
             get;
             protected set;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <c>EquationEditor</c> form with a new equation.
+        /// </summary>
         public EquationEditor()
             : this(new Equation())
         {
         }
 
+        /// <summary>
+        /// Refreshes the expression preview display, parsing the Equation if necessary.
+        /// </summary>
         private void RefreshDisplay()
         {
             if (Equation.ParseTree != null)
@@ -35,6 +47,10 @@ namespace Graphmatic
             expressionDisplay.Refresh();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <c>EquationEditor</c> form with a new equation.
+        /// </summary>
+        /// <param name="equation">The equation that is to be edited.</param>
         public EquationEditor(Equation equation)
         {
             InitializeComponent();
@@ -64,6 +80,10 @@ namespace Graphmatic
                 RefreshDisplay();
         }
 
+        /// <summary>
+        /// Verification is handled by this form rather than the expression editor, as the expression editor is just for the
+        /// expression rather than the equation object as a whole.
+        /// </summary>
         private void inputWindow_Verify(object sender, ExpressionVerificationEventArgs e)
         {
             try

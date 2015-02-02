@@ -34,6 +34,11 @@ namespace Graphmatic
             protected set;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Graphmatic.CreateVariableDialog"/> with the specified default character and key behaviour.
+        /// </summary>
+        /// <param name="defaultChar">The default character to display in the dialog.</param>
+        /// <param name="oneKey">True if the dialog should close immediately after a key is pressed, false otherwise.</param>
         private EnterVariableDialog(char defaultChar, bool oneKey)
         {
             InitializeComponent();
