@@ -10,19 +10,32 @@ using Graphmatic.Interaction;
 
 namespace Graphmatic
 {
+    /// <summary>
+    /// Represents a dialog used to edit some of the generic properties of resources.
+    /// </summary>
     public partial class ResourcePropertiesEditor : Form
     {
+        /// <summary>
+        /// Gets or sets the <see cref="Graphmatic.Interaction.Resource"/> that this dialog is editing the properties of.
+        /// </summary>
         public Resource Resource
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Initializes a new ResourcePropertiesEditor form.
+        /// </summary>
         public ResourcePropertiesEditor()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initializes a new ResourcePropertiesEditor form, with the specified resource to edit the properties of.
+        /// </summary>
+        /// <param name="resource">The <see cref="Graphmatic.Interaction.Resource"/> that this dialog is to edit the properties of.</param>
         public ResourcePropertiesEditor(Resource resource)
             : this()
         {
@@ -40,27 +53,18 @@ namespace Graphmatic
             pictureBoxIcon.Image = resource.GetResourceIcon(true);
         }
 
+        // we don't want the accept button to be pressed when you hit Enter in the description box,
+        // so change the form's AcceptButton while the user is editing description
         private void ResourcePropertiesEditor_Load(object sender, EventArgs e)
         {
             richTextBoxDescription.Enter += (sender1, e1) => AcceptButton = null;
             richTextBoxDescription.Leave += (sender1, e1) => AcceptButton = buttonOK;
         }
 
+        // save the author name when the text box is edited
         private void textBoxAuthor_TextChanged(object sender, EventArgs e)
         {
             Resource.Author = textBoxAuthor.Text;
-        }
-
-        private void textBoxCreationDate_TextChanged(object sender, EventArgs e)
-        {
-            DateTime dateTime;
-            if (DateTime.TryParse(textBoxCreationDate.Text, out dateTime))
-                Resource.CreationDate = dateTime;
-        }
-
-        private void textBoxID_TextChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -69,18 +73,23 @@ namespace Graphmatic
         }
 
         #region Formatting Stuff
-        private void XorStyle(FontStyle style)
+        /// <summary>
+        /// Toggles <paramref name="style"/> in the current font style.
+        /// </summary>
+        /// <param name="style">The style to toggle in the current form.</param>
+        private void ToggleStyle(FontStyle style)
         {
             richTextBoxDescription.SelectionFont = new Font(
                 richTextBoxDescription.SelectionFont,
-                richTextBoxDescription.SelectionFont.Style ^ style);
+                richTextBoxDescription.SelectionFont.Style ^ style); // xor -> toggle
         }
 
         private void boldToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            XorStyle(FontStyle.Bold);
+            ToggleStyle(FontStyle.Bold);
         }
 
+        // change the resource description when the rich text box's RTF changes
         private void richTextBoxDescription_TextChanged(object sender, EventArgs e)
         {
             Resource.Description = richTextBoxDescription.Rtf;
@@ -88,12 +97,12 @@ namespace Graphmatic
 
         private void italicToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            XorStyle(FontStyle.Italic);
+            ToggleStyle(FontStyle.Italic);
         }
 
         private void underlineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            XorStyle(FontStyle.Underline);
+            ToggleStyle(FontStyle.Underline);
         }
 
         private void leftToolStripMenuItem_Click(object sender, EventArgs e)

@@ -12,14 +12,30 @@ using Graphmatic.Properties;
 
 namespace Graphmatic
 {
+    /// <summary>
+    /// Represents a form used for editing the application settings stored in the .NET
+    /// <see cref="Properties.Settings"/> XML settings container.
+    /// </summary>
     public partial class SettingsEditor : Form
     {
+        /// <summary>
+        /// Initializes a new SettingsEditor instance.
+        /// </summary>
         public SettingsEditor()
         {
             InitializeComponent();
             InitializeSettings();
         }
 
+        /// <summary>
+        /// Turns a TextBox into an input region used for inputting a character.<para/>
+        /// Ideally I'd create another UserControl for this, but it's used rarely enough that
+        /// there isn't really any point.
+        /// </summary>
+        /// <param name="textBox">The TextBox to turn into a character input region.</param>
+        /// <param name="defaultValue">The default character to set in the text box.</param>
+        /// <param name="onChange">The delegate fired on the event of the character changing
+        /// inside the text box.</param>
         private void MakeCharBox(TextBox textBox, char defaultValue, Action<char> onChange)
         {
             textBox.ReadOnly = true;
@@ -32,7 +48,11 @@ namespace Graphmatic
             };
             textBox.BackColor = SystemColors.Window;
         }
-
+        /// <summary>
+        /// Initializes the settings editors on the form to show the current values of the
+        /// settings as set by the user, and sets the control changed events to update the
+        /// program settings to the new value.
+        /// </summary>
         private void InitializeSettings()
         {
             // this repetition is unavoidable :(
@@ -64,6 +84,9 @@ namespace Graphmatic
                 Settings.Default.DefaultVariable1,
                 c => Settings.Default.DefaultVariable1 = c);
 
+            // get the text in the data set variables box,
+            // split it on commas, and set each of those variables
+            // as default data set variables
             textBoxDefaultDataSetVariables.Text = String.Join(", ", Settings.Default.DefaultDataSetVariables);
             textBoxDefaultDataSetVariables.TextChanged += (sender, e) => Settings.Default.DefaultDataSetVariables =
                 textBoxDefaultDataSetVariables.Text
@@ -85,6 +108,8 @@ namespace Graphmatic
             numericDefaultHighlightWidth.ValueChanged += (sender, e) =>
                 Settings.Default.DefaultHighlightWidth = (float)numericDefaultHighlightWidth.Value;
 
+            // (en|dis)able the backup-related settings controls depending on
+            // whether the backup check box is checked or not
             checkBoxBackup.CheckedChanged += (sender, e) =>
             {
                 Settings.Default.BackupEnabled =

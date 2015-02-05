@@ -148,7 +148,6 @@
             this.textBoxID.ReadOnly = true;
             this.textBoxID.Size = new System.Drawing.Size(274, 23);
             this.textBoxID.TabIndex = 4;
-            this.textBoxID.TextChanged += new System.EventHandler(this.textBoxID_TextChanged);
             // 
             // labelCreatedOn
             // 
@@ -168,7 +167,6 @@
             this.textBoxCreationDate.ReadOnly = true;
             this.textBoxCreationDate.Size = new System.Drawing.Size(274, 23);
             this.textBoxCreationDate.TabIndex = 2;
-            this.textBoxCreationDate.TextChanged += new System.EventHandler(this.textBoxCreationDate_TextChanged);
             // 
             // labelAuthor
             // 
