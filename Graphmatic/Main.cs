@@ -17,9 +17,15 @@ using Graphmatic.Interaction.Annotations;
 
 namespace Graphmatic
 {
+    /// <summary>
+    /// Represents the main form window of the Graphmatic program.
+    /// </summary>
     public partial class Main : Form
     {
         private Document _CurrentDocument;
+        /// <summary>
+        /// Gets or sets the document that is currently open and being edited.
+        /// </summary>
         public Document CurrentDocument
         {
             get
@@ -34,6 +40,9 @@ namespace Graphmatic
         }
 
         private string _DocumentPath;
+        /// <summary>
+        /// Gets or sets the displayed path of the document in the editor.
+        /// </summary>
         public string DocumentPath
         {
             get
@@ -48,6 +57,9 @@ namespace Graphmatic
         }
 
         private bool _DocumentModified;
+        /// <summary>
+        /// Gets or sets whether the document has been modified by the user or not.
+        /// </summary>
         public bool DocumentModified
         {
             get
@@ -61,6 +73,10 @@ namespace Graphmatic
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the Main form, and initializes everything ready to
+        /// be displayed.
+        /// </summary>
         public Main()
         {
             InitializeComponent();
@@ -69,12 +85,19 @@ namespace Graphmatic
             InitializePageDisplay();
         }
 
+        /// <summary>
+        /// Initializes the timer used for creating regular backups of the currently-open document.
+        /// </summary>
         public void InitializeBackupTimer()
         {
             timerBackup.Interval = Properties.Settings.Default.BackupInterval * 1000;
             timerBackup.Enabled = Properties.Settings.Default.BackupEnabled;
         }
 
+        /// <summary>
+        /// Updates the title of the Main editor window to reflect the currently-open document and
+        /// whether it has been modified by the user or not.
+        /// </summary>
         private void UpdateTitle()
         {
             string documentPath =
@@ -88,6 +111,11 @@ namespace Graphmatic
                 String.Format(Properties.Resources.TitleBarName, Properties.Resources.VersionString));
         }
 
+        /// <summary>
+        /// Checks if the user's current username is "Anonymous". If it is, then the user has not
+        /// used the program yet, so default to the current environment's user name and save the
+        /// settings.
+        /// </summary>
         private void NewUserUsernameCheck()
         {
             if (Properties.Settings.Default.Username == "Anonymous")
@@ -103,9 +131,11 @@ namespace Graphmatic
             
         }
 
+        // open the options editor and then re-initialize the backup timer
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new SettingsEditor().ShowDialog(this);
+            InitializeBackupTimer();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -121,6 +151,7 @@ namespace Graphmatic
             Application.Exit();
         }
 
+        // unless Application.Exit was called, prompt the user to save an unsave document
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason != CloseReason.ApplicationExitCall)
@@ -146,6 +177,7 @@ namespace Graphmatic
             listViewResources.Focus();
         }
 
+        // show the about dialog
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
@@ -172,6 +204,7 @@ namespace Graphmatic
             IsFormResizing = true;
         }
 
+        // show the bug reporting prompt with an obfuscated version of my e-mail
         private void toolStripStatusLabelBugReport_Click(object sender, EventArgs e)
         {
             MessageBox.Show(

@@ -13,8 +13,14 @@ namespace Graphmatic
 {
     public partial class Main
     {
+        /// <summary>
+        /// The resource editors to use for each type of resource.
+        /// </summary>
         private Dictionary<Type, Action<Resource>> ResourceEditors = new Dictionary<Type, Action<Resource>>();
 
+        /// <summary>
+        /// Gets the resource that is currently selected in the resource view.
+        /// </summary>
         private Resource SelectedResource
         {
             get
@@ -24,6 +30,9 @@ namespace Graphmatic
             }
         }
 
+        /// <summary>
+        /// Initializes the editors for the different types of Graphmatic resources.
+        /// </summary>
         private void InitializeEditors()
         {
             RegisterEditor<Equation>(OpenEquationEditor);
@@ -34,28 +43,52 @@ namespace Graphmatic
             CloseResourcePanels();
         }
 
+        /// <summary>
+        /// Opens the equation editor for the specified equation.
+        /// </summary>
+        /// <param name="equation">The equation for which to open the editor.</param>
         private void OpenEquationEditor(Equation equation)
         {
             new EquationEditor(equation).ShowDialog();
             DocumentModified = true;
         }
 
+        /// <summary>
+        /// Opens the data set editor for the specified equation.
+        /// </summary>
+        /// <param name="dataSet">The data set for which to open the editor.</param>
         private void OpenDataSetEditor(DataSet dataSet)
         {
             new DataSetEditor(CurrentDocument, dataSet).ShowDialog();
             DocumentModified = true;
         }
 
+        /// <summary>
+        /// Closes any open resource panels in the document.
+        /// </summary>
         private void CloseResourcePanels()
         {
             panelPageEditor.Visible = panelPageEditor.Enabled = false;
         }
 
+        /// <summary>
+        /// Registers the specified resource editor method for the specified resource type.
+        /// Thus, whenever a resource of type <typeparamref name="T"/> is opened in the editor,
+        /// call the <paramref name="editor"/> method.
+        /// </summary>
+        /// <typeparam name="T">The type of resource to register to this editor.</typeparam>
+        /// <param name="editor">The editor to open.</param>
         private void RegisterEditor<T>(Action<T> editor) where T : Resource
         {
             ResourceEditors.Add(typeof(T), r => editor(r as T));
         }
 
+        /// <summary>
+        /// Creates an item in the list view for the given resource.
+        /// </summary>
+        /// <param name="resource">The resource for which to create a list view item.</param>
+        /// <returns>Returns a <see cref="System.Windows.Forms.ListViewItem"/> with the correct
+        /// text, author and icon for <paramref name="resource"/>.</returns>
         private ListViewItem CreateListViewItem(Resource resource)
         {
             ListViewItem item = new ListViewItem();
@@ -78,6 +111,13 @@ namespace Graphmatic
             return item;
         }
 
+        /// <summary>
+        /// Determines if <paramref name="resource"/> is to be displayed in the resource list.
+        /// This method exists as you can filter the list on the resource type, and thus we
+        /// need to check if the resource is to be displayed in the specific circumstances.
+        /// </summary>
+        /// <param name="resource">The resource to check.</param>
+        /// <returns>Returns <c>true</c> if <paramref name="resource"/> is to be displayed.</returns>
         private bool IsResourceDisplayed(Resource resource)
         {
             if (resource.Hidden)
@@ -102,6 +142,17 @@ namespace Graphmatic
             }
         }
 
+        /// <summary>
+        /// Gets the string used to order resources in the resource editor.
+        /// This is a bit hacky as it relies on the behaviour of the default
+        /// string comparer to order resources, so <see cref="Graphmatic.Interaction.Page"/>s
+        /// are ordered slightly different to everything else; they are ordered based on the
+        /// stored page order for the current document, whereas everything else is ordered on
+        /// the resource name alphabetically, so depending on the type of resource, this returns
+        /// a string dependent on <paramref name="resource"/> which is sorted in the correct
+        /// order.
+        /// </summary>
+        /// <param name="resource">The resource for which to return a comparing string.</param>
         private string GetResourceOrderComparer(Resource resource)
         {
             StringBuilder sb = new StringBuilder();
