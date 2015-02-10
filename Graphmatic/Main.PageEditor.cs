@@ -264,7 +264,10 @@ namespace Graphmatic
         }
 
         /// <summary>
-        /// Clamps a double to a given range (inclusive).
+        /// Clamps a double to a given range (inclusive).<para/>
+        /// If <paramref name="val"/> is between <paramref name="min"/> and <paramref name="max"/>,
+        /// then <paramref name="val"/> will be returned. Otherwise, the closest value within the
+        /// interval [<paramref name="min"/>, <paramref name="max"/>] to <paramref name="val"/>.
         /// </summary>
         /// <param name="val">The value to clamp.</param>
         /// <param name="min">The lower bound of the allowable range.</param>
@@ -280,6 +283,7 @@ namespace Graphmatic
             return val;
         }
 
+        // whenever the graph changes, regenerate the editing menu and redraw the display
         void Graph_Update(object sender, EventArgs e)
         {
             pageDisplay.Refresh();
@@ -599,7 +603,9 @@ namespace Graphmatic
         }
 
         /// <summary>
-        /// Regenerates the annotation editing menu.
+        /// Regenerates the annotation editing menu (ie. the Annotations sub-menu on the
+        /// page editing menu), where the children of this menu is the return value of
+        /// <see cref="RegenerateAnnotationMenuContent"/>.
         /// </summary>
         private ToolStripMenuItem RegenerateAnnotationMenu()
         {
@@ -617,14 +623,14 @@ namespace Graphmatic
                 return new ToolStripMenuItem(
                     "Annotation",
                     Properties.Resources.Annotations16,
-                    RegenerateAnnotationEditMenu());
+                    RegenerateAnnotationMenuContent());
             }
         }
 
         /// <summary>
         /// Regenerates the content of the annotation editing menu.
         /// </summary>
-        private ToolStripMenuItem[] RegenerateAnnotationEditMenu()
+        private ToolStripMenuItem[] RegenerateAnnotationMenuContent()
         {
             List<ToolStripMenuItem> items = new List<ToolStripMenuItem>();
             items.Add(new ToolStripMenuItem(
@@ -742,10 +748,14 @@ namespace Graphmatic
         /// </summary>
         private void HandleErase()
         {
+            // get all of the annotations on the page that are close to the eraser cursor
+            // via a nice legendary LINQ statement
             var toErase = CurrentPage.Annotations
                 .OfType<Drawing>()
                 .Where(a => a.DistanceToPointOnScreen(CurrentPage, pageDisplay.ClientSize, MouseLocation) <= (int)(PenWidth))
                 .ToArray();
+
+            // remove them all from the currently open Page's annotation
             foreach (var annotation in toErase)
             {
                 CurrentPage.Annotations.Remove(annotation);
@@ -834,10 +844,15 @@ namespace Graphmatic
             return CreateDirectionalInvariantRectangle(r.X, r.Y, r.Width, r.Height);
         }
 
+        // handles the initial click on the page display
         private void pageDisplay_MouseDown(object sender, MouseEventArgs e)
         {
+            // sets the current and starting mouse location fields
             MouseStart = new Point(e.X, e.Y);
             MouseLocation = MouseStart;
+
+            // if we already have some annotations selected, check if the user is trying to
+            // drag some existing annotations
             if (SelectedAnnotations != null)
             {
                 // If we've already selected some items, and the cursor clicks somewhere within
@@ -845,13 +860,17 @@ namespace Graphmatic
                 var selection = SelectedAnnotations
                     .Where(a => a.DistanceToPointOnScreen(CurrentPage, pageDisplay.ClientSize, MouseStart) <= 4);
                 int count = selection.Count();
+
                 if (count > 0)
                 {
                     IsManipulatingSelected = true;
 
+                    // if we only have 1 item selected, the user may be trying to resize a resource
                     if (count == 1)
                     {
                         var resourceToResize = selection.First();
+                        // however, we can only do this if the cursor is in the top-right yellow resizing node for
+                        // this resource - so check for that first
                         if (resourceToResize.IsPointInResizeNode(CurrentPage, pageDisplay.ClientSize, MouseLocation))
                         {
                             IsResizing = true;
@@ -859,6 +878,8 @@ namespace Graphmatic
                     }
                 }
             }
+            // if we've decided that we're not moving or resizing anything, or we're not using the selection
+            // tool, handle the starting of other tools
             if (!IsManipulatingSelected)
             {
                 if (CurrentPageTool == PageTool.Pan)
@@ -885,12 +906,17 @@ namespace Graphmatic
                 }
                 else if (CurrentPageTool == PageTool.Eraser)
                 {
+                    // erase stuff when we first click, so we don't have to drag the mouse (and trigger MouseMove)
+                    // to erase any single items
                     HandleErase();
                 }
             }
             IsDragging = true;
         }
 
+        // handle the ending of any mouse interactions on the page this determines which items the
+        // user is trying to select, and resets any state associated with using page tools to their
+        // initial values
         private void pageDisplay_MouseUp(object sender, MouseEventArgs e)
         {
             if (IsDragging)
@@ -907,7 +933,8 @@ namespace Graphmatic
                         var resizedResource = SelectedAnnotations[0];
 
                         // if the resource now has negative width or height after resizing,
-                        // correct it by restoring the correct signs
+                        // correct it by restoring the correct signs; therefore, resources
+                        // will never get a negative width or height after resizing
                         if (resizedResource.Width < 0)
                         {
                             resizedResource.X -= resizedResource.Width = -resizedResource.Width;
@@ -1055,18 +1082,21 @@ namespace Graphmatic
 
         }
 
+        // handle dragging and dropping
         private void pageDisplay_DragDrop(object sender, DragEventArgs e)
         {
+            // we can only drag/drop strings representing GUIDS
             if (e.Data.GetDataPresent(typeof(string)))
             {
                 string guidData = (string)e.Data.GetData(typeof(string));
-                Guid guid;
+                Guid guid; // check the string is a guid
                 if (Guid.TryParse(guidData, out guid))
                 {
-                    if (CurrentDocument.Contains(guid))
+                    if (CurrentDocument.Contains(guid)) // check the document contains the string (eg. so the
+                                                        // user can't drop a random GUID from Notepad)
                     {
                         Resource resource = CurrentDocument[guid];
-                        if (resource is IPlottable)
+                        if (resource is IPlottable) // check the resource can be plotted
                         {
                             try
                             {
@@ -1149,6 +1179,8 @@ namespace Graphmatic
             RegenerateGraphEditMenu();
         }
 
+        // shortcut button for adding a data set to the page;
+        // this gives it an automatic name corresponding to the current page
         private void toolStripButtonPlotDataSet_Click(object sender, EventArgs e)
         {
             DataSet dataSet = new DataSet(Properties.Settings.Default.DefaultDataSetVariables)
@@ -1163,6 +1195,8 @@ namespace Graphmatic
             }
         }
 
+        // shortcut button for adding an equation to the page;
+        // this gives it an automatic name corresponding to the current page
         private void toolStripButtonPlotEquation_Click(object sender, EventArgs e)
         {
             Equation equation = new Equation()
@@ -1176,6 +1210,7 @@ namespace Graphmatic
             }
         }
 
+        // goes back a page in the page order list
         private void toolStripButtonPreviousPage_Click(object sender, EventArgs e)
         {
             int pageIndex = CurrentDocument.PageOrder.IndexOf(CurrentPage);
@@ -1185,6 +1220,7 @@ namespace Graphmatic
             }
         }
 
+        // goes forward a page in the page order list
         private void toolStripButtonNextPage_Click(object sender, EventArgs e)
         {
             int pageIndex = CurrentDocument.PageOrder.IndexOf(CurrentPage);
@@ -1194,11 +1230,13 @@ namespace Graphmatic
             }
         }
 
+        // adds a new page to the end of the page list and opens it
         private void toolStripButtonAddPage_Click(object sender, EventArgs e)
         {
             AddPage();
         }
 
+        // change the zoom level using the given percentage value
         private void toolStripComboBoxZoom_TextChanged(object sender, EventArgs e)
         {
             try
@@ -1214,11 +1252,14 @@ namespace Graphmatic
             }
         }
 
+        // ignore mouse wheel input to the combo-box, as we handle mouse-wheel scrolling
+        // in the page display
         public void toolStripComboBoxZoom_MouseWheel(object sender, MouseEventArgs e)
         {
             (e as HandledMouseEventArgs).Handled = true;
         }
 
+        // erase all annotations in the document
         private void eraseAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (CurrentPage.Annotations.Count > 0)
@@ -1239,6 +1280,7 @@ namespace Graphmatic
             }
         }
 
+        // copies the content of the page display and copies it to the clipboard
         private void toolStripButtonPrintScreen_Click(object sender, EventArgs e)
         {
             using (Image previewImage = CreatePagePreview(pageDisplay.ClientSize))
@@ -1247,6 +1289,9 @@ namespace Graphmatic
             }
         }
 
+        // WinForms handlers for changing the pen colour or pen width
+        // mostly repetitive WinForms event handlers; nothing interesting
+        // goes on here
         #region Pen Color & Width
         // These functions all do similar things: they change the color or dimensions
         // of the annotation pen. There isn't much to them, so I've not documented each one.

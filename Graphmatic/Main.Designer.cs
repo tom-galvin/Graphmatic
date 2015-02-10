@@ -120,12 +120,12 @@ namespace Graphmatic
             this.toolStripDropDownButtonImage = new System.Windows.Forms.ToolStripDropDownButton();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fromfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonPrintScreen = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonPreviousPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNextPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAddPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripComboBoxZoom = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripButtonPrintScreen = new System.Windows.Forms.ToolStripButton();
             this.pageDisplay = new System.Windows.Forms.PictureBox();
             this.timerBackup = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
@@ -889,6 +889,7 @@ namespace Graphmatic
             this.eraseAllToolStripMenuItem.Name = "eraseAllToolStripMenuItem";
             this.eraseAllToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.eraseAllToolStripMenuItem.Text = "Erase &all annotations";
+            this.eraseAllToolStripMenuItem.Click += new System.EventHandler(this.eraseAllToolStripMenuItem_Click);
             // 
             // eraserToolStripMenuItem
             // 
@@ -1008,6 +1009,17 @@ namespace Graphmatic
             this.fromfileToolStripMenuItem.Text = "From &file...";
             this.fromfileToolStripMenuItem.Click += new System.EventHandler(this.fromfileToolStripMenuItem_Click);
             // 
+            // toolStripButtonPrintScreen
+            // 
+            this.toolStripButtonPrintScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPrintScreen.Image = global::Graphmatic.Properties.Resources.PageExportImage24;
+            this.toolStripButtonPrintScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPrintScreen.Name = "toolStripButtonPrintScreen";
+            this.toolStripButtonPrintScreen.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonPrintScreen.Text = "Copy Page Display";
+            this.toolStripButtonPrintScreen.ToolTipText = "Copies an image of the current page and transfers it to the system clipboard";
+            this.toolStripButtonPrintScreen.Click += new System.EventHandler(this.toolStripButtonPrintScreen_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -1063,17 +1075,6 @@ namespace Graphmatic
             this.toolStripComboBoxZoom.Text = "100%";
             this.toolStripComboBoxZoom.ToolTipText = "Change the zoom level for this page";
             this.toolStripComboBoxZoom.TextChanged += new System.EventHandler(this.toolStripComboBoxZoom_TextChanged);
-            // 
-            // toolStripButtonPrintScreen
-            // 
-            this.toolStripButtonPrintScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonPrintScreen.Image = global::Graphmatic.Properties.Resources.PageExportImage24;
-            this.toolStripButtonPrintScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonPrintScreen.Name = "toolStripButtonPrintScreen";
-            this.toolStripButtonPrintScreen.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButtonPrintScreen.Text = "Copy Page Display";
-            this.toolStripButtonPrintScreen.ToolTipText = "Copies an image of the current page and transfers it to the system clipboard";
-            this.toolStripButtonPrintScreen.Click += new System.EventHandler(this.toolStripButtonPrintScreen_Click);
             // 
             // pageDisplay
             // 
