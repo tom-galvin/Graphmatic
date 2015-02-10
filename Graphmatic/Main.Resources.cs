@@ -150,7 +150,13 @@ namespace Graphmatic
         /// stored page order for the current document, whereas everything else is ordered on
         /// the resource name alphabetically, so depending on the type of resource, this returns
         /// a string dependent on <paramref name="resource"/> which is sorted in the correct
-        /// order.
+        /// order.<para/>
+        /// For example, the order string for two pages in order might be <c>"Page.0000001"</c>
+        /// and <c>"Page.0000002"</c>, where the latter would be ordered after the former. However,
+        /// the order strings for two equations would be <c>"Equation.MyEquation"</c> and 
+        /// <c>"Equation.ReallyGood"</c>, where the two are ordered alphabetically. The fact that
+        /// the order string is prefixed with the resource type name ensures that equations of similar
+        /// types are grouped correctly.
         /// </summary>
         /// <param name="resource">The resource for which to return a comparing string.</param>
         private string GetResourceOrderComparer(Resource resource)
@@ -176,6 +182,11 @@ namespace Graphmatic
         /// This boolean works around an internal bug in the .NET Framework's ListView layout engine.
         /// </summary>
         private bool IsRefreshingResourceListView = false;
+        
+        /// <summary>
+        /// Refreshes the list view containing the list of resources in the main editor window.
+        /// This might cause some UI slowdown so try and not call it too often.
+        /// </summary>
         private void RefreshResourceListView()
         {
             IEnumerable<Resource> displayedResources = CurrentDocument
@@ -201,6 +212,11 @@ namespace Graphmatic
             IsRefreshingResourceListView = false;
         }
 
+        /// <summary>
+        /// Opens the resource editor corresponding to the type of <paramref name="resource"/>,
+        /// and loads <paramref name="resource"/> into the newly-opened resource editor.
+        /// </summary>
+        /// <param name="resource">The resource for which to open the resource editor.</param>
         private void OpenResourceEditor(Resource resource)
         {
             Type resourceType = resource.GetType();
@@ -219,6 +235,15 @@ namespace Graphmatic
             }
         }
 
+        /// <summary>
+        /// Duplicates <paramref name="resource"/>, gives the duplicate the name <paramref name="newName"/>,
+        /// and adds it to the document.<para/>
+        /// This works by calling the <see cref="Graphmatic.Interaction.ResourceSerializationExtensionMethods.Duplicate"/>
+        /// Resource extension method to produce a deep copy of the resource.
+        /// </summary>
+        /// <param name="resource">The resource to duplicate.</param>
+        /// <param name="newName">The name to give to the new (duplicate) resource.</param>
+        /// <returns>Returns a reference to the duplicate (newly-created) resource, that was also added to the document.</returns>
         private Resource DuplicateResource(Resource resource, string newName)
         {
             Resource duplicate = resource.Duplicate(CurrentDocument);
@@ -227,26 +252,40 @@ namespace Graphmatic
             return duplicate;
         }
 
+        /// <summary>
+        /// Removes <paramref name="resource"/> from the current opened document, and updates
+        /// any resource references and the UI to reflect to the removal.
+        /// </summary>
+        /// <param name="resource">The resource o remove from the document.</param>
         private void RemoveResource(Resource resource)
         {
-            if (resource is Page)
+            if (CurrentDocument.Contains(resource))
             {
-                RemovePage(resource as Page);
-            }
-            else
-            {
-                CurrentDocument.Remove(resource);
-                DocumentModified = true;
-                if (CurrentDocument.CurrentResource == resource)
+                if (resource is Page)
                 {
-                    CurrentDocument.CurrentResource = null;
-                    CloseResourcePanels();
+                    RemovePage(resource as Page);
                 }
-                RefreshResourceListView();
+                else
+                {
+                    CurrentDocument.Remove(resource);
+                    DocumentModified = true;
+                    if (CurrentDocument.CurrentResource == resource)
+                    {
+                        CurrentDocument.CurrentResource = null;
+                        CloseResourcePanels();
+                    }
+                    RefreshResourceListView();
+                }
+                resource.Removed = true;
             }
-            resource.Removed = true;
         }
 
+        /// <summary>
+        /// Adds <paramref name="resource"/> to the currently-opened document. This correctly handles
+        /// if <paramref name="resource"/> is a <see cref="Graphmatic.Interaction.Page"/> by calling the
+        /// <see cref="AddPage"/> method rather than adding it normally.
+        /// </summary>
+        /// <param name="resource">The resource to add to the document.</param>
         private void AddResource(Resource resource)
         {
             if (resource is Page)
@@ -261,6 +300,16 @@ namespace Graphmatic
             }
         }
 
+        /// <summary>
+        /// Adds <paramref name="page"/> to the currently-opened document. This differs from <see cref="AddResource"/>
+        /// in that this method also adds <paramref name="page"/> to the document page order list, too. If
+        /// <paramref name="after"/> is not <c>null</c>, then <paramref name="page"/> will be added after
+        /// <paramref name="after"/> in the page order list. If <paramref name="after"/> is <c>null</c>, then
+        /// <paramref name="page"/> will simply be added to the end of the page order list.
+        /// </summary>
+        /// <param name="page">The page to add to the document.</param>
+        /// <param name="after">The page to add <paramref name="page"/> after in the page order list, or <c>null</c> to
+        /// add <paramref name="page"/> to the end of the page order list.</param>
         private void AddPage(Page page, Page after = null)
         {
             CurrentDocument.Add(page);
@@ -269,19 +318,37 @@ namespace Graphmatic
             RefreshResourceListView();
         }
 
+        /// <summary>
+        /// Removes <paramref name="page"/> from the currently-opened document, while also removing it from the page
+        /// order list in the process.
+        /// </summary>
+        /// <param name="page">The page to remove from the currently-opened document.</param>
         private void RemovePage(Page page)
         {
-            CurrentDocument.RemovePageFromPageOrder(page);
-            CurrentDocument.Remove(page);
-            DocumentModified = true;
-            if (CurrentDocument.CurrentResource == page)
+            if (CurrentDocument.Contains(page))
             {
-                CurrentDocument.CurrentResource = null;
-                CloseResourcePanels();
+                CurrentDocument.RemovePageFromPageOrder(page);
+                CurrentDocument.Remove(page);
+                DocumentModified = true;
+                if (CurrentDocument.CurrentResource == page)
+                {
+                    CurrentDocument.CurrentResource = null;
+                    CloseResourcePanels();
+                }
+                RefreshResourceListView();
             }
-            RefreshResourceListView();
         }
 
+        /// <summary>
+        /// Creates a template resource name with the given root name.<para/>
+        /// For example, if <paramref name="rootName"/> is <c>"Equation"</c> and the document
+        /// contains no resources, then this method will return <c>"Equation 1"</c>. However,
+        /// calling this method again with the same root name will return <c>"Equation 2"</c>,
+        /// as <c>"Equation 1"</c> is already taken. Removing <c>"Equation 1"</c> from the
+        /// document and calling this method again with the same parameters will again return
+        /// <c>"Equation 1"</c>, as that is the first root name available.
+        /// </summary>
+        /// <param name="rootName">The root resource type name to create a resource name for.</param>
         private string CreateResourceName(string rootName)
         {
             int currentNumber = 0;
@@ -295,18 +362,14 @@ namespace Graphmatic
             return derivedName;
         }
 
-        private string GetResourceNameFromFileName(string fileName)
-        {
-            return String.Join(".", fileName
-                   .Split('\\', '/')
-                   .Last()
-                   .Split('.')
-                   .Reverse()
-                   .Skip(1)
-                   .Reverse()
-                   .ToArray());
-        }
-
+        /// <summary>
+        /// Calls the <see cref="Graphmatic.Interaction.Document.NotifyResourceModified"/> method on the 
+        /// currently opened document, with <paramref name="resource"/> as the parameter. This notifies
+        /// the rest of the resource in the document that <paramref name="resource"/> has been modified, such
+        /// that any <see cref="Graphmatic.Interaction.Page"/>s can have their <see cref="Graphmatic.Interaction.Plotting.Graph"/>
+        /// classes updated and redrawn to reflect any changes in the resource (such as changing the value of an equation).
+        /// </summary>
+        /// <param name="resource"></param>
         private void NotifyResourceModified(Resource resource)
         {
             CurrentDocument.NotifyResourceModified(resource);
@@ -452,6 +515,7 @@ namespace Graphmatic
             }
         }
 
+        // add an equation to the document
         private void equationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string equationName = EnterTextDialog.EnterText("Enter a name for the new equation.", "New Equation", CreateResourceName("Equation"), Properties.Resources.Equation32);
@@ -468,6 +532,7 @@ namespace Graphmatic
             }
         }
 
+        // add a data set to the document
         private void dataSetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string dataSetName = EnterTextDialog.EnterText("Enter a name for the new data set.", "New Data Set", CreateResourceName("Data Set"), Properties.Resources.DataSet32);
@@ -488,6 +553,7 @@ namespace Graphmatic
             }
         }
 
+        // add a page to the document
         private void pageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string pageName = EnterTextDialog.EnterText("Enter a name for the new page.", "New Page", CreateResourceName("Page"), Properties.Resources.Page32);
@@ -503,6 +569,7 @@ namespace Graphmatic
             }
         }
 
+        // opens the page order editor
         private void pageOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Resource resource = SelectedResource;
@@ -517,6 +584,7 @@ namespace Graphmatic
             DocumentModified = true;
         }
 
+        // code for dragging and dropping resources into the page
         private void listViewResources_ItemDrag(object sender, ItemDragEventArgs e)
         {
             listViewResources.DoDragDrop(SelectedResource.Guid.ToString(), DragDropEffects.Link);
