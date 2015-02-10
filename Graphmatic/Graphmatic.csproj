@@ -85,6 +85,12 @@
     <Compile Include="EquationEditor.Designer.cs">
       <DependentUpon>EquationEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ErrorReporting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorReporting.Designer.cs">
+      <DependentUpon>ErrorReporting.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpressionCursor.cs" />
     <Compile Include="ExpressionDisplay.cs">
       <SubType>UserControl</SubType>
@@ -224,6 +230,9 @@
     <EmbeddedResource Include="EquationEditor.resx">
       <DependentUpon>EquationEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ErrorReporting.resx">
+      <DependentUpon>ErrorReporting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExpressionDisplay.resx">
       <DependentUpon>ExpressionDisplay.cs</DependentUpon>
     </EmbeddedResource>
@@ -290,6 +299,7 @@
     <None Include="Resources\image.png" />
     <None Include="Resources\document-export-image.png" />
     <None Include="Resources\document.png" />
+    <None Include="Resources\bug--arrow.png" />
     <Content Include="Resources\Image16.png" />
     <Content Include="Resources\Image32.png" />
     <Content Include="Resources\Images16.png" />
