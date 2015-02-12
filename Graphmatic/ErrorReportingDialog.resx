@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="labelInformation.Text" xml:space="preserve">
-    <value>Graphmatic has encountered an error from which it cannot recover. However, you can help to diagnose and fix the issue! Click the button below and save an error report, which you can then send to me to fix the issue. Hopefully the issue will be diagnosed and fixed in the next release of Graphmatic.</value>
+    <value>Graphmatic has encountered an unhandled error. However, you can help to find and fix the issue! Write a short description of the problem, and then click the button below and save an error report, which you can then send to me to look at. Hopefully the issue will be resolved in the next release of Graphmatic.</value>
   </data>
 </root>

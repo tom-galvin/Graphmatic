@@ -85,11 +85,11 @@
     <Compile Include="EquationEditor.Designer.cs">
       <DependentUpon>EquationEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ErrorReporting.cs">
+    <Compile Include="ErrorReportingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ErrorReporting.Designer.cs">
-      <DependentUpon>ErrorReporting.cs</DependentUpon>
+    <Compile Include="ErrorReportingDialog.Designer.cs">
+      <DependentUpon>ErrorReportingDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ExpressionCursor.cs" />
     <Compile Include="ExpressionDisplay.cs">
@@ -230,8 +230,8 @@
     <EmbeddedResource Include="EquationEditor.resx">
       <DependentUpon>EquationEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ErrorReporting.resx">
-      <DependentUpon>ErrorReporting.cs</DependentUpon>
+    <EmbeddedResource Include="ErrorReportingDialog.resx">
+      <DependentUpon>ErrorReportingDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExpressionDisplay.resx">
       <DependentUpon>ExpressionDisplay.cs</DependentUpon>

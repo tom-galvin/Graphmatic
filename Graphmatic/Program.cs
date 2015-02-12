@@ -22,6 +22,9 @@ namespace Graphmatic
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            if(!Debugger.IsAttached)
+                Application.ThreadException += Application_ThreadException;
+
             SerializationExtensionMethods.RegisterGraphmaticObjects();
 
             Main main = new Main();
@@ -29,6 +32,11 @@ namespace Graphmatic
                 main.OpenDocument(args[0]);
 
             Application.Run(new Main());
+        }
+
+        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            new ErrorReportingDialog(e.Exception).ShowDialog();
         }
     }
 }
