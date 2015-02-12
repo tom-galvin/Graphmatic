@@ -221,7 +221,7 @@ namespace Graphmatic
             CurrentPage = page;
             CurrentPage.Graph.Update += Graph_Update;
             // update the zoom level
-            UpdateZoomComboBox();
+            DisplayZoomLevelOutput();
             pageDisplay.Refresh();
         }
 
@@ -246,7 +246,7 @@ namespace Graphmatic
                 while (zoomLevel / zoomFactor > 0.15)
                     zoomFactor *= 2;
                 CurrentPage.Graph.Axes.GridSize = zoomFactor;
-                UpdateZoomComboBox();
+                DisplayZoomLevelOutput();
                 pageDisplay.Refresh();
                 NotifyResourceModified(CurrentPage);
             }
@@ -256,7 +256,7 @@ namespace Graphmatic
         /// Updates the content of the zoom combo box (on the page editor toolbar) to reflect the
         /// current page's zoom level.
         /// </summary>
-        private void UpdateZoomComboBox()
+        private void DisplayZoomLevelOutput()
         {
             toolStripComboBoxZoom.Text = String.Format(
                 "{0:0.##}%",
@@ -1093,7 +1093,7 @@ namespace Graphmatic
                 if (Guid.TryParse(guidData, out guid))
                 {
                     if (CurrentDocument.Contains(guid)) // check the document contains the string (eg. so the
-                                                        // user can't drop a random GUID from Notepad)
+                    // user can't drop a random GUID from Notepad)
                     {
                         Resource resource = CurrentDocument[guid];
                         if (resource is IPlottable) // check the resource can be plotted
@@ -1237,18 +1237,49 @@ namespace Graphmatic
         }
 
         // change the zoom level using the given percentage value
-        private void toolStripComboBoxZoom_TextChanged(object sender, EventArgs e)
+        private void toolStripComboBoxZoom_DropDownClosed(object sender, EventArgs e)
+        {
+            ParseZoomInput();
+        }
+
+        private void toolStripComboBoxZoom_Leave(object sender, EventArgs e)
+        {
+            ParseZoomInput();
+        }
+
+        private void toolStripComboBoxZoom_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ParseZoomInput();
+            }
+        }
+
+        /// <summary>
+        /// Parse the zoom level that the user has entered.
+        /// </summary>
+        private void ParseZoomInput()
         {
             try
             {
                 string text = toolStripComboBoxZoom.Text;
                 if (text.EndsWith("%"))
                     text = text.Substring(0, text.Length - 1);
-                ZoomLevel = Double.Parse(text) / 100;
+                double zoomLevel = Double.Parse(text) / 100;
+                if (Double.IsNaN(zoomLevel) || Double.IsInfinity(zoomLevel) || zoomLevel <= 0)
+                {
+                    MessageBox.Show("Invalid zoom level.", "Zoom", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ZoomLevel = 1;
+                }
+                else
+                {
+                    ZoomLevel = zoomLevel;
+                }
             }
             catch (FormatException)
             {
                 MessageBox.Show("Invalid zoom level.", "Zoom", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ZoomLevel = 1;
             }
         }
 

@@ -1074,7 +1074,9 @@ namespace Graphmatic
             this.toolStripComboBoxZoom.Size = new System.Drawing.Size(75, 23);
             this.toolStripComboBoxZoom.Text = "100%";
             this.toolStripComboBoxZoom.ToolTipText = "Change the zoom level for this page";
-            this.toolStripComboBoxZoom.TextChanged += new System.EventHandler(this.toolStripComboBoxZoom_TextChanged);
+            this.toolStripComboBoxZoom.DropDownClosed += new System.EventHandler(this.toolStripComboBoxZoom_DropDownClosed);
+            this.toolStripComboBoxZoom.Leave += new System.EventHandler(this.toolStripComboBoxZoom_Leave);
+            this.toolStripComboBoxZoom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.toolStripComboBoxZoom_KeyUp);
             // 
             // pageDisplay
             // 
