@@ -194,7 +194,7 @@
     <value>..\Resources\clipboard-paste.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AboutBoxMessage" xml:space="preserve">
-    <value>Currently in Alpha.
+    <value>Currently in Beta.
 Available on Github: http://github.com/Quackmatic/Graphmatic
 Originally developed for the AQA A2 Computing coursework.</value>
   </data>
@@ -214,7 +214,7 @@ Originally developed for the AQA A2 Computing coursework.</value>
     <value>..\resources\calcbuttons\bracket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="VersionString" xml:space="preserve">
-    <value>Alpha</value>
+    <value>Beta</value>
   </data>
   <data name="Settings16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\toolbaricons\settings16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
