@@ -287,7 +287,7 @@ namespace Graphmatic
         private void StatFunction(string name, Func<IEnumerable<Tuple<double, double>>, double> reductionFunction, bool uniqueVariables = false)
         {
             char[] variables = SelectVariableDialog.SelectVariables(name, DataSet.Variables, name + " of:", "and:");
-            if (variables[0] != variables[1])
+            if (variables != null && variables[0] != variables[1])
             {
                 if (variables != null && SaveChanges())
                 {
@@ -340,7 +340,7 @@ namespace Graphmatic
         private void pMCCToolStripMenuItem_Click(object sender, EventArgs e)
         {
             char[] variables = SelectVariableDialog.SelectVariables("Product-moment correlation coefficient", DataSet.Variables, "PMCC of:", "with:");
-            if (variables[0] != variables[1])
+            if (variables != null && variables[0] != variables[1])
             {
                 if (variables != null && SaveChanges())
                 {
@@ -357,7 +357,7 @@ namespace Graphmatic
         private void createRegressionLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             char[] variables = SelectVariableDialog.SelectVariables("Regression line", DataSet.Variables, "Independent variable:", "Dependent variable:");
-            if (variables[0] != variables[1])
+            if (variables != null && variables[0] != variables[1])
             {
                 if (variables != null && SaveChanges())
                 {
