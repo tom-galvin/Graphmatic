@@ -238,7 +238,9 @@ namespace Graphmatic.Interaction
             {
                 otherResource.ResourceModified(resource, ResourceModifyType.Remove);
             }
-            Remove(resource.Guid);
+            if (PageOrder.Contains(resource as Page))
+                PageOrder.Remove(resource as Page);
+            Resources.Remove(resource.Guid);
         }
 
         /// <summary>
