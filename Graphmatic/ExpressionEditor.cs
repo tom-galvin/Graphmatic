@@ -194,8 +194,8 @@ namespace Graphmatic
             }, "Alt-Minus", Keys.OemMinus, Keys.Alt);
             #endregion
             #region Constants
-            CreateTokenButton(buttonPi, () => new ConstantToken(ConstantToken.ConstantType.Pi), "Alt-P", Keys.P, Keys.Alt);
-            CreateTokenButton(buttonE, () => new ConstantToken(ConstantToken.ConstantType.E), "Alt-E", Keys.E, Keys.Alt);
+            CreateTokenButton(buttonPi, () => new ConstantToken(ConstantToken.ConstantType.Pi), "P", Keys.P);
+            CreateTokenButton(buttonE, () => new ConstantToken(ConstantToken.ConstantType.E), "E", Keys.E);
             #endregion
             #region Misc
             CreateTokenButton(buttonFraction, () => new FractionToken(), "Forward-slash", Keys.OemQuestion);

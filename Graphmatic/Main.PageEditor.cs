@@ -1065,7 +1065,7 @@ namespace Graphmatic
         void pageDisplay_MouseWheel(object sender, MouseEventArgs e)
         {
             double power = 1.0 + 0.1 * (double)Math.Sign(e.Delta);
-            ZoomLevel = DoubleClamp(Math.Pow(ZoomLevel * 100.0, power) / 100.0, 0.025, 20.0);
+            ZoomLevel = DoubleClamp(Math.Pow(ZoomLevel * 100.0, power) / 100.0, 0.025, 500.0);
         }
 
         private void pageDisplay_DragOver(object sender, DragEventArgs e)

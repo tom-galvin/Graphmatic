@@ -134,9 +134,9 @@ namespace Graphmatic.Interaction.Plotting
         /// <param name="originY">The Y position of the origin on the screen.</param>
         private void PlotGridLinesOnto(Graph graph, Graphics graphics, Size graphSize, PlottableParameters plotParams, int originX, int originY)
         {
-            using (Pen majorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.5)))
-            using (Pen minorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.333)))
-            using (Brush valueBrush = majorPen.Brush)
+            using (Pen majorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.25)))
+            using (Pen minorPen = new Pen(plotParams.PlotColor.ColorAlpha(0.15)))
+            using (Brush valueBrush = new SolidBrush(plotParams.PlotColor.ColorAlpha(0.5)))
             {
                 // the increment, in pixels, of each grid space
                 double incrementX = HorizontalType.AxisTypeGridScale() * GridSize / graph.Parameters.HorizontalPixelScale,

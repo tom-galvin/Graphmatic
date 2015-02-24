@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="DefaultPageColor" Description="Default background color for new document pages." Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">214, 199, 184</Value>
+      <Value Profile="(Default)">243, 240, 237</Value>
     </Setting>
     <Setting Name="Username" Description="Default username for users." Type="System.String" Scope="User">
       <Value Profile="(Default)">Anonymous</Value>
