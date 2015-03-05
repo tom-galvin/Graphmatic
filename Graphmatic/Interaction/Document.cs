@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -281,15 +282,28 @@ namespace Graphmatic.Interaction
         /// <returns>Returns the deserialized and loaded Document representing the file at <paramref name="path"/>.</returns>
         public static Document Open(string path, bool compressed)
         {
-            Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            if (compressed)
+            XDocument document = null;
+            try
             {
-                stream = new GZipStream(stream, CompressionMode.Decompress);
-            }
+                Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                if (compressed)
+                {
+                    stream = new GZipStream(stream, CompressionMode.Decompress);
+                }
 
-            XDocument document = XDocument.Load(stream);
-            stream.Close();
-            return new Document(document.Root);
+                document = XDocument.Load(stream);
+                stream.Close();
+                return new Document(document.Root);
+            }
+            catch (Exception ex)
+            {
+                throw new IOException(String.Format(
+                    "The document is corrupted or in an invalid format. " +
+                    "If you are sure that this document should be openable, contact the author of the " +
+                    "document and ask them to save the document in this version of Graphmatic ({0}).",
+                    Properties.Resources.VersionString),
+                    ex);
+            }
         }
 
         /// <summary>
