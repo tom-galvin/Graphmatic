@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSetEditor));
             this.buttonOK = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -40,17 +40,17 @@
             this.buttonStats = new System.Windows.Forms.Button();
             this.labelInfo = new System.Windows.Forms.Label();
             this.contextMenuStripStatistics = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.meanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.squaredSumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productSumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.meanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.standarddeviationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.varianceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.covarianceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.pMCCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createRegressionLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.covarianceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStripStatistics.SuspendLayout();
             this.SuspendLayout();
@@ -72,29 +72,31 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView.Size = new System.Drawing.Size(297, 250);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView_CellValidating);
             this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView_DataError);
+            this.dataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView_RowsAdded);
+            this.dataGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView_RowsRemoved);
             // 
             // buttonEditVariables
             // 
@@ -159,14 +161,7 @@
             this.pMCCToolStripMenuItem,
             this.createRegressionLineToolStripMenuItem});
             this.contextMenuStripStatistics.Name = "contextMenuStripStatistics";
-            this.contextMenuStripStatistics.Size = new System.Drawing.Size(200, 236);
-            // 
-            // meanToolStripMenuItem
-            // 
-            this.meanToolStripMenuItem.Name = "meanToolStripMenuItem";
-            this.meanToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.meanToolStripMenuItem.Text = "&Mean...";
-            this.meanToolStripMenuItem.Click += new System.EventHandler(this.meanToolStripMenuItem_Click);
+            this.contextMenuStripStatistics.Size = new System.Drawing.Size(200, 214);
             // 
             // sumToolStripMenuItem
             // 
@@ -194,6 +189,13 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(196, 6);
             // 
+            // meanToolStripMenuItem
+            // 
+            this.meanToolStripMenuItem.Name = "meanToolStripMenuItem";
+            this.meanToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.meanToolStripMenuItem.Text = "&Mean...";
+            this.meanToolStripMenuItem.Click += new System.EventHandler(this.meanToolStripMenuItem_Click);
+            // 
             // standarddeviationToolStripMenuItem
             // 
             this.standarddeviationToolStripMenuItem.Name = "standarddeviationToolStripMenuItem";
@@ -207,6 +209,13 @@
             this.varianceToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.varianceToolStripMenuItem.Text = "&Variance...";
             this.varianceToolStripMenuItem.Click += new System.EventHandler(this.varianceToolStripMenuItem_Click);
+            // 
+            // covarianceToolStripMenuItem
+            // 
+            this.covarianceToolStripMenuItem.Name = "covarianceToolStripMenuItem";
+            this.covarianceToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.covarianceToolStripMenuItem.Text = "C&ovariance...";
+            this.covarianceToolStripMenuItem.Click += new System.EventHandler(this.covarianceToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -226,13 +235,6 @@
             this.createRegressionLineToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.createRegressionLineToolStripMenuItem.Text = "Create &Regression line...";
             this.createRegressionLineToolStripMenuItem.Click += new System.EventHandler(this.createRegressionLineToolStripMenuItem_Click);
-            // 
-            // covarianceToolStripMenuItem
-            // 
-            this.covarianceToolStripMenuItem.Name = "covarianceToolStripMenuItem";
-            this.covarianceToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.covarianceToolStripMenuItem.Text = "C&ovariance...";
-            this.covarianceToolStripMenuItem.Click += new System.EventHandler(this.covarianceToolStripMenuItem_Click);
             // 
             // DataSetEditor
             // 

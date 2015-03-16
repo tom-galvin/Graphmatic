@@ -85,6 +85,7 @@ namespace Graphmatic
             }
 
             dataGridView.ResumeLayout();
+            UpdateStatisticsButtonEnabledState();
         }
 
         private void buttonEditVariables_Click(object sender, EventArgs e)
@@ -180,6 +181,16 @@ namespace Graphmatic
                 if (clipData.Length > 0) // make sure the copied data isn't nonexistent...
                 {
                     int arrayLength = clipData[0].Length;
+                    if (DataSet.Variables.Length != arrayLength)
+                    {
+                        MessageBox.Show(
+                            "The number of copied columns must be the same as the number of variables " +
+                            "in the data set.",
+                            "Paste from Excel",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }
                     for (int i = 1; i < clipData.Length; i++)
                     {
                         if (clipData[i].Length != arrayLength) // validate the size of the data's records
@@ -244,6 +255,7 @@ namespace Graphmatic
                     e.Cancel = true;
                 }
             }
+            UpdateStatisticsButtonEnabledState();
         }
 
         private void buttonStats_Click(object sender, EventArgs e)
@@ -374,5 +386,24 @@ namespace Graphmatic
             }
         }
         #endregion
+
+        private void dataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            UpdateStatisticsButtonEnabledState();
+        }
+
+        private void dataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            UpdateStatisticsButtonEnabledState();
+        }
+
+        /// <summary>
+        /// Updates the Enabled state of the statistical functions button, based on whether
+        /// there is at least two members of the data set.
+        /// </summary>
+        private void UpdateStatisticsButtonEnabledState()
+        {
+            buttonStats.Enabled = dataGridView.RowCount > 1;
+        }
     }
 }
