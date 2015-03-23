@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04A5A117-D413-42E2-B847-FB34D52E1550}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		Setup.iss = Setup.iss
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SetupData", "SetupData", "{510AB317-70C5-49A9-9E6A-E68947920E34}"
