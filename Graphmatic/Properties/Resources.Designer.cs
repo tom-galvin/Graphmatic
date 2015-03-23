@@ -61,8 +61,7 @@ namespace Graphmatic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Currently in Beta.
-        ///Available on Github: http://github.com/Quackmatic/Graphmatic
+        ///   Looks up a localized string similar to Available on Github: http://github.com/Quackmatic/Graphmatic
         ///Originally developed for the AQA A2 Computing coursework..
         /// </summary>
         public static string AboutBoxMessage {
@@ -1037,7 +1036,7 @@ namespace Graphmatic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Beta.
+        ///   Looks up a localized string similar to 1.0.0.
         /// </summary>
         public static string VersionString {
             get {

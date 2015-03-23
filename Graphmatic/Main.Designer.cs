@@ -58,7 +58,6 @@ namespace Graphmatic
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelBugReport = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelEditor = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.listViewResources = new System.Windows.Forms.ListView();
             this.columnHeaderIcon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -358,8 +357,7 @@ namespace Graphmatic
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel,
-            this.toolStripStatusLabelBugReport,
-            this.toolStripStatusLabelEditor});
+            this.toolStripStatusLabelBugReport});
             this.statusStrip.Location = new System.Drawing.Point(0, 585);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1070, 22);
@@ -380,12 +378,6 @@ namespace Graphmatic
             this.toolStripStatusLabelBugReport.Size = new System.Drawing.Size(97, 17);
             this.toolStripStatusLabelBugReport.Text = "Report bugs here";
             this.toolStripStatusLabelBugReport.Click += new System.EventHandler(this.toolStripStatusLabelBugReport_Click);
-            // 
-            // toolStripStatusLabelEditor
-            // 
-            this.toolStripStatusLabelEditor.Name = "toolStripStatusLabelEditor";
-            this.toolStripStatusLabelEditor.Size = new System.Drawing.Size(45, 17);
-            this.toolStripStatusLabelEditor.Text = "Default";
             // 
             // splitContainer
             // 
@@ -707,7 +699,7 @@ namespace Graphmatic
             this.toolStripPageEditor.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripPageEditor.Location = new System.Drawing.Point(3, 0);
             this.toolStripPageEditor.Name = "toolStripPageEditor";
-            this.toolStripPageEditor.Size = new System.Drawing.Size(595, 31);
+            this.toolStripPageEditor.Size = new System.Drawing.Size(572, 31);
             this.toolStripPageEditor.TabIndex = 0;
             // 
             // toolStripButtonIncreasePenSize
@@ -1071,7 +1063,7 @@ namespace Graphmatic
             "400%",
             "800%"});
             this.toolStripComboBoxZoom.Name = "toolStripComboBoxZoom";
-            this.toolStripComboBoxZoom.Size = new System.Drawing.Size(75, 23);
+            this.toolStripComboBoxZoom.Size = new System.Drawing.Size(75, 31);
             this.toolStripComboBoxZoom.Text = "100%";
             this.toolStripComboBoxZoom.ToolTipText = "Change the zoom level for this page";
             this.toolStripComboBoxZoom.DropDownClosed += new System.EventHandler(this.toolStripComboBoxZoom_DropDownClosed);
@@ -1217,7 +1209,6 @@ namespace Graphmatic
         private PictureBox pageDisplay;
         private ToolStripStatusLabel toolStripStatusLabel;
         private ToolStripStatusLabel toolStripStatusLabelBugReport;
-        private ToolStripStatusLabel toolStripStatusLabelEditor;
         private ToolStripComboBox toolStripComboBoxZoom;
         private ToolStripMenuItem blackToolStripMenuItem;
         private ToolStripMenuItem redToolStripMenuItem;

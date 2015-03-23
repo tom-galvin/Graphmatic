@@ -151,7 +151,6 @@ namespace Graphmatic
                     SelectedAnnotations = null;
                     CheckSelectedTool(items);
                     SelectionBox = new Rectangle();
-                    toolStripStatusLabelEditor.Text = toolType.ToString();
                     CurrentPageTool = toolType;
                     SetPenPresetAttributes(toolType);
                     pageDisplay.Refresh();

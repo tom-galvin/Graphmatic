@@ -226,7 +226,6 @@ namespace Graphmatic
                 ResourceEditors[resourceType](resource);
                 RefreshResourceListView();
 
-                toolStripStatusLabelEditor.Text = resourceType.GetType().Name;
                 NotifyResourceModified(SelectedResource);
             }
             else
