@@ -7,13 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphmatic", "Graphmatic\Gr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04A5A117-D413-42E2-B847-FB34D52E1550}"
 	ProjectSection(SolutionItems) = preProject
+		LargeImage.bmp = LargeImage.bmp
 		README.md = README.md
 		Setup.iss = Setup.iss
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SetupData", "SetupData", "{510AB317-70C5-49A9-9E6A-E68947920E34}"
-	ProjectSection(SolutionItems) = preProject
 		SetupLicense.txt = SetupLicense.txt
+		SmallImage.bmp = SmallImage.bmp
 	EndProjectSection
 EndProject
 Global
@@ -29,8 +27,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{510AB317-70C5-49A9-9E6A-E68947920E34} = {04A5A117-D413-42E2-B847-FB34D52E1550}
 	EndGlobalSection
 EndGlobal
