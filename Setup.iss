@@ -38,6 +38,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]  
 Source: "Graphmatic\bin\Release\Graphmatic.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Graphmatic\Resources\GraphmaticDocument.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dotNetFx40_Client_setup.exe"; DestDir: {tmp}; Flags: deleteafterinstall; Check: not IsRequiredDotNetDetected 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -46,6 +47,7 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
+Filename: {tmp}\dotNetFx40_Client_setup.exe; Parameters: "/q:a /c:""install /l /q"""; Check: not IsRequiredDotNetDetected; StatusMsg: .NET Framework 4.0 Client profile is beïng installed.
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
 [Code]
@@ -85,13 +87,17 @@ begin
     result := success and (install = 1) and (serviceCount >= service);
 end;
 
+function IsRequiredDotNetDetected(): Boolean;  
+begin
+    result := IsDotNetDetected('v4\Client', 0);
+end;
+
 function InitializeSetup(): Boolean;
 begin
     if not IsDotNetDetected('v4\Client', 0) then begin
         MsgBox('MyApp requires Microsoft .NET Framework 4.0 Client Profile.'#13#13
-            'Please use Windows Update to install this version,'#13
-            'and then re-run the {#MyAppName} installer.', mbInformation, MB_OK);
-        result := false;
-    end else
-        result := true;
+            'The {#MyAppName} installer will attempt to install the framework for you.'#13
+            'You must be connected to the internet to do so.', mbInformation, MB_OK);
+    end;
+    result := true;
 end;

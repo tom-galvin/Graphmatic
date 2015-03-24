@@ -36,3 +36,9 @@ as that would be.
 The usage of WinForms also leads to the fact that there is a lot of code cruft to work with the older bits of the .NET framework, especially in the WinForms classes
 (such as in `Main.PageEditor.cs`). As I have said, this project was written to be on-time and functional so the code is not necessarily as clean as it would be had I
 wrote it as a personal project from the start.
+
+installer
+---------
+
+To compile the InnoSetup script, you'll need to download the .NET 4.0 Client Profile web installer from [here](http://www.microsoft.com/en-us/download/details.aspx?id=17113) and put it
+in the root directory.
