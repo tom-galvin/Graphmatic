@@ -13,7 +13,7 @@ namespace Graphmatic
     /// <summary>
     /// Represents a dialog used to enter a single-character variable name.
     /// </summary>
-    public partial class EnterVariableDialog : Form
+    public partial class CreateVariableDialog : Form
     {
         /// <summary>
         /// Gets the character entered by the user.
@@ -39,7 +39,7 @@ namespace Graphmatic
         /// </summary>
         /// <param name="defaultChar">The default character to display in the dialog.</param>
         /// <param name="oneKey">True if the dialog should close immediately after a key is pressed, false otherwise.</param>
-        private EnterVariableDialog(char defaultChar, bool oneKey)
+        private CreateVariableDialog(char defaultChar, bool oneKey)
         {
             InitializeComponent();
             textBoxVariableName.Text = defaultChar.ToString();
@@ -54,7 +54,7 @@ namespace Graphmatic
         /// <returns>Returns the character entered by the user. If the user cancels the interaction, the null character ('\0') is returned.</returns>
         public static char EnterVariable(char defaultChar = '?', bool oneKey = true)
         {
-            EnterVariableDialog dialog = new EnterVariableDialog(defaultChar, oneKey);
+            CreateVariableDialog dialog = new CreateVariableDialog(defaultChar, oneKey);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 return dialog.EnteredChar;

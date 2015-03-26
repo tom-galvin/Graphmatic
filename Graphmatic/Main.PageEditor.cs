@@ -471,7 +471,7 @@ namespace Graphmatic
                 // Add the horizontal variable chooser
                 new ToolStripMenuItem("&Horizontal variable...", null, delegate(object sender, EventArgs e)
                     {
-                        char axisVariable = EnterVariableDialog.EnterVariable(CurrentPage.Graph.Parameters.HorizontalAxis);
+                        char axisVariable = CreateVariableDialog.EnterVariable(CurrentPage.Graph.Parameters.HorizontalAxis);
                         if (axisVariable != '\0')
                         {
                             CurrentPage.Graph.Parameters.HorizontalAxis = axisVariable;
@@ -493,7 +493,7 @@ namespace Graphmatic
                 // Add the vertical variable chooser
                 new ToolStripMenuItem("&Vertical variable...", null, delegate(object sender, EventArgs e)
                     {
-                        char axisVariable = EnterVariableDialog.EnterVariable(CurrentPage.Graph.Parameters.VerticalAxis);
+                        char axisVariable = CreateVariableDialog.EnterVariable(CurrentPage.Graph.Parameters.VerticalAxis);
                         if (axisVariable != '\0')
                         {
                             CurrentPage.Graph.Parameters.VerticalAxis = axisVariable;

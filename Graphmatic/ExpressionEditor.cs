@@ -212,7 +212,7 @@ namespace Graphmatic
             {
                 // creates an EnterVariable dialog to allow the user to enter any variable
                 // character they want (that isn't 'x' or 'y')
-                char customVariable = EnterVariableDialog.EnterVariable();
+                char customVariable = CreateVariableDialog.EnterVariable();
                 if (customVariable != '\0')
                 {
                     return new VariableToken(customVariable);

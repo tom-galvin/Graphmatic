@@ -1,6 +1,6 @@
 ﻿namespace Graphmatic
 {
-    partial class EnterVariableDialog
+    partial class CreateVariableDialog
     {
         /// <summary>
         /// Required designer variable.

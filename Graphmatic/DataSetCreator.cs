@@ -63,7 +63,7 @@ namespace Graphmatic
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            char newVariable = EnterVariableDialog.EnterVariable();
+            char newVariable = CreateVariableDialog.EnterVariable();
             if (newVariable != '\0')
             {
                 // find the index in the variable list at which to add the variable
@@ -152,7 +152,7 @@ namespace Graphmatic
             if (selectedIndex != -1)
             {
                 // asks the user for the new name for the variable
-                char newName = EnterVariableDialog.EnterVariable(DataSet.Variables[selectedIndex]);
+                char newName = CreateVariableDialog.EnterVariable(DataSet.Variables[selectedIndex]);
                 if (newName != '\0')
                 {
                     // renames the variable as long as the user did not close the dialog
