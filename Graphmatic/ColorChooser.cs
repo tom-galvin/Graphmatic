@@ -32,7 +32,13 @@ namespace Graphmatic
             }
         }
 
+        /// <summary>
+        /// Raised when the selected color is changed.
+        /// </summary>
         public event EventHandler ColorChanged;
+        /// <summary>
+        /// Raise the <see cref="Graphmatic.ColorChooser.ColorChanged"/> event.
+        /// </summary>
         protected void OnColorChanged()
         {
             var colorChanged = ColorChanged;
@@ -42,6 +48,9 @@ namespace Graphmatic
             }
         }
 
+        /// <summary>
+        /// Initialize a new instance of the ColorChooser control.
+        /// </summary>
         public ColorChooser()
         {
             InitializeComponent();
@@ -64,6 +73,9 @@ namespace Graphmatic
 
         }
 
+        /// <summary>
+        /// Update the color chooser's display to reflect a change in the selected color.
+        /// </summary>
         private void UpdateColor()
         {
             buttonPicker.BackColor = Color;
