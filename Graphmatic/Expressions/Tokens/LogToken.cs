@@ -252,10 +252,10 @@ namespace Graphmatic.Expressions.Tokens
         public static readonly BinaryEvaluator Evaluator = new BinaryEvaluator((logBase, logOperand) => Math.Log(logOperand, logBase), "log[{0}]({1})");
 
         /// <summary>
-        /// Parses this token into a <c>Graphmatic.Expressions.Parsing.ParseTreeToken</c> representing
+        /// Parses this token into a <c>Graphmatic.Expressions.Parsing.ParseTreeNode</c> representing
         /// the sequence of calculations needed to evaluate this expression.
         /// </summary>
-        /// <returns>A <c>Graphmatic.Expressions.Parsing.ParseTreeToken</c> representing a syntax tree
+        /// <returns>A <c>Graphmatic.Expressions.Parsing.ParseTreeNode</c> representing a syntax tree
         /// for this token and any children.</returns>
         public ParseTreeNode Parse()
         {
