@@ -64,7 +64,7 @@ namespace Graphmatic
                     double meanOffset = x - mean;
                     return meanOffset * meanOffset;
                 })
-                .Mean();
+                .Sum();
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Graphmatic
                     double meanOffset2 = x.Item2 - mean.Item2;
                     return meanOffset1 * meanOffset2;
                 })
-                .Mean();
+                .Sum();
         }
     }
 }
