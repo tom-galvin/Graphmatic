@@ -74,7 +74,7 @@ namespace Graphmatic.Expressions
 
         /// <summary>
         /// Flattens a token's child expressions out into its parent and removes <paramref name="token"/>.
-        /// For example, flattening a <cRootToken</c> <c>"³√x"</c> would result in the tokens <c>3</c> <c>x</c>
+        /// For example, flattening a <c>RootToken</c> <c>"³√x"</c> would result in the tokens <c>3</c> <c>x</c>
         /// being added into the parent expression of the <c>RootToken</c>, with the <c>RootToken</c> (now redundant) being removed in the process.<para/>
         /// Attempting to flatten a token that is not contained within a parent expression will result in an <c>InvalidOperationException</c> being thrown.
         /// </summary>
@@ -113,7 +113,7 @@ namespace Graphmatic.Expressions
 
         /// <summary>
         /// Flattens a token's default child expression out into its parent and removes <paramref name="token"/>.
-        /// For example, flattening a <cRootToken</c> <c>"³√x"</c> would result in the token <c>x</c>
+        /// For example, flattening a <c>RootToken</c> <c>"³√x"</c> would result in the token <c>x</c>
         /// being added into the parent expression of the <c>RootToken</c>, with the <c>RootToken</c> (now redundant) being removed in the process.
         /// Any tokens not in the default child expression of the <c>RootToken</c> are discarded.<para/>
         /// Attempting to flatten a token that is not contained within a parent expression will result in an <c>InvalidOperationException</c> being thrown.
