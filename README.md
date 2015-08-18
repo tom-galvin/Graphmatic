@@ -25,7 +25,7 @@ There are 6 stages:
 |Feature Complete|The feature is complete, but has not been extensively bug-tested or tested by the user.|
 |Complete|The feature is solid, bug-free, user-tested, and works as expected and described. No more work is being done on the feature except to resolve any newly discovered bugs.|
 
-information
+Information
 -----------
 
 Bear in mind that this project was done with satisfying the mark scheme for the AQA Computing A2 coursework project rather than being a future-maintainable project.
@@ -37,7 +37,7 @@ The usage of WinForms also leads to the fact that there is a lot of code cruft t
 (such as in `Main.PageEditor.cs`). As I have said, this project was written to be on-time and functional so the code is not necessarily as clean as it would be had I
 wrote it as a personal project from the start.
 
-installer
+Installer
 ---------
 
 To compile the InnoSetup script, you'll need to download the .NET 4.0 Client Profile web installer from [here](http://www.microsoft.com/en-us/download/details.aspx?id=17113) and put it
